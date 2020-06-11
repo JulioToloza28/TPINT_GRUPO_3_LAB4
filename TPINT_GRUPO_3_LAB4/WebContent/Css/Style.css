@@ -1,3 +1,5 @@
 @charset "ISO-8859-1";
 
-h1 {color:red;}
+.usuario-menu{
+	float:right;
+}
