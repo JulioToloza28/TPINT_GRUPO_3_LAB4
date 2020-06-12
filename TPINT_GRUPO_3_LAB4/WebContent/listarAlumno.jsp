@@ -34,7 +34,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<a href="agregarAlumno.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> <a
-					href="#" class="btn btn-outline-secondary btn-sm">Editar</a> <a
+					href="modificarAlumno.jsp" class="btn btn-outline-secondary btn-sm">Editar</a> <a
 					href="#" class="btn btn-outline-info btn-sm">Cargar Nota</a>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
