@@ -17,7 +17,11 @@
 
 
 	<div class="container">
-		<h1>Cursos</h1>
+		<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">Cursos</li>
+		</ol>
+		</nav>
 		<div class="row">
 			<div class="col-lg-12">
 				<a href="agregarCurso.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> <a
