@@ -53,11 +53,12 @@ public class ServletAlumno extends HttpServlet {
 			
 //			alum.setFechaNac(Date.parse(request.getParameter("txtFechaNac").toString()));
 			try {
-				Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("txtLocalidad").toString());
+				Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("txtFechaNac").toString());
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			alum.setDireccion(request.getParameter("txtDireccion"));
 			alum.setIdLocalidad(Integer.parseInt(request.getParameter("txtLocalidad").toString()));
 			alum.setTelefono(request.getParameter("txtTelefono"));
