@@ -13,12 +13,12 @@ var chart = new Chart(ctx, {
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Aprobados', 'Desaprobados', 'Promocionados'],
         datasets: [{
-            label: 'Ventas',
+            label: 'Programacion 3',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+            data: [5, 10, 5, 2, 20, 30, 45]
         }]
     },
 
