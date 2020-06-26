@@ -14,15 +14,14 @@
 </head>
 <body>
 <jsp:include page="menu.html"></jsp:include>
-
-
-	<div class="container">
-	<!--<h1>Mis alumnos</h1>-->
 		<nav aria-label="breadcrumb"> 		
 		<ol class="breadcrumb"> 			
 		<li class="breadcrumb-item active" aria-current="page">Cargar notas</li> 		
 		</ol> 		
 		</nav>
+
+	<div class="container">
+	<!--<h1>Mis alumnos</h1>-->
 		<div class="row">
 			<div class="col-lg-12">
 				<a href="agregarAlumno.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> <a

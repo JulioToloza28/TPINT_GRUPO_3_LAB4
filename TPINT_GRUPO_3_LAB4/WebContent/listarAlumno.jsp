@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista de alumnos</title>
 <link rel="stylesheet" type="text/css"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
@@ -14,15 +14,15 @@
 </head>
 <body>
 	<jsp:include page="menu.html"></jsp:include>
-
+		<nav aria-label="breadcrumb"> 		
+		<ol class="breadcrumb"> 			
+		<li class="breadcrumb-item active" aria-current="page">Lista de alumnos</li> 		
+		</ol> 		
+		</nav>
 
 	<div class="container">
 	<!--<h1>Mis alumnos</h1>-->
-		<nav aria-label="breadcrumb"> 		
-		<ol class="breadcrumb"> 			
-		<li class="breadcrumb-item active" aria-current="page">Alumnos</li> 		
-		</ol> 		
-		</nav>
+
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="form-group">
