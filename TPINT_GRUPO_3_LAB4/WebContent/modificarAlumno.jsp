@@ -13,17 +13,17 @@
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Nombre</label> <input type="text"
-					class="form-control" id="validationServer01" required>
+					class="form-control" id="validationServer01" required value="Ariel">
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">
 				<label for="validationServer02">Apellido</label> <input type="text"
-					class="form-control " id="validationServer02" value="" required>
+					class="form-control " id="validationServer02" required value="Lobos">
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-2 mb-3">
 				<label for="validationServer03">DNI</label> <input type="text"
-					class="form-control " id="validationServer02" value="" required>
+					class="form-control " id="validationServer02" required value="30006789">
 				<div class="valid-feedback">Looks good!</div>
 
 			</div>
@@ -31,24 +31,24 @@
 		<div class="form-row">
 			<div class="col-md-2 mb-3">
 				<label for="validationServer01">Fecha de Nacimiento</label> <input
-					type="text" class="form-control" id="validationServer01" required>
+					type="text" class="form-control" id="validationServer01" required value="14/11/1990">
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">
 				<label for="validationServer02">Direccion</label> <input type="text"
-					class="form-control " id="validationServer02" value="" required>
+					class="form-control " id="validationServer02" required value="Lanzareto 897">
 				<div class="valid-feedback">Looks good!</div>
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationServer03">Localidad</label> <input
-						type="text" class="form-control " id="validationServer03" required>
+						type="text" class="form-control " id="validationServer03" required value="Talar">
 					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationServer04">Provincia</label> <select
-						class="custom-select " id="validationServer04" required>
+						class="custom-select " id="validationServer04" required value="Buenos Aires">
 						<option selected disabled value="">Choose...</option>
-						<option>...</option>
+						<option>Buenos Aires</option>
 					</select>
 					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
@@ -62,12 +62,12 @@
 			<div class="form-row">
 			<div class="col-md-6 mb-3">
 				<label for="validationServer01">Telefono</label> <input
-					type="text" class="form-control" id="validationServer01" required>
+					type="text" class="form-control" id="validationServer01" required value="46670291">
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-6 mb-3">
 				<label for="validationServer01">Email</label> <input
-					type="text" class="form-control" id="validationServer01" required>
+					type="text" class="form-control" id="validationServer01" required value="arilobos@gmail.com">
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			 </div>
