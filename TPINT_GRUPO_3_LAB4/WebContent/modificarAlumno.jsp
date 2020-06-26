@@ -8,7 +8,11 @@
 </head>
 <body>
 <jsp:include page="menu.html"></jsp:include>
-
+		<nav aria-label="breadcrumb"> 		
+		<ol class="breadcrumb"> 			
+		<li class="breadcrumb-item active" aria-current="page">Modificar alumnos</li> 		
+		</ol> 		
+		</nav>
 	<form style="margin: 40px">
 		<div class="form-row">
 			<div class="col-md-3 mb-3">

@@ -8,7 +8,11 @@
 </head>
 <body>
 	<jsp:include page="menu.html"></jsp:include>
-
+		<nav aria-label="breadcrumb"> 		
+		<ol class="breadcrumb"> 			
+		<li class="breadcrumb-item active" aria-current="page">Agregar alumnos</li> 		
+		</ol> 		
+		</nav>
 	<form action="ServletAlumno" method="get" style="margin: 40px">
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
@@ -71,7 +75,47 @@
 				<input name="txtEmail" type="text" class="form-control" id="validationServer01" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
-			 </div>
+       </div>
+			<div class="form-row">
+			<div class="col-md-2 mb-3">
+ 					<!-- <label for="sel1">Curso</label> 
+					<select class="form-control" id="sel1">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select>-->
+				</div>
+				<div class="col-md-2 mb-3">
+					<label for="sel1">Materia</label> 
+					<select class="form-control" id="sel1">
+						<option>Programacion I</option>
+						<option>Matematica</option>
+						<option>SPD</option>
+						<option>Laboratorio IV</option>
+					</select>
+				</div>
+				<div class="col-md-2 mb-3">
+					<label for="sel1">Cuatrimestre</label> 
+					<select class="form-control" id="sel1">
+						<option>1</option>
+						<option>2</option>
+					</select>
+				</div>
+				<div class="col-md-2 mb-3">
+					<label for="sel1">Año</label> 
+					<select class="form-control" id="sel1">
+						<option>2018</option>
+						<option>2019</option>
+						<option>2020</option>
+					</select>
+				</div>
+				<div class="col-md-2 mb-3">
+				  <button id="btn-materias" class="btn btn-outline-dark" type="button" style="bottom:0; position: absolute;">+</button>
+			    </div>
+			   </div>
+
+			 
 			<button id="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
 	</form>
 	
