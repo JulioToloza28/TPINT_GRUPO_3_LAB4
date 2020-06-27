@@ -26,7 +26,7 @@
 			<div class="col-lg-12">
 				<a href="agregarCurso.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> <a
 					href="modificarCurso.jsp" class="btn btn-outline-secondary btn-sm">Editar</a> <a
-					href="eliminarCurso.jsp" class="btn btn-outline-info btn-sm">Borrar</a>
+					href="eliminarCursos.jsp" class="btn btn-outline-danger btn-sm">Eliminar</a>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>

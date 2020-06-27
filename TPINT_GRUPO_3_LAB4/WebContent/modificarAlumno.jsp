@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Modificar alumno</title>
+<title>Modificar Alumno</title>
 </head>
 <body>
 <jsp:include page="menu.html"></jsp:include>
