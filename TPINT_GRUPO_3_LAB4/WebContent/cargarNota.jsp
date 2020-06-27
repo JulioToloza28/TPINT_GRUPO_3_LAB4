@@ -24,9 +24,8 @@
 	<!--<h1>Mis alumnos</h1>-->
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="agregarAlumno.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> <a
-					href="modificarAlumno.jsp" class="btn btn-outline-secondary btn-sm">Editar</a> <a
-					href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
+				<a href="agregarAlumno.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> 
+				<a href="modificarAlumno.jsp" class="btn btn-outline-secondary btn-sm">Editar</a> 
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -35,6 +34,8 @@
 							<th>Apellido</th>
 							<th>Parcial 1</th>
 							<th>Parcial 2</th>
+							<th>Recuperatorio 1</th>
+							<th>Recuperatorio 2</th>
 							<th>Estado academico</th>
 						</tr>
 					</thead>
@@ -51,6 +52,16 @@
 							<td> 
 							  <div class="form-group">
    								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
+ 							  </div>
+  							</td>
+  							<td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
+ 							  </div>
+  							</td>
+  							<td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
  							  </div>
   							</td>
 							<td>
@@ -76,6 +87,16 @@
    								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
  							  </div>
   							</td>
+  							 <td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
+ 							  </div>
+  							</td>
+  							<td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
+ 							  </div>
+  							</td>
 							<td>
 							  <select class="custom-select">
 								  <option selected>Seleccionar</option>
@@ -97,6 +118,16 @@
 							<td> 
 							  <div class="form-group">
    								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
+ 							  </div>
+  							</td>
+  							 <td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
+ 							  </div>
+  							</td>
+  							<td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
  							  </div>
   							</td>
 							<td>
@@ -122,6 +153,16 @@
    								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
  							  </div>
   							</td>
+  							 <td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
+ 							  </div>
+  							</td>
+  							<td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
+ 							  </div>
+  							</td>
 							<td>
 							  <select class="custom-select">
 								  <option selected>Seleccionar</option>
@@ -143,6 +184,16 @@
 							<td> 
 							  <div class="form-group">
    								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
+ 							  </div>
+  							</td>
+  							 <td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
+ 							  </div>
+  							</td>
+  							<td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
  							  </div>
   							</td>
 							<td>
@@ -168,6 +219,16 @@
    								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
  							  </div>
   							</td>
+  							  <td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
+ 							  </div>
+  							</td>
+  							<td> 
+							  <div class="form-group">
+   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
+ 							  </div>
+  							</td>
 							<td>
 							  <select class="custom-select">
 								  <option selected>Seleccionar</option>
@@ -180,14 +241,18 @@
 					</tbody>
 					<tfoot>
 						<tr>
-						    <th>Legajo</th>
-							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>Parcial 1</th>
-							<th>Parcial 2</th>
-							<th>Estado academico</th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>
+							   <button id="btn-aceptar" class="btn btn-primary" type="submit">Aceptar</button>
+							</th>
 						</tr>
-					</tfoot>
+					</tfoot> 
 				</table>
 			</div>
 		</div>

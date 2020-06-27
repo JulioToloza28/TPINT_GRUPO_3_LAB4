@@ -49,4 +49,3 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		return isInsertExitoso;
 		}
 	}
-}
