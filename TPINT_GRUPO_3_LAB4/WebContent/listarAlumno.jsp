@@ -26,12 +26,29 @@
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="form-group">
-					<label for="sel1">Cursos:</label> <select class="form-control"
+					<label for="sel1">Materias:</label> <select class="form-control"
 						id="sel1">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
+						<option>Laboratorio IV</option>
+						<option>DABD</option>
+						<option>Programacion III</option>
+						<option>Ingles</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="form-group">
+					<label for="sel1">Cuatrimestre:</label> <select class="form-control" id="sel1">
+						<option>1° Cuatrimestre</option>
+						<option>2° Cuatrimestre</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="form-group">
+					<label for="sel1">Año:</label> <select class="form-control" id="sel1">
+						<option>2018</option>
+						<option>2019</option>
+						<option>2020</option>
 					</select>
 				</div>
 			</div>
