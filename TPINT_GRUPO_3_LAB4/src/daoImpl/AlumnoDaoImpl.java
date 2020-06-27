@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AlumnoDaoImpl implements AlumnoDao {
 	
-	private static final String agregarAlumno = "INSERT INTO alumno(nombre, apellido, dni, legajo, fecha de nacimiento, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?,?)";
+	private static final String agregarAlumno = "INSERT INTO alumno(nombre, apellido, dni, legajo, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?,?)";
 
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;

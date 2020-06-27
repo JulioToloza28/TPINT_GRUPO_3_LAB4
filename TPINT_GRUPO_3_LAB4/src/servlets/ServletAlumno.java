@@ -74,7 +74,8 @@ public class ServletAlumno extends HttpServlet {
 			//}
 			
 			alum.setDireccion(request.getParameter("txtDireccion"));
-			alum.setIdLocalidad(Integer.parseInt(request.getParameter("txtLocalidad").toString()));
+			alum.setIdLocalidad(Integer.parseInt(request.getParameter("1").toString()));
+			//alum.setProvincia(request.getParameter("txtProvincia"));
 			alum.setTelefono(request.getParameter("txtTelefono"));
 			alum.setMail(request.getParameter("txtEmail"));
 			
