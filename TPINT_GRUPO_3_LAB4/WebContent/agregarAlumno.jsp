@@ -8,7 +8,11 @@
 </head>
 <body>
 	<jsp:include page="menu.html"></jsp:include>
-
+		<nav aria-label="breadcrumb"> 		
+		<ol class="breadcrumb"> 			
+		<li class="breadcrumb-item active" aria-current="page">Agregar alumnos</li> 		
+		</ol> 		
+		</nav>
 	<form action="ServletAlumno" method="get" style="margin: 40px">
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
@@ -71,7 +75,8 @@
 				<input name="txtEmail" type="text" class="form-control" id="validationServer01" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
-			 </div>
+       </div>
+		
 			<button id="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
 	</form>
 	

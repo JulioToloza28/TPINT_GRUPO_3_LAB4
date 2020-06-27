@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista de alumnos</title>
 <link rel="stylesheet" type="text/css"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
@@ -14,33 +14,51 @@
 </head>
 <body>
 	<jsp:include page="menu.html"></jsp:include>
-
+		<nav aria-label="breadcrumb"> 		
+		<ol class="breadcrumb"> 			
+		<li class="breadcrumb-item active" aria-current="page">Lista de alumnos</li> 		
+		</ol> 		
+		</nav>
 
 	<div class="container">
 	<!--<h1>Mis alumnos</h1>-->
-		<nav aria-label="breadcrumb"> 		
-		<ol class="breadcrumb"> 			
-		<li class="breadcrumb-item active" aria-current="page">Alumnos</li> 		
-		</ol> 		
-		</nav>
+
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="form-group">
-					<label for="sel1">Cursos:</label> <select class="form-control"
+					<label for="sel1">Materias:</label> <select class="form-control"
 						id="sel1">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
+						<option>Laboratorio IV</option>
+						<option>DABD</option>
+						<option>Programacion III</option>
+						<option>Ingles</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="form-group">
+					<label for="sel1">Cuatrimestre:</label> <select class="form-control" id="sel1">
+						<option>1° Cuatrimestre</option>
+						<option>2° Cuatrimestre</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="form-group">
+					<label for="sel1">Año:</label> <select class="form-control" id="sel1">
+						<option>2018</option>
+						<option>2019</option>
+						<option>2020</option>
 					</select>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="agregarAlumno.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> <a
-					href="modificarAlumno.jsp" class="btn btn-outline-secondary btn-sm">Editar</a> <a
-					href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
+				<a href="agregarAlumno.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> 
+				<a href="modificarAlumno.jsp" class="btn btn-outline-secondary btn-sm">Editar</a> 
+					<a href="listarAlumno.jsp" class="btn btn-outline-danger btn-sm">Eliminar</a>
+					<a href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
