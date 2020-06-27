@@ -38,9 +38,10 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="agregarAlumno.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> <a
-					href="modificarAlumno.jsp" class="btn btn-outline-secondary btn-sm">Editar</a> <a
-					href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
+				<a href="agregarAlumno.jsp" class="btn btn-outline-primary btn-sm">Agregar</a> 
+				<a href="modificarAlumno.jsp" class="btn btn-outline-secondary btn-sm">Editar</a> 
+					<a href="listarAlumno.jsp" class="btn btn-outline-danger btn-sm">Eliminar</a>
+					<a href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista de profesores</title>
 </head>
 <body>
 	<jsp:include page="menu.html"></jsp:include>
@@ -29,6 +29,7 @@
 				<a href="agregarProfesor.jsp" class="btn btn-outline-primary btn-sm">Agregar</a>
 				<a href="modificarProfesor.jsp"
 					class="btn btn-outline-secondary btn-sm">Editar</a>
+					<a href="listarAlumno.jsp" class="btn btn-outline-danger btn-sm">Eliminar</a>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
