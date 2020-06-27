@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sun.javafx.scene.layout.region.Margins.Converter;
 
+import dao.AlumnoDao;
 import entidades.Alumno;
 
 /**
@@ -38,7 +39,7 @@ public class ServletAlumno extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		int filas=0;
+		boolean filas=false;
 		if(request.getParameter("btn-aceptar")!=null)
 		{
 			Alumno alum = new Alumno();
@@ -50,19 +51,34 @@ public class ServletAlumno extends HttpServlet {
 			//String string = "January 2, 2010";
 			//DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
 			//Date date = format.parse(string);
-			
 //			alum.setFechaNac(Date.parse(request.getParameter("txtFechaNac").toString()));
+			
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+			Date parsed = null;
 			try {
-				Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("txtFechaNac").toString());
+				parsed = format.parse(request.getParameter("txtFechaNac"));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			java.sql.Date sql = new java.sql.Date(parsed.getTime());
+			alum.setFechaNac(sql);
+
+			//try {
+			//	Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("txtFechaNac").toString());
+			//} catch (ParseException e) {
+				// TODO Auto-generated catch block
+			//	e.printStackTrace();
+			//}
 			
 			alum.setDireccion(request.getParameter("txtDireccion"));
 			alum.setIdLocalidad(Integer.parseInt(request.getParameter("txtLocalidad").toString()));
 			alum.setTelefono(request.getParameter("txtTelefono"));
 			alum.setMail(request.getParameter("txtEmail"));
+			
+			AlumnoDao alumDao=new AlumnoDao();
+			filas=alumDao.agregarAlumno(alum);
+			
 		}
 		
 	}
