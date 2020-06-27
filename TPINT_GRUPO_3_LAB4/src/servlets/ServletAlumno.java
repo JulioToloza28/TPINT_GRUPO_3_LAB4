@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sun.javafx.scene.layout.region.Margins.Converter;
 
 import dao.AlumnoDao;
+import daoImpl.AlumnoDaoImpl;
 import entidades.Alumno;
 
 /**
@@ -76,11 +78,21 @@ public class ServletAlumno extends HttpServlet {
 			alum.setTelefono(request.getParameter("txtTelefono"));
 			alum.setMail(request.getParameter("txtEmail"));
 			
-			AlumnoDao alumDao=new AlumnoDao();
+			AlumnoDaoImpl alumDao=new AlumnoDaoImpl();
 			filas=alumDao.agregarAlumno(alum);
 			
 		}
 		
+		//REQUEST DISPATCHER
+		request.setAttribute("cantFilas", filas);
+		RequestDispatcher rd= getRequestDispatcher("/agregarAlumno.jsp");
+		rd.forward(request, response);
+		
+	}
+
+	private RequestDispatcher getRequestDispatcher(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**

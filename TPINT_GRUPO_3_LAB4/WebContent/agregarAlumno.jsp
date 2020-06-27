@@ -52,8 +52,9 @@
 					<label for="validationServer04">Provincia</label> 
 					<select
 						class="custom-select " id="validationServer04" required>
-						<option selected disabled value="">Choose...</option>
-						<option>...</option>
+						<option selected disabled value="">Provincia</option>
+						<option>Buenos Aires</option>
+						<option>Tucuman</option>
 					</select>
 					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
@@ -81,10 +82,19 @@
 	</form>
 	
 	<%
-	  int filas=0;
+	  boolean filas=false;
 	  if(request.getAttribute("cantFilas")!=null)
-		  
+	  filas=(boolean)(request.getAttribute("cantFilas"));
 	
+	%>
+	
+	<% if(filas==true)
+		{
+	%>
+	 <h2>usuario agregado</h2>
+		
+	<%
+		}
 	%>
 
 
