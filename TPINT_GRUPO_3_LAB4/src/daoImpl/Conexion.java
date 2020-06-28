@@ -11,7 +11,7 @@ public class Conexion {
 	{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/Sql_tpint_grupo_3","root","root");
+			this.connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/tpint_grupo_3_lab4?serverTimezone=UTC","root","root");
 			this.connection.setAutoCommit(false);
 		}
 		catch(Exception ex){

@@ -35,7 +35,7 @@
 		<div class="form-row">
 			<div class="col-md-2 mb-3">
 				<label for="validationServer01">Fecha de Nacimiento</label> 
-				<input name="txtFechaNac" type="text" class="form-control" id="validationServer01" required>
+				<input name="txtFechaNac" type="date." class="form-control" id="validationServer01" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">
@@ -78,20 +78,23 @@
 			</div>
        </div>
 		
-			<button id="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
+			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
 	</form>
 	
 	<%
-	  boolean filas=false;
+	  int filas=0;
 	  if(request.getAttribute("cantFilas")!=null)
-	  filas=(boolean)(request.getAttribute("cantFilas"));
+	  {
+		  filas=1;
+	  }
+	 
 	
 	%>
 	
-	<% if(filas==true)
+	<% if(filas==1)
 		{
 	%>
-	 <h2>usuario agregado</h2>
+	 <h1>Hola</h1>
 		
 	<%
 		}

@@ -20,17 +20,19 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso=false;
 		try {
+			
 			statement=conexion.prepareStatement(agregarAlumno);
 			statement.setString(1, alumno.getNombre());
 			statement.setString(2, alumno.getApellido());
 			statement.setString(3, alumno.getDni());
-			statement.setString(4, alumno.getLegajo());
+			statement.setInt(4, alumno.getLegajo());
 			statement.setDate(5, (Date)alumno.getFechaNac());
 			statement.setString(6, alumno.getDireccion());
 			statement.setInt(7, alumno.getIdLocalidad());
 			statement.setString(8, alumno.getTelefono());
 			statement.setString(9, alumno.getMail());
 			statement.setBoolean(10, alumno.getEstado());
+			
 			
 			if(statement.executeUpdate()>0) {
 				conexion.commit();

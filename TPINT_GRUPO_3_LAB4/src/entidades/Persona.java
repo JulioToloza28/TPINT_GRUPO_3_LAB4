@@ -9,7 +9,7 @@ public class Persona {
 	private String Nombre;
 	private String Apellido;
 	private String Dni;
-	private String Legajo;
+	private int Legajo;
 	private Date FechaNac;
 	private String Direccion;
 	private int IdLocalidad;
@@ -20,7 +20,7 @@ public class Persona {
 	public Persona() {
 	}
 	
-	public Persona(int id, String nombre, String apellido, String dni, String legajo, Date fechaNac, String direccion,
+	public Persona(int id, String nombre, String apellido, String dni, int legajo, Date fechaNac, String direccion,
 			int idLocalidad, String telefono, String mail, Boolean estado) {
 		this.id = id;
 		this.Nombre = nombre;
@@ -59,10 +59,10 @@ public class Persona {
 	public void setDni(String dni) {
 		Dni = dni;
 	}
-	public String getLegajo() {
+	public int getLegajo() {
 		return Legajo;
 	}
-	public void setLegajo(String legajo) {
+	public void setLegajo(int legajo) {
 		Legajo = legajo;
 	}
 	public Date getFechaNac() {
