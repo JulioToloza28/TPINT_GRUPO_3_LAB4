@@ -35,7 +35,7 @@
 		<div class="form-row">
 			<div class="col-md-2 mb-3">
 				<label for="validationServer01">Fecha de Nacimiento</label> 
-				<input name="txtFechaNac" type="date." class="form-control" id="validationServer01" required>
+				<input name="txtFechaNac" type="date" class="form-control" id="validationServer01" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">

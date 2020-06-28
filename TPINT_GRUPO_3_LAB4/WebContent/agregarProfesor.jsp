@@ -22,12 +22,31 @@
 					class="form-control " id="validationServer02" value="" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
-			<div class="col-md-2 mb-3">
+			<div class="col-md-1 mb-3">
 				<label for="validationServer03">DNI</label> <input type="text"
 					class="form-control " id="validationServer02" value="" required>
 				<div class="valid-feedback">Looks good!</div>
 
 			</div>
+	
+		</div>
+		<div class="form-row">
+			<div class="col-md-2 mb-3">
+				<label for="validationServer01">Fecha de Nacimiento</label> 
+				<input name="txtFechaNac" type="date" class="form-control" id="validationServer01" required>
+				<div class="valid-feedback">Looks good!</div>
+			</div>
+			<div class="col-md-2 mb-3">
+				<label for="validationServer01">Telefono</label> <input type="text"
+					class="form-control" id="validationServer01" required>
+				<div class="valid-feedback">Looks good!</div>
+			</div>
+			<div class="col-md-3 mb-3">
+				<label for="validationServer01">Email</label> <input type="text"
+					class="form-control" id="validationServer01" required>
+				<div class="valid-feedback">Looks good!</div>
+			</div>
+			
 		</div>
 		<div class="form-row">
 			
@@ -55,25 +74,10 @@
 				<div class="invalid-feedback">Please select a valid state.</div>
 			</div>
 
-			<!-- <div class="col-md-3 mb-3">
-					<label for="validationServer05">C.P</label> <input type="text"
-						class="form-control " id="validationServer05" required>
-					<div class="invalid-feedback">Please provide a valid zip.</div>
-				</div> -->
+			
 		</div>
 
-		<div class="form-row">
-			<div class="col-md-2 mb-3">
-				<label for="validationServer01">Telefono</label> <input type="text"
-					class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
-			</div>
-			<div class="col-md-3 mb-3">
-				<label for="validationServer01">Email</label> <input type="text"
-					class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
-			</div>
-		</div>
+		
 
 		<button class="btn btn-primary" type="submit">Agregar</button>
 	</form>
