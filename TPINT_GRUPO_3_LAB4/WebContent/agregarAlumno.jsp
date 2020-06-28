@@ -94,7 +94,7 @@
 	<% if(filas==1)
 		{
 	%>
-	 <h1>Hola</h1>
+	 <h1>Agregado Correctamente</h1>
 		
 	<%
 		}

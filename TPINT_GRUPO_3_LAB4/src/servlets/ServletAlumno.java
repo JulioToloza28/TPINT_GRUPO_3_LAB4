@@ -41,8 +41,6 @@ public class ServletAlumno extends HttpServlet {
 			alum.setNombre(request.getParameter("txtNombre"));
 			alum.setApellido(request.getParameter("txtApellido"));
 			alum.setDni(request.getParameter("txtDni"));
-//			alum.setLegajo(request.getParameter("txtLegajo"));
-			alum.setLegajo(1);
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 			Date parsed = null;
 			try {
@@ -59,7 +57,6 @@ public class ServletAlumno extends HttpServlet {
 			alum.setEstado(true);
 			
 			AlumnoDaoImpl alumImp=new AlumnoDaoImpl();
-			boolean algo = alumImp.agregarAlumno(alum);
 			if(alumImp.agregarAlumno(alum)!=false) 
 			{
 				filas=1;

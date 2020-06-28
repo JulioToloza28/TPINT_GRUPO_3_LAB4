@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AlumnoDaoImpl implements AlumnoDao {
 	
-	private static final String agregarAlumno = "INSERT INTO alumno(nombre, apellido, dni, legajo, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?,?)";
+	private static final String agregarAlumno = "INSERT INTO alumno(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?)";
 
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;
@@ -25,13 +25,13 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			statement.setString(1, alumno.getNombre());
 			statement.setString(2, alumno.getApellido());
 			statement.setString(3, alumno.getDni());
-			statement.setInt(4, alumno.getLegajo());
-			statement.setDate(5, (Date)alumno.getFechaNac());
-			statement.setString(6, alumno.getDireccion());
-			statement.setInt(7, alumno.getIdLocalidad());
-			statement.setString(8, alumno.getTelefono());
-			statement.setString(9, alumno.getMail());
-			statement.setBoolean(10, alumno.getEstado());
+			//statement.setInt(4, alumno.getLegajo());
+			statement.setDate(4, (Date)alumno.getFechaNac());
+			statement.setString(5, alumno.getDireccion());
+			statement.setInt(6, alumno.getIdLocalidad());
+			statement.setString(7, alumno.getTelefono());
+			statement.setString(8, alumno.getMail());
+			statement.setBoolean(9, alumno.getEstado());
 			
 			
 			if(statement.executeUpdate()>0) {
