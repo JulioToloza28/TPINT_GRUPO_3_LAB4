@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,18 +30,23 @@ public class ServletsLocalidad extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		String ParamListar = request.getParameter("Param");
 		if(request.getParameter("Param")!=null) {
 		LocalidadDaoImpl LocDao=new LocalidadDaoImpl();
 		ArrayList<Localidad> listaLoc=(ArrayList<Localidad>) LocDao.obtenerListLocalidad();
 		
+		
 		request.setAttribute("listaLocDao",listaLoc);
+		RequestDispatcher rd= request.getRequestDispatcher("/agregarProfesor.jsp");
+		rd.forward(request, response);
 		}
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+
+
 		doGet(request, response);
 	}
 

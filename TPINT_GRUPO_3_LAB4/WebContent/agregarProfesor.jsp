@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<a href="ServletsLocalidad?Param=1"></a>
+	<a href="ServletsLocalidad?Param=1">sda</a>
 
 	<jsp:include page="menu.html"></jsp:include>
 
@@ -84,6 +84,17 @@
 					name="cmbLocalidad" class="custom-select " id="validationServer04"
 					required>
 					<option selected disabled value="">Seleccione...</option>
+						<%
+						LocalidadDaoImpl prueba=new LocalidadDaoImpl();
+						ArrayList<Localidad> listaLocalidad = null;
+					if (request.getAttribute("listaLocDao") != null) {
+						listaLocalidad = prueba.obtenerListLocalidad();
+					}
+					%>
+					<%if (listaLocalidad != null)
+						for (Localidad loc : listaLocalidad) {%>
+					      	<option><%=loc.getNombre()%></option>
+					<%}%>
 				</select>
 				<div class="invalid-feedback">Seleccione una Localidad</div>
 			</div>
@@ -127,6 +138,9 @@
 	<%
 		}
 	%>
+	
+	
+	
 
 
 </body>

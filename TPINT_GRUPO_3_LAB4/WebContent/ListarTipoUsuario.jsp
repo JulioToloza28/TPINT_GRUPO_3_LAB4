@@ -13,9 +13,9 @@
 
 	<%
 		ArrayList<TipoUsuario> listaTipoUsuario = null;
-		if (request.getAttribute("listaU") != null) {
-			listaTipoUsuario =  (ArrayList<TipoUsuario>) request.getAttribute("listaU");
-		}
+	if (request.getAttribute("listaU") != null) {
+		listaTipoUsuario = (ArrayList<TipoUsuario>) request.getAttribute("listaU");
+	}
 	%>
 
 	<table id="table_id" class="display">
@@ -29,7 +29,7 @@
 		<tbody>
 			<%
 				if (listaTipoUsuario != null)
-					for (TipoUsuario tipo : listaTipoUsuario) {
+				for (TipoUsuario tipo : listaTipoUsuario) {
 			%>
 			<tr>
 				<td><%=tipo.getId()%> <input type="hidden" name="idUsuario"
