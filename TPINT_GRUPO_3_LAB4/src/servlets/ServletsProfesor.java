@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
+import daoImpl.LocalidadDaoImpl;
 import daoImpl.ProfesorDaoImpl;
+import entidades.Localidad;
 import entidades.Profesor;
 
 @WebServlet("/ServletsProfesor")
@@ -58,6 +62,8 @@ public class ServletsProfesor extends HttpServlet {
 			    prof.setEstado(true);
 			    
 			    ProfesorDaoImpl profImpl=new ProfesorDaoImpl();
+			    
+				
 			    if(profImpl.agregarProfesor(prof)!=false)
 			    {
 			    	fila=1;

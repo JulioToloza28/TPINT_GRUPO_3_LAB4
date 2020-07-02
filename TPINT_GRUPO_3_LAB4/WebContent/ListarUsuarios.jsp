@@ -17,7 +17,6 @@
 <body>
 	<jsp:include page="menu.html"></jsp:include>
 
-
 	<div class="container">
 		<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
