@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import javax.servlet.RequestDispatcher;
@@ -34,6 +35,18 @@ public class ServletAlumno extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		//listar alumno
+		if(request.getParameter("Param")!=null)
+		{
+			AlumnoDaoImpl alumDao = new AlumnoDaoImpl();
+			ArrayList<Alumno> lista = alumDao.readAll();
+			
+			request.setAttribute("listaAlum", lista);
+			RequestDispatcher rd = request.getRequestDispatcher("/listarAlumno.jsp");
+			rd.forward(request, response);
+		}
+		
+		//agregar alumno
 		int filas=0;
 		if(request.getParameter("btn-aceptar")!=null)
 		{
@@ -45,7 +58,8 @@ public class ServletAlumno extends HttpServlet {
 			Date parsed = null;
 			try {
 				parsed = format.parse(request.getParameter("txtFechaNac"));
-			} catch (ParseException e) {
+			} 
+			catch (ParseException e) {
 				e.printStackTrace();
 			}
 			java.sql.Date sql = new java.sql.Date(parsed.getTime());
@@ -60,8 +74,7 @@ public class ServletAlumno extends HttpServlet {
 			if(alumImp.agregarAlumno(alum)!=false) 
 			{
 				filas=1;
-			}
-			
+			}	
 		}
 		if(filas==1) {
 		//REQUEST DISPATCHER
