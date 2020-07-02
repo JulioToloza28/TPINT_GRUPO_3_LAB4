@@ -9,18 +9,21 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
-    .bs-example{
-        margin: 20px;        
-    }
+.bs-example {
+	margin: 20px;
+}
 </style>
 
 </head>
-<body>
+<body onLoad="myOnLoad()">
 	<jsp:include page="menu.html"></jsp:include>
 
 
@@ -31,366 +34,188 @@
 		</ol>
 		</nav>
 		<form style="margin: 40px">
-		<div class="row">
-			<div class="col-md-3 mb-3">
-				<label for="sel1">Materia:</label> <select class="form-control"
-					id="sel1">
-					<option>Laboratorio 1</option>
-					<option>Programación 1</option>
-					<option>Inglés 1</option>
-				</select>
-			</div>
-
-			<div class="col-md-3 mb-3">
-				<label for="sel1">Cuatrimestre N°:</label> <select class="form-control"
-					id="sel1">
-					<option>1</option>
-					<option>2</option>
-				</select>
-			</div>
-
-			<div class="col-md-3 mb-3">
-				<label for="sel1">Año:</label> <select class="form-control"
-					id="sel1">
-					<option>2020</option>
-					<option>2019</option>
-					<option>2018</option>
-				</select>
-			</div>
-			
-			<div>
-				<label for="sel1">Año:</label>
-				<input type="number" class="form-control" id="sel1">
-			</div>
-			
-			
-		</div>
-		
-		
-			<br>
-			<br>
 			<div class="row">
-			<div class="col-md-3 mb-3">
-			<H4>Profesor:</H4>
+				<div class="col-md-3 mb-3">
+					<label for="sel1">Materia:</label> <select name="materias" class="form-control"
+						id="sel1">
+						<option>Seleccione...</option>
+					</select>
+				</div>
+
+				<div class="col-md-3 mb-3">
+					<label for="sel1">Cuatrimestre N°:</label> <select
+						class="form-control" id="sel1">
+						<option>1</option>
+						<option>2</option>
+					</select>
+				</div>
+
+				<div class="col-md-3 mb-3">
+					<label for="sel1">Año:</label> <select class="form-control"
+						id="sel1">
+						<option>2020</option>
+						<option>2019</option>
+						<option>2018</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="sel1">Año:</label> <input type="number"
+						class="form-control" id="sel1">
+				</div>
+
+
 			</div>
-			<div class="col-md-3 mb-3">
-				<select class="form-control"
-					id="sel1">
-					<option>Raul Perez</option>
-					<option></option>
-					<option></option>
-				</select>
+
+
+			<br> <br>
+			<div class="row">
+				<div class="col-md-3 mb-3">
+					<H4>Profesor:</H4>
+				</div>
+				<div class="col-md-3 mb-3">
+					<select class="form-control" id="sel1">
+						<option>Raul Perez</option>
+						<option></option>
+						<option></option>
+					</select>
+				</div>
 			</div>
-			</div>
-			<br>
-			<br>
-			
-			
+			<br> <br>
+
+
 			<H4>Alumnos:</H4>
 			<table id="example" class="display" style="width: 100%">
-					<thead>
-						<tr>
-							<th></th>
-						    <th>Legajo</th>
-							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>DNI</th>
-							<th>Fecha nacimiento</th>
-							<th>Direccion</th>
-							<th>Localidad</th>
-							<th>Provincia</th>
-							<th>Telefono</th>
-							<th>Mail</th>
-							<th>Estado Academico</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="false" id="Checkbox1" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18887</td>
-							<td>Ariel</td>
-							<td>Lobos</td>
-							<td>30006789</td>
-							<td>14/11/1990</td>
-							<td>Lanzareto 897</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>46670291</td>
-							<td>arilobos@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox2" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18888</td>
-							<td>Daniela</td>
-							<td>Rubinstein</td>
-							<td>35322960</td>
-							<td>12/08/1990</td>
-							<td>Ecuador 234</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>danirubinstein@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox3" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18889</td>
-							<td>Julio</td>
-							<td>Toloza</td>
-							<td>35322960</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>35890023</td>
-							<td>jtoloza@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox4" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18890</td>
-							<td>Rodrigo</td>
-							<td>Guzman</td>
-							<td>36920579</td>
-							<td>12/12/1988</td>
-							<td>Tucuman 34</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>48992037</td>
-							<td>rguzman@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox5" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18890</td>
-							<td>Rodrigo</td>
-							<td>Guzman</td>
-							<td>36920579</td>
-							<td>12/12/1988</td>
-							<td>Tucuman 34</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>48992037</td>
-							<td>rguzman@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox6" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18891</td>
-							<td>Veronica</td>
-							<td>Alvarez</td>
-							<td>37495038</td>
-							<td>09/03/1993</td>
-							<td>Talcahuano 43</td>
-							<td>CABA</td>
-							<td>Buenos Aires</td>
-							<td>47889088</td>
-							<td>valvarez@gmail.com</td>
-							<td>Libre</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox7" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18892</td>
-							<td>Maria</td>
-							<td>Menendez</td>
-							<td>33902389</td>
-							<td>24/09/1989</td>
-							<td>Olegario 9012</td>
-							<td>Bella Vista</td>
-							<td>Buenos Aires</td>
-							<td>45990289</td>
-							<td>Mmenendez@gmail.com</td>
-							<td>Libre</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox8" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18887</td>
-							<td>Ariel</td>
-							<td>Lobos</td>
-							<td>30006789</td>
-							<td>14/11/1990</td>
-							<td>Lanzareto 897</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>46670291</td>
-							<td>arilobos@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox9" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18888</td>
-							<td>Daniela</td>
-							<td>Rubinstein</td>
-							<td>35322960</td>
-							<td>12/08/1990</td>
-							<td>Ecuador 234</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>danirubinstein@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox10" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18889</td>
-							<td>Julio</td>
-							<td>Toloza</td>
-							<td>35322960</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>35890023</td>
-							<td>jtoloza@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox11" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18890</td>
-							<td>Rodrigo</td>
-							<td>Guzman</td>
-							<td>36920579</td>
-							<td>12/12/1988</td>
-							<td>Tucuman 34</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>48992037</td>
-							<td>rguzman@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox12" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18891</td>
-							<td>Veronica</td>
-							<td>Alvarez</td>
-							<td>37495038</td>
-							<td>09/03/1993</td>
-							<td>Talcahuano 43</td>
-							<td>CABA</td>
-							<td>Buenos Aires</td>
-							<td>47889088</td>
-							<td>valvarez@gmail.com</td>
-							<td>Libre</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox13" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18892</td>
-							<td>Maria</td>
-							<td>Menendez</td>
-							<td>33902389</td>
-							<td>24/09/1989</td>
-							<td>Olegario 9012</td>
-							<td>Bella Vista</td>
-							<td>Buenos Aires</td>
-							<td>45990289</td>
-							<td>Mmenendez@gmail.com</td>
-							<td>Libre</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox14" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18887</td>
-							<td>Ariel</td>
-							<td>Lobos</td>
-							<td>30006789</td>
-							<td>14/11/1990</td>
-							<td>Lanzareto 897</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>46670291</td>
-							<td>arilobos@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox15" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18888</td>
-							<td>Daniela</td>
-							<td>Rubinstein</td>
-							<td>35322960</td>
-							<td>12/08/1990</td>
-							<td>Ecuador 234</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>danirubinstein@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox16" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18889</td>
-							<td>Julio</td>
-							<td>Toloza</td>
-							<td>35322960</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>35890023</td>
-							<td>jtoloza@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox17" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18890</td>
-							<td>Rodrigo</td>
-							<td>Guzman</td>
-							<td>36920579</td>
-							<td>12/12/1988</td>
-							<td>Tucuman 34</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>48992037</td>
-							<td>rguzman@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox18" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18891</td>
-							<td>Veronica</td>
-							<td>Alvarez</td>
-							<td>37495038</td>
-							<td>09/03/1993</td>
-							<td>Talcahuano 43</td>
-							<td>CABA</td>
-							<td>Buenos Aires</td>
-							<td>47889088</td>
-							<td>valvarez@gmail.com</td>
-							<td>Libre</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox19" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18890</td>
-							<td>Rodrigo</td>
-							<td>Guzman</td>
-							<td>36920579</td>
-							<td>12/12/1988</td>
-							<td>Tucuman 34</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>48992037</td>
-							<td>rguzman@gmail.com</td>
-							<td>Regular</td>
-						</tr>
-						<tr>
-							<td><input class="form-check-input" type="checkbox" value="" id="Checkbox20" style="margin-right: auto;   margin-left: auto;"></td>
-							<td>18892</td>
-							<td>Maria</td>
-							<td>Menendez</td>
-							<td>33902389</td>
-							<td>24/09/1989</td>
-							<td>Olegario 9012</td>
-							<td>Bella Vista</td>
-							<td>Buenos Aires</td>
-							<td>45990289</td>
-							<td>Mmenendez@gmail.com</td>
-							<td>Libre</td>
-						</tr>
-					</tbody>
+				<thead>
+					<tr>
+						<th></th>
+						<th>Legajo</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>DNI</th>
+						<th>Fecha nacimiento</th>
+						<th>Direccion</th>
+						<th>Localidad</th>
+						<th>Provincia</th>
+						<th>Telefono</th>
+						<th>Mail</th>
+						<th>Estado Academico</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input class="form-check-input" type="checkbox"
+							value="false" id="Checkbox1"
+							style="margin-right: auto; margin-left: auto;"></td>
+						<td>18887</td>
+						<td>Ariel</td>
+						<td>Lobos</td>
+						<td>30006789</td>
+						<td>14/11/1990</td>
+						<td>Lanzareto 897</td>
+						<td>Talar</td>
+						<td>Buenos Aires</td>
+						<td>46670291</td>
+						<td>arilobos@gmail.com</td>
+						<td>Regular</td>
+					</tr>
 					
-				</table>
-			
-			
-			
+					<tr>
+						<td><input class="form-check-input" type="checkbox" value=""
+							id="Checkbox15" style="margin-right: auto; margin-left: auto;"></td>
+						<td>18888</td>
+						<td>Daniela</td>
+						<td>Rubinstein</td>
+						<td>35322960</td>
+						<td>12/08/1990</td>
+						<td>Ecuador 234</td>
+						<td>Don Torcuato</td>
+						<td>Buenos Aires</td>
+						<td>47880933</td>
+						<td>danirubinstein@gmail.com</td>
+						<td>Regular</td>
+					</tr>
+					<tr>
+						<td><input class="form-check-input" type="checkbox" value=""
+							id="Checkbox16" style="margin-right: auto; margin-left: auto;"></td>
+						<td>18889</td>
+						<td>Julio</td>
+						<td>Toloza</td>
+						<td>35322960</td>
+						<td>10/06/1991</td>
+						<td>Brasil 21</td>
+						<td>Talar</td>
+						<td>Buenos Aires</td>
+						<td>35890023</td>
+						<td>jtoloza@gmail.com</td>
+						<td>Regular</td>
+					</tr>
+					<tr>
+						<td><input class="form-check-input" type="checkbox" value=""
+							id="Checkbox17" style="margin-right: auto; margin-left: auto;"></td>
+						<td>18890</td>
+						<td>Rodrigo</td>
+						<td>Guzman</td>
+						<td>36920579</td>
+						<td>12/12/1988</td>
+						<td>Tucuman 34</td>
+						<td>Don Torcuato</td>
+						<td>Buenos Aires</td>
+						<td>48992037</td>
+						<td>rguzman@gmail.com</td>
+						<td>Regular</td>
+					</tr>
+					<tr>
+						<td><input class="form-check-input" type="checkbox" value=""
+							id="Checkbox18" style="margin-right: auto; margin-left: auto;"></td>
+						<td>18891</td>
+						<td>Veronica</td>
+						<td>Alvarez</td>
+						<td>37495038</td>
+						<td>09/03/1993</td>
+						<td>Talcahuano 43</td>
+						<td>CABA</td>
+						<td>Buenos Aires</td>
+						<td>47889088</td>
+						<td>valvarez@gmail.com</td>
+						<td>Libre</td>
+					</tr>
+					<tr>
+						<td><input class="form-check-input" type="checkbox" value=""
+							id="Checkbox19" style="margin-right: auto; margin-left: auto;"></td>
+						<td>18890</td>
+						<td>Rodrigo</td>
+						<td>Guzman</td>
+						<td>36920579</td>
+						<td>12/12/1988</td>
+						<td>Tucuman 34</td>
+						<td>Don Torcuato</td>
+						<td>Buenos Aires</td>
+						<td>48992037</td>
+						<td>rguzman@gmail.com</td>
+						<td>Regular</td>
+					</tr>
+					<tr>
+						<td><input class="form-check-input" type="checkbox" value=""
+							id="Checkbox20" style="margin-right: auto; margin-left: auto;"></td>
+						<td>18892</td>
+						<td>Maria</td>
+						<td>Menendez</td>
+						<td>33902389</td>
+						<td>24/09/1989</td>
+						<td>Olegario 9012</td>
+						<td>Bella Vista</td>
+						<td>Buenos Aires</td>
+						<td>45990289</td>
+						<td>Mmenendez@gmail.com</td>
+						<td>Libre</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+
+
 			<button class="btn btn-primary" type="submit">Guardar</button>
 
 		</form>
@@ -404,3 +229,28 @@
 	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
+
+<script>
+//Codigo a Ejecutar al Cargar la Pagina
+function myOnLoad() {
+ cargar_materias()
+}
+
+// cargo materias al campo <select>
+function cargar_materias() {
+ var array = ["Mate", "lab", "sads", "asfas", "Extremadura"];
+ array.sort();
+ addOptions("materias", array);
+}
+
+// agrego opciones al select
+function addOptions(domElement, array) {
+ var select = document.getElementsByName(domElement)[0];
+
+ for (value in array) {
+  var option = document.createElement("option");
+  option.text = array[value];
+  select.add(option);
+ }
+}
+</script>
