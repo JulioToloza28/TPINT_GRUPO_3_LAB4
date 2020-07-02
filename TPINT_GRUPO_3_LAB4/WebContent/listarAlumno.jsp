@@ -1,3 +1,6 @@
+<%@page import="entidades.Alumno" %>
+<%@page import="daoImpl.AlumnoDaoImpl" %>
+<%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,7 +25,6 @@
 
 	<div class="container">
 	<!--<h1>Mis alumnos</h1>-->
-
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="form-group">
@@ -76,7 +78,33 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+									
+					
+ <% 
+    ArrayList<Alumno> listaAlumno=null;
+    if(request.getAttribute("listaAlum")!=null)
+    {
+ 	listaAlumno = (ArrayList<Alumno>)request.getAttribute("listaAlum");
+    }
+%> 
+					<% if(listaAlumno!=null)
+                        for(Alumno alumno : listaAlumno){ %>
+							<tr> 
+							<td><%=alumno.getLegajo()%></td>
+							<td><%=alumno.getNombre()%></td>
+							<td><%=alumno.getApellido()%></td>
+							<td><%=alumno.getDni()%></td>
+							<td><%=alumno.getFechaNac()%></td>
+							<td><%=alumno.getDireccion()%></td>
+							<td><%=alumno.getIdLocalidad()%></td>
+ 							<td>provincia</td>
+							<td><%=alumno.getTelefono()%></td>
+							<td><%=alumno.getMail()%></td>
+							<td><%=alumno.getEstado()%></td>
+ 						    </tr>
+<%} %>
+
+						<!--<tr>
 							<td>18887</td>
 							<td>Ariel</td>
 							<td>Lobos</td>
@@ -335,7 +363,7 @@
 							<td>45990289</td>
 							<td>Mmenendez@gmail.com</td>
 							<td>Libre</td>
-						</tr>
+						</tr>-->
 					</tbody>
 					<tfoot>
 						<tr>
