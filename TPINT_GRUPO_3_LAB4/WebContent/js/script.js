@@ -3,7 +3,9 @@
  */
 
 $(document).ready(function() {
-	$('#example').DataTable();
+	$('#example').DataTable( {
+        "scrollX": true
+    } );
 });
 
 var ctx = document.getElementById('myChart').getContext('2d');
