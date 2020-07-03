@@ -1,4 +1,5 @@
 <%@page import="entidades.Alumno" %>
+<%@page import="entidades.Localidad" %>
 <%@page import="daoImpl.AlumnoDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -87,7 +88,8 @@
  	listaAlumno = (ArrayList<Alumno>)request.getAttribute("listaAlum");
     }
 %> 
-					<% if(listaAlumno!=null)
+					<% 
+					    if(listaAlumno!=null)
                         for(Alumno alumno : listaAlumno){ %>
 							<tr> 
 							<td><%=alumno.getLegajo()%></td>
@@ -96,14 +98,13 @@
 							<td><%=alumno.getDni()%></td>
 							<td><%=alumno.getFechaNac()%></td>
 							<td><%=alumno.getDireccion()%></td>
-<%-- 							<td><%=alumno.getIdLocalidad()%></td> --%>
+ 							<td><%=alumno.getLocalidad().getId()%></td>
  							<td>provincia</td>
 							<td><%=alumno.getTelefono()%></td>
 							<td><%=alumno.getMail()%></td>
 							<td><%=alumno.getEstado()%></td>
  						    </tr>
 <%} %>
-
 					</tbody>
 					<tfoot>
 						
