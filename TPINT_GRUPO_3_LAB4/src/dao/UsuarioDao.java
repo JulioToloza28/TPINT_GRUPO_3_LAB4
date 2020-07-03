@@ -12,4 +12,5 @@ public interface UsuarioDao {
 	//public boolean update(Usuario usuario_a_modificar);
 
 	public ArrayList<Usuario> obtenerTodos();
+	public ArrayList<Usuario> obtenerUsuario(String user,String clave);
 }
