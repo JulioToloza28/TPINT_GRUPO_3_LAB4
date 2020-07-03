@@ -1,11 +1,9 @@
 package entidades;
 
 public class Alumno extends Persona {
-	
-	public Alumno(){
+
+	public Alumno() {
 		super();
 	}
-	
+
 }
-
-

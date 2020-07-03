@@ -18,7 +18,7 @@ public class AlumnoNegocioImpl implements AlumnoNegocio {
 //		   alumnoAgregado.getLegajo().trim().length()>0 &&
 		   alumnoAgregado.getFechaNac()!= null &&
 		   alumnoAgregado.getDireccion().trim().length()>0 &&
-		   alumnoAgregado.getIdLocalidad() != 0 &&
+		   alumnoAgregado.getLocalidad().getId() !=0 &&
 		   alumnoAgregado.getTelefono().trim().length()>0 &&
 		   alumnoAgregado.getMail().trim().length()>0
 		  ){
