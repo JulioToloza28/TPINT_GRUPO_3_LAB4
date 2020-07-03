@@ -42,10 +42,8 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="agregarProfesor.jsp" class="btn btn-outline-primary btn-sm">Agregar</a>
-				<!--<a href="modificarProfesor.jsp"
-					class="btn btn-outline-secondary btn-sm">Editar</a> <a
-					href="listarProfesor.jsp" class="btn btn-outline-danger btn-sm">Eliminar</a>  -->
+				<a href="ServletsLocalidad?Param=1" class="btn btn-outline-primary btn-sm">Agregar</a>
+				
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>

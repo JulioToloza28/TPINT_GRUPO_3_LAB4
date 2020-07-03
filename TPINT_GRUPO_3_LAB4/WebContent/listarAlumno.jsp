@@ -96,7 +96,7 @@
 							<td><%=alumno.getDni()%></td>
 							<td><%=alumno.getFechaNac()%></td>
 							<td><%=alumno.getDireccion()%></td>
-							<td><%=alumno.getIdLocalidad()%></td>
+<%-- 							<td><%=alumno.getIdLocalidad()%></td> --%>
  							<td>provincia</td>
 							<td><%=alumno.getTelefono()%></td>
 							<td><%=alumno.getMail()%></td>

@@ -56,7 +56,7 @@ public class ServletsProfesor extends HttpServlet {
 			    java.sql.Date sql=new java.sql.Date(parsed.getTime());
 			    prof.setFechaNac(sql);
 			    prof.setDireccion(request.getParameter("txtDireccion"));
-			    prof.setIdLocalidad(1);
+			    //prof.setIdLocalidad(1);
 			    prof.setTelefono(request.getParameter("txtTelefono"));
 			    prof.setMail(request.getParameter("txtMail"));
 			    prof.setEstado(true);
