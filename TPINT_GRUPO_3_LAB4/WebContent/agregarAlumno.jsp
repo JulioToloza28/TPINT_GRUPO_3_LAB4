@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+<%@page import="entidades.Provincia" %>
+<%@page import="entidades.Localidad" %>
+<%@page import="daoImpl.AlumnoDaoImpl" %>
+<%@page import="java.util.ArrayList" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,8 +66,14 @@
 					<select
 						class="custom-select " id="validationServer04" required>
 						<option selected disabled value="">Provincia</option>
-						<option>Buenos Aires</option>
-						<option>Tucuman</option>
+						<%
+						  ArrayList<Provincia>ListarProvi=null;
+							if(request.getAttribute("listaProvDao")!=null){
+							ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");}%>
+							<% if(ListarProvi!=null)
+								for(Provincia prov : ListarProvi){%>
+								<option value=<%=prov.getId()%>><%=prov.getNombre() %></option>
+								<%} %>
 					</select>
 					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>

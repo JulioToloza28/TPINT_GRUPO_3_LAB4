@@ -34,12 +34,17 @@ public class ServletsLocalidad extends HttpServlet {
 		if(request.getParameter("Param")!=null) {
 		LocalidadDaoImpl LocDao=new LocalidadDaoImpl();
 		ArrayList<Localidad> listaLoc=(ArrayList<Localidad>) LocDao.obtenerListLocalidad();
-		
-		
 		request.setAttribute("listaLocDao",listaLoc);
-		RequestDispatcher rd= request.getRequestDispatcher("/agregarProfesor.jsp");
+		
+		if("Profesor".equals(request.getParameter("Param"))) {
+		RequestDispatcher rdProf= request.getRequestDispatcher("/agregarProfesor.jsp");
+		rdProf.forward(request, response);
+		}
+		else if("Alumno".equals(request.getParameter("Param"))) {
+		RequestDispatcher rd= request.getRequestDispatcher("/agregarAlumno.jsp");
 		rd.forward(request, response);
 		}
+	 }
 	}
 
 	

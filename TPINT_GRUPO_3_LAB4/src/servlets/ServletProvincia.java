@@ -27,6 +27,7 @@ public class ServletProvincia extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		if(request.getParameter("Param")!=null) 
 		{
 			ProvinciaDaoImpl provDao=new ProvinciaDaoImpl();
