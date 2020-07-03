@@ -3,11 +3,10 @@ package entidades;
 import java.util.Date;
 
 public class Persona {
-	private int id;
+	private int Legajo;
 	private String Nombre;
 	private String Apellido;
 	private String Dni;
-	private int Legajo;
 	private Date FechaNac;
 	private String Direccion;
 	private Localidad localidad;
@@ -18,13 +17,12 @@ public class Persona {
 	public Persona() {
 	}
 
-	public Persona(int id, String nombre, String apellido, String dni, int legajo, Date fechaNac, String direccion,
+	public Persona(int legajo, String nombre, String apellido, String dni, Date fechaNac, String direccion,
 			       Localidad localidad, String telefono, String mail, Boolean estado) {
-		this.id = id;
+		this.Legajo = legajo;
 		this.Nombre = nombre;
 		this.Apellido = apellido;
 		this.Dni = dni;
-		this.Legajo = legajo;
 		this.FechaNac = fechaNac;
 		this.Direccion = direccion;
 		this.localidad = localidad;
@@ -32,20 +30,19 @@ public class Persona {
 		this.Mail = mail;
 		this.Estado = estado;
 	}
+	public int getLegajo() {
+		return Legajo;
+	}
+
+	public void setLegajo(int legajo) {
+		Legajo = legajo;
+	}
 	public Localidad getLocalidad() {
 		return localidad;
 	}
 
 	public void setLocalidad(Localidad localidad) {
 		this.localidad = localidad;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -70,14 +67,6 @@ public class Persona {
 
 	public void setDni(String dni) {
 		Dni = dni;
-	}
-
-	public int getLegajo() {
-		return Legajo;
-	}
-
-	public void setLegajo(int legajo) {
-		Legajo = legajo;
 	}
 
 	public Date getFechaNac() {
@@ -122,8 +111,7 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Dni=" + Dni + ", Legajo="
-				+ Legajo + ", FechaNac=" + FechaNac + ", Direccion=" + Direccion + ", Localidad=" + localidad.getNombre()
+		return "Persona [Legajo=" + Legajo + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Dni=" + Dni + ", FechaNac=" + FechaNac + ", Direccion=" + Direccion + ", Localidad=" + localidad.getId()
 				+ ", Telefono=" + Telefono + ", Mail=" + Mail + ", Estado=" + Estado + "]";
 	}
 }
