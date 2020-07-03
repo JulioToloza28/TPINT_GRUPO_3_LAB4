@@ -8,8 +8,8 @@ import entidades.Materia;
 
 public class MateriaDaoImpl implements MateriaDao {
 
-	String listarMaterias = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1";
-	String buscarMateria = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1 and idMateria=";
+	String listarTodo = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1";
+	String buscarxID = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1 and idMateria=";
 
 	@Override
 	public Materia buscarMateria(int Id) {
@@ -19,7 +19,7 @@ public class MateriaDaoImpl implements MateriaDao {
 		Conexion conexion = Conexion.getConexion();
 
 		try {
-			statement = conexion.getSQLConexion().prepareStatement(buscarMateria + Id);
+			statement = conexion.getSQLConexion().prepareStatement(buscarxID + Id);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				materia.setId(resultSet.getInt("idmateria"));
@@ -46,7 +46,7 @@ public class MateriaDaoImpl implements MateriaDao {
 		ResultSet resultSet;
 		Conexion conexion = Conexion.getConexion();
 		try {
-			statement = conexion.getSQLConexion().prepareStatement(listarMaterias);
+			statement = conexion.getSQLConexion().prepareStatement(listarTodo);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				materia = new Materia();
