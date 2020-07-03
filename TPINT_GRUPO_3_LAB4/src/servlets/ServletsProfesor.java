@@ -32,7 +32,11 @@ public class ServletsProfesor extends HttpServlet {
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-			int fila=0;
+		//Listar Profesor
+		
+		
+		//Agregar Profesor	
+		int fila=0;
 			if(request.getParameter("btn-Acaptar")!=null) 
 			{
 				Profesor prof=new Profesor();

@@ -12,8 +12,7 @@
 <title>Agregar Profesor</title>
 </head>
 <body>
-
-	<a href="ServletsLocalidad?Param=1">sda</a>
+	<!-- 	<a href="ServletsLocalidad?Param=1">sda</a> -->
 
 	<jsp:include page="menu.html"></jsp:include>
 
@@ -36,9 +35,7 @@
 					type="text" class="form-control " id="validationServer02" value=""
 					required>
 				<div class="valid-feedback">Looks good!</div>
-
 			</div>
-
 		</div>
 		<div class="form-row">
 			<div class="col-md-2 mb-3">
@@ -61,7 +58,6 @@
 
 		</div>
 		<div class="form-row">
-
 			<div class="col-md-3 mb-3">
 				<label for="validationServer02">Direccion</label> <input
 					name="txtDireccion" type="text" class="form-control "
@@ -84,16 +80,17 @@
 					name="cmbLocalidad" class="custom-select " id="validationServer04"
 					required>
 					<option selected disabled value="">Seleccione...</option>
-						<%
-						LocalidadDaoImpl prueba=new LocalidadDaoImpl();
+					<%
 						ArrayList<Localidad> listaLocalidad = null;
 					if (request.getAttribute("listaLocDao") != null) {
-						listaLocalidad = prueba.obtenerListLocalidad();
+						listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
 					}
 					%>
-					<%if (listaLocalidad != null)
-						for (Localidad loc : listaLocalidad) {%>
-					      	<option><%=loc.getNombre()%></option>
+					<%
+						if (listaLocalidad != null)
+						for (Localidad loc : listaLocalidad) {
+					%>
+					<option value=<%=loc.getId()%>><%=loc.getNombre()%></option>
 					<%}%>
 				</select>
 				<div class="invalid-feedback">Seleccione una Localidad</div>
@@ -102,9 +99,9 @@
 		</div>
 		<div class="form-group row">
 			<label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
-			<div class="col-sm-10">
-				<input type="text" readonly="" class="form-control-plaintext"
-					id="staticEmail" value="Prueba@gmail.com">
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="inputPassword"
+					placeholder="Usuario">
 			</div>
 		</div>
 		<div class="form-group row">
@@ -113,15 +110,15 @@
 				<input type="password" class="form-control" id="inputPassword"
 					placeholder="Contraseña">
 			</div>
-		
+
 		</div>
 		<div class="form-group row">
 			<label for="inputPassword" class="col-sm-2 col-form-label">Verificar</label>
 			<div class="col-sm-2">
-				<input type="password" class="form-control" id="inputPassword"
+				<input type="password" class="form-control" id="Verificacion"
 					placeholder="Repetir Contraseña">
 			</div>
-
+		</div>
 		<button class="btn btn-primary" name="btn-Acaptar" type="submit">Agregar</button>
 	</form>
 
@@ -138,9 +135,9 @@
 	<%
 		}
 	%>
-	
-	
-	
+
+
+
 
 
 </body>
