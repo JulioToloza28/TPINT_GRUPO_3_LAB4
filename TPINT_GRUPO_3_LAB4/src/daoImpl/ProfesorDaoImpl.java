@@ -3,12 +3,15 @@ package daoImpl;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+
 import dao.ProfesorDao;
 import entidades.Profesor;
 
 public class ProfesorDaoImpl implements ProfesorDao{
 
 	private static final String agregarProfesor="INSERT INTO PROFESOR(NOMBRE,APELLIDO,DNI,FECHA_NAC,DIRECCION,IDLOCALIDAD,TELEFONO,MAIL,ESTADO)VALUES(?,?,?,?,?,?,?,?,?)";
+	private static final String listarProfe="SELECT * FROM tpint_grupo_3_lab4.profesor where estado=1;";
 	
 	public boolean agregarProfesor(Profesor profesor)
 	{
@@ -49,6 +52,12 @@ public class ProfesorDaoImpl implements ProfesorDao{
 		
 		return isInsertExitoso;
 		
+	}
+
+	@Override
+	public ArrayList<Profesor> listarProfe() {
+		// TODO Auto-generated method stub
+		return null;
 	} 
 
 }

@@ -3,7 +3,7 @@ package entidades;
 public class AlumnosPorCursos {
 	private int Id;
 	private Alumno Alumno;
-	private Cursos Curso;
+	private Curso Curso;
 	private int Parcial1;
 	private int Parcial2;
 	private int Recuperatorio1;
@@ -12,7 +12,7 @@ public class AlumnosPorCursos {
 	
 	public AlumnosPorCursos() {}
 	
-	public AlumnosPorCursos(int id, entidades.Alumno alumno, Cursos curso, int parcial1, int parcial2,
+	public AlumnosPorCursos(int id, entidades.Alumno alumno, Curso curso, int parcial1, int parcial2,
 			int recuperatorio1, int recuperatorio2, String estadoCursada) {
 		this.Id = id;
 		this.Alumno = alumno;
@@ -35,10 +35,10 @@ public class AlumnosPorCursos {
 	public void setAlumno(Alumno alumno) {
 		Alumno = alumno;
 	}
-	public Cursos getCurso() {
+	public Curso getCurso() {
 		return Curso;
 	}
-	public void setCurso(Cursos curso) {
+	public void setCurso(Curso curso) {
 		Curso = curso;
 	}
 	public int getParcial1() {

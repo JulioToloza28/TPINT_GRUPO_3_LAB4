@@ -1,13 +1,13 @@
 package entidades;
 
 public class Profesor extends Persona {
-	private Cursos Curso;
+	private Curso Curso;
 
-	public Cursos getCurso() {
+	public Curso getCurso() {
 		return Curso;
 	}
 
-	public void setCurso(Cursos curso) {
+	public void setCurso(Curso curso) {
 		Curso = curso;
 	}
 
