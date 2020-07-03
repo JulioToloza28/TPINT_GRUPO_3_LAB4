@@ -42,7 +42,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="ServletsLocalidad?Param=1" class="btn btn-outline-primary btn-sm">Agregar</a>
+				<a href="ServletProvincia?Param=1" class="btn btn-outline-primary btn-sm">Agregar</a>
 				
 				<table id="example" class="display" style="width: 100%">
 					<thead>

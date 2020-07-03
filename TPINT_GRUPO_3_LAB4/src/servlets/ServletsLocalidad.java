@@ -30,7 +30,7 @@ public class ServletsLocalidad extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ParamListar = request.getParameter("Param");
+		
 		if(request.getParameter("Param")!=null) {
 		LocalidadDaoImpl LocDao=new LocalidadDaoImpl();
 		ArrayList<Localidad> listaLoc=(ArrayList<Localidad>) LocDao.obtenerListLocalidad();

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Localidad"%>
+<%@page import="entidades.Provincia"%>
 <%@page import="daoImpl.LocalidadDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -12,8 +13,6 @@
 <title>Agregar Profesor</title>
 </head>
 <body>
-
-	<!-- 	<a href="ServletsLocalidad?Param=1">sda</a> -->
 
 	<jsp:include page="menu.html"></jsp:include>
 
@@ -74,7 +73,19 @@
 					name="cmbProvincia" class="custom-select " id="validationServer04"
 					required>
 					<option selected disabled value="">Seleccione...</option>
-					<option>Buenos Aires</option>
+					<%
+						ArrayList<Provincia> ListarProvi = null;
+					if (request.getAttribute("listaProvDao") != null) {
+						ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");
+					}
+					%>
+					<%
+						if (ListarProvi != null)
+						for (Provincia prov : ListarProvi) {
+					%>
+					<option value=<%=prov.getId()%>><%=prov.getNombre()%></option>
+					<%}%>
+
 				</select>
 				<div class="invalid-feedback">Please select a valid state.</div>
 			</div>
@@ -85,23 +96,23 @@
 					required>
 					<option selected disabled value="">Seleccione...</option>
 					<%
-						LocalidadDaoImpl prueba = new LocalidadDaoImpl();
-					ArrayList<Localidad> listaLocalidad = null;
+						ArrayList<Localidad> listaLocalidad = null;
 					if (request.getAttribute("listaLocDao") != null) {
-						listaLocalidad = prueba.obtenerListLocalidad();
+						listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
 					}
 					%>
 					<%
 						if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {
+							
 					%>
 					<option><%=loc.getNombre()%></option>
 					<%}%>
 				</select>
 				<div class="invalid-feedback">Seleccione una Localidad</div>
 			</div>
-
 		</div>
+
 		<div class="form-group row">
 			<label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
 			<div class="col-sm-2">
