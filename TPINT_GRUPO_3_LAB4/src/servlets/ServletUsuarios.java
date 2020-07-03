@@ -45,6 +45,17 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/ListarUsuarios.jsp");
 			rd.forward(request, response);
 		}
+		
+		if (request.getParameter("btnIngresar") != null) {
+			// Entra por haber echo click en el hyperlink mostrar usuarios
+			UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
+			ArrayList<Usuario> lista = UsuarioDao.obtenerUsuario(request.getParameter("txtUsuario"), request.getParameter("txtClave"));
+			System.out.println(lista);
+			request.setAttribute("listaUsuario", lista);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
