@@ -8,8 +8,8 @@ import entidades.Materia;
 
 public class MateriaDaoImpl implements MateriaDao {
 
-	String listarMaterias = "SELECT * FROM tpint_grupo_3_lab4.materia";
-	String buscarMateria = "SELECT * FROM tpint_grupo_3_lab4.materia where idMateria=";
+	String listarMaterias = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1";
+	String buscarMateria = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1 and idMateria=";
 
 	@Override
 	public Materia buscarMateria(int Id) {

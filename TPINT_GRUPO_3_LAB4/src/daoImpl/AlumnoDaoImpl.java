@@ -66,7 +66,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	 			 Localidad loc = new Localidad();
 	 			 loc.setId(1);
 	 			 Alumno alum = new Alumno();
-	 			 alum.setLegajo(resultSet.getInt("Legajo"));
+	 			 alum.setLegajo(resultSet.getInt("Legajo_alum"));
 	 			 alum.setNombre(resultSet.getString("Nombre"));
 	 			 alum.setApellido(resultSet.getString("Apellido"));
 	 			 alum.setDni(resultSet.getString("Dni"));

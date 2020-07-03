@@ -17,12 +17,13 @@
 <body>
 	<jsp:include page="menu.html"></jsp:include>
 
-	<div class="container">
 		<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">Usuarios</li>
 		</ol>
 		</nav>
+
+	<div class="container">
 
 		<%
 			ArrayList<Usuario> listaUsuario = null;
