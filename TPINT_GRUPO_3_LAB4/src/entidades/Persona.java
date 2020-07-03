@@ -3,7 +3,6 @@ package entidades;
 import java.util.Date;
 
 public class Persona {
-
 	
 	private int id;
 	private String Nombre;
@@ -12,7 +11,7 @@ public class Persona {
 	private int Legajo;
 	private Date FechaNac;
 	private String Direccion;
-	private int IdLocalidad;
+	private Localidad localidad;
 	private String Telefono;
 	private String Mail;
 	private Boolean Estado;
@@ -21,7 +20,7 @@ public class Persona {
 	}
 	
 	public Persona(int id, String nombre, String apellido, String dni, int legajo, Date fechaNac, String direccion,
-			int idLocalidad, String telefono, String mail, Boolean estado) {
+			       Localidad localidad, String telefono, String mail, Boolean estado) {
 		this.id = id;
 		this.Nombre = nombre;
 		this.Apellido = apellido;
@@ -29,12 +28,20 @@ public class Persona {
 		this.Legajo = legajo;
 		this.FechaNac = fechaNac;
 		this.Direccion = direccion;
-		this.IdLocalidad = idLocalidad;
+		this.localidad = localidad;
 		this.Telefono = telefono;
 		this.Mail = mail;
 		this.Estado = estado;
 	}
 	
+	public Localidad getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -77,12 +84,7 @@ public class Persona {
 	public void setDireccion(String direccion) {
 		Direccion = direccion;
 	}
-	public int getIdLocalidad() {
-		return IdLocalidad;
-	}
-	public void setIdLocalidad(int idLocalidad) {
-		IdLocalidad = idLocalidad;
-	}
+
 	public String getTelefono() {
 		return Telefono;
 	}
@@ -105,7 +107,7 @@ public class Persona {
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Dni=" + Dni + ", Legajo="
-				+ Legajo + ", FechaNac=" + FechaNac + ", Direccion=" + Direccion + ", IdLocalidad=" + IdLocalidad
+				+ Legajo + ", FechaNac=" + FechaNac + ", Direccion=" + Direccion + ", Localidad=" + localidad.getNombre()
 				+ ", Telefono=" + Telefono + ", Mail=" + Mail + ", Estado=" + Estado + "]";
 	}
 }

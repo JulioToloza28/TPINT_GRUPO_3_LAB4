@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import dao.AlumnoDao;
 import entidades.Alumno;
+import entidades.Localidad;
+
 import java.util.List;
 
 public class AlumnoDaoImpl implements AlumnoDao {
@@ -29,7 +31,8 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			// statement.setInt(4, alumno.getLegajo());
 			statement.setDate(4, (Date) alumno.getFechaNac());
 			statement.setString(5, alumno.getDireccion());
-			statement.setInt(6, alumno.getIdLocalidad());
+			//CORREGIR Y PONER POR get
+			statement.setInt(6, 1);
 			statement.setString(7, alumno.getTelefono());
 			statement.setString(8, alumno.getMail());
 			statement.setBoolean(9, alumno.getEstado());
@@ -60,6 +63,8 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			resultSet = statement.executeQuery();
 	 		 while(resultSet.next()) 
 	 		  {
+	 			 Localidad loc = new Localidad();
+	 			 loc.setId(1);
 	 			 Alumno alum = new Alumno();
 	 			 alum.setLegajo(resultSet.getInt("Legajo"));
 	 			 alum.setNombre(resultSet.getString("Nombre"));
@@ -67,7 +72,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	 			 alum.setDni(resultSet.getString("Dni"));
 	 			 //alum.setFechaNac(resultSet.getString("FechaNac"));
 	 			 alum.setDireccion(resultSet.getString("Direccion"));
-	 			 alum.setIdLocalidad(resultSet.getInt("IdLocalidad"));
+	 			 alum.setLocalidad(loc);
 	 			 //FALTA DATO PROVINCIA
 	 			 alum.setTelefono(resultSet.getString("Telefono"));
 	 			 alum.setMail(resultSet.getString("Mail"));

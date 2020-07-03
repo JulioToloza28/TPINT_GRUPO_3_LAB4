@@ -20,6 +20,7 @@ import com.sun.javafx.scene.layout.region.Margins.Converter;
 import dao.AlumnoDao;
 import daoImpl.AlumnoDaoImpl;
 import entidades.Alumno;
+import entidades.Localidad;
 
 @WebServlet("/ServletAlumno")
 public class ServletAlumno extends HttpServlet {
@@ -49,7 +50,9 @@ public class ServletAlumno extends HttpServlet {
 		//agregar alumno
 		int filas=0;
 		if(request.getParameter("btn-aceptar")!=null)
-		{
+		{ 
+			Localidad loc = new Localidad();
+			loc.setId(1);
 			Alumno alum = new Alumno();			
 			alum.setNombre(request.getParameter("txtNombre"));
 			alum.setApellido(request.getParameter("txtApellido"));
@@ -65,7 +68,7 @@ public class ServletAlumno extends HttpServlet {
 			java.sql.Date sql = new java.sql.Date(parsed.getTime());
 			alum.setFechaNac(sql);			
 			alum.setDireccion(request.getParameter("txtDireccion"));
-			alum.setIdLocalidad(1);
+			alum.setLocalidad(loc);
 			alum.setTelefono(request.getParameter("txtTelefono"));
 			alum.setMail(request.getParameter("txtEmail"));
 			alum.setEstado(true);
