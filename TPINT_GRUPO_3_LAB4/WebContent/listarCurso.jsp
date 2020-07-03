@@ -34,7 +34,7 @@
 		</nav>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="agregarCurso.jsp" class="btn btn-outline-primary btn-sm">Agregar curso</a><br><br>
+				<a href="ServletCurso?AddCurso=1" name="AddCurso" class="btn btn-outline-primary btn-sm">Agregar curso</a><br><br>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>

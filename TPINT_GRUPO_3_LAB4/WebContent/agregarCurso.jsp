@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="daoImpl.MateriaDaoImpl"%>
+<%@page import="entidades.Materia"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +26,7 @@
 </style>
 
 </head>
-<body onLoad="myOnLoad()">
+<body>
 	<jsp:include page="menu.html"></jsp:include>
 
 
@@ -33,12 +36,26 @@
 			<li class="breadcrumb-item active" aria-current="page">Cursos</li>
 		</ol>
 		</nav>
-		<form style="margin: 40px">
+		<form style="margin: 40px" method="post" action="ServletAgregarCurso">
 			<div class="row">
 				<div class="col-md-3 mb-3">
-					<label for="sel1">Materia:</label> <select name="materias" class="form-control"
-						id="sel1">
-						<option>Seleccione...</option>
+					<label for="sel1">Materia:</label> <select name="cmbMateria"
+						class="custom-select " id="validationServer04" required>
+						<option selected disabled value="">Seleccione...</option>
+						<%
+							ArrayList<Materia> listaMateria = null;
+							if (request.getAttribute("listaMatDao") != null) {
+								listaMateria = (ArrayList<Materia>)request.getAttribute("listaMatDao");
+							}
+						%>
+						<%
+							if (listaMateria != null)
+								for (Materia mate : listaMateria) {
+						%>
+						<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
+						<%
+							}
+						%>
 					</select>
 				</div>
 
@@ -60,8 +77,8 @@
 				</div>
 
 				<div>
-					<label for="sel1">Año:</label> <input type="number"
-						class="form-control" id="sel1">
+					<label for="sel1">Año:</label> <input type="number" 
+						class="form-control" id="sel1" >
 				</div>
 
 
@@ -119,7 +136,7 @@
 						<td>arilobos@gmail.com</td>
 						<td>Regular</td>
 					</tr>
-					
+
 					<tr>
 						<td><input class="form-check-input" type="checkbox" value=""
 							id="Checkbox15" style="margin-right: auto; margin-left: auto;"></td>
@@ -220,6 +237,19 @@
 
 		</form>
 
+		<%
+			int fila = 0;
+			if (request.getAttribute("cantFilas") != null) {
+				fila = 1;
+			}
+		%>
+		<%
+			if (fila == 1) {
+		%>
+		<h2>Agregado Correctamente</h2>
+		<%
+			}
+		%>
 
 	</div>
 	<script
@@ -229,28 +259,3 @@
 	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
-
-<script>
-//Codigo a Ejecutar al Cargar la Pagina
-function myOnLoad() {
- cargar_materias()
-}
-
-// cargo materias al campo <select>
-function cargar_materias() {
- var array = ["Mate", "lab", "sads", "asfas", "Extremadura"];
- array.sort();
- addOptions("materias", array);
-}
-
-// agrego opciones al select
-function addOptions(domElement, array) {
- var select = document.getElementsByName(domElement)[0];
-
- for (value in array) {
-  var option = document.createElement("option");
-  option.text = array[value];
-  select.add(option);
- }
-}
-</script>
