@@ -105,7 +105,6 @@
 							<td><%=alumno.getEstado()%></td>
  						    </tr>
 <%} %>
-
 					</tbody>
 					<tfoot>
 						
