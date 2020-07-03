@@ -1,4 +1,5 @@
 package daoImpl;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class MateriaDaoImpl implements MateriaDao {
 		Conexion conexion = Conexion.getConexion();
 
 		try {
-			statement = conexion.getSQLConexion().prepareStatement(buscarMateria+Id);
+			statement = conexion.getSQLConexion().prepareStatement(buscarMateria + Id);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				materia.setId(resultSet.getInt("idmateria"));
@@ -34,17 +35,21 @@ public class MateriaDaoImpl implements MateriaDao {
 
 	@Override
 	public ArrayList<Materia> listarMaterias() {
-
-		Materia materia = new Materia();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Materia materia = null;
 		ArrayList<Materia> lMaterias = new ArrayList<Materia>();
 		PreparedStatement statement;
 		ResultSet resultSet;
 		Conexion conexion = Conexion.getConexion();
-
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(listarMaterias);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
+				materia = new Materia();
 				materia.setId(resultSet.getInt("idmateria"));
 				materia.setNombre(resultSet.getString("nombre"));
 				materia.setEstado(resultSet.getBoolean("estado"));

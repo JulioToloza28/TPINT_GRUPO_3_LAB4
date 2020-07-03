@@ -29,13 +29,13 @@
 <body>
 	<jsp:include page="menu.html"></jsp:include>
 
-
-	<div class="container">
 		<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">Cursos</li>
 		</ol>
 		</nav>
+
+	<div class="container">
 		<form style="margin: 40px" method="post" action="ServletAgregarCurso">
 			<div class="row">
 				<div class="col-md-3 mb-3">
@@ -45,7 +45,7 @@
 						<%
 							ArrayList<Materia> listaMateria = null;
 							if (request.getAttribute("listaMatDao") != null) {
-								listaMateria = (ArrayList<Materia>)request.getAttribute("listaMatDao");
+								listaMateria = (ArrayList<Materia>) request.getAttribute("listaMatDao");
 							}
 						%>
 						<%
@@ -73,14 +73,21 @@
 						<option>2020</option>
 						<option>2019</option>
 						<option>2018</option>
+						<option>2017</option>
+						<option>2016</option>
+						<option>2015</option>
+						<option>2014</option>
+						<option>2013</option>
+						<option>2012</option>
+						<option>2011</option>
+						<option>2010</option>
+						<option>2009</option>
+						<option>2008</option>
+						<option>2007</option>
+						<option>2006</option>
+						<option>2005</option>
 					</select>
 				</div>
-
-				<div>
-					<label for="sel1">Año:</label> <input type="number" 
-						class="form-control" id="sel1" >
-				</div>
-
 
 			</div>
 

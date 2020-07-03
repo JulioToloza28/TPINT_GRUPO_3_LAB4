@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.MateriaDao;
 import daoImpl.MateriaDaoImpl;
 import entidades.Materia;
+import negocio.MateriaNegocio;
+import negocioImpl.MateriaNegocioImpl;
 
 @WebServlet("/ServletCurso")
 public class ServletCurso extends HttpServlet {
@@ -25,8 +27,8 @@ public class ServletCurso extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("AddCurso")!=null) {
-			MateriaDao materiaDao = new MateriaDaoImpl();
-			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaDao.listarMaterias();
+			MateriaNegocio materiaNeg = new MateriaNegocioImpl();
+			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
 			
 			request.setAttribute("listaMatDao", lMateria);
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarCurso.jsp");
