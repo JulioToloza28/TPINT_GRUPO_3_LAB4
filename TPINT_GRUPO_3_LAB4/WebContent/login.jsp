@@ -1,3 +1,5 @@
+<%@page import="entidades.Usuario"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,18 +33,19 @@
 	</nav>
 
 	<div class="login-form">
-		<form action="/examples/actions/confirmation.php" method="post">
+		<form action="ServletUsuarios?Param=2" method="get">
 			<h2 class="text-center">Login</h2>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Usuario"
-					required="required">
+				<input type="text" class="form-control" name="txtUsuario"
+					placeholder="Usuario" required="required">
 			</div>
 			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Clave"
-					required="required">
+				<input type="password" class="form-control" name="txtClave"
+					placeholder="Clave" required="required">
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+				<input type="submit" value="Ingresar"
+					class="btn btn-primary btn-block" name="btnIngresar">
 			</div>
 			<div class="clearfix">
 				<label class="pull-left checkbox-inline"></label> <a href="#"
@@ -53,6 +56,33 @@
 			<a href="#">Crear una cuenta</a>
 		</p>
 	</div>
+
+	<%
+		ArrayList<Usuario> listaUsuario = null;
+		if (request.getAttribute("listaUsuario") != null) {
+			listaUsuario = (ArrayList<Usuario>) request.getAttribute("listaUsuario");
+		}
+	%>
+
+	<%
+		if (listaUsuario != null && !listaUsuario.isEmpty()) {
+	%>
+	<script type="text/javascript">
+		alert("Bienvenido");
+	</script>
+	<%
+		response.sendRedirect("/TPINT_GRUPO_3_LAB4/menu.html");
+	%>
+	<%
+		} else {
+	%>
+	<script type="text/javascript">
+		alert("Usuario no valido");
+	</script>
+	<%
+		}
+	%>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 	<script
