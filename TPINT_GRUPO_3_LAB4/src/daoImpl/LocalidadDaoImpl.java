@@ -11,7 +11,8 @@ import dao.LocalidadDao;
 public class LocalidadDaoImpl implements LocalidadDao {
 
 	private static final String ObtenerListLocalidad="SELECT loc.idlocalidad, loc.nombre as LolNombre, prov.idprovincia, prov.Nombre as ProNombre FROM tpint_grupo_3_lab4.localidad as loc inner join provincia prov on loc.idprovincia=prov.idprovincia;";
-
+    private static final String ObtenerLocalidad_Provincia="SELECT * FROM tpint_grupo_3_lab4.localidad where idprovincia = ?;";
+	
 	@Override
 	public ArrayList<Localidad> obtenerListLocalidad() {
 		try {
@@ -41,6 +42,33 @@ public class LocalidadDaoImpl implements LocalidadDao {
 		}
 		return localidades;
 	}
+	
+	@Override
+	public ArrayList<Localidad> ObtenerLocalidadPorProvincia(int IdProv) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		ArrayList<Localidad> Localidad = new ArrayList<Localidad>();
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(ObtenerLocalidad_Provincia);
+			statement.setInt(1, IdProv);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Localidad.add(getLocalidad(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Localidad;
+	}
+	
+	
 	private Localidad getLocalidad(ResultSet resultSet) throws SQLException
 	{
 		Provincia prov=new Provincia();
@@ -49,8 +77,6 @@ public class LocalidadDaoImpl implements LocalidadDao {
 		prov.setId(resultSet.getInt("idprovincia"));
 		prov.setNombre(resultSet.getString("ProNombre"));
 		return new Localidad(id,nombre,prov);
-		
-		
 	}
 	
 	

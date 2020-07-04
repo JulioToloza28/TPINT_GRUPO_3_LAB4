@@ -52,7 +52,8 @@ public class ServletAlumno extends HttpServlet {
 		if(request.getParameter("btn-aceptar")!=null)
 		{ 
 			Localidad loc = new Localidad();
-			loc.setId(1);
+			String a=request.getParameter("cmbLocalidad");
+			loc.setId(Integer.parseInt(a));
 			Alumno alum = new Alumno();			
 			alum.setNombre(request.getParameter("txtNombre"));
 			alum.setApellido(request.getParameter("txtApellido"));
