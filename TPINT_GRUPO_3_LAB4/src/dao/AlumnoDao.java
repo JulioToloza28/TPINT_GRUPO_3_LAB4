@@ -1,3 +1,4 @@
+
 package dao;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,4 +10,7 @@ public interface AlumnoDao {
 	public ArrayList<Alumno> readAll();
 	public boolean modificarAlumno(Alumno alumnoModificado);
 	//public boolean borrarAlumno(Alumno alumnoEliminado);
+  	public ArrayList<Alumno> getAlumnosInscriptos(int IdCurso);
 }
+
+
