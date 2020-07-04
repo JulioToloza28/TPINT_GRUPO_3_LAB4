@@ -6,6 +6,6 @@ import entidades.Provincia;
 
 public interface ProvinciaDao {
 	
-	public ArrayList<Provincia> obtenerProvincias();
+	public ArrayList<Provincia> listarProvincia();
 
 }

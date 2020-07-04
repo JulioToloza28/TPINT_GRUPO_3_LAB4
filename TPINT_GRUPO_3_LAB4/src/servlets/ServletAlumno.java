@@ -87,6 +87,45 @@ public class ServletAlumno extends HttpServlet {
 		RequestDispatcher rd= request.getRequestDispatcher("/agregarAlumno.jsp");
 		rd.forward(request, response);
 		}
+		
+		//Modificar alumno
+		if(request.getParameter("btn-EditarAlumno")!=null) {
+			Alumno alum = new Alumno();
+			Localidad loc = new Localidad();
+			String a=request.getParameter("cmbLocalidad");
+			loc.setId(Integer.parseInt(a));
+			Alumno alum1 = new Alumno();			
+			alum1.setNombre(request.getParameter("txtNombre"));
+			alum1.setApellido(request.getParameter("txtApellido"));
+			alum1.setDni(request.getParameter("txtDni"));
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+			Date parsed = null;
+			try {
+				parsed = format.parse(request.getParameter("txtFechaNac"));
+			} 
+			catch (ParseException e) {
+				e.printStackTrace();
+			}
+			java.sql.Date sql = new java.sql.Date(parsed.getTime());
+			alum1.setFechaNac(sql);			
+			alum1.setDireccion(request.getParameter("txtDireccion"));
+			alum1.setLocalidad(loc);
+			alum1.setTelefono(request.getParameter("txtTelefono"));
+			alum1.setMail(request.getParameter("txtEmail"));
+			alum1.setEstado(true);
+			
+			AlumnoDaoImpl alumImp=new AlumnoDaoImpl();
+			if(alumImp.modificarAlumno(alum1)!=false) 
+			{
+				filas=1;
+			}	
+			if(filas==1) {
+				//REQUEST DISPATCHER
+				request.setAttribute("cantFilas", filas);
+				RequestDispatcher rd= request.getRequestDispatcher("/modificarAlumno.jsp");
+				rd.forward(request, response);
+				}
+		}
 	}
 
 	private RequestDispatcher getRequestDispatcher(String string) {
