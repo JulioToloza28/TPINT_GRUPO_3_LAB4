@@ -75,7 +75,7 @@
 							<th>Provincia</th>
 							<th>Telefono</th>
 							<th>Mail</th>
-							<th>Estado Academico</th>
+							<!-- <th>Estado Academico</th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -98,12 +98,11 @@
 							<td><%=alumno.getDni()%></td>
 							<td><%=alumno.getFechaNac()%></td>
 							<td><%=alumno.getDireccion()%></td>
- 							<td>""</td>
- 							<td>""</td>
+ 							<td><%=alumno.getLocalidad().getNombre()%></td>
+ 							<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
 							<td><%=alumno.getTelefono()%></td>
 							<td><%=alumno.getMail()%></td>
-							<td><%=alumno.getEstado()%></td>
- 						    </tr>
+							</tr>
 <%} %>
 					</tbody>
 					<tfoot>

@@ -75,7 +75,7 @@ public class LocalidadDaoImpl implements LocalidadDao {
 		int id=resultSet.getInt("idlocalidad");
 		String nombre=resultSet.getString("LolNombre");
 		prov.setId(resultSet.getInt("idprovincia"));
-		prov.setNombre(resultSet.getString("ProNombre"));
+		prov.setNombreProv(resultSet.getString("ProNombre"));
 		return new Localidad(id,nombre,prov);
 	}
 	

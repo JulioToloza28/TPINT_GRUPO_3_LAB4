@@ -8,7 +8,7 @@ import entidades.Provincia;
 
 public class ProvinciaDaoImpl {
 
-	private static final String obtenerListProvincia="SELECT * FROM tpint_grupo_3_lab4.provincia;";
+	private static final String obtenerListProvincia="SELECT idprovincia, Nombre as NProvincia FROM  tpint_grupo_3_lab4.provincia;";
 	
 	public ArrayList<Provincia> listarProvincia()
 	{
@@ -40,7 +40,7 @@ public class ProvinciaDaoImpl {
 	
 	private Provincia getProvincia(ResultSet resultSet) throws SQLException
 	{
-		return new Provincia(resultSet.getInt("idprovincia"),resultSet.getString("Nombre"));
+		return new Provincia(resultSet.getInt("idprovincia"),resultSet.getString("NProvincia"));
 	}
 	
 	public ProvinciaDaoImpl() {

@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import dao.AlumnoDao;
 import entidades.Alumno;
 import entidades.Localidad;
+import entidades.Provincia;
+
 import java.util.List;
 
 public class AlumnoDaoImpl implements AlumnoDao {
 
 	private static final String agregarAlumno = "INSERT INTO alumno(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?)";
-	private static final String readAll = "SELECT a.legajo_alum, a.nombre, a.apellido, a.dni, a.fecha_nac, a.direccion, loc.nombre as 'Localidad', a.telefono, a.mail from alumno as a  inner join localidad as loc on a.idlocalidad = loc.idlocalidad  where estado=1;";
+	private static final String readAll = "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1;";
 
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;
@@ -65,14 +67,20 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Localidad loc = new Localidad();
-				loc.setNombre(resultSet.getString("Localidad"));
+				Provincia provincia=new Provincia();
 				Alumno alum = new Alumno();
 				alum.setLegajo(resultSet.getInt("legajo_alum"));
-				alum.setNombre(resultSet.getString("Nombre"));
+				alum.setNombre(resultSet.getString("Alumno"));
 				alum.setApellido(resultSet.getString("Apellido"));
 				alum.setDni(resultSet.getString("Dni"));
 				alum.setFechaNac(resultSet.getDate("fecha_nac"));
 				alum.setDireccion(resultSet.getString("direccion"));
+				loc.setId(resultSet.getInt("idlocalidad"));
+				loc.setNombre(resultSet.getString("Localidad"));
+				provincia.setId(resultSet.getInt("idprovincia"));
+				String pr=resultSet.getString("Provincia");
+				provincia.setNombreProv("Prueba");				
+				loc.setProvincia(provincia);
 				alum.setLocalidad(loc);
 				alum.setTelefono(resultSet.getString("telefono"));
 				alum.setMail(resultSet.getString("mail"));

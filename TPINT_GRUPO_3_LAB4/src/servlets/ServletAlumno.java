@@ -41,6 +41,7 @@ public class ServletAlumno extends HttpServlet {
 		{
 			AlumnoDaoImpl alumDao = new AlumnoDaoImpl();
 			ArrayList<Alumno> lista = alumDao.readAll();
+			System.out.println(lista);
 			
 			request.setAttribute("listaAlum", lista);
 			RequestDispatcher rd = request.getRequestDispatcher("/listarAlumno.jsp");

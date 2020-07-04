@@ -83,7 +83,7 @@
 							ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");}%>
 							<% if(ListarProvi!=null)
 								for(Provincia prov : ListarProvi){%>
-								<option value=<%=prov.getId()%>><%=prov.getNombre() %></option>
+								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
 								<%} %>
 								
 					</select>
