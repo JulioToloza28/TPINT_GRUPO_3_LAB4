@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import entidades.Curso;
 public class CursoDaoImpl implements CursoDao {
 
 	String listarTodos = "SELECT * FROM tpint_grupo_3_lab4.listar_cursos";
-	String buscarxId = "SELECT * FROM tpint_grupo_3_lab4.curso where estado=1 and idCurso = ";
+	String buscarxId = "SELECT * FROM tpint_grupo_3_lab4.listar_cursos where idcurso=";
 	String eliminar_Curso = "UPDATE tpint_grupo_3_lab4.curso SET estado = 0 WHERE idcurso = ";
 
 	@Override
@@ -89,11 +90,11 @@ public class CursoDaoImpl implements CursoDao {
 			e.printStackTrace();
 		}
 		PreparedStatement statement;
-		Conexion conexion = Conexion.getConexion();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try {
-			statement = conexion.getSQLConexion().prepareStatement(eliminar_Curso + Id);
+			statement = conexion.prepareStatement(eliminar_Curso + Id);
 			Elim = statement.executeUpdate();
-
+			conexion.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

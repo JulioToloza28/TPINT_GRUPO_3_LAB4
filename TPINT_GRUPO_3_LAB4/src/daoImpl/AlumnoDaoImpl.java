@@ -18,6 +18,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 
 	private static final String agregarAlumno = "INSERT INTO alumno(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?)";
 	private static final String readAll = "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1;";
+	private static final String obtenerAlumnosInscriptos = "SELECT distinct a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoxcurso as alXcu on legajo_alum=legajoalumno where estado=1 and idCurso=";
 
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;
@@ -56,7 +57,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		ArrayList<Alumno> listAlumno = new ArrayList<Alumno>();
 		PreparedStatement statement;
 		ResultSet resultSet;
@@ -67,7 +68,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Localidad loc = new Localidad();
-				Provincia provincia=new Provincia();
+				Provincia provincia = new Provincia();
 				Alumno alum = new Alumno();
 				alum.setLegajo(resultSet.getInt("legajo_alum"));
 				alum.setNombre(resultSet.getString("Alumno"));
@@ -78,13 +79,58 @@ public class AlumnoDaoImpl implements AlumnoDao {
 				loc.setId(resultSet.getInt("idlocalidad"));
 				loc.setNombre(resultSet.getString("Localidad"));
 				provincia.setId(resultSet.getInt("idprovincia"));
-				String pr=resultSet.getString("Provincia");
-				provincia.setNombreProv("Prueba");				
+				String pr = resultSet.getString("Provincia");
+				provincia.setNombreProv("Prueba");
 				loc.setProvincia(provincia);
 				alum.setLocalidad(loc);
 				alum.setTelefono(resultSet.getString("telefono"));
 				alum.setMail(resultSet.getString("mail"));
 				listAlumno.add(alum);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return listAlumno;
+	}
+
+	@Override
+	public ArrayList<Alumno> getAlumnosInscriptos(int IdCurso) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Alumno> listAlumno = new ArrayList<Alumno>();
+		Alumno alumno = null;
+		Localidad localidad = null;
+		Provincia provincia = null;
+		PreparedStatement statement;
+		ResultSet resultSet;
+
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(obtenerAlumnosInscriptos + IdCurso);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				localidad = new Localidad();
+				provincia = new Provincia();
+				alumno = new Alumno();
+				alumno.setLegajo(resultSet.getInt("legajo_alum"));
+				alumno.setNombre(resultSet.getString("Alumno"));
+				alumno.setApellido(resultSet.getString("Apellido"));
+				alumno.setDni(resultSet.getString("Dni"));
+				alumno.setFechaNac(resultSet.getDate("fecha_nac"));
+				alumno.setDireccion(resultSet.getString("direccion"));
+				localidad.setId(resultSet.getInt("idlocalidad"));
+				localidad.setNombre(resultSet.getString("Localidad"));
+				provincia.setId(resultSet.getInt("idprovincia"));
+				provincia.setNombreProv(resultSet.getString("Provincia"));
+				localidad.setProvincia(provincia);
+				alumno.setLocalidad(localidad);
+				alumno.setTelefono(resultSet.getString("telefono"));
+				alumno.setMail(resultSet.getString("mail"));
+				listAlumno.add(alumno);
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

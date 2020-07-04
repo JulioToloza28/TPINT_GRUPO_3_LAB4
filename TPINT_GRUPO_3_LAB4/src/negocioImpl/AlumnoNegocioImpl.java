@@ -1,4 +1,5 @@
 package negocioImpl;
+import java.util.ArrayList;
 import java.util.List;
 import dao.AlumnoDao;
 import daoImpl.AlumnoDaoImpl;
@@ -25,5 +26,15 @@ public class AlumnoNegocioImpl implements AlumnoNegocio {
 			estado = alumDao.agregarAlumno(alumnoAgregado); 
 			}
 		return estado;
+	}
+
+	@Override
+	public ArrayList<Alumno> getAlumnosInscriptos(int IdCurso) {
+		return alumDao.getAlumnosInscriptos(IdCurso);
+	}
+
+	@Override
+	public ArrayList<Alumno> readAll() {
+		return alumDao.readAll();
 	}
 }
