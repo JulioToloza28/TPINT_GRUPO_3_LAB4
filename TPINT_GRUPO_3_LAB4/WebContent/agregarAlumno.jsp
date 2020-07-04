@@ -1,10 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@page import="entidades.Provincia" %>
 <%@page import="entidades.Localidad" %>
 <%@page import="daoImpl.AlumnoDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
+
+<script type="text/javascript">
+
+//  function cambiar_localidad(){
+//  	var IdProv;
+//  		IdProv = document.getElementById('txtselectLocalidad').value;
+//  	 if (request.getAttribute("listaLocDao") != null) 
+//  	   {
+ 		
+// 	   }
+//  	 }
+//  }
+</script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -63,8 +75,7 @@
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationServer04">Provincia</label> 
-					<select
-						class="custom-select " id="validationServer04" required>
+					<select name="cmbProvincia" class="custom-select " id="txtselectProvincia" onchange="cambiar_localidad()" required>
 						<option selected disabled value="">Provincia</option>
 						<%
 						  ArrayList<Provincia>ListarProvi=null;
@@ -74,14 +85,22 @@
 								for(Provincia prov : ListarProvi){%>
 								<option value=<%=prov.getId()%>><%=prov.getNombre() %></option>
 								<%} %>
+								
 					</select>
 					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
 				 <div class="col-md-2 mb-3">
 					<label for="validationServer03">Localidad</label> 
-					<select class="custom-select " id="validationServer04" required>
+					<select name="cmbLocalidad" class="custom-select " id="txtselectLocalidad" required>
 						<option selected disabled value="">Localidad</option>
-						<option>Don Torcuato</option>
+						<%ArrayList<Localidad> listaLocalidad = null;
+					      if (request.getAttribute("listaLocDao") != null) {
+						  listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
+					}%>
+					<%if (listaLocalidad != null)
+						for (Localidad loc : listaLocalidad) {%>
+					<option value=<%=loc.getId()%>><%=loc.getNombre()%></option>
+					<%}%>
 					</select>
 					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>

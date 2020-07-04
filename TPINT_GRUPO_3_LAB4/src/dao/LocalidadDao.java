@@ -8,4 +8,6 @@ public interface LocalidadDao {
 	
 	public ArrayList<Localidad> obtenerListLocalidad();
 
+	public ArrayList<Localidad> ObtenerLocalidadPorProvincia(int IdProv);
+
 }
