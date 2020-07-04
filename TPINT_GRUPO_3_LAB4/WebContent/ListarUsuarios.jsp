@@ -17,11 +17,11 @@
 <body>
 	<jsp:include page="menu.html"></jsp:include>
 
-		<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item active" aria-current="page">Usuarios</li>
-		</ol>
-		</nav>
+	<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+	</ol>
+	</nav>
 
 	<div class="container">
 
@@ -54,10 +54,8 @@
 							<td><%=user.getUsername()%></td>
 							<td><%=user.getLegajo()%></td>
 							<td><%=user.getTipoUsuario().getTipo()%></td>
-							<td><input type="submit" class="btn btn-info btn-sm" name="btnModificar"
-								value="Modificar">
-							<input type="submit" class="btn btn-danger btn-sm" name="btnEliminar"
-								value="Eliminar"></td>
+							<td><a href="CambiarClave.jsp?idUsuario=<%=user.getId()%>" class="btn btn-info btn-sm"><i
+									class="fas fa-exchange-alt"></i> Cambiar Clave</a>
 						</tr>
 						<%
 							}
