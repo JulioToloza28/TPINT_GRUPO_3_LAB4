@@ -9,6 +9,7 @@ public interface CursoNegocio {
 
 	public ArrayList<Curso> listarCursos();
 	
+	
 	public boolean eliminarCurso (int Id);
 	
 }

@@ -36,5 +36,6 @@ public class AlumnoNegocioImpl implements AlumnoNegocio {
 	@Override
 	public ArrayList<Alumno> readAll() {
 		return alumDao.readAll();
+		
 	}
 }

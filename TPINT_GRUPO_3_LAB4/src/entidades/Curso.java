@@ -11,6 +11,7 @@ public class Curso {
 	private String  Profesor;
 	private int CantAlum;
 	
+	
 	public Curso() {}
 	
 	public Curso(int id, int idMateria, int cuatrimestre, int legajoProf, int estado) {

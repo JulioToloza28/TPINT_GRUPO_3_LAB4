@@ -19,6 +19,7 @@ public class CursoDaoImpl implements CursoDao {
 		PreparedStatement statement;
 		ResultSet resultSet;
 		Conexion conexion = Conexion.getConexion();
+		
 
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(buscarxId + Id);

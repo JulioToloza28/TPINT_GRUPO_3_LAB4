@@ -10,6 +10,7 @@ public class Materia {
 		this.Estado = true;
 	}
 	
+	
 	public Materia(int id, String nombre) {
 		this.id = id;
 		this.Nombre = nombre;

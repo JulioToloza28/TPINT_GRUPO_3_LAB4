@@ -6,4 +6,5 @@ import entidades.Profesor;
 
 public interface ProfesorNegocio {
 	public ArrayList<Profesor> listarProfe();
+	
 }

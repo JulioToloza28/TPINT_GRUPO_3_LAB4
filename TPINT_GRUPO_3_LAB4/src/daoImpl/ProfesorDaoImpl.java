@@ -23,6 +23,7 @@ public class ProfesorDaoImpl implements ProfesorDao{
 		PreparedStatement statement;
 		Connection conexion=Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso=false;
+		
 		try {
 			statement=conexion.prepareStatement(agregarProfesor);
 			statement.setString(1,profesor.getNombre());

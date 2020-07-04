@@ -16,6 +16,7 @@ public class CursoNegocioImpl implements CursoNegocio {
 		Curso curso = new Curso();
 		curso = cursoDao.buscarCurso(Id);
 		return curso;
+		
 	}
 
 	@Override
