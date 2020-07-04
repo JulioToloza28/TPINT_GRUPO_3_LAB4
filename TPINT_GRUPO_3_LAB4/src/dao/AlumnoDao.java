@@ -8,4 +8,5 @@ public interface AlumnoDao {
 	public boolean agregarAlumno(Alumno alumnoAgregado);
 	public ArrayList<Alumno> readAll();
 	//public boolean borrarAlumno(Alumno alumnoEliminado);
+	public ArrayList<Alumno> getAlumnosInscriptos(int IdCurso);
 }

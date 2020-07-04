@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,15 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MateriaDao;
-import daoImpl.MateriaDaoImpl;
 import entidades.Alumno;
 import entidades.Curso;
 import entidades.Materia;
+import entidades.Profesor;
+import negocio.AlumnoNegocio;
 import negocio.CursoNegocio;
+import negocioImpl.AlumnoNegocioImpl;
 import negocioImpl.CursoNegocioImpl;
 import negocio.MateriaNegocio;
+import negocio.ProfesorNegocio;
 import negocioImpl.MateriaNegocioImpl;
+import negocioImpl.ProfesorNegocioImpl;
 
 @WebServlet("/ServletCurso")
 public class ServletCurso extends HttpServlet {
@@ -31,14 +33,20 @@ public class ServletCurso extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		CursoNegocio cursoNeg = new CursoNegocioImpl();
-		
+		AlumnoNegocio alumnoNeg = new AlumnoNegocioImpl();
+		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
 		
 		
 		if (request.getParameter("AddCourses") != null) {
 			MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
+			ArrayList<Alumno> lAlum= alumnoNeg.readAll();
+			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+			
 
 			request.setAttribute("listaMatDao", lMateria);
+			request.setAttribute("ListaAlumnos", lAlum);
+			request.setAttribute("listaProfes", lProfesor);
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarCurso.jsp");
 			rd.forward(request, response);
 		}
@@ -58,13 +66,13 @@ public class ServletCurso extends HttpServlet {
 		
 		if(request.getParameter("deleteCourse")!= null) {
 			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("deleteCourse")));
-			Alumno alum=null;
+			ArrayList<Alumno> alum= alumnoNeg.getAlumnosInscriptos(Integer.parseInt(request.getParameter("deleteCourse")));
 			
 			
 			
 			request.setAttribute("CursoElim", curso);
-			request.setAttribute("AlumnosCur", alum);
-			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
+			request.setAttribute("ListaAlumnos", alum);
+			RequestDispatcher rd = request.getRequestDispatcher("/agregarCurso.jsp");
 			rd.forward(request, response);
 		}
 		

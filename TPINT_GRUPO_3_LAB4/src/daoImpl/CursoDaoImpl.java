@@ -9,7 +9,7 @@ import entidades.Curso;
 public class CursoDaoImpl implements CursoDao {
 
 	String listarTodos = "SELECT * FROM tpint_grupo_3_lab4.listar_cursos";
-	String buscarxId = "SELECT * FROM tpint_grupo_3_lab4.curso where estado=1 and idCurso = ";
+	String buscarxId = "SELECT * FROM tpint_grupo_3_lab4.listar_cursos where idcurso=";
 	String eliminar_Curso = "UPDATE tpint_grupo_3_lab4.curso SET estado = 0 WHERE idcurso = ";
 
 	@Override
