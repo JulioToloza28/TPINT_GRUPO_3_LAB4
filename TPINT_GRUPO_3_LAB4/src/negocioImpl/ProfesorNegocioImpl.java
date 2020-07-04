@@ -13,6 +13,7 @@ public class ProfesorNegocioImpl implements ProfesorNegocio {
 	@Override
 	public ArrayList<Profesor> listarProfe() {
 		return profesorDao.listarProfe();
+		
 	}
 
 }

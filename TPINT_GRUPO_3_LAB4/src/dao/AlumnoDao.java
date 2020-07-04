@@ -9,4 +9,5 @@ public interface AlumnoDao {
 	public ArrayList<Alumno> readAll();
 	//public boolean borrarAlumno(Alumno alumnoEliminado);
 	public ArrayList<Alumno> getAlumnosInscriptos(int IdCurso);
+	
 }

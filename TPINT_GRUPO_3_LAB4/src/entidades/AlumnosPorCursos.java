@@ -10,6 +10,7 @@ public class AlumnosPorCursos {
 	private int Recuperatorio2;
 	private String EstadoCursada;
 	
+	
 	public AlumnosPorCursos() {}
 	
 	public AlumnosPorCursos(int id, entidades.Alumno alumno, Curso curso, int parcial1, int parcial2,

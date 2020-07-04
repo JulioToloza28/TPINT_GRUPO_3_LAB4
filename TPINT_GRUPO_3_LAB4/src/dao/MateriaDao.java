@@ -9,4 +9,5 @@ public interface MateriaDao {
 	public Materia buscarMateria(int Id);
 	
 	public ArrayList<Materia> listarMaterias();
+	
 }

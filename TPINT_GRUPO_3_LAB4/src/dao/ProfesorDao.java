@@ -8,4 +8,5 @@ public interface ProfesorDao {
 	
 	public boolean agregarProfesor(Profesor profesorAgregado);
 	public ArrayList<Profesor> listarProfe();
+	
 }

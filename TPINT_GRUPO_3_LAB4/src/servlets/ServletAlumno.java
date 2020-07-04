@@ -39,6 +39,7 @@ public class ServletAlumno extends HttpServlet {
 		//listar alumno
 		if(request.getParameter("Param")!=null)
 		{
+			
 			AlumnoDaoImpl alumDao = new AlumnoDaoImpl();
 			ArrayList<Alumno> lista = alumDao.readAll();
 			System.out.println(lista);

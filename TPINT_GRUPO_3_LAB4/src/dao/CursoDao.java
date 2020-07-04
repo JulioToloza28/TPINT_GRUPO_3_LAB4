@@ -11,5 +11,6 @@ public interface CursoDao {
 	public ArrayList<Curso> listarCursos();
 	
 	public boolean eliminarCurso(int Id);
+	
 
 }

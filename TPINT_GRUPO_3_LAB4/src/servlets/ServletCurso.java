@@ -37,6 +37,7 @@ public class ServletCurso extends HttpServlet {
 		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
 		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 
+		
 		if (request.getParameter("AddCourses") != null) {
 			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
