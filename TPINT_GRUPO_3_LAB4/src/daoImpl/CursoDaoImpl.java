@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -89,11 +90,11 @@ public class CursoDaoImpl implements CursoDao {
 			e.printStackTrace();
 		}
 		PreparedStatement statement;
-		Conexion conexion = Conexion.getConexion();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try {
-			statement = conexion.getSQLConexion().prepareStatement(eliminar_Curso + Id);
+			statement = conexion.prepareStatement(eliminar_Curso + Id);
 			Elim = statement.executeUpdate();
-
+			conexion.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

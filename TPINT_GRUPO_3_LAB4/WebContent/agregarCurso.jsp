@@ -38,7 +38,7 @@
 	</nav>
 
 	<div class="container">
-		<form style="margin: 40px" method="post" action="ServletAgregarCurso">
+		<form style="margin: 40px" method="post" action="ServletCurso">
 			<div class="row">
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Materia:</label> <select name="cmbMateria"
@@ -63,7 +63,8 @@
 
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Cuatrimestre N°:</label> <select
-						class="form-control" id="sel1">
+						class="form-control" id="sel1" name="cmbCuatrimestre" required>
+						<option selected disabled value="">Seleccione...</option>
 						<option>1</option>
 						<option>2</option>
 					</select>
@@ -71,11 +72,14 @@
 
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Año:</label> <select class="form-control"
-						id="sel1">
+						id="sel1" name="cmbAnio" required>
+						<option selected disabled value="">Seleccione...</option>
 						<%
-						for(int x=2020; x>=2000;x--){%>
+							for (int x = 2020; x >= 2000; x--) {
+						%>
 						<option><%=x%></option>
-						<%}
+						<%
+							}
 						%>
 					</select>
 				</div>
@@ -90,7 +94,7 @@
 				</div>
 				<div class="col-md-3 mb-3">
 
-					<select name="cmbMateria" class="custom-select "
+					<select name="cmbProfesor" class="custom-select "
 						id="validationServer04" required>
 						<option selected disabled value="">Seleccione...</option>
 						<%
@@ -115,10 +119,11 @@
 
 
 			<H4>Alumnos:</H4>
-			<table id="example" class="display" style="width: 100%">
+			<table id="example" name="tableAlumnos" class="display"
+				style="width: 100%">
 				<thead>
 					<tr>
-						<!-- 						<th></th> -->
+						<th></th>
 						<th>Legajo</th>
 						<th>Nombre</th>
 						<th>Apellido</th>
@@ -132,19 +137,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% 
-    ArrayList<Alumno> listaAlumno=null;
-    if(request.getAttribute("ListaAlumnos")!=null)
-    {
- 	listaAlumno = (ArrayList<Alumno>)request.getAttribute("ListaAlumnos");
-    }
-%>
-					<% 
-					    if(listaAlumno!=null)
-                        for(Alumno alumno : listaAlumno){ %>
+					<%
+						ArrayList<Alumno> listaAlumno = null;
+						if (request.getAttribute("ListaAlumnos") != null) {
+							listaAlumno = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+						}
+					%>
+					<%
+						if (listaAlumno != null)
+							for (Alumno alumno : listaAlumno) {
+					%>
 					<tr>
-						<!-- 							<td><input class="form-check-input" type="checkbox" value="" -->
-						<!-- 							id="Checkbox15" style="margin-right: auto; margin-left: auto;"></td> -->
+						<td><input class="form-check-input" type="checkbox"
+							value="<%=alumno.getLegajo()%>"
+							id="Checkbox<%=alumno.getLegajo()%>"
+							style="margin-right: auto; margin-left: auto;"></td>
 						<td><%=alumno.getLegajo()%></td>
 						<td><%=alumno.getNombre()%></td>
 						<td><%=alumno.getApellido()%></td>
@@ -156,7 +163,9 @@
 						<td><%=alumno.getTelefono()%></td>
 						<td><%=alumno.getMail()%></td>
 					</tr>
-					<%} %>
+					<%
+						}
+					%>
 
 
 				</tbody>
@@ -165,8 +174,14 @@
 
 
 
-			<button class="btn btn-primary" type="submit">Guardar</button>
-
+			<input Id="GrabarCurso" name="GrabarCurso" class="btn btn-primary"
+				type="submit" Value="Guardar"> 
+				<a Id="Retroceder"
+				name="Retroceder" class="btn btn-secondary" type="submit"
+				href="ServletCurso?listCourses=1">Volver</a>
+<!-- 				<a Id="Retroceder" -->
+<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
+<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
 		</form>
 
 		<%
