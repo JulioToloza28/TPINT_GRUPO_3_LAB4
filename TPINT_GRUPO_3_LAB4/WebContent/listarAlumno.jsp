@@ -102,7 +102,7 @@
  							<td><%=alumno.getLocalidad().getProvincia().getId()%></td>
 							<td><%=alumno.getTelefono()%></td>
 							<td><%=alumno.getMail()%></td>
-							<td><a href="servletAlumno?Param=<%=alumno.getLegajo()%>" name="btn-EditarAlumno" class="btn btn-outline-secondary btn-sm">Editar</a> </td>
+							<td><a href="ServletAlumno?Param=ModificarAlumno&Data=<%=alumno%>" name="btn-EditarAlumno" class="btn btn-outline-secondary btn-sm">Editar</a> </td>
 					        <td><a href="listarAlumno.jsp" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
 							</tr>
 							<%} %>

@@ -37,16 +37,23 @@ public class ServletAlumno extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		//listar alumno
-		if(request.getParameter("Param")!=null)
+		if("MenuAlumno".equals(request.getParameter("Param")))
 		{
 			AlumnoDaoImpl alumDao = new AlumnoDaoImpl();
 			ArrayList<Alumno> lista = alumDao.readAll();
-			System.out.println(lista);
+			
 			
 			request.setAttribute("listaAlum", lista);
 			RequestDispatcher rd = request.getRequestDispatcher("/listarAlumno.jsp");
 			rd.forward(request, response);
 		}
+		 
+		if("ModificarAlumno".equals(request.getParameter("Param")))
+		{
+			request.getRequestDispatcher("/agregarAlumno.jsp").forward(request, response);
+
+		}
+		
 		
 		//agregar alumno
 		int filas=0;
@@ -84,12 +91,12 @@ public class ServletAlumno extends HttpServlet {
 		if(filas==1) {
 		//REQUEST DISPATCHER
 		request.setAttribute("cantFilas", filas);
-		RequestDispatcher rd= request.getRequestDispatcher("/agregarAlumno.jsp");
+		RequestDispatcher rd= request.getRequestDispatcher("/listarAlumno.jsp");
 		rd.forward(request, response);
 		}
 		
 		//Modificar alumno
-		if(request.getParameter("btn-EditarAlumno")!=null) {
+	/*	if(request.getParameter("btn-EditarAlumno")!=null) {
 			Alumno alum = new Alumno();
 			Localidad loc = new Localidad();
 			String a=request.getParameter("cmbLocalidad");
@@ -125,7 +132,7 @@ public class ServletAlumno extends HttpServlet {
 				RequestDispatcher rd= request.getRequestDispatcher("/modificarAlumno.jsp");
 				rd.forward(request, response);
 				}
-		}
+		}*/
 	}
 
 	private RequestDispatcher getRequestDispatcher(String string) {
@@ -136,6 +143,8 @@ public class ServletAlumno extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	
 		
 		doGet(request, response);
 	}
