@@ -98,8 +98,8 @@
 							<td><%=alumno.getDni()%></td>
 							<td><%=alumno.getFechaNac()%></td>
 							<td><%=alumno.getDireccion()%></td>
- 							<td><%=alumno.getLocalidad().getId()%></td>
- 							<td>provincia</td>
+ 							<td>""</td>
+ 							<td>""</td>
 							<td><%=alumno.getTelefono()%></td>
 							<td><%=alumno.getMail()%></td>
 							<td><%=alumno.getEstado()%></td>
