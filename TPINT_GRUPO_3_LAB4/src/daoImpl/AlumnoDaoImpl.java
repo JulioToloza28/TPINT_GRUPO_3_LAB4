@@ -72,7 +72,6 @@ public class AlumnoDaoImpl implements AlumnoDao {
 				alum.setApellido(resultSet.getString("Apellido"));
 				alum.setDni(resultSet.getString("Dni"));
 				alum.setFechaNac(resultSet.getDate("fecha_nac"));
-				// alum.setFechaNac(fecha);
 				alum.setDireccion(resultSet.getString("direccion"));
 				alum.setLocalidad(loc);
 				alum.setTelefono(resultSet.getString("telefono"));
