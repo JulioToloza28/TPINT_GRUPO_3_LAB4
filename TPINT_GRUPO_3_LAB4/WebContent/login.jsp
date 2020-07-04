@@ -66,6 +66,9 @@
 
 	<%
 		if (listaUsuario != null && !listaUsuario.isEmpty()) {
+			for (Usuario user : listaUsuario) {
+				session.setAttribute("user", user.getUsername());
+			}
 	%>
 	<script type="text/javascript">
 		alert("Bienvenido");
