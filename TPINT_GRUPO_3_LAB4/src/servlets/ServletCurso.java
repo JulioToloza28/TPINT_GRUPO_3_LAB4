@@ -35,9 +35,9 @@ public class ServletCurso extends HttpServlet {
 		CursoNegocio cursoNeg = new CursoNegocioImpl();
 		AlumnoNegocio alumnoNeg = new AlumnoNegocioImpl();
 		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
+		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 
 		if (request.getParameter("AddCourses") != null) {
-			MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
 			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
@@ -81,6 +81,24 @@ public class ServletCurso extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("ServletCurso?listCourses=1");
 			rd.forward(request, response);
 		}
+		
+		
+		if (request.getParameter("editCourse") != null) {
+			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("editCourse")));
+			ArrayList<Alumno> alum = alumnoNeg.getAlumnosInscriptos(Integer.parseInt(request.getParameter("editCourse")));
+			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
+			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
+			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+			
+			request.setAttribute("listaMatDao", lMateria);
+			request.setAttribute("ListaAlumnos", lAlum);
+			request.setAttribute("listaProfes", lProfesor);
+			request.setAttribute("CursoElim", curso);
+			request.setAttribute("ListaAlumnos", alum);
+			RequestDispatcher rd = request.getRequestDispatcher("/modificarCurso.jsp");
+			rd.forward(request, response);
+		}
+		
 
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

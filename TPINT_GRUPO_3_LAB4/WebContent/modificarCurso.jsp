@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="daoImpl.MateriaDaoImpl"%>
+<%@page import="entidades.Curso"%>
+<%@page import="entidades.Alumno"%>
 <%@page import="entidades.Materia"%>
 <%@page import="entidades.Profesor"%>
-<%@page import="entidades.Alumno"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -36,14 +37,25 @@
 		<li class="breadcrumb-item active" aria-current="page">Cursos</li>
 	</ol>
 	</nav>
+	<%
+		Curso curso = null;
+		ArrayList<Alumno> alum = null;
 
+		if (request.getAttribute("CursoElim") != null) {
+			curso = (Curso) request.getAttribute("CursoElim");
+		}
+
+		if (request.getAttribute("ListaAlumnos") != null) {
+			alum = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+		}
+	%>
 	<div class="container">
 		<form style="margin: 40px" method="post" action="ServletCurso">
 			<div class="row">
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Materia:</label> <select name="cmbMateria"
 						class="custom-select " id="validationServer04" required>
-						<option selected disabled value="">Seleccione...</option>
+						<option selected disabled value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
 						<%
 							ArrayList<Materia> listaMateria = null;
 							if (request.getAttribute("listaMatDao") != null) {
@@ -64,7 +76,7 @@
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Cuatrimestre N°:</label> <select
 						class="form-control" id="sel1" name="cmbCuatrimestre" required>
-						<option selected disabled value="">Seleccione...</option>
+						<option selected disabled value=<%=curso.getCuatrimestre()%>><%=curso.getCuatrimestre()%></option>
 						<option>1</option>
 						<option>2</option>
 					</select>
@@ -73,7 +85,7 @@
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Año:</label> <select class="form-control"
 						id="sel1" name="cmbAnio" required>
-						<option selected disabled value="">Seleccione...</option>
+						<option selected disabled value=<%=curso.getAnio()%>><%=curso.getAnio()%></option>
 						<%
 							for (int x = 2020; x >= 2000; x--) {
 						%>
@@ -96,7 +108,7 @@
 
 					<select name="cmbProfesor" class="custom-select "
 						id="validationServer04" required>
-						<option selected disabled value="">Seleccione...</option>
+						<option selected disabled value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
 						<%
 							ArrayList<Profesor> listaProfesor = null;
 							if (request.getAttribute("listaProfes") != null) {
