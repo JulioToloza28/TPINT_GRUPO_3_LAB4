@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="daoImpl.MateriaDaoImpl"%>
-<%@page import="entidades.Materia"%>
+<%-- <%@page import="daoImpl.MateriaDaoImpl"%> --%>
+<%@page import="entidades.Curso"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,54 +41,48 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<a href="ServletCurso?AddCurso=1" name="AddCurso"
-					class="btn btn-outline-primary btn-sm">Agregar curso</a><br>
-				<br>
+					class="btn btn-outline-primary btn-sm">Agregar curso</a><br> <br>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
 							<th>Materia</th>
 							<th>Cuatrimestre</th>
 							<th>Año</th>
+							<th>Profesor</th>
 							<th>Cant. Alumnos</th>
 							<th style="width: 60px"></th>
 						</tr>
 					</thead>
 					<tbody>
+
+
+						<%
+							ArrayList<Curso> listaCurso = null;
+							if (request.getAttribute("listaCursoDao") != null) {
+								listaCurso = (ArrayList<Curso>) request.getAttribute("listaCursoDao");
+							}
+						%>
+						<%
+							if (listaCurso != null)
+								for (Curso curso : listaCurso) {
+						%>
 						<tr>
-							<td>Laboratorio 1</td>
-							<td>1er</td>
-							<td>2020</td>
-							<td>32</td>
+							<td><%=curso.getMateria()%></td>
+							<td><%=curso.getCuatrimestre()%></td>
+							<td><%=curso.getAnio()%></td>
+							<td><%=curso.getProfesor()%></td>
+							<td><%=curso.getCantAlum()%></td>
 							<td><a type="button" class="btn btn-primary btn-sm"
-								href="modificarCurso.jsp"><i class="fa fa-edit"></i></a>
-								<button type="button" class="btn btn-danger btn-sm">
-									<i class="fa fa-trash" onclick="confirmar()"></i>
-								</button></td>
-						</tr>
-						<tr>
-							<td>Laboratorio 1</td>
-							<td>2do</td>
-							<td>2019</td>
-							<td>20</td>
-							<td><button type="button" class="btn btn-primary btn-sm">
-									<i class="fa fa-edit"></i>
-								</button>
-								<button type="button" class="btn btn-danger btn-sm">
+								href="ServletCurso?editCourse=<%=curso.getId()%>"><i class="fa fa-edit"></i></a>
+								<a type="submit" class="btn btn-danger btn-sm" href="ServletCurso?deleteCourse=<%=curso.getId()%>">
 									<i class="fa fa-trash"></i>
-								</button></td>
+								</a></td>
 						</tr>
-						<tr>
-							<td>Laboratorio 1</td>
-							<td>1er</td>
-							<td>2019</td>
-							<td>50</td>
-							<td><button type="button" class="btn btn-primary btn-sm">
-									<i class="fa fa-edit"></i>
-								</button>
-								<button type="button" class="btn btn-danger btn-sm">
-									<i class="fa fa-trash"></i>
-								</button></td>
-						</tr>
+						<%
+							}
+						%>
+
+						
 					</tbody>
 				</table>
 			</div>
@@ -100,17 +94,6 @@
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 
-
-	<script>
-		function confirmar() {
-			if (!confirm("¿Deseas eliminar este curso?")) {
-				return false; //no se borra
-			} else {
-				//si se borra
-				return true;
-			}
-		}
-	</script>
 
 </body>
 </html>

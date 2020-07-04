@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.MateriaDao;
 import daoImpl.MateriaDaoImpl;
+import entidades.Curso;
 import entidades.Materia;
-//import negocio.CursoNegocio;
-//import negocioImpl.CursoNegocioImpl;
+import negocio.CursoNegocio;
+import negocioImpl.CursoNegocioImpl;
 import negocio.MateriaNegocio;
 import negocioImpl.MateriaNegocioImpl;
 
@@ -28,10 +29,7 @@ public class ServletCurso extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//CursoNegocio cursoNeg = new CursoNegocioImpl();
-		
-
-		
+		CursoNegocio cursoNeg = new CursoNegocioImpl();
 		
 		if (request.getParameter("AddCurso") != null) {
 			MateriaNegocio materiaNeg = new MateriaNegocioImpl();
@@ -41,12 +39,29 @@ public class ServletCurso extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarCurso.jsp");
 			rd.forward(request, response);
 		}
-
+		
+		
 		if (request.getParameter("listCourses") != null) {
+			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 			
+			request.setAttribute("listaCursoDao", lCursos);
+			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
+			rd.forward(request, response);
 		}
-
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		if(request.getParameter("deleteCourse")!= null) {
+			String Msj = "ERROR: No se pudo eliminar el curso";
+			if(cursoNeg.eliminarCurso(Integer.parseInt(request.getParameter("deleteCourse")))){
+				Msj = "Curso eliminado";
+			}
+			
+			request.setAttribute("MensajeElim", Msj);
+			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
+			rd.forward(request, response);
+		}
+		
+		
+// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -3,11 +3,13 @@ package entidades;
 public class Curso {
 	private int Id;
 	private int IdMateria;
-	private Materia Materia;
 	private int Cuatrimestre;
+	private int Anio;
 	private int LegajoProf;
-	private Profesor Profesor;
 	private int Estado;
+	private String Materia;
+	private String  Profesor;
+	private int CantAlum;
 	
 	public Curso() {}
 	
@@ -35,20 +37,20 @@ public class Curso {
 		IdMateria = idMateria;
 	}
 
-	public Materia getMateria() {
-		return Materia;
-	}
-
-	public void setMateria(Materia materia) {
-		Materia = materia;
-	}
-
 	public int getCuatrimestre() {
 		return Cuatrimestre;
 	}
 
 	public void setCuatrimestre(int cuatrimestre) {
 		Cuatrimestre = cuatrimestre;
+	}
+
+	public int getAnio() {
+		return Anio;
+	}
+
+	public void setAnio(int anio) {
+		Anio = anio;
 	}
 
 	public int getLegajoProf() {
@@ -59,14 +61,6 @@ public class Curso {
 		LegajoProf = legajoProf;
 	}
 
-	public Profesor getProfesor() {
-		return Profesor;
-	}
-
-	public void setProfesor(Profesor profesor) {
-		Profesor = profesor;
-	}
-
 	public int getEstado() {
 		return Estado;
 	}
@@ -74,9 +68,29 @@ public class Curso {
 	public void setEstado(int estado) {
 		Estado = estado;
 	}
-	
-	
 
-	
-	
+	public String getMateria() {
+		return Materia;
+	}
+
+	public void setMateria(String materia) {
+		Materia = materia;
+	}
+
+	public String getProfesor() {
+		return Profesor;
+	}
+
+	public void setProfesor(String profesor) {
+		Profesor = profesor;
+	}
+
+	public int getCantAlum() {
+		return CantAlum;
+	}
+
+	public void setCantAlum(int cantAlum) {
+		CantAlum = cantAlum;
+	}
+
 }
