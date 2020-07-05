@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Provincia" %>
 <%@page import="entidades.Localidad" %>
+<%@page import="entidades.Alumno" %>
 <%@page import="daoImpl.AlumnoDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
 
@@ -38,11 +39,14 @@
 		<%}%>
 		</ol> 		
 		</nav>
+		<% Alumno alum=null;
+		     if(request.getAttribute("AlumnoAMod")!=null){ 
+		     alum=(Alumno)request.getAttribute("AlumnoAMod");%>
 	<form action="ServletAlumno" method="get" style="margin: 40px">
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Nombre</label> 
-				<input name="txtNombre" type="text" class="form-control" id="validationServer01" required>
+				<input value="<%=alum.getNombre() %>" name="txtNombre" type="text" class="form-control" id="validationServer01" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">
@@ -114,7 +118,7 @@
 			</div>
 			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
 	</form>
-	
+	<%} %>
 	<%
 	  int filas=0;
 	  if(request.getAttribute("cantFilas")!=null)

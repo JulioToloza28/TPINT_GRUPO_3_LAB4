@@ -51,14 +51,14 @@
 				<div class="form-group">
 					<label for="sel1">Cuatrimestre:</label> <select
 						class="form-control" id="sel1">
-						<option>1ï¿½ Cuatrimestre</option>
-						<option>2ï¿½ Cuatrimestre</option>
+						<option>1° Cuatrimestre</option>
+						<option>2° Cuatrimestre</option>
 					</select>
 				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="form-group">
-					<label for="sel1">Aï¿½o:</label> <select class="form-control"
+					<label for="sel1">Año:</label> <select class="form-control"
 						id="sel1">
 						<option>2018</option>
 						<option>2019</option>
@@ -91,8 +91,6 @@
 						</tr>
 					</thead>
 					<tbody>
-
-
 						<%
 							ArrayList<Alumno> listaAlumno = null;
 							if (request.getAttribute("listaAlum") != null) {
@@ -114,7 +112,7 @@
 							<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
 							<td><%=alumno.getTelefono()%></td>
 							<td><%=alumno.getMail()%></td>
-							<td><a href="ServletAlumno?Param=ModificarAlumno&Data"
+							<td><a href="ServletAlumno?Param=ModificarAlumno&amp;Data=<%=alumno.getLegajo()%>"
 								name="btn-EditarAlumno" class="btn btn-outline-secondary btn-sm">Editar</a>
 							</td>
 							<td><a href="listarAlumno.jsp"
