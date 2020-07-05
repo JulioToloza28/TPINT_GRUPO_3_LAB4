@@ -21,11 +21,11 @@ public class Localidad {
 		Id = id;
 	}
 
-	public String getNombre() {
+	public String getNombreLoc() {
 		return Nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombreLoc(String nombre) {
 		Nombre = nombre;
 	}
 
@@ -39,6 +39,6 @@ public class Localidad {
 
 	@Override
 	public String toString() {
-		return "Localidad [Id=" + Id + ", Nombre=" + Nombre + ", Provincia=" + Provincia + "]";
+		return "Localidad [Id=" + Id + ", Nombre=" + Nombre + ", Provincia=" + Provincia.getId() + "]";
 	}
 }

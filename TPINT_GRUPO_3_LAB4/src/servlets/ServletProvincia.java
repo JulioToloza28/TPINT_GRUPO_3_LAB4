@@ -25,7 +25,6 @@ public class ServletProvincia extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(request.getParameter("Param")!=null) 
@@ -37,7 +36,6 @@ public class ServletProvincia extends HttpServlet {
 			RequestDispatcher rd= request.getRequestDispatcher("ServletsLocalidad");
 			rd.forward(request, response);
 		}
-		
 		/*response.getWriter().append("Served at: ").append(request.getContextPath());*/
 	}
 

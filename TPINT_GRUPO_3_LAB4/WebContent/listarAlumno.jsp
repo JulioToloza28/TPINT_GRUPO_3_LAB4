@@ -66,13 +66,20 @@
 					</select>
 				</div>
 			</div>
+			<div class="col-lg-3">
+				<div class="form-group">
+				<div id="example_filter" class="dataTables_filter">
+					<label style="margin-bottom:0px;">Buscar: <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">
+					</label>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="ServletProvincia?Param=Alumno"
-					class="btn btn-outline-primary btn-sm">Agregar</a> <a
-					href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar
-					Nota</a>
+<!-- 				<a href="ServletProvincia?Param=Alumno" class="btn btn-outline-primary btn-sm">Agregar</a> -->
+				 <a href="ServletAlumno?BtnAgregar=Alumno" class="btn btn-outline-primary btn-sm">Agregar</a>
+				<a href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -108,15 +115,15 @@
 							<td><%=alumno.getDni()%></td>
 							<td><%=alumno.getFechaNac()%></td>
 							<td><%=alumno.getDireccion()%></td>
-							<td><%=alumno.getLocalidad().getNombre()%></td>
+							<td><%=alumno.getLocalidad().getNombreLoc()%></td>
 							<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
 							<td><%=alumno.getTelefono()%></td>
 							<td><%=alumno.getMail()%></td>
 							<td><a href="ServletAlumno?Param=ModificarAlumno&amp;Data=<%=alumno.getLegajo()%>"
 								name="btn-EditarAlumno" class="btn btn-outline-secondary btn-sm">Editar</a>
 							</td>
-							<td><a href="listarAlumno.jsp"
-								class="btn btn-outline-danger btn-sm">Eliminar</a></td>
+							<td><a href="ServletAlumno?Data=<%=alumno.getLegajo()%>"
+								name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
 						</tr>
 						<%
 							}
@@ -129,6 +136,24 @@
 			</div>
 		</div>
 	</div>
+	<%
+	  int filas=0;
+	  if(request.getAttribute("cantFilas")!=null)
+	  {
+		  filas=1;
+	  }
+	 
+	
+	%>
+	
+	<% if(filas==1)
+		{
+	%>
+	 <h5>Eliminado correctamente</h5>
+		
+	<%
+		}
+	%>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
