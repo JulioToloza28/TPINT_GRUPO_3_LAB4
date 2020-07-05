@@ -26,9 +26,16 @@
 </head>
 <body>
 	<jsp:include page="menu.html"></jsp:include>
-		<nav aria-label="breadcrumb"> 		
+	<%if ("ModificarAlumno".equals(request.getParameter("Param"))) {%>
+	  <nav aria-label="breadcrumb"> 		
 		<ol class="breadcrumb"> 			
-		<li class="breadcrumb-item active" aria-current="page">Agregar alumnos</li> 		
+		<li class="breadcrumb-item active" aria-current="page">Modificar alumnos</li> 
+		
+	<%} else{%>
+	 <nav aria-label="breadcrumb"> 		
+		<ol class="breadcrumb"> 			
+		<li class="breadcrumb-item active" aria-current="page">Agregar alumnos</li> 
+		<%}%>
 		</ol> 		
 		</nav>
 	<form action="ServletAlumno" method="get" style="margin: 40px">
@@ -121,7 +128,7 @@
 	<% if(filas==1)
 		{
 	%>
-	 <h1>Agregado correctamente</h1>
+	 <h5>Agregado correctamente</h5>
 		
 	<%
 		}
