@@ -45,47 +45,10 @@
 			</div>
 			<div class="form-group">
 				<input type="submit" value="Ingresar"
-					class="btn btn-primary btn-block" name="btnIngresar">
-			</div>
-			<div class="clearfix">
-				<label class="pull-left checkbox-inline"></label> <a href="#"
-					class="pull-right">Olvido su clave?</a>
+					class="btn btn-primary btn-block" name="btnIngresar" onclick="validar();">
 			</div>
 		</form>
-		<p class="text-center">
-			<a href="#">Crear una cuenta</a>
-		</p>
 	</div>
-
-	<%
-		ArrayList<Usuario> listaUsuario = null;
-		if (request.getAttribute("listaUsuario") != null) {
-			listaUsuario = (ArrayList<Usuario>) request.getAttribute("listaUsuario");
-		}
-	%>
-
-	<%
-		if (listaUsuario != null && !listaUsuario.isEmpty()) {
-			for (Usuario user : listaUsuario) {
-				session.setAttribute("user", user.getUsername());
-			}
-	%>
-	<script type="text/javascript">
-		alert("Bienvenido");
-	</script>
-	<%
-		response.sendRedirect("/TPINT_GRUPO_3_LAB4/menu.html");
-	%>
-	<%
-		} else {
-	%>
-	<script type="text/javascript">
-		alert("Usuario no valido");
-	</script>
-	<%
-		}
-	%>
-
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 	<script
