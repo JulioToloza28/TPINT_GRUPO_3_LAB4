@@ -80,62 +80,44 @@
 				</div>
 
 			</div>
-			<div class="form-row">
-
-				<div class="col-md-3 mb-3">
-					<label for="validationServer02">Direccion</label> <input
-						name="txtDireccion" type="text" class="form-control "
-						id="validationServer02" value="" required>
-					<div class="valid-feedback">Looks good!</div>
+		<div class="form-row">
+			<div class="col-md-3 mb-3">
+				<label for="validationServer02">Direccion</label>  
+				<input name="txtDireccion" type="text" class="form-control " id="validationServer02" value="" required>
+				<div class="valid-feedback">Looks good!</div>
 				</div>
-
-				<div class="col-md-2 mb-3">
-					<label for="validationServer04">Provincia</label> <select
-						name="cmbProvincia" class="custom-select " id="validationServer04"
-						required>
-						<option selected disabled value="">Seleccione...</option>
+				<div class="col-md-3 mb-3">
+					<label for="validationServer04">Provincia</label> 
+					<select name="cmbProvincia" class="custom-select " id="txtselectProvincia" onchange="cambiar_localidad()" required>
+						<option selected disabled value="">Provincia</option>
 						<%
-							ArrayList<Provincia> ListarProvi = null;
-							if (request.getAttribute("listaProvDao") != null) {
-								ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");
-							}
-						%>
-						<%
-							if (ListarProvi != null)
-								for (Provincia prov : ListarProvi) {
-						%>
-						<option value=<%=prov.getId()%>><%=prov.getNombreProv()%></option>
-						<%
-							}
-						%>
-
+						  ArrayList<Provincia>ListarProvi=null;
+							if(request.getAttribute("listaProvDao")!=null){
+							ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");}%>
+							<% if(ListarProvi!=null)
+								for(Provincia prov : ListarProvi){%>
+								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
+								<%} %>	
 					</select>
 					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
-
-				<div class="col-md-2 mb-3">
-					<label for="validationServer04">Localidad</label> <select
-						name="cmbLocalidad" class="custom-select " id="validationServer04"
-						required>
-						<option selected disabled value="">Seleccione...</option>
-						<%
-							ArrayList<Localidad> listaLocalidad = null;
-							if (request.getAttribute("listaLocDao") != null) {
-								listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
-							}
-						%>
-						<%
-							if (listaLocalidad != null)
-								for (Localidad loc : listaLocalidad) {
-						%>
-						<option><%=loc.getNombre()%></option>
-						<%
-							}
-						%>
+				 <div class="col-md-2 mb-3">
+					<label for="validationServer03">Localidad</label> 
+					<select name="cmbLocalidad" class="custom-select " id="txtselectLocalidad" required>
+						<option selected disabled value="">Localidad</option>
+						<%ArrayList<Localidad> listaLocalidad = null;
+					      if (request.getAttribute("listaLocDao") != null) {
+						  listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
+					}%>
+					<%if (listaLocalidad != null)
+						for (Localidad loc : listaLocalidad) {%>
+					<option value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
+					<%}%>
 					</select>
-					<div class="invalid-feedback">Seleccione una Localidad</div>
+					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
+<!-- 			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button> -->
 			
 			<br>
 			<br>
@@ -162,7 +144,7 @@
 						placeholder="Repetir Contraseña">
 				</div>
 			</div>
-			<button class="btn btn-primary" name="btn-Acaptar" type="submit">Agregar</button>
+			<button class="btn btn-primary" name="btn-Aceptar" type="submit">Agregar</button>
 		</form>
 
 		<%
