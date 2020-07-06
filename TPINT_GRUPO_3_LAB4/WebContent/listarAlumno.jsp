@@ -50,14 +50,14 @@
 				<div class="form-group">
 					<label for="sel1">Cuatrimestre:</label> <select
 						class="form-control" id="sel1">
-						<option>1° Cuatrimestre</option>
-						<option>2° Cuatrimestre</option>
+						<option>1Â° Cuatrimestre</option>
+						<option>2Â° Cuatrimestre</option>
 					</select>
 				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="form-group">
-					<label for="sel1">Año:</label> <select class="form-control"
+					<label for="sel1">AÃ±o:</label> <select class="form-control"
 						id="sel1">
 						<option>2018</option>
 						<option>2019</option>
@@ -161,5 +161,6 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	
 </body>
 </html>

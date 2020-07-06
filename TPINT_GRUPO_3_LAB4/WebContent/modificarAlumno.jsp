@@ -118,7 +118,7 @@
 	<% if(filas==1)
 		{
 	%>
-	 <h5>Agregado correctamente</h5>
+	 <h5>Modificado correctamente</h5>
 		
 	<%}%>
 
