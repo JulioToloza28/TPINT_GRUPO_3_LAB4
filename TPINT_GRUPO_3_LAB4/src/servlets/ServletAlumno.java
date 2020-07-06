@@ -114,7 +114,7 @@ public class ServletAlumno extends HttpServlet {
 		if(filas==1) {
 		//REQUEST DISPATCHER
 		request.setAttribute("cantFilas", filas);
-		RequestDispatcher rd= request.getRequestDispatcher("/listarAlumno.jsp");
+		RequestDispatcher rd= request.getRequestDispatcher("ServletAlumno?Param=MenuAlumno");
 		rd.forward(request, response);
 		}
 		
@@ -170,7 +170,8 @@ public class ServletAlumno extends HttpServlet {
 			request.getRequestDispatcher("/listarAlumno.jsp").forward(request, response);
 		}*/
 		
-		if(request.getParameter("btn-EliminarAlumno")!=null) {
+		
+			if("EliminarAlumno".equals(request.getParameter("Param"))){
 			int Legajo_alum = Integer.parseInt(request.getParameter("Data"));
 			AlumnoDaoImpl alumDaoImpl = new AlumnoDaoImpl();
 			alumDaoImpl.eliminarAlumno(Legajo_alum);
@@ -181,8 +182,8 @@ public class ServletAlumno extends HttpServlet {
 			}	
 			if(filas==1) {
 				//REQUEST DISPATCHER
-				request.setAttribute("cantFilas", filas);
-				RequestDispatcher rd= request.getRequestDispatcher("/listarAlumno.jsp");
+				request.setAttribute("AlumnoEliminado", filas);
+				RequestDispatcher rd= request.getRequestDispatcher("ServletAlumno?Param=MenuAlumno");
 				rd.forward(request, response);
 			}
 		}

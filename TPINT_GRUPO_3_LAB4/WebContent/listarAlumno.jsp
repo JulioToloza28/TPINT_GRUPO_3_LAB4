@@ -122,8 +122,7 @@
 							<td><a href="ServletAlumno?Param=ModificarAlumno&amp;Data=<%=alumno.getLegajo()%>"
 								name="btn-EditarAlumno" class="btn btn-outline-secondary btn-sm">Editar</a>
 							</td>
-							<td><a href="ServletAlumno?Data=<%=alumno.getLegajo()%>"
-								name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
+							<td><a href="ServletAlumno?Param=EliminarAlumno&amp;Data=<%=alumno.getLegajo()%>" name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
 						</tr>
 						<%
 							}
@@ -137,16 +136,16 @@
 		</div>
 	</div>
 	<%
-	  int filas=0;
-	  if(request.getAttribute("cantFilas")!=null)
+	  int aux=0;
+	  if(request.getAttribute("AlumnoEliminado")!=null)
 	  {
-		  filas=1;
+		  aux=1;
 	  }
 	 
 	
 	%>
 	
-	<% if(filas==1)
+	<% if(aux==1)
 		{
 	%>
 	 <h5>Eliminado correctamente</h5>
