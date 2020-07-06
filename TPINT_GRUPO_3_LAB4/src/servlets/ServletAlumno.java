@@ -114,7 +114,7 @@ public class ServletAlumno extends HttpServlet {
 		if(filas==1) {
 		//REQUEST DISPATCHER
 		request.setAttribute("cantFilas", filas);
-		RequestDispatcher rd= request.getRequestDispatcher("ServletAlumno?Param=MenuAlumno");
+		RequestDispatcher rd= request.getRequestDispatcher("listarAlumno.jsp");
 		rd.forward(request, response);
 		}
 		
