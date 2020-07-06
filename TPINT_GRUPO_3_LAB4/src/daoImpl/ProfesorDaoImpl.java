@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.DriverManager;
+
+import java.util.List;
 
 import dao.ProfesorDao;
 import entidades.Localidad;
@@ -14,54 +17,43 @@ import entidades.Provincia;
 
 public class ProfesorDaoImpl implements ProfesorDao{
 
-	private static final String agregarProfesor="INSERT INTO PROFESOR(NOMBRE,APELLIDO,DNI,FECHA_NAC,DIRECCION,IDLOCALIDAD,TELEFONO,MAIL,ESTADO)VALUES(?,?,?,?,?,?,?,?,?)";
-	private static final String listarProfe="SELECT * FROM tpint_grupo_3_lab4.profesor where estado=1;";
+	private static final String agregarProfesor="INSERT INTO profesor(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?);";
+	//private static final String listarProfe="SELECT * FROM tpint_grupo_3_lab4.profesor where estado=1;";
 	private static final String readAll = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1;";
 	
 	public boolean agregarProfesor(Profesor profesor)
 	{
 		PreparedStatement statement;
-		Connection conexion=Conexion.getConexion().getSQLConexion();
-		boolean isInsertExitoso=false;
-		
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
 		try {
-			statement=conexion.prepareStatement(agregarProfesor);
-			statement.setString(1,profesor.getNombre());
-			statement.setString(2,profesor.getApellido());
+			statement = conexion.prepareStatement(agregarProfesor);
+			statement.setString(1, profesor.getNombre());
+			statement.setString(2, profesor.getApellido());
 			statement.setString(3, profesor.getDni());
-			statement.setDate(4,(Date)profesor.getFechaNac());
+			statement.setDate(4, (Date) profesor.getFechaNac());
 			statement.setString(5, profesor.getDireccion());
-			//CORREGIR Y PONER POR get
-			statement.setInt(6,1);
-			statement.setString(7,profesor.getTelefono());
-			statement.setString(8,profesor.getMail());
+			statement.setInt(6, profesor.getLocalidad().getId());
+			statement.setString(7, profesor.getTelefono());
+			statement.setString(8, profesor.getMail());
 			statement.setBoolean(9, profesor.getEstado());
-			
-			if(statement.executeUpdate()>0) 
-			{
+			if (statement.executeUpdate() > 0) {
 				conexion.commit();
-				isInsertExitoso=true;
+				isInsertExitoso = true;
 			}
-			
-			
-		}
-		catch(Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 			try {
 				conexion.rollback();
+			} catch (Exception ex1) {
+				ex1.printStackTrace();
 			}
-			catch(Exception ex) 
-			{
-				ex.printStackTrace();
-			}
-		}		
-		
+		}
 		return isInsertExitoso;
-		
-	}
-
+			}
+			
 	@Override
-	public ArrayList<Profesor> listarProfe() {
+	public ArrayList<Profesor> listarProfesores() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
