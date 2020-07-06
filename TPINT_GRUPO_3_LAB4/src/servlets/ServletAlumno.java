@@ -119,8 +119,7 @@ public class ServletAlumno extends HttpServlet {
 		
 		}
 		
-		//Modificar alumno (guarda los datos una vez que se hace click)
-		
+		//Modificar alumno (guarda los datos una vez que se hace click)		
 		if(request.getParameter("btn-EditarAlumno")!=null) {
 			//Alumno alum = new Alumno();
 			Localidad loc = new Localidad();
