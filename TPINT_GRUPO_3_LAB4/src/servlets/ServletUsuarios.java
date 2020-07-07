@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.Session;
 
 import daoImpl.TipoUsuarioDaoImpl;
 import daoImpl.UsuarioDaoImpl;
@@ -52,9 +55,19 @@ public class ServletUsuarios extends HttpServlet {
 			ArrayList<Usuario> lista = UsuarioDao.obtenerUsuario(request.getParameter("txtUsuario"), request.getParameter("txtClave"));
 			System.out.println(lista);
 			request.setAttribute("listaUsuario", lista);
+			if (lista != null && !lista.isEmpty()) {
+				response.sendRedirect("/TPINT_GRUPO_3_LAB4/menu.html");
+			} else {
+				PrintWriter out = response.getWriter();
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Usuario y clave incorrecta');");
+				out.println("location='login.jsp';");
+				out.println("</script>");
+			}
+			
 
-			RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-			rd.forward(request, response);
+			/*RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+			rd.forward(request, response);*/
 		}
 	}
 

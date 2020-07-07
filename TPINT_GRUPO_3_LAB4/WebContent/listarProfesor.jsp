@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="entidades.Profesor"%>
+<%@page import="entidades.Localidad"%>
+<%@page import="daoImpl.ProfesorDaoImpl"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,7 +46,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="ServletProvincia?Param=Profesor" class="btn btn-outline-primary btn-sm">Agregar</a>
+				<a href="ServletsProfesor?BtnAgregar=Profesor" class="btn btn-outline-primary btn-sm">Agregar</a>
 				
 				<table id="example" class="display" style="width: 100%">
 					<thead>
@@ -57,174 +61,53 @@
 							<th>Provincia</th>
 							<th>Telefono</th>
 							<th>Mail</th>
-							<th style="width:60px;"></th>
+							<th>Editar</th>
+							<th>Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
+					<%
+							ArrayList<Profesor> listaProfesor = null;
+							if (request.getAttribute("listaProf") != null) {
+								listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProf");
+							}
+						%>
+						<%
+							if (listaProfesor != null)
+								for (Profesor profesor : listaProfesor) {
+						%>
 						<tr>
-							<td>22331</td>
-							<td>Adriana</td>
-							<td>Perez</td>
-							<td>32546464</td>
-							<td>14/11/1990</td>
-							<td>Lanzareto 897</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>46670291</td>
-							<td>Mmenendez@gmail.com</td>
-							<td><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button></td>						
-						    <td><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></td>
-
+							<td><%=profesor.getLegajo()%></td>
+							<td><%=profesor.getNombre()%></td>
+							<td><%=profesor.getApellido()%></td>
+							<td><%=profesor.getDni()%></td>
+							<td><%=profesor.getFechaNac()%></td>
+							<td><%=profesor.getDireccion()%></td>
+							<td><%=profesor.getLocalidad().getNombreLoc()%></td>
+							<td><%=profesor.getLocalidad().getProvincia().getNombreProv()%></td>
+							<td><%=profesor.getTelefono()%></td>
+							<td><%=profesor.getMail()%></td>
+							<td><a href="ServletsProfesor?Param=ModificarProfesor&amp;Data=<%=profesor.getLegajo()%>"
+								name="btn-EditarProfesor" class="btn btn-outline-secondary btn-sm">Editar</a></td>
+							<td><a href="ServletsProfesor?Param=EliminarProfesor&amp;Data=<%=profesor.getLegajo() %>" name="btn-EliminarProfesor" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
 						</tr>
-
-						<tr>
-							<td>22332</td>
-							<td>Daniel</td>
-							<td>Sterli</td>
-							<td>32546465</td>
-							<td>12/08/1990</td>
-							<td>Ecuador 234</td>
-							<td>Don Torcuato</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-						<tr>
-							<td>22333</td>
-							<td>Juan</td>
-							<td>Mordecai</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-
-						<tr>
-							<td>22333</td>
-							<td>Claudio</td>
-							<td>Martinez</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-
-						<tr>
-							<td>22333</td>
-							<td>Mateo</td>
-							<td>Pereira</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-
-						<tr>
-							<td>22333</td>
-							<td>Cecilia</td>
-							<td>Milbert</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-						<tr>
-							<td>22333</td>
-							<td>Raul</td>
-							<td>Mordel</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-						<tr>
-							<td>22333</td>
-							<td>Juan</td>
-							<td>Mordecai</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-						<tr>
-							<td>22333</td>
-							<td>Juan</td>
-							<td>Mordecai</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-						<tr>
-							<td>22333</td>
-							<td>Juan</td>
-							<td>Mordecai</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-						<tr>
-							<td>22333</td>
-							<td>Carlos</td>
-							<td>Amarilla</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-						<tr>
-							<td>22333</td>
-							<td>Sandra</td>
-							<td>Moschey</td>
-							<td>32546466</td>
-							<td>10/06/1991</td>
-							<td>Brasil 21</td>
-							<td>Talar</td>
-							<td>Buenos Aires</td>
-							<td>47880933</td>
-							<td>Mmenendez@gmail.com</td>
-						</tr>
-
-
-
+						<%}%>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+	
+	<% int aux=0;
+	   if(request.getAttribute("ProfesorEliminado")!=null)
+	   {aux=1;}%>
+	<% if(aux==1){%>
+	 <h5>Eliminado correctamente</h5>
+	<%}%>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
-
 </body>
 </html>

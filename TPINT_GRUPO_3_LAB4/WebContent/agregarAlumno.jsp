@@ -2,20 +2,38 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Provincia" %>
 <%@page import="entidades.Localidad" %>
+<%@page import="entidades.Alumno" %>
 <%@page import="daoImpl.AlumnoDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
 
 <script type="text/javascript">
 
-//  function cambiar_localidad(){
-//  	var IdProv;
-//  		IdProv = document.getElementById('txtselectLocalidad').value;
-//  	 if (request.getAttribute("listaLocDao") != null) 
-//  	   {
- 		
-// 	   }
-//  	 }
-//  }
+function cambiar_Localidad(){ 
+	var IdProv;
+	IdProv = document.getElementById('txtselectProvincia').value;
+	$.ajax({
+		type : 'POST',
+		url : 'ServletLocalidad',
+		dataType : "json",
+		data : {
+			ProvinciaId : IdProv
+		},
+		success : function(result) {
+			if (result) {
+				//$("#txtselectLocalidad option:not(:disabled)").remove();
+				$.each(result, function(index, option) {
+					console.log("option: " + option)
+					$("#txtselectLocalidad").append(
+							'<option value="' + option.ID + '">'
+									+ option.Nombre + '</option>')					
+				});
+			}
+		},
+		error : function(data) {
+			alert('fail');
+		}
+	})
+};
 </script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,23 +44,17 @@
 </head>
 <body>
 	<jsp:include page="menu.html"></jsp:include>
-	<%if ("ModificarAlumno".equals(request.getParameter("Param"))) {%>
 	  <nav aria-label="breadcrumb"> 		
 		<ol class="breadcrumb"> 			
-		<li class="breadcrumb-item active" aria-current="page">Modificar alumnos</li> 
-		
-	<%} else{%>
-	 <nav aria-label="breadcrumb"> 		
-		<ol class="breadcrumb"> 			
 		<li class="breadcrumb-item active" aria-current="page">Agregar alumnos</li> 
-		<%}%>
 		</ol> 		
 		</nav>
+		         
 	<form action="ServletAlumno" method="get" style="margin: 40px">
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Nombre</label> 
-				<input name="txtNombre" type="text" class="form-control" id="validationServer01" required>
+				<input  name="txtNombre" type="text" class="form-control" id="validationServer01" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">
@@ -54,7 +66,6 @@
 				<label for="validationServer03">DNI</label> 
 				<input name="txtDni" type="text" class="form-control " id="validationServer02" value="" required>
 				<div class="valid-feedback">Looks good!</div>
-
 			</div>
 		</div>
 		<div class="form-row">			
@@ -91,8 +102,7 @@
 							<% if(ListarProvi!=null)
 								for(Provincia prov : ListarProvi){%>
 								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
-								<%} %>
-								
+								<%} %>	
 					</select>
 					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
@@ -106,7 +116,7 @@
 					}%>
 					<%if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {%>
-					<option value=<%=loc.getId()%>><%=loc.getNombre()%></option>
+					<option value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
 					<%}%>
 					</select>
 					<div class="invalid-feedback">Please provide a valid city.</div>
@@ -114,7 +124,7 @@
 			</div>
 			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
 	</form>
-	
+
 	<%
 	  int filas=0;
 	  if(request.getAttribute("cantFilas")!=null)
