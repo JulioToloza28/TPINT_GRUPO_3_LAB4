@@ -114,7 +114,11 @@ public class ServletAlumno extends HttpServlet {
 		if(filas==1) {
 		//REQUEST DISPATCHER
 		request.setAttribute("cantFilas", filas);
-		RequestDispatcher rd= request.getRequestDispatcher("ServletAlumno?Param=MenuAlumno");
+		
+		ArrayList<Alumno> listaAlum = alumDao.readAll();
+		request.setAttribute("listaAlum", listaAlum);
+		
+		RequestDispatcher rd= request.getRequestDispatcher("/listarAlumno.jsp");
 		rd.forward(request, response);
 		}
 		
@@ -157,20 +161,9 @@ public class ServletAlumno extends HttpServlet {
 				RequestDispatcher rd= request.getRequestDispatcher("/modificarAlumno.jsp");
 				rd.forward(request, response);
 				}
-		}
-		
+		}		
+		 
 		//Eliminar alumno
-/*		if("EliminarAlumno".equals(request.getParameter("Param")))
-		{
-			Alumno alum = alumDao.ObtenerAlumno(Integer.parseInt(request.getParameter("Data")));
-			
-			request.setAttribute("AlumnoAMod", alum);
-			
-			//debe listarme con un refresh
-			request.getRequestDispatcher("/listarAlumno.jsp").forward(request, response);
-		}*/
-		
-		
 			if("EliminarAlumno".equals(request.getParameter("Param"))){
 			int Legajo_alum = Integer.parseInt(request.getParameter("Data"));
 			AlumnoDaoImpl alumDaoImpl = new AlumnoDaoImpl();

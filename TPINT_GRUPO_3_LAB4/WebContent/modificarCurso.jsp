@@ -171,7 +171,7 @@
 						<td><%=alumno.getDni()%></td>
 						<td><%=alumno.getFechaNac()%></td>
 						<td><%=alumno.getDireccion()%></td>
-						<td><%=alumno.getLocalidad().getNombre()%></td>
+						<td><%=alumno.getLocalidad().getNombreLoc()%></td>
 						<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
 						<td><%=alumno.getTelefono()%></td>
 						<td><%=alumno.getMail()%></td>

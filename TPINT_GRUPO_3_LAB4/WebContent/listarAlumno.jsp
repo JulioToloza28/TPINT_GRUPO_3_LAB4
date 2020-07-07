@@ -66,14 +66,14 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-lg-3">
-				<div class="form-group">
-				<div id="example_filter" class="dataTables_filter">
-					<label style="margin-bottom:0px;">Buscar: <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">
-					</label>
-					</div>
-				</div>
-			</div>
+<!-- 			<div class="col-lg-3"> -->
+<!-- 				<div class="form-group"> -->
+<!-- 				<div id="example_filter" class="dataTables_filter"> -->
+<!-- 					<label style="margin-bottom:0px;">Buscar: <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"> -->
+<!-- 					</label> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
@@ -93,7 +93,8 @@
 							<th>Provincia</th>
 							<th>Telefono</th>
 							<th>Mail</th>
-							<th></th>
+							<th>Editar</th>
+							<th>Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
