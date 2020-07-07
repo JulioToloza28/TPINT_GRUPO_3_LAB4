@@ -37,7 +37,6 @@ public class ServletCurso extends HttpServlet {
 		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
 		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 
-		
 		if (request.getParameter("AddCourses") != null) {
 			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
@@ -49,9 +48,9 @@ public class ServletCurso extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarCurso.jsp");
 			rd.forward(request, response);
 		}
-//		if (request.getParameter("GrabarCurso") != null) {
-//
-//		}
+		// if (request.getParameter("GrabarCurso") != null) {
+		//
+		// }
 
 		if (request.getParameter("listCourses") != null) {
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
@@ -82,15 +81,15 @@ public class ServletCurso extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("ServletCurso?listCourses=1");
 			rd.forward(request, response);
 		}
-		
-		
+
 		if (request.getParameter("editCourse") != null) {
 			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("editCourse")));
-			ArrayList<Alumno> alum = alumnoNeg.getAlumnosInscriptos(Integer.parseInt(request.getParameter("editCourse")));
+			ArrayList<Alumno> alum = alumnoNeg
+					.getAlumnosInscriptos(Integer.parseInt(request.getParameter("editCourse")));
 			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
 			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
-			
+
 			request.setAttribute("listaMatDao", lMateria);
 			request.setAttribute("ListaAlumnos", lAlum);
 			request.setAttribute("listaProfes", lProfesor);
@@ -99,14 +98,20 @@ public class ServletCurso extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/modificarCurso.jsp");
 			rd.forward(request, response);
 		}
-		
 
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Curso curs = new Curso();
+		Alumno alum = new Alumno();
+
+		if (request.getParameter("GrabarCurso") != null) {
+			int x = 1;
+
+		}
+
 		doGet(request, response);
 	}
-
 }

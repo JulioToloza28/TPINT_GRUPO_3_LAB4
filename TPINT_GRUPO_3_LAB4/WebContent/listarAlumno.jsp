@@ -28,8 +28,7 @@
 	<jsp:include page="menu.html"></jsp:include>
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Lista de
-			alumnos</li>
+		<li class="breadcrumb-item active" aria-current="page">Lista de alumnos</li>
 	</ol>
 	</nav>
 
@@ -51,14 +50,18 @@
 				<div class="form-group">
 					<label for="sel1">Cuatrimestre:</label> <select
 						class="form-control" id="sel1">
-						<option>1° Cuatrimestre</option>
-						<option>2° Cuatrimestre</option>
+
+						<option>1Â° Cuatrimestre</option>
+						<option>2Â° Cuatrimestre</option>
+
 					</select>
 				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="form-group">
-					<label for="sel1">Año:</label> <select class="form-control"
+
+					<label for="sel1">AÃ±o:</label> <select class="form-control"
+
 						id="sel1">
 						<option>2018</option>
 						<option>2019</option>
@@ -75,6 +78,15 @@
 <!-- 				</div> -->
 <!-- 			</div> -->
 		</div>
+		<div class="row">
+		<div class="col-sm-12 col-md-6">
+		<div class="dataTables_length" id="example_length">
+		<label>Mostrar cantidad <select name="example_length" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm">
+		<option value="5">5</option><option value="10">10</option><option value="30">30</option>
+		<option value="50">50</option></select></label></div>
+		</div><div class="col-sm-12 col-md-6"><div id="example_filter" class="dataTables_filter">
+		<label>Buscar:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">
+		</label></div></div></div>
 		<div class="row">
 			<div class="col-lg-12">
 <!-- 				<a href="ServletProvincia?Param=Alumno" class="btn btn-outline-primary btn-sm">Agregar</a> -->
@@ -128,9 +140,6 @@
 							}
 						%>
 					</tbody>
-					<tfoot>
-
-					</tfoot>
 				</table>
 			</div>
 		</div>
@@ -141,8 +150,6 @@
 	  {
 		  aux=1;
 	  }
-	 
-	
 	%>
 	
 	<% if(aux==1)
