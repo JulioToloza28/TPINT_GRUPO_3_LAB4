@@ -128,7 +128,7 @@
 							if (listaLocalidad != null)
 								for (Localidad loc : listaLocalidad) {
 						%>
-						<option><%=loc.getNombre()%></option>
+						<option><%=loc.getNombreLoc()%></option>
 						<%
 							}
 						%>
