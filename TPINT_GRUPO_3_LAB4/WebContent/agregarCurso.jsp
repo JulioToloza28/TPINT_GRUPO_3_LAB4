@@ -76,7 +76,7 @@
 						id="sel1" name="cmbAnio" required>
 						<option selected disabled value="">Seleccione...</option>
 						<%
-							for (int x = 2020; x >= 2000; x--) {
+							for (int x = 2020; x >= 1990; x--) {
 						%>
 						<option><%=x%></option>
 						<%

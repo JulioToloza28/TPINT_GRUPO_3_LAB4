@@ -50,14 +50,18 @@
 				<div class="form-group">
 					<label for="sel1">Cuatrimestre:</label> <select
 						class="form-control" id="sel1">
+
 						<option>1° Cuatrimestre</option>
 						<option>2° Cuatrimestre</option>
+
 					</select>
 				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="form-group">
+
 					<label for="sel1">Año:</label> <select class="form-control"
+
 						id="sel1">
 						<option>2018</option>
 						<option>2019</option>
