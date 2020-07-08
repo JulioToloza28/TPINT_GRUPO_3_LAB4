@@ -40,7 +40,7 @@
 	</nav>
 
 	<div class="container">
-		<form style="margin: 40px" method="post" action="ServletCurso">
+		<form style="margin: 40px" method="get" action="ServletCurso">
 			<div class="row">
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Materia:</label> <select name="cmbMateria"
@@ -150,10 +150,8 @@
 							for (Alumno alumno : listaAlumno) {
 					%>
 					<tr>
-						<td><input class="form-check-input" type="checkbox"
-							value="<%=alumno.getLegajo()%>"
-							id="Checkbox<%=alumno.getLegajo()%>"
-							style="margin-right: auto; margin-left: auto;"></td>
+						<td><input type="checkbox" id="cboxAlumno" name="cboxAlumno"
+								value="<%=alumno.getLegajo()%>"></td>
 						<td><%=alumno.getLegajo()%></td>
 						<td><%=alumno.getNombre()%></td>
 						<td><%=alumno.getApellido()%></td>
@@ -176,8 +174,8 @@
 
 
 
-			<input Id="GrabarCurso" name="GrabarCurso" class="btn btn-primary"
-				type="submit" Value="Guardar"> 
+			<button Id="btn-GrabarCurso" name="btn-GrabarCurso" class="btn btn-primary"
+				type="submit">Guardar</button> 
 				<a Id="Retroceder"
 				name="Retroceder" class="btn btn-secondary" type="submit"
 				href="ServletCurso?listCourses=1">Volver</a>
