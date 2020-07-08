@@ -22,7 +22,6 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
-
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 .bs-example {
@@ -36,28 +35,27 @@
 
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Editar Curso</li>
+		<li class="breadcrumb-item active" aria-current="page">Editar
+			Curso</li>
 	</ol>
 	</nav>
 	<%
 		Curso curso = null;
-		ArrayList<Alumno> alum = null;
-
 		if (request.getAttribute("CursoElim") != null) {
 			curso = (Curso) request.getAttribute("CursoElim");
 		}
-
-		if (request.getAttribute("ListaAlumnos") != null) {
-			alum = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
-		}
 	%>
 	<div class="container">
-		<form style="margin: 40px" method="post" action="ServletCurso">
+		<form style="margin: 40px" method="get" action="ServletCurso">
 			<div class="row">
+
+				<input type="hidden" name="txtIdCurso" id="txtIdCurso" value="<%=curso.getId()%>">
+
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Materia:</label> <select name="cmbMateria"
 						class="custom-select " id="validationServer04" required>
-						<option selected disabled value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
 						<%
 							ArrayList<Materia> listaMateria = null;
 							if (request.getAttribute("listaMatDao") != null) {
@@ -78,7 +76,8 @@
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Cuatrimestre N°:</label> <select
 						class="form-control" id="sel1" name="cmbCuatrimestre" required>
-						<option selected disabled value=<%=curso.getCuatrimestre()%>><%=curso.getCuatrimestre()%></option>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getCuatrimestre()%>><%=curso.getCuatrimestre()%></option>
 						<option>1</option>
 						<option>2</option>
 					</select>
@@ -87,7 +86,8 @@
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Año:</label> <select class="form-control"
 						id="sel1" name="cmbAnio" required>
-						<option selected disabled value=<%=curso.getAnio()%>><%=curso.getAnio()%></option>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getAnio()%>><%=curso.getAnio()%></option>
 						<%
 							for (int x = 2020; x >= 2000; x--) {
 						%>
@@ -110,7 +110,8 @@
 
 					<select name="cmbProfesor" class="custom-select "
 						id="validationServer04" required>
-						<option selected disabled value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
 						<%
 							ArrayList<Profesor> listaProfesor = null;
 							if (request.getAttribute("listaProfes") != null) {
@@ -153,19 +154,23 @@
 				<tbody>
 					<%
 						ArrayList<Alumno> listaAlumno = null;
+						ArrayList<Alumno> listaAlumnoInsc = null;
 						if (request.getAttribute("ListaAlumnos") != null) {
 							listaAlumno = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
 						}
-					%>
-					<%
+						if (request.getAttribute("ListaAlumnosInsc") != null) {
+							listaAlumnoInsc = (ArrayList<Alumno>) request.getAttribute("ListaAlumnosInsc");
+						}
 						if (listaAlumno != null)
 							for (Alumno alumno : listaAlumno) {
 					%>
 					<tr>
-						<td><input class="form-check-input" type="checkbox"
+						<td><input type="checkbox" id="cboxAlumno" name="cboxAlumno"
 							value="<%=alumno.getLegajo()%>"
-							id="Checkbox<%=alumno.getLegajo()%>"
-							style="margin-right: auto; margin-left: auto;"></td>
+							<%for (Alumno alumnoInsc : listaAlumnoInsc) {
+						if (alumnoInsc.getLegajo() == alumno.getLegajo()) {%>
+							checked <%}
+					}%>></td>
 						<td><%=alumno.getLegajo()%></td>
 						<td><%=alumno.getNombre()%></td>
 						<td><%=alumno.getApellido()%></td>
@@ -188,14 +193,13 @@
 
 
 
-			<input Id="GrabarCurso" name="GrabarCurso" class="btn btn-primary"
-				type="submit" Value="Guardar"> 
-				<a Id="Retroceder"
-				name="Retroceder" class="btn btn-secondary" type="submit"
-				href="ServletCurso?listCourses=1">Volver</a>
-<!-- 				<a Id="Retroceder" -->
-<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
-<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
+			<input Id="btn-EditarCurso" name="btn-EditarCurso"
+				class="btn btn-primary" type="submit" Value="Guardar"> <a
+				Id="Retroceder" name="Retroceder" class="btn btn-secondary"
+				type="submit" href="ServletCurso?listCourses=1">Volver</a>
+			<!-- 				<a Id="Retroceder" -->
+			<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
+			<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
 		</form>
 
 		<%

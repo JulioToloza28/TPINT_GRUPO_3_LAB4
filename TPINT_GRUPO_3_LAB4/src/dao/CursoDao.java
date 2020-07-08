@@ -12,5 +12,9 @@ public interface CursoDao {
 	
 	public boolean eliminarCurso(int Id);
 	
-
+	public boolean GrabarCurso(Curso curso);
+	
+	public int UltimoId();
+	
+	public boolean InsertarAlumnoAlCurso(int idCurso, String legajoAlumno);
 }
