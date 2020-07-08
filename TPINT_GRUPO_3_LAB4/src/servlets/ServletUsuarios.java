@@ -10,10 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import daoImpl.UsuarioDaoImpl;
-import entidades.Alumno;
-import entidades.Localidad;
 import entidades.Profesor;
 import entidades.TipoUsuario;
 import entidades.Usuario;
@@ -47,6 +46,7 @@ public class ServletUsuarios extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		if (request.getParameter("Param") != null) {
 			// Entra por haber echo click en el hyperlink mostrar usuarios
 			UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
@@ -66,7 +66,8 @@ public class ServletUsuarios extends HttpServlet {
 			System.out.println(lista);
 			request.setAttribute("listaUsuario", lista);
 			if (lista != null && !lista.isEmpty()) {
-				response.sendRedirect("/TPINT_GRUPO_3_LAB4/menu.html");
+				session.setAttribute("Session_user", request.getParameter("txtUsuario"));
+				response.sendRedirect("/TPINT_GRUPO_3_LAB4/Menu.jsp");
 			} else {
 				PrintWriter out = response.getWriter();
 				out.println("<script type=\"text/javascript\">");
