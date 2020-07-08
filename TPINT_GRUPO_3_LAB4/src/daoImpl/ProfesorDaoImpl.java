@@ -17,7 +17,7 @@ import entidades.Profesor;
 import entidades.Provincia;
 
 public class ProfesorDaoImpl implements ProfesorDao{
-
+	
 	private static final String agregarProfesor="INSERT INTO profesor(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?);";
 	//private static final String listarProfe="SELECT * FROM tpint_grupo_3_lab4.profesor where estado=1;";
 	private static final String readAll = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1;";

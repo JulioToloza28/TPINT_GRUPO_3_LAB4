@@ -29,7 +29,6 @@ import entidades.Provincia;
 @WebServlet("/ServletsProfesor")
 public class ServletsProfesor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
   
     public ServletsProfesor() {
         super();
