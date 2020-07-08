@@ -163,10 +163,25 @@ public class ServletsProfesor extends HttpServlet {
 	  					rd.forward(request, response);
 	  					}
 	  			}
+	  			
+		  		//Eliminar profesor
+					if("EliminarProfesor".equals(request.getParameter("Param"))){
+					int Legajo_profe = Integer.parseInt(request.getParameter("Data"));
+					ProfesorDaoImpl profeDaoImpl = new ProfesorDaoImpl();
+					profeDaoImpl.eliminarProfesor(Legajo_profe);
+					
+					if(profeDaoImpl.eliminarProfesor(Legajo_profe)!=false) 
+					{
+						filas=1;
+					}	
+					if(filas==1) {
+						//REQUEST DISPATCHER
+						request.setAttribute("ProfesorEliminado", filas);
+						RequestDispatcher rd= request.getRequestDispatcher("ServletsProfesor?Param=MenuProfesor");
+						rd.forward(request, response);
+					}
+				}
 	}
-	
-	
-	
 	
 	private RequestDispatcher getRequestDispatcher(String string) {
 		return null;
