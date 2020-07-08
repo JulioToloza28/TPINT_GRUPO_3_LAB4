@@ -17,12 +17,11 @@ import java.util.List;
 public class AlumnoDaoImpl implements AlumnoDao {
 
 	private static final String agregarAlumno = "INSERT INTO alumno(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?)";
-	private static final String readAll = "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1;";
-
-    private static final String modificarAlumno= "UPDATE alumno set nombre=?,apellido=?, dni=?, fecha_nac=?, direccion=?, Idlocalidad=?, telefono=?, mail=? where legajo_alum= ?";
+	private static final String readAll ="SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoXcurso as AC on AC.legajoAlumno=a.legajo_alum inner join curso as C on C.idcurso=AC.idcurso where a.estado=1";
+	private static final String modificarAlumno = "UPDATE alumno set nombre=?,apellido=?, dni=?, fecha_nac=?, direccion=?, Idlocalidad=?, telefono=?, mail=? where legajo_alum= ?";
 	private static final String obtenerAlumnosInscriptos = "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoxcurso as alXcu on legajo_alum=legajoalumno where estado=1 and idCurso=";
 	private static final String leerAlumno = "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1 and legajo_alum=?;";
-    private static final String eliminarAlumno = "UPDATE alumno set estado=0 where legajo_alum= ?";
+	private static final String eliminarAlumno = "UPDATE alumno set estado=0 where legajo_alum= ?";
 
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;
@@ -94,7 +93,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		}
 		return listAlumno;
 	}
-	
+
 	public Alumno ObtenerAlumno(int Legajo) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -108,7 +107,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 
 		Conexion conexion = Conexion.getConexion();
 		try {
-			
+
 			statement = conexion.getSQLConexion().prepareStatement(leerAlumno);
 			statement.setInt((1), Legajo);
 			resultSet = statement.executeQuery();
@@ -136,17 +135,17 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		}
 		return alum;
 	}
-	
-    public boolean eliminarAlumno(int Legajo) {
-    	PreparedStatement statement;
+
+	public boolean eliminarAlumno(int Legajo) {
+		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try {
 
 			statement = conexion.prepareStatement(eliminarAlumno);
 			statement.setInt(1, Legajo);
-			//statement.setInt(2, alum1.getEstado());
-			
+			// statement.setInt(2, alum1.getEstado());
+
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
 				isInsertExitoso = true;
@@ -160,7 +159,8 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			}
 		}
 		return isInsertExitoso;
-    }
+	}
+
 	public boolean modificarAlumno(Alumno alum1) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -177,8 +177,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			statement.setString(7, alum1.getTelefono());
 			statement.setString(8, alum1.getMail());
 			statement.setInt(9, alum1.getLegajo());
-			
-		
+
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
 				isInsertExitoso = true;
@@ -192,7 +191,8 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			}
 		}
 		return isInsertExitoso;
-}
+	}
+
 	@Override
 	public ArrayList<Alumno> getAlumnosInscriptos(int IdCurso) {
 		try {
@@ -237,7 +237,60 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		}
 		return listAlumno;
 	}
-	
-	
+
+	public ArrayList<Alumno> filtroDeAlumnos(int idmateria, int cuatrimestre, int anio) {
+
+		String consulta = readAll;
+
+		if (idmateria != 0) {
+			consulta = consulta + " and idMateria= " + idmateria;
+		}
+		if (cuatrimestre != 0) {
+			consulta = consulta + " and C.cuatrimestre= " + cuatrimestre;
+		}
+		if (anio != 0) {
+			consulta = consulta + " and C.anio= " + anio;
+		}
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Alumno> listAlumno = new ArrayList<Alumno>();
+		PreparedStatement statement;
+		ResultSet resultSet;
+
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(consulta);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Localidad loc = new Localidad();
+				Provincia provincia = new Provincia();
+				Alumno alum = new Alumno();
+				alum.setLegajo(resultSet.getInt("legajo_alum"));
+				alum.setNombre(resultSet.getString("Alumno"));
+				alum.setApellido(resultSet.getString("Apellido"));
+				alum.setDni(resultSet.getString("Dni"));
+				alum.setFechaNac(resultSet.getDate("fecha_nac"));
+				alum.setDireccion(resultSet.getString("direccion"));
+				loc.setId(resultSet.getInt("idlocalidad"));
+				loc.setNombreLoc(resultSet.getString("Localidad"));
+				provincia.setId(resultSet.getInt("idprovincia"));
+				provincia.setNombreProv(resultSet.getString("Provincia"));
+				loc.setProvincia(provincia);
+				alum.setLocalidad(loc);
+				alum.setTelefono(resultSet.getString("telefono"));
+				alum.setMail(resultSet.getString("mail"));
+				listAlumno.add(alum);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return listAlumno;
+
+
+	}
 
 }

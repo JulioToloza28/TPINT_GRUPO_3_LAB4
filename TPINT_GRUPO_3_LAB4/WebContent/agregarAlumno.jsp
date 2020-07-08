@@ -7,7 +7,6 @@
 <%@page import="java.util.ArrayList" %>
 
 <script type="text/javascript">
-
 function cambiar_Localidad(){ 
 	var IdProv;
 	IdProv = document.getElementById('txtselectProvincia').value;

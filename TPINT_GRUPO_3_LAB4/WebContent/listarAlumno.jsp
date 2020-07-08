@@ -1,9 +1,12 @@
 <%@page import="entidades.Alumno"%>
 <%@page import="entidades.Localidad"%>
 <%@page import="daoImpl.AlumnoDaoImpl"%>
+<%@page import="daoImpl.MateriaDaoImpl"%>
+<%@page import="entidades.Materia"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,146 +28,164 @@
 
 </head>
 <body>
+
 	<jsp:include page="Menu.jsp"></jsp:include>
+
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Lista de alumnos</li>
+		<li class="breadcrumb-item active" aria-current="page">Lista de
+			alumnos</li>
 	</ol>
 	</nav>
 
 	<div class="container">
-		<!--<h1>Mis alumnos</h1>-->
+
+<form action="ServletAlumno?Param=Filtrar" method="get">
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="form-group">
-					<label for="sel1">Materias:</label> <select class="form-control"
-						id="sel1">
-						<option>Laboratorio IV</option>
-						<option>DABD</option>
-						<option>Programacion III</option>
-						<option>Ingles</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="form-group">
-					<label for="sel1">Cuatrimestre:</label> <select
-						class="form-control" id="sel1">
-
-						<option>1Â° Cuatrimestre</option>
-						<option>2Â° Cuatrimestre</option>
-
-					</select>
-				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="form-group">
-
-					<label for="sel1">AÃ±o:</label> <select class="form-control"
-
-						id="sel1">
-						<option>2018</option>
-						<option>2019</option>
-						<option>2020</option>
-					</select>
-				</div>
-			</div>
-<!-- 			<div class="col-lg-3"> -->
-<!-- 				<div class="form-group"> -->
-<!-- 				<div id="example_filter" class="dataTables_filter"> -->
-<!-- 					<label style="margin-bottom:0px;">Buscar: <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"> -->
-<!-- 					</label> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-		</div>
-		<div class="row">
-		<div class="col-sm-12 col-md-6">
-		<div class="dataTables_length" id="example_length">
-		<label>Mostrar cantidad <select name="example_length" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm">
-		<option value="5">5</option><option value="10">10</option><option value="30">30</option>
-		<option value="50">50</option></select></label></div>
-		</div><div class="col-sm-12 col-md-6"><div id="example_filter" class="dataTables_filter">
-		<label>Buscar:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">
-		</label></div></div></div>
-		<div class="row">
-			<div class="col-lg-12">
-<!-- 				<a href="ServletProvincia?Param=Alumno" class="btn btn-outline-primary btn-sm">Agregar</a> -->
-				 <a href="ServletAlumno?BtnAgregar=Alumno" class="btn btn-outline-primary btn-sm">Agregar</a>
-				<a href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
-				<table id="example" class="display" style="width: 100%">
-					<thead>
-						<tr>
-							<th>Legajo</th>
-							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>DNI</th>
-							<th>Fecha nacimiento</th>
-							<th>Direccion</th>
-							<th>Localidad</th>
-							<th>Provincia</th>
-							<th>Telefono</th>
-							<th>Mail</th>
-							<th>Editar</th>
-							<th>Eliminar</th>
-						</tr>
-					</thead>
-					<tbody>
+					<label for="sel1">Materias:</label>
+					 <select id="cbxMateria" name="cbxMateria" class="custom-select" id="sel1" >
+						<option selected disabled value="">Seleccione...</option>
 						<%
-							ArrayList<Alumno> listaAlumno = null;
+							MateriaDaoImpl materiaL = new MateriaDaoImpl();
+						ArrayList<Materia> listaMateria = null;
+						listaMateria = (ArrayList<Materia>) materiaL.listarMaterias();
+						%>
+						<%
+							if (listaMateria != null)
+							for (Materia mate : listaMateria) {
+						%>
+						<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="form-group">
+					<label for="sel1">Cuatrimestre:</label> 
+					<select id="cbxCuatrimestre" name="cbxCuatrimestre"	class="form-control" id="sel1">
+						<option selected disabled value="">Seleccione...</option>
+						<option value="1">1° Cuatrimestre</option>
+						<option value="2">2° Cuatrimestre</option>
+
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="form-group">
+
+					<label for="sel1">Año:</label> <select id="cdxAnio" name="cdxAnio"	 class="form-control" id="sel1">
+						<option selected disabled value="">Seleccione...</option>
+						<%
+							for (int x = 2020; x >= 1990; x--) {
+						%>
+						<option><%=x%></option>
+						<%
+							}
+						%>
+					</select>
+					
+				</div>
+				
+			</div>
+			<div class="col-lg-3"> <button id="btn-filtrar" name="btn-filtrar" class="btn btn-primary" type="submit">Filtrar</button></div>
+		</div>
+</form>
+		
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<div class="dataTables_length" id="example_length"></div>
+				<div class="col-sm-12 col-md-6">
+					<div id="example_filter" class="dataTables_filter">
+						<!-- <label>Buscar:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"> -->
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<!-- 				<a href="ServletProvincia?Param=Alumno" class="btn btn-outline-primary btn-sm">Agregar</a> -->
+					<a href="ServletAlumno?BtnAgregar=Alumno"
+						class="btn btn-outline-primary btn-sm">Agregar</a>
+						 <a	href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
+
+					<table id="example" class="display" style="width: 100%">
+						<thead>
+							<tr>
+								<th>Legajo</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>DNI</th>
+								<th>Fecha nacimiento</th>
+								<th>Direccion</th>
+								<th>Localidad</th>
+								<th>Provincia</th>
+								<th>Telefono</th>
+								<th>Mail</th>
+								<th>Editar</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								ArrayList<Alumno> listaAlumno = null;
 							if (request.getAttribute("listaAlum") != null) {
 								listaAlumno = (ArrayList<Alumno>) request.getAttribute("listaAlum");
 							}
-						%>
-						<%
-							if (listaAlumno != null)
+							%>
+							<%
+								if (listaAlumno != null)
 								for (Alumno alumno : listaAlumno) {
-						%>
-						<tr>
-							<td><%=alumno.getLegajo()%></td>
-							<td><%=alumno.getNombre()%></td>
-							<td><%=alumno.getApellido()%></td>
-							<td><%=alumno.getDni()%></td>
-							<td><%=alumno.getFechaNac()%></td>
-							<td><%=alumno.getDireccion()%></td>
-							<td><%=alumno.getLocalidad().getNombreLoc()%></td>
-							<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
-							<td><%=alumno.getTelefono()%></td>
-							<td><%=alumno.getMail()%></td>
-							<td><a href="ServletAlumno?Param=ModificarAlumno&amp;Data=<%=alumno.getLegajo()%>"
-								name="btn-EditarAlumno" class="btn btn-outline-secondary btn-sm">Editar</a>
-							</td>
-							<td><a href="ServletAlumno?Param=EliminarAlumno&amp;Data=<%=alumno.getLegajo()%>" name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
-				</table>
+							%>
+							<tr>
+								<td><%=alumno.getLegajo()%></td>
+								<td><%=alumno.getNombre()%></td>
+								<td><%=alumno.getApellido()%></td>
+								<td><%=alumno.getDni()%></td>
+								<td><%=alumno.getFechaNac()%></td>
+								<td><%=alumno.getDireccion()%></td>
+								<td><%=alumno.getLocalidad().getNombreLoc()%></td>
+								<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
+								<td><%=alumno.getTelefono()%></td>
+								<td><%=alumno.getMail()%></td>
+								<td><a
+									href="ServletAlumno?Param=ModificarAlumno&amp;Data=<%=alumno.getLegajo()%>"
+									name="btn-EditarAlumno"
+									class="btn btn-outline-secondary btn-sm">Editar</a></td>
+								<td><a
+									href="ServletAlumno?Param=EliminarAlumno&amp;Data=<%=alumno.getLegajo()%>"
+									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
+							</tr>
+							<%
+								}
+							%>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
-	<%
-	  int aux=0;
-	  if(request.getAttribute("AlumnoEliminado")!=null)
-	  {
-		  aux=1;
-	  }
-	%>
-	
-	<% if(aux==1)
-		{
-	%>
-	 <h5>Eliminado correctamente</h5>
-		
-	<%
+		<%
+			int aux = 0;
+		if (request.getAttribute("AlumnoEliminado") != null) {
+			aux = 1;
 		}
-	%>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-	
+		%>
+
+		<%
+			if (aux == 1) {
+		%>
+		<h5>Eliminado correctamente</h5>
+
+		<%
+			}
+		%>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript"
+			src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
