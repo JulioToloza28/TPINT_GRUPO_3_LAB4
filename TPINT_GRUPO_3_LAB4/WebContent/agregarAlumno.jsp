@@ -122,6 +122,7 @@ function cambiar_Localidad(){
 				</div>
 			</div>
 			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
+			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
 	</form>
 
 	<%
