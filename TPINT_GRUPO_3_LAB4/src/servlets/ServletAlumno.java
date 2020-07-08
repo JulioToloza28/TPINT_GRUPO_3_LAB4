@@ -28,64 +28,80 @@ import entidades.Provincia;
 @WebServlet("/ServletAlumno")
 public class ServletAlumno extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    public ServletAlumno() {
-        super();
-     
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 AlumnoDaoImpl alumDao = new AlumnoDaoImpl();
+	public ServletAlumno() {
+		super();
+
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		AlumnoDaoImpl alumDao = new AlumnoDaoImpl();
 		ProvinciaDaoImpl provDao = new ProvinciaDaoImpl();
 		LocalidadDaoImpl locDao = new LocalidadDaoImpl();
-		
-		//listar alumno
-		if("MenuAlumno".equals(request.getParameter("Param")))
-		{
+
+		// listar alumno
+		if ("MenuAlumno".equals(request.getParameter("Param"))) {
 			ArrayList<Alumno> listaAlum = alumDao.readAll();
-			//ArrayList<Provincia> listaProv = provDao.readAll();
-			
+			// ArrayList<Provincia> listaProv = provDao.readAll();
+
 			request.setAttribute("listaAlum", listaAlum);
-			//request.setAttribute("listaProv", listaProv);
+			// request.setAttribute("listaProv", listaProv);
 			RequestDispatcher rd = request.getRequestDispatcher("/listarAlumno.jsp");
 			rd.forward(request, response);
 		}
+		// Filtrar Alumno
 		
-		//agregar alumno
-		if(request.getParameter("BtnAgregar")!= null) {
-			
+		  if(request.getParameter("btn-filtrar") != null) {
+		  
+			  int materia=0;
+			  int Cuatri=0;
+			  int anio=0;
+			  if(request.getParameter("cbxMateria")!=null) { materia= Integer.parseInt(request.getParameter("cbxMateria"));}
+			  if(request.getParameter("cbxCuatrimestre")!=null) {Cuatri= Integer.parseInt(request.getParameter("cbxCuatrimestre"));}
+			  if(request.getParameter("cdxAnio")!=null) {anio= Integer.parseInt(request.getParameter("cdxAnio"));}
+			  
+			  
+		  ArrayList<Alumno> listaAlum = alumDao.filtroDeAlumnos(materia,Cuatri,anio);
+		  
+		  request.setAttribute("listaAlum", listaAlum);
+		  RequestDispatcher rd = request.getRequestDispatcher("/listarAlumno.jsp");
+	      rd.forward(request, response);
+	      }
+		 
+
+		// agregar alumno
+		if (request.getParameter("BtnAgregar") != null) {
+
 			ArrayList<Provincia> listaProv = provDao.listarProvincia();
 			ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
-			
+
 			request.setAttribute("listaProvDao", listaProv);
 			request.setAttribute("listaLocDao", listaLoc);
 			request.getRequestDispatcher("/agregarAlumno.jsp").forward(request, response);
 		}
-		
-		//modificar alumno (trae listados de combos y de alumno)
-		if("ModificarAlumno".equals(request.getParameter("Param")))
-		{
+
+		// modificar alumno (trae listados de combos y de alumno)
+		if ("ModificarAlumno".equals(request.getParameter("Param"))) {
 			ArrayList<Provincia> listaProv = provDao.listarProvincia();
 			ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
-			
+
 			Alumno alum = alumDao.ObtenerAlumno(Integer.parseInt(request.getParameter("Data")));
-			
+
 			request.setAttribute("AlumnoAMod", alum);
-			
+
 			request.setAttribute("listaProvDao", listaProv);
 			request.setAttribute("listaLocDao", listaLoc);
 			request.getRequestDispatcher("/modificarAlumno.jsp").forward(request, response);
 		}
-		
-		
-		//Agregar alumno
-		int filas=0;
-		if(request.getParameter("btn-aceptar")!=null)
-		{ 
+
+		// Agregar alumno
+		int filas = 0;
+		if (request.getParameter("btn-aceptar") != null) {
 			Localidad loc = new Localidad();
-			String a=request.getParameter("cmbLocalidad");
+			String a = request.getParameter("cmbLocalidad");
 			loc.setId(Integer.parseInt(a));
-			Alumno alum = new Alumno();			
+			Alumno alum = new Alumno();
 			alum.setNombre(request.getParameter("txtNombre"));
 			alum.setApellido(request.getParameter("txtApellido"));
 			alum.setDni(request.getParameter("txtDni"));
@@ -93,40 +109,38 @@ public class ServletAlumno extends HttpServlet {
 			Date parsed = null;
 			try {
 				parsed = format.parse(request.getParameter("txtFechaNac"));
-			} 
-			catch (ParseException e) {
+			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 			java.sql.Date sql = new java.sql.Date(parsed.getTime());
-			alum.setFechaNac(sql);			
+			alum.setFechaNac(sql);
 			alum.setDireccion(request.getParameter("txtDireccion"));
 			alum.setLocalidad(loc);
 			alum.setTelefono(request.getParameter("txtTelefono"));
 			alum.setMail(request.getParameter("txtEmail"));
 			alum.setEstado(true);
-			
-			AlumnoDaoImpl alumImp=new AlumnoDaoImpl();
-			if(alumImp.agregarAlumno(alum)!=false) 
-			{
-				filas=1;
-			}	
+
+			AlumnoDaoImpl alumImp = new AlumnoDaoImpl();
+			if (alumImp.agregarAlumno(alum) != false) {
+				filas = 1;
+			}
 		}
-		if(filas==1) {
-		//REQUEST DISPATCHER
-		request.setAttribute("cantFilas", filas);
-		
-		ArrayList<Alumno> listaAlum = alumDao.readAll();
-		request.setAttribute("listaAlum", listaAlum);
-		
-		RequestDispatcher rd= request.getRequestDispatcher("/listarAlumno.jsp");
-		rd.forward(request, response);
+		if (filas == 1) {
+			// REQUEST DISPATCHER
+			request.setAttribute("cantFilas", filas);
+
+			ArrayList<Alumno> listaAlum = alumDao.readAll();
+			request.setAttribute("listaAlum", listaAlum);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/listarAlumno.jsp");
+			rd.forward(request, response);
 		}
-		
-		//Modificar alumno (guarda los datos una vez que se hace click)
-		if(request.getParameter("btn-EditarAlumno")!=null) {
-			//Alumno alum = new Alumno();
+
+		// Modificar alumno (guarda los datos una vez que se hace click)
+		if (request.getParameter("btn-EditarAlumno") != null) {
+			// Alumno alum = new Alumno();
 			Localidad loc = new Localidad();
-			String a=request.getParameter("cmbLocalidad").toString();			
+			String a = request.getParameter("cmbLocalidad").toString();
 			loc.setId(Integer.parseInt(a));
 			Alumno alum1 = new Alumno();
 			String algo = request.getParameter("txtlegajo");
@@ -138,45 +152,42 @@ public class ServletAlumno extends HttpServlet {
 			Date parsed = null;
 			try {
 				parsed = format.parse(request.getParameter("txtFechaNac"));
-			} 
-			catch (ParseException e) {
+			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 			java.sql.Date sql = new java.sql.Date(parsed.getTime());
-			alum1.setFechaNac(sql);			
+			alum1.setFechaNac(sql);
 			alum1.setDireccion(request.getParameter("txtDireccion"));
 			alum1.setLocalidad(loc);
 			alum1.setTelefono(request.getParameter("txtTelefono"));
 			alum1.setMail(request.getParameter("txtEmail"));
 			alum1.setEstado(true);
-			
-			AlumnoDaoImpl alumImp=new AlumnoDaoImpl();
-			if(alumImp.modificarAlumno(alum1)!=false) 
-			{
-				filas=1;
-			}	
-			if(filas==1) {
-				//REQUEST DISPATCHER
+
+			AlumnoDaoImpl alumImp = new AlumnoDaoImpl();
+			if (alumImp.modificarAlumno(alum1) != false) {
+				filas = 1;
+			}
+			if (filas == 1) {
+				// REQUEST DISPATCHER
 				request.setAttribute("cantFilas", filas);
-				RequestDispatcher rd= request.getRequestDispatcher("/modificarAlumno.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/modificarAlumno.jsp");
 				rd.forward(request, response);
-				}
-		}		
-		 
-		//Eliminar alumno
-			if("EliminarAlumno".equals(request.getParameter("Param"))){
+			}
+		}
+
+		// Eliminar alumno
+		if ("EliminarAlumno".equals(request.getParameter("Param"))) {
 			int Legajo_alum = Integer.parseInt(request.getParameter("Data"));
 			AlumnoDaoImpl alumDaoImpl = new AlumnoDaoImpl();
 			alumDaoImpl.eliminarAlumno(Legajo_alum);
-			
-			if(alumDaoImpl.eliminarAlumno(Legajo_alum)!=false) 
-			{
-				filas=1;
-			}	
-			if(filas==1) {
-				//REQUEST DISPATCHER
+
+			if (alumDaoImpl.eliminarAlumno(Legajo_alum) != false) {
+				filas = 1;
+			}
+			if (filas == 1) {
+				// REQUEST DISPATCHER
 				request.setAttribute("AlumnoEliminado", filas);
-				RequestDispatcher rd= request.getRequestDispatcher("ServletAlumno?Param=MenuAlumno");
+				RequestDispatcher rd = request.getRequestDispatcher("ServletAlumno?Param=MenuAlumno");
 				rd.forward(request, response);
 			}
 		}
@@ -187,12 +198,12 @@ public class ServletAlumno extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
