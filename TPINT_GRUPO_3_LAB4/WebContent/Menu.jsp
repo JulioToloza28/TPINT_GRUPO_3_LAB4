@@ -64,7 +64,7 @@
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link"
 					href="ServletUsuarios?Param=1">Usuarios</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><%=session.getAttribute("user")%></a></li>
+				<li class="nav-item"><a class="nav-link" href="#"><%=session.getAttribute("Session_user")%></a></li>
 				<li class="nav-item"><a class="nav-link" href="#"
 					data-toggle="modal" data-target="#logoutModal"> <i
 						class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -83,7 +83,7 @@
 						desea salir?</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">x</span>
 					</button>
 				</div>
 				<div class="modal-body">Selecciones "Logout" para cerrar su
