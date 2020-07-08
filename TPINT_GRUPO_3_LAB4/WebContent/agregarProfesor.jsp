@@ -45,18 +45,6 @@
 <body>
 
 	<jsp:include page="Menu.jsp"></jsp:include>
-
-	<%
-		if ("ModificarProfesor".equals(request.getParameter("Param"))) {
-	%>
-	<nav aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Modificar
-			Profesor</li>
-
-		<%
-			} else {
-		%>
 		<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">Agregar Profesor</li>

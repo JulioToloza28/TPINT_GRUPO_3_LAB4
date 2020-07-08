@@ -52,7 +52,7 @@
 				<li class="nav-item"><a class="navbar-brand" href="#"> <img
 						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="listarProfesor.jsp">Profesores</a></li>
+					href="ServletsProfesor?Param=MenuProfesor">Profesores</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="ServletCurso?listCourses=1">Cursos</a></li>
 				<li class="nav-item"><a class="nav-link"
