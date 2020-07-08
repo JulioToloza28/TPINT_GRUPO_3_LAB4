@@ -8,7 +8,7 @@
 <link href="Css/Style.css" rel="StyleSheet" type="text/css">
 </head>
 <body>
-	<jsp:include page="menu.html"></jsp:include>
+	<jsp:include page="Menu.jsp"></jsp:include>
 	<div class="container">
 		<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">

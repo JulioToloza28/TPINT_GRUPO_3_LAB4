@@ -8,12 +8,29 @@ import entidades.Profesor;
 import negocio.ProfesorNegocio;
 
 public class ProfesorNegocioImpl implements ProfesorNegocio {
-	ProfesorDao profesorDao = new ProfesorDaoImpl();
+	ProfesorDaoImpl profesorDao = new ProfesorDaoImpl();
 
 	@Override
 	public ArrayList<Profesor> listarProfe() {
 		return profesorDao.listarProfesores();
+	}
+
+	@Override
+	public boolean agregarProfesor(Profesor profesorAgregado) {
+		boolean estado=false;
 		
+		if(profesorAgregado.getNombre().trim().length()>0 &&
+		   profesorAgregado.getApellido().trim().length()>0 &&
+		   profesorAgregado.getDni().trim().length()>0 &&
+		   profesorAgregado.getFechaNac()!= null &&
+		   profesorAgregado.getDireccion().trim().length()>0 &&
+		   profesorAgregado.getLocalidad().getId() !=0 &&
+		   profesorAgregado.getTelefono().trim().length()>0 &&
+		   profesorAgregado.getMail().trim().length()>0	)
+		   {
+			estado = profesorDao.agregarProfesor(profesorAgregado); 
+			}
+		return estado;
 	}
 
 }

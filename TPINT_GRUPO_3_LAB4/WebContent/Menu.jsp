@@ -49,10 +49,10 @@
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div style="width: 90%; float: left">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="navbar-brand" href="Menu.jsp"> <img
+				<li class="nav-item"><a class="navbar-brand" href="#"> <img
 						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="listarProfesor.jsp">Profesores</a></li>
+					href="ServletsProfesor?Param=MenuProfesor">Profesores</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="ServletCurso?listCourses=1">Cursos</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -60,13 +60,41 @@
 				<li class="nav-item"><a class="nav-link" href="reporte.jsp">Reportes</a></li>
 			</ul>
 		</div>
-		<div style="width: 10%; float: right">
+		<div style="width: 20%; float: right">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link"
 					href="ServletUsuarios?Param=1">Usuarios</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"><%=session.getAttribute("user")%></a></li>
+				<li class="nav-item"><a class="nav-link" href="#"
+					data-toggle="modal" data-target="#logoutModal"> <i
+						class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+						Logout
+				</a></li>
 			</ul>
 		</div>
 	</nav>
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Seguro que
+						desea salir?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Selecciones "Logout" para cerrar su
+					sesion.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.jsp">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

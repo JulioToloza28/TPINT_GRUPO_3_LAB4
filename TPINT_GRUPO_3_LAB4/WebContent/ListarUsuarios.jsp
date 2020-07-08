@@ -15,15 +15,13 @@
 	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 </head>
 <body>
-	<jsp:include page="menu.html"></jsp:include>
-
-	<nav aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Usuarios</li>
-	</ol>
-	</nav>
-
+	<jsp:include page="Menu.jsp"></jsp:include>
 	<div class="container">
+		<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+		</ol>
+		</nav>
 
 		<%
 			ArrayList<Usuario> listaUsuario = null;
@@ -33,6 +31,8 @@
 		%>
 		<div class="row">
 			<div class="col-lg-12">
+				<a href="ServletUsuarios?AddUser=1"
+					class="btn btn-outline-primary btn-sm">Agregar</a>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -54,8 +54,9 @@
 							<td><%=user.getUsername()%></td>
 							<td><%=user.getLegajo()%></td>
 							<td><%=user.getTipoUsuario().getTipo()%></td>
-							<td><a href="CambiarClave.jsp?idUsuario=<%=user.getId()%>" class="btn btn-info btn-sm"><i
-									class="fas fa-exchange-alt"></i> Cambiar Clave</a>
+							<td><a href="CambiarClave.jsp?idUsuario=<%=user.getId()%>"
+								class="btn btn-info btn-sm"><i class="fas fa-exchange-alt"></i>
+									Cambiar Clave</a>
 						</tr>
 						<%
 							}
