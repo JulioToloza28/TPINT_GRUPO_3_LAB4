@@ -8,12 +8,12 @@ public class Curso {
 	private int LegajoProf;
 	private int Estado;
 	private String Materia;
-	private String  Profesor;
+	private String Profesor;
 	private int CantAlum;
-	
-	
-	public Curso() {}
-	
+
+	public Curso() {
+	}
+
 	public Curso(int id, int idMateria, int cuatrimestre, int legajoProf, int estado) {
 		this.Id = id;
 		this.Cuatrimestre = cuatrimestre;
@@ -92,6 +92,13 @@ public class Curso {
 
 	public void setCantAlum(int cantAlum) {
 		CantAlum = cantAlum;
+	}
+
+	@Override
+	public String toString() {
+		return "Curso [Id=" + Id + ", IdMateria=" + IdMateria + ", Cuatrimestre=" + Cuatrimestre + ", Anio=" + Anio
+				+ ", LegajoProf=" + LegajoProf + ", Estado=" + Estado + ", Materia=" + Materia + ", Profesor="
+				+ Profesor + ", CantAlum=" + CantAlum + "]";
 	}
 
 }
