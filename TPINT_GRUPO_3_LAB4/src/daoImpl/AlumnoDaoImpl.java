@@ -17,12 +17,13 @@ import java.util.List;
 public class AlumnoDaoImpl implements AlumnoDao {
 
 	private static final String agregarAlumno = "INSERT INTO alumno(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?)";
-	private static final String readAll ="SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoXcurso as AC on AC.legajoAlumno=a.legajo_alum inner join curso as C on C.idcurso=AC.idcurso where a.estado=1";
+	private static final String readAll ="SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia where a.estado=1";
 	private static final String modificarAlumno = "UPDATE alumno set nombre=?,apellido=?, dni=?, fecha_nac=?, direccion=?, Idlocalidad=?, telefono=?, mail=? where legajo_alum= ?";
 	private static final String obtenerAlumnosInscriptos = "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoxcurso as alXcu on legajo_alum=legajoalumno where estado=1 and idCurso=";
 	private static final String leerAlumno = "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1 and legajo_alum=?;";
 	private static final String eliminarAlumno = "UPDATE alumno set estado=0 where legajo_alum= ?";
-
+    private static final String filtrar="SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoXcurso as AC on AC.legajoAlumno=a.legajo_alum inner join curso as C on C.idcurso=AC.idcurso where a.estado=1";
+	
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -240,16 +241,27 @@ public class AlumnoDaoImpl implements AlumnoDao {
 
 	public ArrayList<Alumno> filtroDeAlumnos(int idmateria, int cuatrimestre, int anio) {
 
-		String consulta = readAll;
+		String consulta = filtrar;
+		int cont=0;
 
-		if (idmateria != 0) {
+		if (idmateria != 0) 
+		{
 			consulta = consulta + " and idMateria= " + idmateria;
+			cont++;
 		}
-		if (cuatrimestre != 0) {
+		if (cuatrimestre != 0) 
+		{
 			consulta = consulta + " and C.cuatrimestre= " + cuatrimestre;
+			cont++;
 		}
-		if (anio != 0) {
+		if (anio != 0) 
+		{
 			consulta = consulta + " and C.anio= " + anio;
+			cont++;
+		}
+		if(cont==0) 
+		{
+			consulta=readAll;
 		}
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
