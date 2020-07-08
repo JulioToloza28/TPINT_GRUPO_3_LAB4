@@ -17,12 +17,13 @@ import entidades.Profesor;
 import entidades.Provincia;
 
 public class ProfesorDaoImpl implements ProfesorDao{
-
+	
 	private static final String agregarProfesor="INSERT INTO profesor(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?);";
 	//private static final String listarProfe="SELECT * FROM tpint_grupo_3_lab4.profesor where estado=1;";
 	private static final String readAll = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1;";
 	private static final String leerProfesor = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1 and legajo_Pro=?;";
 	private static final String modificarProfesor= "UPDATE profesor set nombre=?,apellido=?, dni=?, fecha_nac=?, direccion=?, Idlocalidad=?, telefono=?, mail=? where legajo_Pro= ?";
+    private static final String eliminarProfesor = "UPDATE profesor set estado=0 where legajo_Pro= ?";
 
 	public boolean agregarProfesor(Profesor profesor)
 	{
@@ -96,7 +97,6 @@ public class ProfesorDaoImpl implements ProfesorDao{
 		}
 		return listProfesor;
 	} 
-	
 	//obtener profesor
 	public Profesor ObtenerProfesor(int Legajo) {
 		try {
@@ -170,5 +170,29 @@ public class ProfesorDaoImpl implements ProfesorDao{
 		}
 		return isInsertExitoso;
 	}
+	
+	//eliminar profesor
+	 public boolean eliminarProfesor(int Legajo) {
+	    	PreparedStatement statement;
+			Connection conexion = Conexion.getConexion().getSQLConexion();
+			boolean isInsertExitoso = false;
+			try {
+
+				statement = conexion.prepareStatement(eliminarProfesor);
+				statement.setInt(1, Legajo);
+				if (statement.executeUpdate() > 0) {
+					conexion.commit();
+					isInsertExitoso = true;
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				try {
+					conexion.rollback();
+				} catch (Exception ex1) {
+					ex1.printStackTrace();
+				}
+			}
+			return isInsertExitoso;
+	    }
 
 }
