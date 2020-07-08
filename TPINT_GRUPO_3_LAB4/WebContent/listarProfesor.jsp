@@ -89,8 +89,28 @@
 							<td><%=profesor.getMail()%></td>
 							<td><a href="ServletsProfesor?Param=ModificarProfesor&amp;Data=<%=profesor.getLegajo()%>"
 								name="btn-EditarProfesor" class="btn btn-outline-secondary btn-sm">Editar</a></td>
-							<td><a href="ServletsProfesor?Param=EliminarProfesor&amp;Data=<%=profesor.getLegajo() %>" name="btn-EliminarProfesor" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
+							<td><a data-toggle="modal" data-target="#VentEliminar"  name="btn-EliminarProfesor" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
 						</tr>
+							<div class="modal fade" id="VentEliminar" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+				</div>
+				<div class="modal-body">Esta seguro que desea eliminar el registro?</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-danger" href="ServletsProfesor?Param=EliminarProfesor&amp;Data=<%=profesor.getLegajo() %>"">Eliminar</a>
+				</div>
+			</div>
+		</div>
+	</div>	
 						<%}%>
 					</tbody>
 				</table>
