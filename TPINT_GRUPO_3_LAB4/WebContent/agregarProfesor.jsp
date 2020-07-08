@@ -6,6 +6,36 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 
+<script type="text/javascript">
+
+/* function cambiar_Localidad(){ 
+	var IdProv;
+	IdProv = document.getElementById('txtselectProvincia').value;
+	$.ajax({
+		type : 'POST',
+		url : 'ServletLocalidad',
+		dataType : "json",
+		data : {
+			ProvinciaId : IdProv
+		},
+		success : function(result) {
+			if (result) {
+				//$("#txtselectLocalidad option:not(:disabled)").remove();
+				$.each(result, function(index, option) {
+					console.log("option: " + option)
+					$("#txtselectLocalidad").append(
+							'<option value="' + option.ID + '">'
+									+ option.Nombre + '</option>')					
+				});
+			}
+		},
+		error : function(data) {
+			alert('fail');
+		}
+	})
+}; */
+</script>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,11 +59,7 @@
 		%>
 		<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item active" aria-current="page">Agregar
-				Profesor</li>
-			<%
-				}
-			%>
+			<li class="breadcrumb-item active" aria-current="page">Agregar Profesor</li>
 		</ol>
 		</nav>
 
@@ -51,7 +77,7 @@
 						id="validationServer02" value="" required>
 					<div class="valid-feedback">Looks good!</div>
 				</div>
-				<div class="col-md-1 mb-3">
+				<div class="col-md-2 mb-3">
 					<label for="validationServer03">DNI</label> <input name="txtDNI"
 						type="text" class="form-control " id="validationServer02" value=""
 						required>
@@ -67,7 +93,7 @@
 						id="validationServer01" required>
 					<div class="valid-feedback">Looks good!</div>
 				</div>
-				<div class="col-md-2 mb-3">
+				<div class="col-md-3 mb-3">
 					<label for="validationServer01">Telefono</label> <input
 						name="txtTelefono" type="text" class="form-control"
 						id="validationServer01" required>
@@ -117,49 +143,27 @@
 					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
-<!-- 			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button> -->
-			
-			<br>
-			<br>
-
-			<div class="form-group row ">
-				<label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control" id="inputPassword"
-						placeholder="Usuario">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
-				<div class="col-sm-2">
-					<input type="password" class="form-control" id="inputPassword"
-						placeholder="Contraseña">
-				</div>
-
-			</div>
-			<div class="form-group row">
-				<label for="inputPassword" class="col-sm-2 col-form-label">Verificar</label>
-				<div class="col-sm-2">
-					<input type="password" class="form-control" id="inputPassword"
-						placeholder="Repetir Contraseña">
-				</div>
-			</div>
-			<button class="btn btn-primary" name="btn-Aceptar" type="submit">Agregar</button>
+			<button id="btn-aceptarProfesor" name="btn-aceptarProfesor" class="btn btn-primary"  type="submit">Aceptar</button>
 		</form>
 
 		<%
-			int fila = 0;
-			if (request.getAttribute("cantFilas") != null) {
-				fila = 1;
-			}
-		%>
-		<%
-			if (fila == 1) {
-		%>
-		<h2>Agregado Correctamente</h2>
-		<%
-			}
-		%>
+	  int filas=0;
+	  if(request.getAttribute("cantFilas")!=null)
+	  {
+		  filas=1;
+	  }
+	 
+	
+	%>
+	
+	<% if(filas==1)
+		{
+	%>
+	 <h5>Agregado correctamente</h5>
+		
+	<%
+		}
+	%>
 	
 </body>
 </html>

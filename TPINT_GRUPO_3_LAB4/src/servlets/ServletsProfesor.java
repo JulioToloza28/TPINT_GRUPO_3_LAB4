@@ -29,14 +29,11 @@ import entidades.Provincia;
 @WebServlet("/ServletsProfesor")
 public class ServletsProfesor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
   
     public ServletsProfesor() {
         super();
       
     }
-
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -54,6 +51,7 @@ public class ServletsProfesor extends HttpServlet {
 			rd.forward(request, response);
 		}
 		
+		  //Carga lista de prov y loc y redirige a la ventana del formulario agregar profesor
           if("Profesor".equals(request.getParameter("BtnAgregar"))) {
 			
 			ArrayList<Provincia> listaProv = provDao.listarProvincia();
@@ -63,12 +61,10 @@ public class ServletsProfesor extends HttpServlet {
 			request.setAttribute("listaLocDao", listaLoc);
 			request.getRequestDispatcher("/agregarProfesor.jsp").forward(request, response);
 		}
-		
-		
-		
-		//Agregar Profesor	
+          
+		//Agregar Profesor
 		int filas=0;
-			if(request.getParameter("btn-Aceptar")!=null) 
+			if(request.getParameter("btn-aceptarProfesor")!=null) 
 			{
 				Localidad loc = new Localidad();
 				String a=request.getParameter("cmbLocalidad");
@@ -76,12 +72,12 @@ public class ServletsProfesor extends HttpServlet {
 				Profesor prof = new Profesor();			
 				prof.setNombre(request.getParameter("txtNombre"));
 				prof.setApellido(request.getParameter("txtApellido"));
-				prof.setDni(request.getParameter("txtDni"));
+				prof.setDni(request.getParameter("txtDNI"));
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 				Date parsed = null;
 				try {
 					parsed = format.parse(request.getParameter("txtFechaNac"));
-				} 
+				}
 				catch (ParseException e) {
 					e.printStackTrace();
 					}
@@ -90,21 +86,102 @@ public class ServletsProfesor extends HttpServlet {
 				prof.setDireccion(request.getParameter("txtDireccion"));
 				prof.setLocalidad(loc);
 				prof.setTelefono(request.getParameter("txtTelefono"));
-				prof.setMail(request.getParameter("txtEmail"));
+				prof.setMail(request.getParameter("txtMail"));
 				prof.setEstado(true);
 				
 				ProfesorDaoImpl profImp=new ProfesorDaoImpl();
 				if(profImp.agregarProfesor(prof)!=false) 
 				{
 					filas=1;
-				}	
+				}
 			}
 			if(filas==1) {
 			//REQUEST DISPATCHER
 			request.setAttribute("cantFilas", filas);
-			RequestDispatcher rd= request.getRequestDispatcher("ServletsProfesor?Param=MenuProfesor");
+			
+			ArrayList<Profesor> listaProfesor = profDao.listarProfesores();			
+			request.setAttribute("listaProf", listaProfesor);			
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/listarProfesor.jsp");
 			rd.forward(request, response);
 			}
+			
+			//modificar Profesor (trae listados de combos y de profesor)
+	  		if("ModificarProfesor".equals(request.getParameter("Param")))
+	  		{
+	  			ArrayList<Provincia> listaProv = provDao.listarProvincia();
+	  			ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
+	  			
+	  			Profesor profe = profDao.ObtenerProfesor(Integer.parseInt(request.getParameter("Data")));
+	  			
+	  			request.setAttribute("ProfesorAMod", profe);
+	  			
+	  			request.setAttribute("listaProvDao", listaProv);
+	  			request.setAttribute("listaLocDao", listaLoc);
+	  			request.getRequestDispatcher("/modificarProfesor.jsp").forward(request, response);
+	  		}
+	  		
+	  	     //Modificar profesor (guarda los datos una vez que se hace click)
+	  			if(request.getParameter("btn-EditarProfesor")!=null) {
+	  								Localidad loc = new Localidad();
+	  				String a=request.getParameter("cmbLocalidad").toString();			
+	  				loc.setId(Integer.parseInt(a));
+	  				Profesor profe = new Profesor();
+	  				String algo = request.getParameter("txtlegajo");
+	  				profe.setLegajo(Integer.parseInt(request.getParameter("txtlegajo")));
+	  				profe.setNombre(request.getParameter("txtNombre"));
+	  				profe.setApellido(request.getParameter("txtApellido"));
+	  				profe.setDni(request.getParameter("txtDni"));
+	  				SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+	  				Date parsed = null;
+	  				try {
+	  					parsed = format.parse(request.getParameter("txtFechaNac"));
+	  				} 
+	  				catch (ParseException e) {
+	  					e.printStackTrace();
+	  				}
+	  				java.sql.Date sql = new java.sql.Date(parsed.getTime());
+	  				profe.setFechaNac(sql);			
+	  				profe.setDireccion(request.getParameter("txtDireccion"));
+	  				profe.setLocalidad(loc);
+	  				profe.setTelefono(request.getParameter("txtTelefono"));
+	  				profe.setMail(request.getParameter("txtEmail"));
+	  				profe.setEstado(true);
+	  				
+	  				ProfesorDaoImpl profeImp=new ProfesorDaoImpl();
+	  				if(profeImp.modificarProfesor(profe)!=false) 
+	  				{
+	  					filas=1;
+	  				}	
+	  				if(filas==1) {
+	  					//REQUEST DISPATCHER
+	  					request.setAttribute("cantFilas", filas);
+	  					RequestDispatcher rd= request.getRequestDispatcher("/modificarProfesor.jsp");
+	  					rd.forward(request, response);
+	  					}
+	  			}
+	  			
+		  		//Eliminar profesor
+					if("EliminarProfesor".equals(request.getParameter("Param"))){
+					int Legajo_profe = Integer.parseInt(request.getParameter("Data"));
+					ProfesorDaoImpl profeDaoImpl = new ProfesorDaoImpl();
+					profeDaoImpl.eliminarProfesor(Legajo_profe);
+					
+					if(profeDaoImpl.eliminarProfesor(Legajo_profe)!=false) 
+					{
+						filas=1;
+					}	
+					if(filas==1) {
+						//REQUEST DISPATCHER
+						request.setAttribute("ProfesorEliminado", filas);
+						RequestDispatcher rd= request.getRequestDispatcher("ServletsProfesor?Param=MenuProfesor");
+						rd.forward(request, response);
+					}
+				}
+	}
+	
+	private RequestDispatcher getRequestDispatcher(String string) {
+		return null;
 	}
 
 	
