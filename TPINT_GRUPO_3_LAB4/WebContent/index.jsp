@@ -21,7 +21,7 @@
 
 </head>
 <body>
-<jsp:include page="menu.html"></jsp:include>
+<jsp:include page="Menu.jsp"></jsp:include>
 
 </body>
 </html>

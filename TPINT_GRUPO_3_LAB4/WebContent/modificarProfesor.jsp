@@ -13,7 +13,9 @@
 </head>
 <body>
 
-<jsp:include page="menu.html"></jsp:include>
+<jsp:include page="Menu.jsp"></jsp:include>
+
+	<form style="margin: 40px">
 	  <nav aria-label="breadcrumb"> 		
 		<ol class="breadcrumb"> 			
 		<li class="breadcrumb-item active" aria-current="page">Modificar Profesor</li> 

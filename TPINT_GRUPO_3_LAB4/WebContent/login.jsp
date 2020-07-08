@@ -45,7 +45,7 @@
 			</div>
 			<div class="form-group">
 				<input type="submit" value="Ingresar"
-					class="btn btn-primary btn-block" name="btnIngresar" onclick="validar();">
+					class="btn btn-primary btn-block" name="btnIngresar">
 			</div>
 		</form>
 	</div>

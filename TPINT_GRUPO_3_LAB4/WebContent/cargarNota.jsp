@@ -13,7 +13,7 @@
 	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 </head>
 <body>
-<jsp:include page="menu.html"></jsp:include>
+<jsp:include page="Menu.jsp"></jsp:include>
 		<nav aria-label="breadcrumb"> 		
 		<ol class="breadcrumb"> 			
 		<li class="breadcrumb-item active" aria-current="page">Cargar notas</li> 		
