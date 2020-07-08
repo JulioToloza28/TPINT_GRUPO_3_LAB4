@@ -46,7 +46,7 @@
 				<div class="form-group">
 					<label for="sel1">Materias:</label>
 					 <select id="cbxMateria" name="cbxMateria" class="custom-select" id="sel1" >
-						<option selected disabled value="">Seleccione...</option>
+						<option selected disabled value="<>">Seleccione...</option>
 						<%
 							MateriaDaoImpl materiaL = new MateriaDaoImpl();
 						ArrayList<Materia> listaMateria = null;
