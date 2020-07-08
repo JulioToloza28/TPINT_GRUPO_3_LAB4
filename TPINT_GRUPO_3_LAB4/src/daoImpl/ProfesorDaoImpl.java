@@ -84,8 +84,7 @@ public class ProfesorDaoImpl implements ProfesorDao{
 				loc.setId(resultSet.getInt("idlocalidad"));
 				loc.setNombreLoc(resultSet.getString("Localidad"));
 				provincia.setId(resultSet.getInt("idprovincia"));
-				String pr = resultSet.getString("Provincia");
-				provincia.setNombreProv("Prueba");
+				provincia.setNombreProv(resultSet.getString("Provincia"));
 				loc.setProvincia(provincia);
 				profe.setLocalidad(loc);
 				profe.setTelefono(resultSet.getString("telefono"));
