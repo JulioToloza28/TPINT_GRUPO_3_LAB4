@@ -1,12 +1,10 @@
-package dao;
+package negocio;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import entidades.Alumno;
 import entidades.Usuario;
 
-public interface UsuarioDao {
+public interface UsuarioNegocio {
 	public ArrayList<Usuario> obtenerTodos();
 	public ArrayList<Usuario> obtenerUsuario(String user,String clave);
 	public boolean agregarUsuario(Usuario usuarioAgregado);

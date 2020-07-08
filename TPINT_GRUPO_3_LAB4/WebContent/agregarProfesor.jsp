@@ -14,7 +14,7 @@
 </head>
 <body>
 
-	<jsp:include page="menu.html"></jsp:include>
+	<jsp:include page="Menu.jsp"></jsp:include>
 
 	<%
 		if ("ModificarProfesor".equals(request.getParameter("Param"))) {
