@@ -97,7 +97,6 @@ public class ProfesorDaoImpl implements ProfesorDao{
 		}
 		return listProfesor;
 	} 
-	
 	//obtener profesor
 	public Profesor ObtenerProfesor(int Legajo) {
 		try {

@@ -12,5 +12,4 @@ public interface ProfesorDao {
 	public Profesor ObtenerProfesor (int Legajo);
 	public boolean modificarProfesor(Profesor profesorModificado);
 	public boolean eliminarProfesor(int Legajo);
-	
 }
