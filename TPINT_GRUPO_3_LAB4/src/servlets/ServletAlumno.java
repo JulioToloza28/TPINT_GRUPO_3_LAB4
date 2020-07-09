@@ -98,6 +98,7 @@ public class ServletAlumno extends HttpServlet {
 		// Agregar alumno
 		int filas = 0;
 		if (request.getParameter("btn-aceptar") != null) {
+			
 			Localidad loc = new Localidad();
 			String a = request.getParameter("cmbLocalidad");
 			loc.setId(Integer.parseInt(a));
