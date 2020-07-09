@@ -34,10 +34,10 @@
 </head>
 <body>
 	<%
-		System.out.println(request.getAttribute("Usuario"));
+		System.out.println(request.getAttribute("Usuario2"));
 		Usuario usuario = null;
-		if (request.getAttribute("Usuario") != null) {
-			usuario = (Usuario) request.getAttribute("Usuario");
+		if (request.getAttribute("Usuario2") != null) {
+			usuario = (Usuario) request.getAttribute("Usuario2");
 			
 			if (usuario.getTipoUsuario().getId() == 1) {
 				
