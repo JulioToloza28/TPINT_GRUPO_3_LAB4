@@ -4,19 +4,21 @@
 <%@page import="entidades.Localidad" %>
 <%@page import="entidades.Alumno" %>
 <%@page import="daoImpl.AlumnoDaoImpl" %>
+<%@page import="daoImpl.LocalidadDaoImpl" %>
+<%@page import="dao.LocalidadDao" %>
 <%@page import="java.util.ArrayList" %>
 
-<!-- <script>
+<script>
 function cambiar_Localidad(){ 
 	var IdProv = document.getElementById('cmbProvincia');
 	var user = IdProv.selectedIndex;
 	
 	if(user!=null){
-		document.getElementById('cmbLocalidad').values=user;
+		document.getElementById('div1').innerText=user;
 	}
 	return false;
 };
-</script> -->
+</script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
