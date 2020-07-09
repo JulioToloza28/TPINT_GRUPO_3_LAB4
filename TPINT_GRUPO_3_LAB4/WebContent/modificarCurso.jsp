@@ -46,7 +46,7 @@
 		}
 	%>
 	<div class="container">
-		<form style="margin: 40px" method="get" action="ServletCurso">
+		<form style="margin: 40px" method="post" action="ServletCurso">
 			<div class="row">
 
 				<input type="hidden" name="txtIdCurso" id="txtIdCurso" value="<%=curso.getId()%>">

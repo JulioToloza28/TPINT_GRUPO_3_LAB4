@@ -58,6 +58,49 @@ public class ServletUsuarios extends HttpServlet {
 			rd.forward(request, response);
 		}
 
+		if (request.getParameter("AddUser") != null) {
+			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+			ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
+
+			request.setAttribute("listaProfes", lProfesor);
+			request.setAttribute("listaTipoUsuario", listaTipoUsuario);
+			RequestDispatcher rd = request.getRequestDispatcher("/agregarUsuario.jsp");
+			rd.forward(request, response);
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
+		// Agregar Usuario
+		int filas = 0;
+		if (request.getParameter("btnGuardar") != null) {
+			Usuario user = new Usuario();
+			TipoUsuario tipoUser = new TipoUsuario();
+			String a = request.getParameter("cmbTipoUsuario");
+			tipoUser.setId(Integer.parseInt(a));
+
+			user.setUsername(request.getParameter("txtUsuario"));
+			user.setPass(request.getParameter("txtClave"));
+			user.setTipoUsuario(tipoUser);
+			user.setLegajo(Integer.parseInt(request.getParameter("cmbProfesor")));
+			user.setEstado(1);
+
+			if (UsuarioDao.agregarUsuario(user) != false) {
+				filas = 1;
+			}
+
+			request.setAttribute("listaUsuario", UsuarioDao.obtenerTodos());
+			request.setAttribute("cantFilas", filas);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
+			dispatcher.forward(request, response);
+		}
+
 		if (request.getParameter("btnIngresar") != null) {
 			// Entra por haber echo click en el hyperlink mostrar usuarios
 			UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
@@ -85,46 +128,5 @@ public class ServletUsuarios extends HttpServlet {
 			 */
 		}
 
-		if (request.getParameter("AddUser") != null) {
-			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
-			ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
-
-			request.setAttribute("listaProfes", lProfesor);
-			request.setAttribute("listaTipoUsuario", listaTipoUsuario);
-			RequestDispatcher rd = request.getRequestDispatcher("/agregarUsuario.jsp");
-			rd.forward(request, response);
-		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// Agregar Usuario
-		int filas = 0;
-		if (request.getParameter("btnGuardar") != null) {
-			Usuario user = new Usuario();
-			TipoUsuario tipoUser = new TipoUsuario();
-			String a = request.getParameter("cmbTipoUsuario");
-			tipoUser.setId(Integer.parseInt(a));
-
-			user.setUsername(request.getParameter("txtUsuario"));
-			user.setPass(request.getParameter("txtClave"));
-			user.setTipoUsuario(tipoUser);
-			user.setLegajo(Integer.parseInt(request.getParameter("cmbProfesor")));
-			user.setEstado(1);
-
-			if (UsuarioDao.agregarUsuario(user) != false) {
-				filas = 1;
-			}
-
-			request.setAttribute("listaUsuario", UsuarioDao.obtenerTodos());
-			request.setAttribute("cantFilas", filas);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
-			dispatcher.forward(request, response);
-		}
-	}
-
 }

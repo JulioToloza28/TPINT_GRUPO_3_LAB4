@@ -20,11 +20,15 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
-
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 .bs-example {
 	margin: 20px;
+}
+.MensajeServlet{
+color:navy;
+/* background-color:gray; */
+text-align:Center;
 }
 </style>
 
@@ -32,11 +36,22 @@
 <body>
 	<jsp:include page="Menu.jsp"></jsp:include>
 
+
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Listar Cursos</li>
+		<li class="breadcrumb-item active" aria-current="page">Listar
+			Cursos</li>
 	</ol>
 	</nav>
+	<%
+		if (request.getAttribute("Mensaje") != null) {
+			String Mensaje = request.getAttribute("Mensaje").toString();
+	%>
+	<h3 class="MensajeServlet"><%=Mensaje%></h3>
+	
+	<%
+		}
+	%>
 
 	<div class="container">
 		<div class="row">
@@ -74,21 +89,25 @@
 							<td><%=curso.getProfesor()%></td>
 							<td><%=curso.getCantAlum()%></td>
 							<td><a type="button" class="btn btn-primary btn-sm"
-								href="ServletCurso?editCourse=<%=curso.getId()%>"><i class="fa fa-edit"></i></a>
-								<a type="submit" class="btn btn-danger btn-sm" href="ServletCurso?deleteCourse=<%=curso.getId()%>">
-									<i class="fa fa-trash"></i>
-								</a></td>
+								href="ServletCurso?editCourse=<%=curso.getId()%>"><i
+									class="fa fa-edit"></i></a> <a type="submit"
+								class="btn btn-danger btn-sm"
+								href="ServletCurso?deleteCourse=<%=curso.getId()%>"> <i
+									class="fa fa-trash"></i>
+							</a></td>
 						</tr>
 						<%
 							}
 						%>
 
-						
+
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
