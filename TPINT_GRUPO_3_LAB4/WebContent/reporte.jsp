@@ -41,7 +41,7 @@
 
 
 				</div>
-				<div class="col-md-4" style="width: 1030px;">
+				<div class="col-md-4">
 					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-primary"
 						type="submit">Filtrar</button>
 				</div>

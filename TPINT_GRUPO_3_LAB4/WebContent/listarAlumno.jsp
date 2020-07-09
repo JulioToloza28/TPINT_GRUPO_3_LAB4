@@ -40,61 +40,66 @@
 
 	<div class="container">
 
-<form action="ServletAlumno?Param=Filtrar" method="get">
-		<div class="row">
-			<div class="col-lg-3">
-				<div class="form-group">
-					<label for="sel1">Materias:</label>
-					 <select id="cbxMateria" name="cbxMateria" class="custom-select" id="sel1" >
-						<option selected disabled value="<>">Seleccione...</option>
-						<%
-							MateriaDaoImpl materiaL = new MateriaDaoImpl();
-						ArrayList<Materia> listaMateria = null;
-						listaMateria = (ArrayList<Materia>) materiaL.listarMaterias();
-						%>
-						<%
-							if (listaMateria != null)
-							for (Materia mate : listaMateria) {
-						%>
-						<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
-						<%
-							}
-						%>
-					</select>
+		<form action="ServletAlumno?Param=Filtrar" method="get">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="form-group">
+						<label for="sel1">Materias:</label> <select id="cbxMateria"
+							name="cbxMateria" class="custom-select" id="sel1">
+							<option selected disabled value="<>">Seleccione...</option>
+							<%
+								MateriaDaoImpl materiaL = new MateriaDaoImpl();
+							ArrayList<Materia> listaMateria = null;
+							listaMateria = (ArrayList<Materia>) materiaL.listarMaterias();
+							%>
+							<%
+								if (listaMateria != null)
+								for (Materia mate : listaMateria) {
+							%>
+							<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="form-group">
-					<label for="sel1">Cuatrimestre:</label> 
-					<select id="cbxCuatrimestre" name="cbxCuatrimestre"	class="form-control" id="sel1">
-						<option selected disabled value="">Seleccione...</option>
-						<option value="1">1° Cuatrimestre</option>
-						<option value="2">2° Cuatrimestre</option>
+				<div class="col-lg-3">
+					<div class="form-group">
+						<label for="sel1">Cuatrimestre:</label> <select
+							id="cbxCuatrimestre" name="cbxCuatrimestre" class="form-control"
+							id="sel1">
+							<option selected disabled value="">Seleccione...</option>
+							<option value="1">1° Cuatrimestre</option>
+							<option value="2">2° Cuatrimestre</option>
 
-					</select>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="form-group">
+				<div class="col-lg-3">
+					<div class="form-group">
 
-					<label for="sel1">Año:</label> <select id="cdxAnio" name="cdxAnio"	 class="form-control" id="sel1">
-						<option selected disabled value="">Seleccione...</option>
-						<%
-							for (int x = 2020; x >= 1990; x--) {
-						%>
-						<option><%=x%></option>
-						<%
-							}
-						%>
-					</select>
-					
+						<label for="sel1">Año:</label> <select id="cdxAnio" name="cdxAnio"
+							class="form-control" id="sel1">
+							<option selected disabled value="">Seleccione...</option>
+							<%
+								for (int x = 2020; x >= 1990; x--) {
+							%>
+							<option><%=x%></option>
+							<%
+								}
+							%>
+						</select>
+
+					</div>
+
 				</div>
-				
+				<div class="col-lg-3">
+					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-primary"
+						type="submit">Filtrar</button>
+				</div>
 			</div>
-			<div class="col-lg-3"> <button id="btn-filtrar" name="btn-filtrar" class="btn btn-primary" type="submit">Filtrar</button></div>
-		</div>
-</form>
-		
+		</form>
+
 		<div class="row">
 			<div class="col-sm-12 col-md-6">
 				<div class="dataTables_length" id="example_length"></div>
@@ -107,10 +112,11 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<!-- 				<a href="ServletProvincia?Param=Alumno" class="btn btn-outline-primary btn-sm">Agregar</a> -->
 					<a href="ServletAlumno?BtnAgregar=Alumno"
-						class="btn btn-outline-primary btn-sm">Agregar</a>
-						 <a	href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
+						class="btn btn-outline-primary btn-sm">Agregar</a> <a
+						id="CargarNota" name="CargarNota"
+						href="ServletAlumXcurso?Param=CargarNota"
+						class="btn btn-outline-info btn-sm">Cargar Nota</a>
 
 					<table id="example" class="display" style="width: 100%">
 						<thead>
@@ -151,35 +157,42 @@
 								<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
 								<td><%=alumno.getTelefono()%></td>
 								<td><%=alumno.getMail()%></td>
-								<td><a href="ServletAlumno?Param=ModificarAlumno&amp;Data=<%=alumno.getLegajo()%>" name="btn-EditarAlumno" class="btn btn-outline-secondary btn-sm">Editar</a></td>
-								<td><a data-toggle="modal" data-target="#VentEliminar"  name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
+								<td><a
+									href="ServletAlumno?Param=ModificarAlumno&amp;Data=<%=alumno.getLegajo()%>"
+									name="btn-EditarAlumno"
+									class="btn btn-outline-secondary btn-sm">Editar</a></td>
+								<td><a data-toggle="modal" data-target="#VentEliminar"
+									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
 							</tr>
-	<div class="modal fade" id="VentEliminar" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">X</span>
-					</button>
-				</div>
-				<div class="modal-body">Esta seguro que desea eliminar el registro?</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-danger" href="ServletAlumno?Param=EliminarAlumno&amp;Data=<%=alumno.getLegajo()%>"">Eliminar</a>
-				</div>
-			</div>
-		</div>
-	</div>							
+							<div class="modal fade" id="VentEliminar" tabindex="-1"
+								role="dialog" aria-labelledby="exampleModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+											<button class="close" type="button" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">X</span>
+											</button>
+										</div>
+										<div class="modal-body">Esta seguro que desea eliminar
+											el registro?</div>
+										<div class="modal-footer">
+											<button class="btn btn-secondary" type="button"
+												data-dismiss="modal">Cancel</button>
+											<a class="btn btn-danger"
+												href="ServletAlumno?Param=EliminarAlumno&amp;Data=<%=alumno.getLegajo()%>"">Eliminar</a>
+										</div>
+									</div>
+								</div>
+							</div>
 							<%
 								}
 							%>
 						</tbody>
 					</table>
-					
+
 
 				</div>
 			</div>
