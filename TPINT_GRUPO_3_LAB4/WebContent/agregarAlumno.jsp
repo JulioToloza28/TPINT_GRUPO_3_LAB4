@@ -6,34 +6,17 @@
 <%@page import="daoImpl.AlumnoDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
 
-<script type="text/javascript">
+<!-- <script>
 function cambiar_Localidad(){ 
-	var IdProv;
-	IdProv = document.getElementById('txtselectProvincia').value;
-	$.ajax({
-		type : 'POST',
-		url : 'ServletLocalidad',
-		dataType : "json",
-		data : {
-			ProvinciaId : IdProv
-		},
-		success : function(result) {
-			if (result) {
-				//$("#txtselectLocalidad option:not(:disabled)").remove();
-				$.each(result, function(index, option) {
-					console.log("option: " + option)
-					$("#txtselectLocalidad").append(
-							'<option value="' + option.ID + '">'
-									+ option.Nombre + '</option>')					
-				});
-			}
-		},
-		error : function(data) {
-			alert('fail');
-		}
-	})
+	var IdProv = document.getElementById('cmbProvincia');
+	var user = IdProv.selectedIndex;
+	
+	if(user!=null){
+		document.getElementById('cmbLocalidad').values=user;
+	}
+	return false;
 };
-</script>
+</script> -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -92,7 +75,7 @@ function cambiar_Localidad(){
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationServer04">Provincia</label> 
-					<select name="cmbProvincia" class="custom-select " id="txtselectProvincia" onchange="cambiar_localidad()" required>
+					<select name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()">
 						<option selected disabled value="">Provincia</option>
 						<%
 						  ArrayList<Provincia>ListarProvi=null;
@@ -107,7 +90,7 @@ function cambiar_Localidad(){
 				</div>
 				 <div class="col-md-2 mb-3">
 					<label for="validationServer03">Localidad</label> 
-					<select name="cmbLocalidad" class="custom-select " id="txtselectLocalidad" required>
+					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" " required>
 						<option selected disabled value="">Localidad</option>
 						<%ArrayList<Localidad> listaLocalidad = null;
 					      if (request.getAttribute("listaLocDao") != null) {
