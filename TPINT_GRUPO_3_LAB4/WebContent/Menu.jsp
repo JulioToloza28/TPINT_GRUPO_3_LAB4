@@ -39,8 +39,7 @@
 		if (session.getAttribute("Usuario2") != null) {
 			usuario = (Usuario) session.getAttribute("Usuario2");
 			
-			if (usuario.getTipoUsuario().getId() == 1) {
-				
+			if (usuario.getTipoUsuario().getId() == 1) {	
 	%>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div style="width: 80%; float: left">
