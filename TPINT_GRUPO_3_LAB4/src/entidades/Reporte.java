@@ -46,6 +46,7 @@ public class Reporte {
 		this.total_alumnos = total_alumnos;
 	}
 	@Override
+	
 	public String toString() {
 		return "Reporte [Id=" + Id + ", curso=" + curso + ", materia=" + materia + ", total_no_aprobados="
 				+ total_no_aprobados + ", total_aprobados=" + total_aprobados + ", total_alumnos=" + total_alumnos
