@@ -137,8 +137,17 @@
 						</thead>
 						<tbody>
 							<%
-								ArrayList<Alumno> listaAlumno = null;
-							if (request.getAttribute("listaAlum") != null) {
+							ArrayList<Alumno> listaAlumno = null;
+							int cont=0;
+							int id=(int)session.getAttribute("Session_Legajo");
+							if(id!=0 && id!=1)
+							{								
+								AlumnoDaoImpl AlumnoXPro=new AlumnoDaoImpl();
+								listaAlumno=AlumnoXPro.filtroProProfesor(id);
+								cont++;
+							}
+								
+							if (cont==0 && id==1) {
 								listaAlumno = (ArrayList<Alumno>) request.getAttribute("listaAlum");
 							}
 							%>

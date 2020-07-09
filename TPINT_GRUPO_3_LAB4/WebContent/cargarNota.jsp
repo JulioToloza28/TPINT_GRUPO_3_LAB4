@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%@page import="entidades.AlumnosPorCursos"%>
+	<%@page import="daoImpl.AlumnoPorCursoDaoImpl"%>
 	<%@page import="java.util.ArrayList"%>
 	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,7 +25,7 @@
 	</ol>
 	</nav>
 	
-	<form action="ServletAlumXcurso" method="get" style="margin: 40px">
+	<form  style="margin: 40px">
 
 	<div class="container">
 		<div class="row">
@@ -32,10 +33,10 @@
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
-							<th>Legajo</th>
+							<th></th>
 							<th>Alumno</th>
-							<th>Parcial 1</th>
-							<th>Parcial 2</th>
+							<th>Parcial 1 </th>
+							<th>Parcial 2  </th>
 							<th>Recuperatorio 1</th>
 							<th>Recuperatorio 2</th>
 							<th>Estado academico</th>
@@ -43,8 +44,18 @@
 					</thead>
 					<tbody>
 							
-							<%ArrayList<AlumnosPorCursos> listaAlumno = null;
-							if (request.getAttribute("listaAlumConNota") != null) {
+							<%
+							AlumnoPorCursoDaoImpl AlumnoxProfe=new AlumnoPorCursoDaoImpl();
+							ArrayList<AlumnosPorCursos> listaAlumno = null;
+							int cont=0;
+							int id=(int)session.getAttribute("Session_Legajo");
+							if(id!=1)
+							{
+								 listaAlumno=AlumnoxProfe.filtrarPorProfesor(id);
+								 cont++;
+							}
+							
+							if (cont==0 && id==1) {
 								listaAlumno = (ArrayList<AlumnosPorCursos>) request.getAttribute("listaAlumConNota");}%>
 							
 							<%if (listaAlumno != null){
@@ -55,32 +66,32 @@
 								<td><%=alumnoXNota.getAlumno().getNombre()%></td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="notaParcial1" placeholder="Parcial1" value="<%=alumnoXNota.getParcial1()%>">
+										<input type="text" class="form-control" id="notaParcial1" name="notaParcial1" placeholder="Parcial1" value="<%=alumnoXNota.getParcial1()%>">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="notaParcial2"
+										<input type="text" class="form-control" id="notaParcial2"  name="notaParcial2"
 											placeholder="Parcial2" value="<%=alumnoXNota.getParcial2()%>">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="Recuperatorio1"
+										<input type="text" class="form-control" id="Recuperatorio1"  name="Recuperatorio1"
 											placeholder="Recuperatorio 1"
 											value="<%=alumnoXNota.getRecuperatorio1()%>">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="Recuperatorio2"
+										<input type="text" class="form-control" id="Recuperatorio2" name="Recuperatorio2"
 											placeholder="Recuperatorio 2"
 											value="<%=alumnoXNota.getRecuperatorio1()%>">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-										<select class="custom-select">
+										<select name="cmbEstadoAc" id="cmbEstadoAc" class="custom-select">
 											<option selected value="<%=alumnoXNota.getEstadoAca().getId()%>"></option>
 											<%if(alumnoXNota.getEstadoAca().getId()==1){%><option value="1" Selected>En Curso</option> <%} %>
 											<%if(alumnoXNota.getEstadoAca().getId()==2){%><option value="2" Selected>Promocionado</option> <%} %>
@@ -94,8 +105,10 @@
 									</div>
 								</td>
 							</tr>
-
-
+							<input value="<%=alumnoXNota.getAlumno().getLegajo() %>" type="hidden" id="idAlumno" >
+							<%-- <input value="<%=alumnoXNota.getCurso().getId() %>" type="hidden" id="idcurso" > --%>
+                          
+                             
 							<%}%>
 							
 							<% } %>

@@ -111,6 +111,7 @@ public class ServletUsuarios extends HttpServlet {
 			if (usuario != null) {
 				session.setAttribute("Session_user", usuario.getUsername());
 				session.setAttribute("Session_type", usuario.getTipoUsuario().getTipo());
+        session.setAttribute("Session_Legajo",usuario.getLegajo());
 				// session.setAttribute("Session_user", request.getParameter("txtUsuario"));
 				request.getRequestDispatcher("Home.jsp").forward(request, response);
 //				response.sendRedirect("/TPINT_GRUPO_3_LAB4/Menu.jsp");

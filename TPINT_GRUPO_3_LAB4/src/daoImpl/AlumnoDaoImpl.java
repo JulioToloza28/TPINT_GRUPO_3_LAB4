@@ -26,7 +26,8 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	private static final String eliminarAlumno = "UPDATE alumno set estado=0 where legajo_alum= ?";
     private static final String filtrar="SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoXcurso as AC on AC.legajoAlumno=a.legajo_alum inner join curso as C on C.idcurso=AC.idcurso where a.estado=1";
     private static final String existeTablaAxC = "SELECT count(*) as total FROM tpint_grupo_3_lab4.alumnoxcurso where legajoAlumno= ? and idCurso= ? and estado = 1";
-	
+    private static final String filtrarPorProfesor= "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoxcurso as AC on AC.legajoAlumno=a.legajo_alum inner join curso as C on C.idcurso= AC.idCurso where a.estado=1";
+    
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -266,6 +267,60 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		{
 			consulta=readAll;
 		}
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Alumno> listAlumno = new ArrayList<Alumno>();
+		PreparedStatement statement;
+		ResultSet resultSet;
+
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(consulta);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Localidad loc = new Localidad();
+				Provincia provincia = new Provincia();
+				Alumno alum = new Alumno();
+				alum.setLegajo(resultSet.getInt("legajo_alum"));
+				alum.setNombre(resultSet.getString("Alumno"));
+				alum.setApellido(resultSet.getString("Apellido"));
+				alum.setDni(resultSet.getString("Dni"));
+				alum.setFechaNac(resultSet.getDate("fecha_nac"));
+				alum.setDireccion(resultSet.getString("direccion"));
+				loc.setId(resultSet.getInt("idlocalidad"));
+				loc.setNombreLoc(resultSet.getString("Localidad"));
+				provincia.setId(resultSet.getInt("idprovincia"));
+				provincia.setNombreProv(resultSet.getString("Provincia"));
+				loc.setProvincia(provincia);
+				alum.setLocalidad(loc);
+				alum.setTelefono(resultSet.getString("telefono"));
+				alum.setMail(resultSet.getString("mail"));
+				listAlumno.add(alum);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return listAlumno;
+
+
+	}
+	
+	
+	public ArrayList<Alumno> filtroProProfesor(int idProfesor) {
+
+		String consulta = filtrarPorProfesor;
+		
+
+		if (idProfesor != 0) 
+		{
+			consulta = consulta + " and C.legajo_pro= " + idProfesor;
+
+		}
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
