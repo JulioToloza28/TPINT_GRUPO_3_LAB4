@@ -41,6 +41,15 @@ public class ServletCurso extends HttpServlet {
 		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
 		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 
+		// BOTON CURSOS DEL MENU, LISTA LOS CURSOS
+		if (request.getParameter("listCourses") != null) {
+			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
+
+			request.setAttribute("listaCursoDao", lCursos);
+			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
+			rd.forward(request, response);
+		}
+
 		// BOTON AGREGAR CURSO (SOLICITA LOS DATOS DEL CURSO)
 		if (request.getParameter("AddCourses") != null) {
 			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
@@ -54,6 +63,7 @@ public class ServletCurso extends HttpServlet {
 			// pw.println("<html><body>Prueba PrintWriter</body></html>"); //IMPRIMO EN
 			// PANTALLA
 			// pw.close();
+
 			request.setAttribute("listaMatDao", lMateria);
 			request.setAttribute("ListaAlumnos", lAlum);
 			request.setAttribute("listaProfes", lProfesor);
@@ -91,8 +101,26 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
+		// BOTON EDITAR CURSO, MUESTRA LA INFORMACION A EDITAR
+		if (request.getParameter("editCourse") != null) {
+			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("editCourse")));
+			ArrayList<Alumno> lAlumInsc = alumnoNeg
+					.getAlumnosInscriptos(Integer.parseInt(request.getParameter("editCourse")));
+			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
+			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
+			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+
+			request.setAttribute("listaMatDao", lMateria);
+			request.setAttribute("ListaAlumnos", lAlum);
+			request.setAttribute("listaProfes", lProfesor);
+			request.setAttribute("CursoElim", curso);
+			request.setAttribute("ListaAlumnosInsc", lAlumInsc);
+			RequestDispatcher rd = request.getRequestDispatcher("/modificarCurso.jsp");
+			rd.forward(request, response);
+		}
+
+		// BOTON GUARDAR EDICION
 		if (request.getParameter("btn-EditarCurso") != null) {
-			Alumno alum = null;
 			String[] lNvaAlumnosInscriptos;
 			List<Alumno> lVjaAlumnosInscriptos;
 			int IdCurso;
@@ -117,25 +145,18 @@ public class ServletCurso extends HttpServlet {
 						cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lNvaAlumnosInscriptos[x]);
 					}
 				}
-				for(Alumno alumnoInicial : lVjaAlumnosInscriptos) {
-					
+				for (Alumno alum : lVjaAlumnosInscriptos) {
+					boolean existe = false;
+					for (int i = 0; i < lNvaAlumnosInscriptos.length; i++) {
+						if (alum.getLegajo() == Integer.parseInt(lNvaAlumnosInscriptos[i])) {
+							existe = true;
+						}
+					}
+					if (existe == false) {
+						cursoNeg.EliminarAlumnoDelCurso(alum.getLegajo(), curs.getId());
+					}
 				}
 			}
-
-			// for (int x=0; x<lAlumnosInscriptos.length;x++)
-			// {
-			// cursoNeg.InsertarAlumnoAlCurso(IdCurso,lAlumnosInscriptos[x]);
-			// }
-			// }
-			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
-
-			request.setAttribute("listaCursoDao", lCursos);
-			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
-			rd.forward(request, response);
-		}
-
-		// BOTON CURSOS DEL MENU
-		if (request.getParameter("listCourses") != null) {
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
 			request.setAttribute("listaCursoDao", lCursos);
@@ -166,24 +187,6 @@ public class ServletCurso extends HttpServlet {
 
 			request.setAttribute("MensajeElim", Msj);
 			RequestDispatcher rd = request.getRequestDispatcher("ServletCurso?listCourses=1");
-			rd.forward(request, response);
-		}
-
-		// BOTON EDITAR CURSO, MUESTRA LA INFORMACION A EDITAR
-		if (request.getParameter("editCourse") != null) {
-			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("editCourse")));
-			ArrayList<Alumno> lAlumInsc = alumnoNeg
-					.getAlumnosInscriptos(Integer.parseInt(request.getParameter("editCourse")));
-			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
-			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
-			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
-
-			request.setAttribute("listaMatDao", lMateria);
-			request.setAttribute("ListaAlumnos", lAlum);
-			request.setAttribute("listaProfes", lProfesor);
-			request.setAttribute("CursoElim", curso);
-			request.setAttribute("ListaAlumnosInsc", lAlumInsc);
-			RequestDispatcher rd = request.getRequestDispatcher("/modificarCurso.jsp");
 			rd.forward(request, response);
 		}
 

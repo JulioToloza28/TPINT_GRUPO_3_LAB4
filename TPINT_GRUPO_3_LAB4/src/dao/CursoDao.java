@@ -19,4 +19,6 @@ public interface CursoDao {
 	public boolean InsertarAlumnoAlCurso(int idCurso, String legajoAlumno);
 	
 	public boolean ActualizarCurso(Curso curso);
+	
+	public boolean EliminarAlumnoDelCurso(int legajoAlumno, int idCurso);
 }
