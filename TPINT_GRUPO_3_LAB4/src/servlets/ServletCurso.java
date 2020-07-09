@@ -36,6 +36,7 @@ public class ServletCurso extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		CursoNegocio cursoNeg = new CursoNegocioImpl();
 		AlumnoNegocio alumnoNeg = new AlumnoNegocioImpl();
 		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
@@ -43,8 +44,14 @@ public class ServletCurso extends HttpServlet {
 
 		// BOTON CURSOS DEL MENU, LISTA LOS CURSOS
 		if (request.getParameter("listCourses") != null) {
+			String msj;
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
+			if (request.getAttribute("Mensaje") != null) {
+				msj = request.getAttribute("Mensaje").toString();
+				request.setAttribute("Mensaje", msj);
+			}
+			
 			request.setAttribute("listaCursoDao", lCursos);
 			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
 			rd.forward(request, response);
@@ -56,14 +63,6 @@ public class ServletCurso extends HttpServlet {
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
 			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
 
-			// HttpSession misession= request.getSession(true); //INICIO UNA SESION
-			// misession.setAttribute("SessionAlumnos",lAlum); //CARGO LA LISTA DE ALUMNOS
-			// INSCRIPTOS
-			// PrintWriter pw= response.getWriter();
-			// pw.println("<html><body>Prueba PrintWriter</body></html>"); //IMPRIMO EN
-			// PANTALLA
-			// pw.close();
-
 			request.setAttribute("listaMatDao", lMateria);
 			request.setAttribute("ListaAlumnos", lAlum);
 			request.setAttribute("listaProfes", lProfesor);
@@ -71,8 +70,66 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
+		// BOTON EDITAR CURSO, MUESTRA LA INFORMACION A EDITAR
+		if (request.getParameter("editCourse") != null) {
+			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("editCourse")));
+			ArrayList<Alumno> lAlumInsc = alumnoNeg
+					.getAlumnosInscriptos(Integer.parseInt(request.getParameter("editCourse")));
+			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
+			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
+			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+
+			request.setAttribute("listaMatDao", lMateria);
+			request.setAttribute("ListaAlumnos", lAlum);
+			request.setAttribute("listaProfes", lProfesor);
+			request.setAttribute("CursoElim", curso);
+			request.setAttribute("ListaAlumnosInsc", lAlumInsc);
+			RequestDispatcher rd = request.getRequestDispatcher("/modificarCurso.jsp");
+			rd.forward(request, response);
+		}
+
+		// BOTON ELIMINAR CURSO, RECIBE EL ID PARA MOSTRAR LA INFORMACION Y CONFIRMAR LA
+		// ELIMINACION
+		if (request.getParameter("deleteCourse") != null) {
+			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("deleteCourse")));
+			ArrayList<Alumno> alum = alumnoNeg
+					.getAlumnosInscriptos(Integer.parseInt(request.getParameter("deleteCourse")));
+
+			request.setAttribute("CursoElim", curso);
+			request.setAttribute("ListaAlumnos", alum);
+			RequestDispatcher rd = request.getRequestDispatcher("/eliminarCurso.jsp");
+			rd.forward(request, response);
+		}
+
+		// BOTON CONFIRMA ELIMINAR, CAMBIA EL ESTADO DEL CURSO
+		if (request.getParameter("deleteConfirmedCourse") != null) {
+			String Msj = "ERROR: No se pudo eliminar el curso";
+			if (cursoNeg.eliminarCurso(Integer.parseInt(request.getParameter("deleteConfirmedCourse")))) {
+				Msj = "Curso eliminado correctamente";
+			}
+
+			request.setAttribute("Mensaje", Msj);
+			RequestDispatcher rd = request.getRequestDispatcher("ServletCurso?listCourses=1");
+			rd.forward(request, response);
+		}
+
+		
+		// PrintWriter pw= response.getWriter();
+		// pw.println("<html><body>Prueba PrintWriter</body></html>"); //IMPRIMO EN
+		// PANTALLA
+		// pw.close();
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		CursoNegocio cursoNeg = new CursoNegocioImpl();
+		AlumnoNegocio alumnoNeg = new AlumnoNegocioImpl();
+
 		// BOTON GRABAR CURSO (GRABA EN LA BD)
 		if (request.getParameter("btn-GrabarCurso") != null) {
+			String Msj;
 			Alumno alum = null;
 			String[] lAlumnosInscriptos;
 			int IdCurso;
@@ -95,32 +152,17 @@ public class ServletCurso extends HttpServlet {
 				}
 			}
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
+			Msj = "Curso creado correctamente";
 
 			request.setAttribute("listaCursoDao", lCursos);
+			request.setAttribute("Mensaje", Msj);
 			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
-			rd.forward(request, response);
-		}
-
-		// BOTON EDITAR CURSO, MUESTRA LA INFORMACION A EDITAR
-		if (request.getParameter("editCourse") != null) {
-			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("editCourse")));
-			ArrayList<Alumno> lAlumInsc = alumnoNeg
-					.getAlumnosInscriptos(Integer.parseInt(request.getParameter("editCourse")));
-			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
-			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
-			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
-
-			request.setAttribute("listaMatDao", lMateria);
-			request.setAttribute("ListaAlumnos", lAlum);
-			request.setAttribute("listaProfes", lProfesor);
-			request.setAttribute("CursoElim", curso);
-			request.setAttribute("ListaAlumnosInsc", lAlumInsc);
-			RequestDispatcher rd = request.getRequestDispatcher("/modificarCurso.jsp");
 			rd.forward(request, response);
 		}
 
 		// BOTON GUARDAR EDICION
 		if (request.getParameter("btn-EditarCurso") != null) {
+			String Msj;
 			String[] lNvaAlumnosInscriptos;
 			List<Alumno> lVjaAlumnosInscriptos;
 			int IdCurso;
@@ -157,44 +199,14 @@ public class ServletCurso extends HttpServlet {
 					}
 				}
 			}
+			Msj = "Curso Editado correctamente";
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
 			request.setAttribute("listaCursoDao", lCursos);
+			request.setAttribute("Mensaje", Msj);
 			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
 			rd.forward(request, response);
 		}
-
-		// BOTON ELIMINAR CURSO, RECIBE EL ID PARA MOSTRAR LA INFORMACION Y CONFIRMAR LA
-		// ELIMINACION
-		if (request.getParameter("deleteCourse") != null) {
-			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("deleteCourse")));
-			ArrayList<Alumno> alum = alumnoNeg
-					.getAlumnosInscriptos(Integer.parseInt(request.getParameter("deleteCourse")));
-
-			request.setAttribute("CursoElim", curso);
-			request.setAttribute("ListaAlumnos", alum);
-			RequestDispatcher rd = request.getRequestDispatcher("/eliminarCurso.jsp");
-			rd.forward(request, response);
-		}
-
-		// BOTON CONFIRMA ELIMINAR, CAMBIA EL ESTADO DEL CURSO (LOS ALUMNOS NO SON
-		// ELIMINADOS)
-		if (request.getParameter("deleteConfirmedCourse") != null) {
-			String Msj = "ERROR: No se pudo eliminar el curso";
-			if (cursoNeg.eliminarCurso(Integer.parseInt(request.getParameter("deleteConfirmedCourse")))) {
-				Msj = "Curso eliminado";
-			}
-
-			request.setAttribute("MensajeElim", Msj);
-			RequestDispatcher rd = request.getRequestDispatcher("ServletCurso?listCourses=1");
-			rd.forward(request, response);
-		}
-
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
 		doGet(request, response);
 	}

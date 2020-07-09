@@ -5,35 +5,73 @@
 <%@page import="daoImpl.LocalidadDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+ <style>
+  #lblCreado{color: #4F8A10!important;background: #DFF2BF!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
+  span#lblError{color: #D8000C!important;background-color: #FFD2D2!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
+  #txtCaracteres{color:red;}
+</style>
+<script>
+function cambiar_Localidad(){ 
+	var IdProv = document.getElementById('cmbProvincia');
+	var user = IdProv.selectedIndex;
+	
+	if(user!=null){
+		document.getElementById('div1').innerText=user;
+	}
+	return false;
+};
 
-<script type="text/javascript">
+function onlyLetter(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letter = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    special = "8-37-39-46";
+    special_key = false
+    for (var i in special) {
+        if (key == special[i]) {
+            special_key = true;
+            break;
+        }
+    }
+    if (letter.indexOf(tecla) == -1 && !special_key) {
+        return false;
+    }
+}
 
-/* function cambiar_Localidad(){ 
-	var IdProv;
-	IdProv = document.getElementById('txtselectProvincia').value;
-	$.ajax({
-		type : 'POST',
-		url : 'ServletLocalidad',
-		dataType : "json",
-		data : {
-			ProvinciaId : IdProv
-		},
-		success : function(result) {
-			if (result) {
-				//$("#txtselectLocalidad option:not(:disabled)").remove();
-				$.each(result, function(index, option) {
-					console.log("option: " + option)
-					$("#txtselectLocalidad").append(
-							'<option value="' + option.ID + '">'
-									+ option.Nombre + '</option>')					
-				});
-			}
-		},
-		error : function(data) {
-			alert('fail');
-		}
-	})
-}; */
+function onlyNumber(car) {
+    var key = window.Event ? car.which : car.keyCode;
+    return (key >= 48 && key <= 57)
+}
+
+function validateMin() {
+    var Min_Length = 8;
+    var length = $("#txtTelefono").val().length;
+    if (length < Min_Length)
+    {
+        $("#txtTelefono").addClass("is-invalid");
+        $("#txtTelefono").after("<p id='txtCaracteres'>La cantidad de caracteres es 8 o 10, usted escribio " + length + " caracteres</p>");
+        return false;
+    }
+    else{$("#txtTelefono").addClass("is-valid");}
+}
+function cleanError() {
+    $("#txtCaracteres").remove();
+    $("#txtTelefono").removeClass("is-invalid");
+    //$("#txtTelefono").addClass("is-valid");
+}
+
+function validateMail() {
+    obj = document.getElementById("txtMail");
+    valueForm = obj.value;
+    var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    if (valueForm.search(mailFormat) == 0) {
+    	$("#txtMail").addClass("is-valid");
+    	$("#txtMail").removeClass("is-invalid");
+    } else {
+    	$("#txtMail").addClass("is-invalid");
+    }
+}
+
 </script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -56,18 +94,18 @@
 				<div class="col-md-3 mb-3">
 					<label for="validationServer01">Nombre</label> <input
 						name="txtNombre" type="text" class="form-control"
-						id="validationServer01" required>
+						onKeyPress="return onlyLetter(event)" required>
 					<div class="valid-feedback">Looks good!</div>
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationServer02">Apellido</label> <input
 						name="txtApellido" type="text" class="form-control "
-						id="validationServer02" value="" required>
+						onKeyPress="return onlyLetter(event)" value="" required>
 					<div class="valid-feedback">Looks good!</div>
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationServer03">DNI</label> <input name="txtDNI"
-						type="text" class="form-control " id="validationServer02" value=""
+						type="text" class="form-control " onKeyPress="return onlyNumber(event)" value=""
 						required>
 					<div class="valid-feedback">Looks good!</div>
 
@@ -77,19 +115,19 @@
 			<div class="form-row">
 				<div class="col-md-2 mb-3">
 					<label for="validationServer01">Fecha de Nacimiento</label> <input
-						name="txtFechaNac" type="date" class="form-control"
+						name="txtFechaNac" max="2020-07-09" min="1900-01-01" type="date" class="form-control"
 						id="validationServer01" required>
 					<div class="valid-feedback">Looks good!</div>
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationServer01">Telefono</label> <input
-						name="txtTelefono" type="text" class="form-control"
-						id="validationServer01" required>
+						id="txtTelefono" name="txtTelefono" type="text" class="form-control"
+						maxlength="10" onKeyPress="return onlyNumber(event)" onFocusOut="return validateMin()" onKeyUp="return cleanError()" required>
 					<div class="valid-feedback">Looks good!</div>
 				</div>
 				<div class="col-md-3 mb-3">
-					<label for="validationServer01">Email</label> <input name="txtMail"
-						type="text" class="form-control" id="validationServer01" required>
+					<label for="validationServer01">Email</label> 
+					<input id="txtMail" name="txtMail" type="email" class="form-control" onFocusOut="return validateMail()" required>
 					<div class="valid-feedback">Looks good!</div>
 				</div>
 
