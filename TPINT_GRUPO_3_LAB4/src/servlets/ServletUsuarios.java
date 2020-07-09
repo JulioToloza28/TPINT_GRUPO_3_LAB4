@@ -64,7 +64,7 @@ public class ServletUsuarios extends HttpServlet {
 			Usuario usuario = UsuarioDao.obtenerUsuario(request.getParameter("txtUsuario"),
 					request.getParameter("txtClave"));
 			System.out.println(usuario);
-			request.setAttribute("Usuario2", usuario);
+			session.setAttribute("Usuario2", usuario);
 			if (usuario != null) {
 				session.setAttribute("Session_user", usuario.getUsername());
 				session.setAttribute("Session_type", usuario.getTipoUsuario().getTipo());

@@ -33,46 +33,7 @@
 
 </head>
 <body>
-<%
-		System.out.println(session.getAttribute("Usuario2"));
-		Usuario usuario = null;
-		if (session.getAttribute("Usuario2") != null) {
-			usuario = (Usuario) session.getAttribute("Usuario2");
-			
-			if (usuario.getTipoUsuario().getId() == 1) {
-				
-	%>
-	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-		<div style="width: 80%; float: left">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="navbar-brand" href="#"> <img
-						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="ServletsProfesor?Param=MenuProfesor">Profesores</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="ServletCurso?listCourses=1">Cursos</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="ServletAlumno?Param=MenuAlumno">Alumnos</a></li>
-				<li class="nav-item"><a class="nav-link" href="reporte.jsp">Reportes</a></li>
-			</ul>
-		</div>
-		<div style="width: 20%; float: right">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link"
-					href="ServletUsuarios?Param=1">Usuarios</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><%=session.getAttribute("Session_user")%>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"
-					data-toggle="modal" data-target="#logoutModal"> <i
-						class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-						Logout
-				</a></li>
-			</ul>
-		</div>
-	</nav>
-	<%
-		} else {
-	%>
+
 
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div style="width: 80%; float: left">
@@ -98,13 +59,7 @@
 			</ul>
 		</div>
 	</nav>
-	<%
-		}
-	%>
 
-	<%
-		}
-	%>
 	<!-- Logout Modal-->
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">

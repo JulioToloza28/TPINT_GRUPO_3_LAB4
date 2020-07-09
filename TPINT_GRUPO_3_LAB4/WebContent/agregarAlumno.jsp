@@ -3,6 +3,7 @@
 <%@page import="entidades.Provincia" %>
 <%@page import="entidades.Localidad" %>
 <%@page import="entidades.Alumno" %>
+<%@page import="entidades.Usuario" %>
 <%@page import="daoImpl.AlumnoDaoImpl" %>
 <%@page import="daoImpl.LocalidadDaoImpl" %>
 <%@page import="dao.LocalidadDao" %>
@@ -27,12 +28,14 @@ function cambiar_Localidad(){
 <title>Alumno</title>
 </head>
 <body>
+
 	<jsp:include page="Menu.jsp"></jsp:include>
+
 	  <nav aria-label="breadcrumb"> 		
 		<ol class="breadcrumb"> 			
 		<li class="breadcrumb-item active" aria-current="page">Agregar alumnos</li> 
 		</ol> 		
-		</nav>
+	</nav>
 		         
 	<form action="ServletAlumno" method="get" style="margin: 40px">
 		<div class="form-row">
