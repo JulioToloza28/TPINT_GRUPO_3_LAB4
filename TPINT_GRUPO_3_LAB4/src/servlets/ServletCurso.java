@@ -41,17 +41,19 @@ public class ServletCurso extends HttpServlet {
 		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
 		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 
-		//BOTON AGREGAR CURSO (SOLICITA LOS DATOS DEL CURSO)
+		// BOTON AGREGAR CURSO (SOLICITA LOS DATOS DEL CURSO)
 		if (request.getParameter("AddCourses") != null) {
 			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
 			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
-			
-//			HttpSession misession= request.getSession(true);		//INICIO UNA SESION
-//			misession.setAttribute("SessionAlumnos",lAlum);		//CARGO LA LISTA DE ALUMNOS INSCRIPTOS
-//			PrintWriter pw= response.getWriter();
-//			pw.println("<html><body>Prueba PrintWriter</body></html>");	//IMPRIMO EN PANTALLA
-//			pw.close();
+
+			// HttpSession misession= request.getSession(true); //INICIO UNA SESION
+			// misession.setAttribute("SessionAlumnos",lAlum); //CARGO LA LISTA DE ALUMNOS
+			// INSCRIPTOS
+			// PrintWriter pw= response.getWriter();
+			// pw.println("<html><body>Prueba PrintWriter</body></html>"); //IMPRIMO EN
+			// PANTALLA
+			// pw.close();
 			request.setAttribute("listaMatDao", lMateria);
 			request.setAttribute("ListaAlumnos", lAlum);
 			request.setAttribute("listaProfes", lProfesor);
@@ -59,7 +61,7 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		//BOTON GRABAR CURSO (GRABA EN LA BD)
+		// BOTON GRABAR CURSO (GRABA EN LA BD)
 		if (request.getParameter("btn-GrabarCurso") != null) {
 			Alumno alum = null;
 			String[] lAlumnosInscriptos;
@@ -74,13 +76,13 @@ public class ServletCurso extends HttpServlet {
 			curs.setAnio(Integer.parseInt(aux));
 			aux = request.getParameter("cmbProfesor");
 			curs.setLegajoProf(Integer.parseInt(aux));
-			if(cursoNeg.GrabarCurso(curs)) {		//SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE EXITOSA Y PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
+			if (cursoNeg.GrabarCurso(curs)) { // SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE EXITOSA Y
+												// PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
 				lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
-				IdCurso=cursoNeg.UltimoId();
-				for (int x=0; x<lAlumnosInscriptos.length;x++)
-				{
-					cursoNeg.InsertarAlumnoAlCurso(IdCurso,lAlumnosInscriptos[x]);
-				} 
+				IdCurso = cursoNeg.UltimoId();
+				for (int x = 0; x < lAlumnosInscriptos.length; x++) {
+					cursoNeg.InsertarAlumnoAlCurso(IdCurso, lAlumnosInscriptos[x]);
+				}
 			}
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
@@ -88,14 +90,15 @@ public class ServletCurso extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
 			rd.forward(request, response);
 		}
-		
+
 		if (request.getParameter("btn-EditarCurso") != null) {
 			Alumno alum = null;
-			String[] lAlumnosInscriptos;
+			String[] lNvaAlumnosInscriptos;
+			List<Alumno> lVjaAlumnosInscriptos;
 			int IdCurso;
 			Curso curs = new Curso();
 			String aux = new String();
-			aux=request.getParameter("txtIdCurso");
+			aux = request.getParameter("txtIdCurso");
 			curs.setId(Integer.parseInt(aux));
 			aux = request.getParameter("cmbMateria");
 			curs.setIdMateria(Integer.parseInt(aux));
@@ -105,13 +108,25 @@ public class ServletCurso extends HttpServlet {
 			curs.setAnio(Integer.parseInt(aux));
 			aux = request.getParameter("cmbProfesor");
 			curs.setLegajoProf(Integer.parseInt(aux));
-//			if(cursoNeg.GrabarCurso(curs)) {		//SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE EXITOSA Y PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
-//				lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
-//				for (int x=0; x<lAlumnosInscriptos.length;x++)
-//				{
-//					cursoNeg.InsertarAlumnoAlCurso(IdCurso,lAlumnosInscriptos[x]);
-//				} 
-//			}
+			if (cursoNeg.ActualizarCurso(curs)) { // SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE EXITOSA Y
+													// PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
+				lNvaAlumnosInscriptos = request.getParameterValues("cboxAlumno");
+				lVjaAlumnosInscriptos = alumnoNeg.getAlumnosInscriptos(curs.getId());
+				for (int x = 0; x < lNvaAlumnosInscriptos.length; x++) {
+					if (!alumnoNeg.verifEstaInscripto(lNvaAlumnosInscriptos[x], curs.getId())) {
+						cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lNvaAlumnosInscriptos[x]);
+					}
+				}
+				for(Alumno alumnoInicial : lVjaAlumnosInscriptos) {
+					
+				}
+			}
+
+			// for (int x=0; x<lAlumnosInscriptos.length;x++)
+			// {
+			// cursoNeg.InsertarAlumnoAlCurso(IdCurso,lAlumnosInscriptos[x]);
+			// }
+			// }
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
 			request.setAttribute("listaCursoDao", lCursos);
@@ -119,7 +134,7 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		//BOTON CURSOS DEL MENU
+		// BOTON CURSOS DEL MENU
 		if (request.getParameter("listCourses") != null) {
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
@@ -128,7 +143,8 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		//BOTON ELIMINAR CURSO, RECIBE EL ID PARA MOSTRAR LA INFORMACION Y CONFIRMAR LA ELIMINACION
+		// BOTON ELIMINAR CURSO, RECIBE EL ID PARA MOSTRAR LA INFORMACION Y CONFIRMAR LA
+		// ELIMINACION
 		if (request.getParameter("deleteCourse") != null) {
 			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("deleteCourse")));
 			ArrayList<Alumno> alum = alumnoNeg
@@ -140,7 +156,8 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		//BOTON CONFIRMA ELIMINAR, CAMBIA EL ESTADO DEL CURSO (LOS ALUMNOS NO SON ELIMINADOS)
+		// BOTON CONFIRMA ELIMINAR, CAMBIA EL ESTADO DEL CURSO (LOS ALUMNOS NO SON
+		// ELIMINADOS)
 		if (request.getParameter("deleteConfirmedCourse") != null) {
 			String Msj = "ERROR: No se pudo eliminar el curso";
 			if (cursoNeg.eliminarCurso(Integer.parseInt(request.getParameter("deleteConfirmedCourse")))) {
@@ -152,7 +169,7 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		//BOTON EDITAR CURSO, MUESTRA LA INFORMACION A EDITAR
+		// BOTON EDITAR CURSO, MUESTRA LA INFORMACION A EDITAR
 		if (request.getParameter("editCourse") != null) {
 			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("editCourse")));
 			ArrayList<Alumno> lAlumInsc = alumnoNeg
@@ -175,7 +192,6 @@ public class ServletCurso extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 
 		doGet(request, response);
 	}

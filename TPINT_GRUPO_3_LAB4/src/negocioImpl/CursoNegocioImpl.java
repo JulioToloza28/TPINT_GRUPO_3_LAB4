@@ -49,4 +49,10 @@ public class CursoNegocioImpl implements CursoNegocio {
 		return estadoGrabado;
 	}
 
+	@Override
+	public boolean ActualizarCurso(Curso curso) {
+		boolean EstadoGrabado = cursoDao.ActualizarCurso(curso);
+		return EstadoGrabado;
+	}
+
 }

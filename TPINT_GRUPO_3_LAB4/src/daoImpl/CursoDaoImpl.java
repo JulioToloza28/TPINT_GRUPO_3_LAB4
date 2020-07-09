@@ -17,6 +17,7 @@ public class CursoDaoImpl implements CursoDao {
 	String eliminar_Curso = "UPDATE tpint_grupo_3_lab4.curso SET estado = 0 WHERE idcurso = ";
 	String agregarCurso = "insert into curso (IdMateria, Cuatrimestre, Anio, Legajo_pro, Estado) VALUES(?, ?, ?, ?, ?)";
 	String InsertarAlumnoalCurso = "insert into tpint_grupo_3_lab4.alumnoxcurso (IdCurso, LegajoAlumno, idEstadoAcademico) VALUES (?, ? , 2)";
+	String actualizarCurso = "update tpint_grupo_3_lab4.curso set idMateria= ?  , Cuatrimestre= ?, Anio= ?  , Legajo_pro= ?  where IdCurso= ?";
 
 	@Override
 	public Curso buscarCurso(int Id) {
@@ -188,6 +189,30 @@ public class CursoDaoImpl implements CursoDao {
 			}
 		}
 		return isInsertExitoso;
+	}
+
+	@Override
+	public boolean ActualizarCurso(Curso curso) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean Actualizado = false;
+		try {
+			statement = conexion.prepareStatement(actualizarCurso);
+			statement.setInt(1, curso.getIdMateria());
+			statement.setInt(2, curso.getCuatrimestre());
+			statement.setInt(3, curso.getAnio());
+			statement.setInt(4, curso.getLegajoProf());
+			statement.setInt(5, curso.getId());
+
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				Actualizado = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Actualizado;
+
 	}
 
 }

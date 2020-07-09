@@ -12,6 +12,7 @@ public interface AlumnoDao {
 	public boolean modificarAlumno(Alumno alumnoModificado);
 	public boolean eliminarAlumno(int Legajo);
 	public ArrayList<Alumno> getAlumnosInscriptos(int IdCurso);
+	public boolean verifEstaInscripto(String legajoAlumno, int idCurso);
 }
 
 

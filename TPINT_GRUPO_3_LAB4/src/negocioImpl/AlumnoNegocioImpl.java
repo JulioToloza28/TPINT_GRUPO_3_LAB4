@@ -36,6 +36,10 @@ public class AlumnoNegocioImpl implements AlumnoNegocio {
 	@Override
 	public ArrayList<Alumno> readAll() {
 		return alumDao.readAll();
-		
+	}
+
+	@Override
+	public boolean verifEstaInscripto(String legajoAlumno, int idCurso) {
+		return alumDao.verifEstaInscripto(legajoAlumno, idCurso);
 	}
 }

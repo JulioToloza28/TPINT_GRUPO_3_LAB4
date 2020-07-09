@@ -11,4 +11,6 @@ public interface AlumnoNegocio  {
 	public ArrayList<Alumno> readAll();
 	
 	public ArrayList<Alumno> getAlumnosInscriptos(int IdCurso);
+	
+	public boolean verifEstaInscripto(String legajoAlumno, int idCurso);
 }
