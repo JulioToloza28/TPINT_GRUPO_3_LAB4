@@ -8,7 +8,12 @@
 <%@page import="daoImpl.LocalidadDaoImpl" %>
 <%@page import="dao.LocalidadDao" %>
 <%@page import="java.util.ArrayList" %>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <style>
+  #lblCreado{color: #4F8A10!important;background: #DFF2BF!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
+  span#lblError{color: #D8000C!important;background-color: #FFD2D2!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
+  #txtCaracteres{color:red;}
+</style>
 <script>
 function cambiar_Localidad(){ 
 	var IdProv = document.getElementById('cmbProvincia');
@@ -19,15 +24,66 @@ function cambiar_Localidad(){
 	}
 	return false;
 };
-</script>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+function onlyLetter(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letter = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    special = "8-37-39-46";
+    special_key = false
+    for (var i in special) {
+        if (key == special[i]) {
+            special_key = true;
+            break;
+        }
+    }
+    if (letter.indexOf(tecla) == -1 && !special_key) {
+        return false;
+    }
+}
+
+function onlyNumber(car) {
+    var key = window.Event ? car.which : car.keyCode;
+    return (key >= 48 && key <= 57)
+}
+
+function validateMin() {
+    var Min_Length = 8;
+    var length = $("#txtTelefono").val().length;
+    if (length < Min_Length)
+    {
+        $("#txtTelefono").addClass("is-invalid");
+        $("#txtTelefono").after("<p id='txtCaracteres'>La cantidad de caracteres es 8 o 10, usted escribio " + length + " caracteres</p>");
+        return false;
+    }
+    else{$("#txtTelefono").addClass("is-valid");}
+}
+function cleanError() {
+    $("#txtCaracteres").remove();
+    $("#txtTelefono").removeClass("is-invalid");
+    $("#txtTelefono").addClass("is-valid");
+}
+
+function validateMail() {
+    obj = document.getElementById("txtEmail");
+    valueForm = obj.value;
+    var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    if (valueForm.search(mailFormat) == 0) {
+    	$("#txtEmail").addClass("is-valid");
+    	$("#txtEmail").removeClass("is-invalid");
+    } else {
+    	$("#txtEmail").addClass("is-invalid");
+    }
+}
+
+</script>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Alumno</title>
 </head>
 <body>
+
 
 	<jsp:include page="Menu.jsp"></jsp:include>
 
@@ -38,37 +94,40 @@ function cambiar_Localidad(){
 	</nav>
 		         
 	<form action="ServletAlumno" method="get" style="margin: 40px">
+	     <div class="row">
+               <label id="lblCreado" name="lblCreado" style="visibility:hidden">Alumno creado</label>
+        </div>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Nombre</label> 
-				<input  name="txtNombre" type="text" class="form-control" id="validationServer01" required>
+				<input  name="txtNombre" type="text" class="form-control" onKeyPress="return onlyLetter(event)" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">
 				<label for="validationServer02">Apellido</label> 
-				<input name="txtApellido" type="text" class="form-control " id="validationServer02" value="" required>
+				<input name="txtApellido" type="text" class="form-control " onKeyPress="return onlyLetter(event)" value="" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-2 mb-3">
 				<label for="validationServer03">DNI</label> 
-				<input name="txtDni" type="text" class="form-control " id="validationServer02" value="" required>
+				<input name="txtDni" type="text" class="form-control " onKeyPress="return onlyNumber(event)" value="" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 		</div>
 		<div class="form-row">			
 			<div class="col-md-2 mb-3">
 				<label for="validationServer01">Fecha de Nacimiento</label> 
-				<input name="txtFechaNac" type="date" class="form-control" id="validationServer01" required>
+				<input name="txtFechaNac" type="date" max="2020-07-09" min="1900-01-01" class="form-control" id="validationServer01" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Telefono</label> 
-				<input name="txtTelefono" type="text" class="form-control" id="validationServer01" required>
+				<input id="txtTelefono" name="txtTelefono" type="text" class="form-control" maxlength="10" onKeyPress="return onlyNumber(event)" onFocusOut="return validateMin()" onKeyUp="return cleanError()" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Email</label> 
-				<input name="txtEmail" type="text" class="form-control" id="validationServer01" required>
+				<input id="txtEmail" name="txtEmail" type="email" class="form-control" onFocusOut="return validateMail()" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
        </div>
@@ -119,19 +178,15 @@ function cambiar_Localidad(){
 	  {
 		  filas=1;
 	  }
-	 
-	
 	%>
 	
 	<% if(filas==1)
 		{
 	%>
-	 <h5>Agregado correctamente</h5>
+	 <h5 class="msj-success">Agregado correctamente</h5>
 		
 	<%
 		}
 	%>
-
-
 </body>
 </html>
