@@ -33,7 +33,7 @@
 	</nav>
 
 	<div class="login-form">
-		<form action="ServletUsuarios?Param=2" method="get">
+		<form action="ServletUsuarios?Param=2" method="post">
 			<h2 class="text-center">Login</h2>
 			<div class="form-group">
 				<input type="text" class="form-control" name="txtUsuario"

@@ -40,7 +40,7 @@
 	</nav>
 
 	<div class="container">
-		<form style="margin: 40px" method="get" action="ServletCurso">
+		<form style="margin: 40px" method="post" action="ServletCurso">
 			<div class="row">
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Materia:</label> <select name="cmbMateria"
@@ -203,6 +203,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/script2.js"></script>
 </body>
 </html>
