@@ -110,7 +110,7 @@
 					<!-- 				<a href="ServletProvincia?Param=Alumno" class="btn btn-outline-primary btn-sm">Agregar</a> -->
 					<a href="ServletAlumno?BtnAgregar=Alumno"
 						class="btn btn-outline-primary btn-sm">Agregar</a>
-						 <a	href="cargarNota.jsp" class="btn btn-outline-info btn-sm">Cargar Nota</a>
+						 <a	href="ServletAlumnoXcurso?BtnNota=CargarNota" class="btn btn-outline-info btn-sm">Cargar Nota</a>
 
 					<table id="example" class="display" style="width: 100%">
 						<thead>
@@ -179,8 +179,6 @@
 							%>
 						</tbody>
 					</table>
-					
-
 				</div>
 			</div>
 		</div>

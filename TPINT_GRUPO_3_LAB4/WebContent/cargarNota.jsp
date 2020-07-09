@@ -1,3 +1,6 @@
+<%@page import="entidades.Alumno"%>
+<%@page import="daoImpl.AlumnoDaoImpl"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -40,204 +43,52 @@
 						</tr>
 					</thead>
 					<tbody>
+					<%
+								ArrayList<Alumno> listaAlumno = null;
+							if (request.getAttribute("listaAlum") != null) {
+								listaAlumno = (ArrayList<Alumno>) request.getAttribute("listaAlum");
+							}
+							%>
+							<%
+								if (listaAlumno != null)
+								for (Alumno alumno : listaAlumno) {
+							%>
 						<tr>
-							<td>18887</td>
-							<td>Ariel</td>
-							<td>Lobos</td>
+							<td><%=alumno.getLegajo()%></td>
+							<td><%=alumno.getNombre()%></td>
+							<td><%=alumno.getApellido()%></td>
 							<td> 
 							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial1">
+   								 <input type="text" class="form-control" id="Parcial1" placeholder="Parcial1">
  							  </div>
   							</td>
 							<td> 
 							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
+   								 <input type="text" class="form-control" id="Parcial2" placeholder="Parcial2">
  							  </div>
   							</td>
   							<td> 
 							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
+   								 <input type="text" class="form-control" id="Recuperatorio1" placeholder="Recuperatorio1">
  							  </div>
   							</td>
   							<td> 
 							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
+   								 <input type="text" class="form-control" id="Recuperatorio2" placeholder="Recuperatorio2">
  							  </div>
   							</td>
 							<td>
 							  <select class="custom-select">
-								  <option selected>Seleccionar</option>
+								  <option  selected>Seleccionar</option>
  								  <option value="1">Promocionado</option>
  								  <option value="2">Regular</option>
   								  <option value="3">Libre</option>
 								</select>
 							</td>
 						</tr>
-						<tr>
-							<td>18888</td>
-							<td>Daniela</td>
-							<td>Rubinstein</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial1">
- 							  </div>
-  							</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
- 							  </div>
-  							</td>
-  							 <td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
- 							  </div>
-  							</td>
-  							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
- 							  </div>
-  							</td>
-							<td>
-							  <select class="custom-select">
-								  <option selected>Seleccionar</option>
- 								  <option value="1">Promocionado</option>
- 								  <option value="2">Regular</option>
-  								  <option value="3">Libre</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>18889</td>
-							<td>Julio</td>
-							<td>Toloza</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial1">
- 							  </div>
-  							</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
- 							  </div>
-  							</td>
-  							 <td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
- 							  </div>
-  							</td>
-  							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
- 							  </div>
-  							</td>
-							<td>
-							  <select class="custom-select">
-								  <option selected>Seleccionar</option>
- 								  <option value="1">Promocionado</option>
- 								  <option value="2">Regular</option>
-  								  <option value="3">Libre</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>18890</td>
-							<td>Rodrigo</td>
-							<td>Guzman</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial1">
- 							  </div>
-  							</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
- 							  </div>
-  							</td>
-  							 <td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
- 							  </div>
-  							</td>
-  							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
- 							  </div>
-  							</td>
-							<td>
-							  <select class="custom-select">
-								  <option selected>Seleccionar</option>
- 								  <option value="1">Promocionado</option>
- 								  <option value="2">Regular</option>
-  								  <option value="3">Libre</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>18891</td>
-							<td>Veronica</td>
-							<td>Alvarez</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial1">
- 							  </div>
-  							</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
- 							  </div>
-  							</td>
-  							 <td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
- 							  </div>
-  							</td>
-  							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
- 							  </div>
-  							</td>
-							<td>
-							  <select class="custom-select">
-								  <option selected>Seleccionar</option>
- 								  <option value="1">Promocionado</option>
- 								  <option value="2">Regular</option>
-  								  <option value="3">Libre</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>18892</td>
-							<td>Maria</td>
-							<td>Menendez</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial1">
- 							  </div>
-  							</td>
-							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Parcial2">
- 							  </div>
-  							</td>
-  							  <td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 1">
- 							  </div>
-  							</td>
-  							<td> 
-							  <div class="form-group">
-   								 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Recuperatorio 2">
- 							  </div>
-  							</td>
-							<td>
-							  <select class="custom-select">
-								  <option selected>Seleccionar</option>
- 								  <option value="1">Promocionado</option>
- 								  <option value="2">Regular</option>
-  								  <option value="3">Libre</option>
-								</select>
-							</td>
-						</tr>
+							<%
+								}
+							%>
 					</tbody>
 					<tfoot>
 						<tr>
