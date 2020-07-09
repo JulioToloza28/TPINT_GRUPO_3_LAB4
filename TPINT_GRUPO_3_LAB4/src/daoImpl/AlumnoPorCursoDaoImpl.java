@@ -47,6 +47,7 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao{
 				EstadoA.setNombres(resultSet.getString("Estado_Academico"));
 				notas.setEstadoAca(EstadoA);
 				notas.setEstado(resultSet.getBoolean("estado"));
+				notas.setAlumno(alum);
 				 
 				
 				

@@ -81,7 +81,11 @@
 								<td>
 									<div class="form-group">
 										<select class="custom-select">
-											<option selected></option>
+											<option selected value="<%=alumnoXNota.getEstadoAca().getId()%>"></option>
+											<%if(alumnoXNota.getEstadoAca().getId()==1){%><option value="1" Selected>En Curso</option> <%} %>
+											<%if(alumnoXNota.getEstadoAca().getId()==2){%><option value="2" Selected>Promocionado</option> <%} %>
+											<%if(alumnoXNota.getEstadoAca().getId()==3){%><option value="3" Selected>Regular</option> <%} %>
+											<%if(alumnoXNota.getEstadoAca().getId()==4){%><option value="4" Selected>Libre</option> <%} %>
 											<option value="1">En Curso</option>
 											<option value="2">Promocionado</option>
 											<option value="3">Regular</option>
