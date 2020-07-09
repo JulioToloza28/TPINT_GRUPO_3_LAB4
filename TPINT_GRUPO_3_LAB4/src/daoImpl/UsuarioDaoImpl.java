@@ -12,7 +12,7 @@ import entidades.Usuario;
 
 public class UsuarioDaoImpl implements UsuarioDao {
 	private static final String obtenerTodos = "SELECT * FROM usuario a  inner join tipousuario b on b.idtipoUsuario = a.idTipoUsuario Where estado=1";
-	private static final String obtenerUsuario = "SELECT * FROM usuario a  inner join tipousuario b on b.idtipoUsuario = a.idTipoUsuario Where a.nombreUsuario=? and a.Contrasenia=? and a.estado=1";
+	private static final String obtenerUsuario = "SELECT * FROM tpint_grupo_3_lab4.usuario a  inner join tpint_grupo_3_lab4.tipousuario b on b.idtipoUsuario = a.idTipoUsuario Where a.nombreUsuario= ? and a.Contrasenia= ? and a.estado=1";
 	private static final String agregarUsuario = "INSERT INTO usuario(nombreUsuario, Contrasenia, idTipoUsuario, legajo_Pro, estado) values(?,?,?,?,?)";
 
 	public ArrayList<Usuario> obtenerTodos() {
@@ -32,18 +32,24 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		return usuario;
 	}
 
-	public ArrayList<Usuario> obtenerUsuario(String user, String pass) {
+	public Usuario obtenerUsuario(String user, String pass) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		PreparedStatement statement;
 		ResultSet resultSet; // Guarda el resultado de la query
-		ArrayList<Usuario> usuario = new ArrayList<Usuario>();
+		Usuario usuario = new Usuario();
 		Conexion conexion = Conexion.getConexion();
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(obtenerUsuario);
 			statement.setString(1, user);
 			statement.setString(2, pass);
 			resultSet = statement.executeQuery();
+			System.out.println(resultSet);
 			while (resultSet.next()) {
-				usuario.add(getUsuario(resultSet));
+				usuario = getUsuario(resultSet);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

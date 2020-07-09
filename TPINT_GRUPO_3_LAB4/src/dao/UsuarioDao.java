@@ -8,6 +8,6 @@ import entidades.Usuario;
 
 public interface UsuarioDao {
 	public ArrayList<Usuario> obtenerTodos();
-	public ArrayList<Usuario> obtenerUsuario(String user,String clave);
+	public Usuario obtenerUsuario(String user,String clave);
 	public boolean agregarUsuario(Usuario usuarioAgregado);
 }

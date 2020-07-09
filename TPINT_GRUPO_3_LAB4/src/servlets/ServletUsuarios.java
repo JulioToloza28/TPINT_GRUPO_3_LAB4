@@ -61,13 +61,16 @@ public class ServletUsuarios extends HttpServlet {
 		if (request.getParameter("btnIngresar") != null) {
 			// Entra por haber echo click en el hyperlink mostrar usuarios
 			UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
-			ArrayList<Usuario> lista = UsuarioDao.obtenerUsuario(request.getParameter("txtUsuario"),
+			Usuario usuario = UsuarioDao.obtenerUsuario(request.getParameter("txtUsuario"),
 					request.getParameter("txtClave"));
-			System.out.println(lista);
-			request.setAttribute("listaUsuario", lista);
-			if (lista != null && !lista.isEmpty()) {
-				session.setAttribute("Session_user", request.getParameter("txtUsuario"));
-				response.sendRedirect("/TPINT_GRUPO_3_LAB4/Menu.jsp");
+			System.out.println(usuario);
+			request.setAttribute("Usuario2", usuario);
+			if (usuario != null) {
+				session.setAttribute("Session_user", usuario.getUsername());
+				session.setAttribute("Session_type", usuario.getTipoUsuario().getTipo());
+				// session.setAttribute("Session_user", request.getParameter("txtUsuario"));
+				request.getRequestDispatcher("Menu.jsp").forward(request, response);
+//				response.sendRedirect("/TPINT_GRUPO_3_LAB4/Menu.jsp");
 			} else {
 				PrintWriter out = response.getWriter();
 				out.println("<script type=\"text/javascript\">");

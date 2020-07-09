@@ -11,9 +11,9 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 	UsuarioDao usuarioDao = new UsuarioDaoImpl();
 
 	@Override
-	public ArrayList<Usuario> obtenerUsuario(String user, String clave) {
-		ArrayList<Usuario> listUsuario = usuarioDao.obtenerUsuario(user, clave);
-		return listUsuario;
+	public Usuario obtenerUsuario(String user, String clave) {
+		Usuario usuario = usuarioDao.obtenerUsuario(user, clave);
+		return usuario;
 	}
 
 	@Override
