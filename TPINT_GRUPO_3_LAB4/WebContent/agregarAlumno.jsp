@@ -24,7 +24,6 @@ function cambiar_Localidad(){
 	}
 	return false;
 };
-
 function onlyLetter(e) {
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toLowerCase();
@@ -41,12 +40,10 @@ function onlyLetter(e) {
         return false;
     }
 }
-
 function onlyNumber(car) {
     var key = window.Event ? car.which : car.keyCode;
     return (key >= 48 && key <= 57)
 }
-
 function validateMin() {
     var Min_Length = 8;
     var length = $("#txtTelefono").val().length;
@@ -63,7 +60,6 @@ function cleanError() {
     $("#txtTelefono").removeClass("is-invalid");
     $("#txtTelefono").addClass("is-valid");
 }
-
 function validateMail() {
     obj = document.getElementById("txtEmail");
     valueForm = obj.value;
@@ -75,7 +71,6 @@ function validateMail() {
     	$("#txtEmail").addClass("is-invalid");
     }
 }
-
 </script>
 <html>
 <head>
@@ -171,7 +166,6 @@ function validateMail() {
 			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
 	</form>
-
 	<%
 	  int filas=0;
 	  if(request.getAttribute("cantFilas")!=null)

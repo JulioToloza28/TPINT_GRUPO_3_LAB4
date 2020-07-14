@@ -16,7 +16,7 @@ import entidades.EstadoAcademico;
 public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao{
 	
 	private static final String readAll ="SELECT * FROM tpint_grupo_3_lab4.listar_notas";
-	private static final String cargarNotaAlumno ="UPDATE `tpint_grupo_3_lab4`.`alumnoxcurso` SET `notaParcial1` = ?, `notaParcial2` = ?, `notaRecuperatorio1` = ?, `notaRecuperatorio2` = ?, `idEstadoAcademico` = ? WHERE (`idAlumnoXCurso` = ?);uperatorio2`, `idEstadoAcademico`, `estado`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String cargarNotaAlumno ="UPDATE `tpint_grupo_3_lab4`.`alumnoxcurso` SET `notaParcial1` = ?, `notaParcial2` = ?, `notaRecuperatorio1` = ?, `notaRecuperatorio2` = ?, `idEstadoAcademico` = ? WHERE `legajoAlumno` = ? and `idCurso` = ?";
 
 	public boolean cargarNotaAlumno(AlumnosPorCursos NotaAlum) {
 		PreparedStatement statement;
@@ -31,6 +31,7 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao{
 			statement.setInt(4, NotaAlum.getRecuperatorio2());
 			statement.setInt(5, NotaAlum.getEstadoAca().getId()); 
 			statement.setInt(6, NotaAlum.getAlumno().getLegajo());
+			statement.setInt(7, NotaAlum.getCurso().getId());
 			
 			
 			
@@ -68,8 +69,10 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao{
 			while (resultSet.next()) {
 				Alumno alum=new Alumno();
 				EstadoAcademico EstadoA=new EstadoAcademico();
+				Curso curso=new Curso();
 				AlumnosPorCursos notas = new AlumnosPorCursos();
 				alum.setLegajo(resultSet.getInt("legajoAlumno"));
+				curso.setId(resultSet.getInt("idcurso"));
 				alum.setNombre(resultSet.getString("Alumno"));
 				notas.setParcial1(resultSet.getInt("notaParcial1"));
 				notas.setParcial2(resultSet.getInt("notaParcial2"));
@@ -80,8 +83,7 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao{
 				notas.setEstadoAca(EstadoA);
 				notas.setEstado(resultSet.getBoolean("estado"));
 				notas.setAlumno(alum);
-				 
-				
+				notas.setCurso(curso);
 				
 				listAlumnoConNotas.add(notas);
 			}
@@ -91,14 +93,14 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao{
 		return listAlumnoConNotas;
 	}
 	
-	public ArrayList<AlumnosPorCursos> filtrarPorProfesor(int legajo) {
+	public ArrayList<AlumnosPorCursos> filtrarPorProfesor(int legajo, int idcurso) {
 		
 		String consulta = readAll;
 		
 
 		if (legajo != 0) 
 		{
-			consulta = consulta + " where idProfesor= " + legajo;
+			consulta = consulta + " where idProfesor= " + legajo + " and "+"idcurso = "+ idcurso;
 
 		}
 		try {

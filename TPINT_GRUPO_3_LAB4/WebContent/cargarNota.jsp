@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@page import="entidades.AlumnosPorCursos"%>
-	<%@page import="daoImpl.AlumnoPorCursoDaoImpl"%>
-	<%@page import="java.util.ArrayList"%>
-	
+<%@page import="entidades.AlumnosPorCursos"%>
+<%@page import="daoImpl.AlumnoPorCursoDaoImpl"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,119 +24,162 @@
 			notas</li>
 	</ol>
 	</nav>
-	
-	<form  style="margin: 40px">
 
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<table id="example" class="display" style="width: 100%">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Alumno</th>
-							<th>Parcial 1 </th>
-							<th>Parcial 2  </th>
-							<th>Recuperatorio 1</th>
-							<th>Recuperatorio 2</th>
-							<th>Estado academico</th>
-						</tr>
-					</thead>
-					<tbody>
-							
-							<%
-							AlumnoPorCursoDaoImpl AlumnoxProfe=new AlumnoPorCursoDaoImpl();
-							ArrayList<AlumnosPorCursos> listaAlumno = null;
-							int cont=0;
-							int id=(int)session.getAttribute("Session_Legajo");
-							if(id!=1)
-							{
-								 listaAlumno=AlumnoxProfe.filtrarPorProfesor(id);
-								 cont++;
-							}
-							
-							if (cont==0 && id==1) {
-								listaAlumno = (ArrayList<AlumnosPorCursos>) request.getAttribute("listaAlumConNota");}%>
-							
-							<%if (listaAlumno != null){
-								for (AlumnosPorCursos alumnoXNota : listaAlumno) {%>
+	<form action="ServletAlumXcurso" method="post" style="margin: 40px">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<table id="example" class="display" style="width: 100%">
+						<thead>
 							<tr>
-							
+								<th></th>
+								<th>Alumno</th>
+								<th>Parcial 1</th>
+								<th>Parcial 2</th>
+								<th>Recuperatorio 1</th>
+								<th>Recuperatorio 2</th>
+								<th>Estado academico</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<%
+								AlumnoPorCursoDaoImpl AlumnoxProfe = new AlumnoPorCursoDaoImpl();
+							ArrayList<AlumnosPorCursos> NotasdeAlumnos = null;
+							int cont = 0;
+							int id = (int) session.getAttribute("Session_Legajo");
+							int idcurso = 5; //Falta asociar el id del curso
+
+							NotasdeAlumnos = AlumnoxProfe.filtrarPorProfesor(id, idcurso);
+							cont++;
+							%>
+
+							<%
+								if (NotasdeAlumnos != null) {
+								for (AlumnosPorCursos alumnoXNota : NotasdeAlumnos) {
+							%>
+							<tr>
+
 								<td><%=alumnoXNota.getAlumno().getLegajo()%></td>
 								<td><%=alumnoXNota.getAlumno().getNombre()%></td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="notaParcial1" name="notaParcial1" placeholder="Parcial1" value="<%=alumnoXNota.getParcial1()%>">
+										<input type="text" class="form-control" id="notaParcial1"
+											name="notaParcial1" placeholder="Parcial1"
+											value="<%=alumnoXNota.getParcial1()%>">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="notaParcial2"  name="notaParcial2"
-											placeholder="Parcial2" value="<%=alumnoXNota.getParcial2()%>">
+										<input type="text" class="form-control" id="notaParcial2"
+											name="notaParcial2" placeholder="Parcial2"
+											value="<%=alumnoXNota.getParcial2()%>">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="Recuperatorio1"  name="Recuperatorio1"
-											placeholder="Recuperatorio 1"
+										<input type="text" class="form-control" id="Recuperatorio1"
+											name="Recuperatorio1" placeholder="Recuperatorio 1"
 											value="<%=alumnoXNota.getRecuperatorio1()%>">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="Recuperatorio2" name="Recuperatorio2"
-											placeholder="Recuperatorio 2"
-											value="<%=alumnoXNota.getRecuperatorio1()%>">
+										<input type="text" class="form-control" id="Recuperatorio2"
+											name="Recuperatorio2" placeholder="Recuperatorio 2"
+											value="<%=alumnoXNota.getRecuperatorio2()%>">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-										<select name="cmbEstadoAc" id="cmbEstadoAc" class="custom-select">
-											<option selected value="<%=alumnoXNota.getEstadoAca().getId()%>"></option>
-											<%if(alumnoXNota.getEstadoAca().getId()==1){%><option value="1" Selected>En Curso</option> <%} %>
-											<%if(alumnoXNota.getEstadoAca().getId()==2){%><option value="2" Selected>Promocionado</option> <%} %>
-											<%if(alumnoXNota.getEstadoAca().getId()==3){%><option value="3" Selected>Regular</option> <%} %>
-											<%if(alumnoXNota.getEstadoAca().getId()==4){%><option value="4" Selected>Libre</option> <%} %>
-											<option value="1">En Curso</option>
-											<option value="2">Promocionado</option>
-											<option value="3">Regular</option>
-											<option value="4">Libre</option>
+										<select name="cmbEstadoAc" id="cmbEstadoAc"
+											class="custom-select">
+											<option selected disabled value="">Seleccione..</option>
+											<%
+												if (alumnoXNota.getEstadoAca().getId() == 1) {
+											%><option value="1"
+												Selected>Promocionado</option>
+											<%
+												} else {
+											%><option value="1">Promocionado</option>
+											<%
+												}
+											%>
+											<%
+												if (alumnoXNota.getEstadoAca().getId() == 2) {
+											%><option value="2"
+												Selected>Cursando</option>
+											<%
+												} else {
+											%><option value="2">Cursando</option>
+											<%
+												}
+											%>
+											<%
+												if (alumnoXNota.getEstadoAca().getId() == 3) {
+											%><option value="3"
+												Selected>Regular</option>
+											<%
+												} else {
+											%><option value="3">Regular</option>
+											<%
+												}
+											%>
+											<%
+												if (alumnoXNota.getEstadoAca().getId() == 4) {
+											%><option value="4"
+												Selected>Libre</option>
+											<%
+												} else {
+											%><option value="4">Libre</option>
+											<%
+												}
+											%>
+
 										</select>
 									</div>
 								</td>
 							</tr>
-							<input value="<%=alumnoXNota.getAlumno().getLegajo() %>" type="hidden" id="idAlumno" >
-							<%-- <input value="<%=alumnoXNota.getCurso().getId() %>" type="hidden" id="idcurso" > --%>
-                          
-                             
-							<%}%>
-							
-							<% } %>
-						
-					</tbody>
-					<tfoot>
-						<tr>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>
-					</tfoot>
-				</table>
-				<input id="btnGuardar" name="btnGuardar" class="btn btn-primary" type="submit" value="Guardar"> 
-					<a id="Retroceder"	name="Retroceder" class="btn btn-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
+
+
+							<%
+								}
+							%>
+
+							<%
+								}
+							%>
+
+
+						</tbody>
+						<tfoot>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+
+
+					<button id="btnGuardar" name="btnGuardar" class="btn btn-primary"
+						type="submit">Guardar Notas</button>
+					<a id="Retroceder" name="Retroceder" class="btn btn-secondary"
+						type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
+				</div>
 			</div>
 		</div>
-	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript"
+			src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
 	</form>
 </body>
 </html>

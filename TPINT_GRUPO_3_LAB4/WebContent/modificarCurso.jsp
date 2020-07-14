@@ -197,9 +197,7 @@
 				class="btn btn-primary" type="submit" Value="Guardar"> <a
 				Id="Retroceder" name="Retroceder" class="btn btn-secondary"
 				type="submit" href="ServletCurso?listCourses=1">Volver</a>
-			<!-- 				<a Id="Retroceder" -->
-			<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
-			<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
+		
 		</form>
 
 		<%
