@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -132,10 +133,11 @@ public class ServletAlumno extends HttpServlet {
 				}
 			}else 
 			{
-				/* request.setAttribute("Alumno_repetido", alum); */
-				response.sendRedirect("agregarAlumno.jsp?error="+alum);
-				RequestDispatcher rd = request.getRequestDispatcher("/agregarAlumno.jsp");
-				rd.forward(request, response);
+				PrintWriter out = response.getWriter();
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('El alumno ya existe');");
+				 out.println("location='agregarAlumno.jsp';"); 
+				out.println("</script>");
 				
 			}
 			
