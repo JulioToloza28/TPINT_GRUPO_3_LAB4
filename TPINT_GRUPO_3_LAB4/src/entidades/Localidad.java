@@ -12,6 +12,11 @@ public class Localidad {
 		this.Nombre = nombre;
 		this.Provincia = provincia;
 	}
+	
+	public Localidad(int id, String nombre) {
+		this.Id = id;
+		this.Nombre = nombre;
+	}
 
 	public int getId() {
 		return Id;
