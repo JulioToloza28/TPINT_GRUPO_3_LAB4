@@ -14,66 +14,10 @@
   span#lblError{color: #D8000C!important;background-color: #FFD2D2!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
   #txtCaracteres{color:red;}
 </style>
-<script>
-function cambiar_Localidad(){ 
-	var IdProv = document.getElementById('cmbProvincia');
-	var user = IdProv.selectedIndex;
-	
-	if(user!=null){
-		document.getElementById('div1').innerText=user;
-	}
-	return false;
-};
-function onlyLetter(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toLowerCase();
-    letter = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-    special = "8-37-39-46";
-    special_key = false
-    for (var i in special) {
-        if (key == special[i]) {
-            special_key = true;
-            break;
-        }
-    }
-    if (letter.indexOf(tecla) == -1 && !special_key) {
-        return false;
-    }
-}
-function onlyNumber(car) {
-    var key = window.Event ? car.which : car.keyCode;
-    return (key >= 48 && key <= 57)
-}
-function validateMin() {
-    var Min_Length = 8;
-    var length = $("#txtTelefono").val().length;
-    if (length < Min_Length)
-    {
-        $("#txtTelefono").addClass("is-invalid");
-        $("#txtTelefono").after("<p id='txtCaracteres'>La cantidad de caracteres es 8 o 10, usted escribio " + length + " caracteres</p>");
-        return false;
-    }
-    else{$("#txtTelefono").addClass("is-valid");}
-}
-function cleanError() {
-    $("#txtCaracteres").remove();
-    $("#txtTelefono").removeClass("is-invalid");
-    $("#txtTelefono").addClass("is-valid");
-}
-function validateMail() {
-    obj = document.getElementById("txtEmail");
-    valueForm = obj.value;
-    var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-    if (valueForm.search(mailFormat) == 0) {
-    	$("#txtEmail").addClass("is-valid");
-    	$("#txtEmail").removeClass("is-invalid");
-    } else {
-    	$("#txtEmail").addClass("is-invalid");
-    }
-}
-</script>
+
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Alumno</title>
 </head>
@@ -149,9 +93,11 @@ function validateMail() {
 				</div>
 				 <div class="col-md-2 mb-3">
 					<label for="validationServer03">Localidad</label> 
-					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" " required>
+					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" required>
 						<option selected disabled value="">Localidad</option>
-						<%ArrayList<Localidad> listaLocalidad = null;
+						<%
+						  ArrayList<Localidad> listaLocalidad = null;
+						  LocalidadDaoImpl LocDaoImpl = new LocalidadDaoImpl();
 					      if (request.getAttribute("listaLocDao") != null) {
 						  listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
 					}%>
@@ -166,6 +112,7 @@ function validateMail() {
 			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
 	</form>
+
 	<%
 	  int filas=0;
 	  if(request.getAttribute("cantFilas")!=null)
@@ -182,5 +129,97 @@ function validateMail() {
 	<%
 		}
 	%>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+	<script>
+// function cambiar_Localidad(){ 
+// 	var IdProv = document.getElementById('cmbProvincia');
+// 	var SelectedIdProv = IdProv.selectedIndex;
+	
+//  	return SelectedIdProv;
+// };
+
+function cambiar_Localidad(){ 
+	var ProvinciaId;
+	ProvinciaId = document.getElementById('cmbProvincia').value;
+	$.ajax({
+		type : 'POST',
+		url : 'ServletsLocalidad',
+		dataType : "json",
+		data : {
+			Provinciaid : ProvinciaId
+		},
+		success : function(result) {
+			if (result) {
+				$("#cmbLocalidad option:not(:disabled)").remove();
+				$.each(result, function(index, option) {
+					console.log("option: " + option)
+					$("#cmbLocalidad").append(
+							'<option value="' + option.Id + '">'
+									+ option.Nombre + '</option>')					
+				});
+			}
+		},
+		error : function(data) {
+			alert('fail');
+		}
+	})
+};
+
+function onlyLetter(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letter = " Ã¡Ã©Ã­Ã³ÃºabcdefghijklmnÃ±opqrstuvwxyz";
+    special = "8-37-39-46";
+    special_key = false
+    for (var i in special) {
+        if (key == special[i]) {
+            special_key = true;
+            break;
+        }
+    }
+    if (letter.indexOf(tecla) == -1 && !special_key) {
+        return false;
+    }
+}
+
+function onlyNumber(car) {
+    var key = window.Event ? car.which : car.keyCode;
+    return (key >= 48 && key <= 57)
+}
+
+function validateMin() {
+    var Min_Length = 8;
+    var length = $("#txtTelefono").val().length;
+    if (length < Min_Length)
+    {
+        $("#txtTelefono").addClass("is-invalid");
+        $("#txtTelefono").after("<p id='txtCaracteres'>La cantidad de caracteres es 8 o 10, usted escribio " + length + " caracteres</p>");
+        return false;
+    }
+    else{$("#txtTelefono").addClass("is-valid");}
+}
+function cleanError() {
+    $("#txtCaracteres").remove();
+    $("#txtTelefono").removeClass("is-invalid");
+    $("#txtTelefono").addClass("is-valid");
+}
+
+function validateMail() {
+    obj = document.getElementById("txtEmail");
+    valueForm = obj.value;
+    var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    if (valueForm.search(mailFormat) == 0) {
+    	$("#txtEmail").addClass("is-valid");
+    	$("#txtEmail").removeClass("is-invalid");
+    } else {
+    	$("#txtEmail").addClass("is-invalid");
+    }
+}
+
+</script>
 </body>
 </html>
