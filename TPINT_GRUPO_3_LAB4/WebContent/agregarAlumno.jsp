@@ -172,7 +172,7 @@ function cambiar_Localidad(){
 function onlyLetter(e) {
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toLowerCase();
-    letter = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    letter = " Ã¡Ã©Ã­Ã³ÃºabcdefghijklmnÃ±opqrstuvwxyz";
     special = "8-37-39-46";
     special_key = false
     for (var i in special) {

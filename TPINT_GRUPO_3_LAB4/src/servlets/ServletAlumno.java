@@ -124,9 +124,21 @@ public class ServletAlumno extends HttpServlet {
 			alum.setEstado(true);
 
 			AlumnoDaoImpl alumImp = new AlumnoDaoImpl();
-			if (alumImp.agregarAlumno(alum) != false) {
-				filas = 1;
+			
+			if(alumImp.VerificarAlumno(alum.getDni())==false) 
+			{
+				if (alumImp.agregarAlumno(alum) != false) {
+					filas = 1;
+				}
+			}else 
+			{
+				/* request.setAttribute("Alumno_repetido", alum); */
+				response.sendRedirect("agregarAlumno.jsp?error="+alum);
+				RequestDispatcher rd = request.getRequestDispatcher("/agregarAlumno.jsp");
+				rd.forward(request, response);
+				
 			}
+			
 		}
 		if (filas == 1) {
 			// REQUEST DISPATCHER
