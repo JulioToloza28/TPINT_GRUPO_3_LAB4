@@ -11,7 +11,7 @@ import dao.LocalidadDao;
 public class LocalidadDaoImpl implements LocalidadDao {
 
 	private static final String ObtenerListLocalidad="SELECT loc.idlocalidad, loc.nombre as LolNombre, prov.idprovincia, prov.Nombre as ProNombre FROM tpint_grupo_3_lab4.localidad as loc inner join provincia prov on loc.idprovincia=prov.idprovincia;";
-    private static final String ObtenerLocalidad_Provincia="SELECT * FROM tpint_grupo_3_lab4.localidad where idprovincia = ?;";
+    private static final String ObtenerLocalidad_Provincia="SELECT * FROM tpint_grupo_3_lab4.localidad where idprovincia = ?";
 	
 	@Override
 	public ArrayList<Localidad> obtenerListLocalidad() {
@@ -59,7 +59,7 @@ public class LocalidadDaoImpl implements LocalidadDao {
 			statement.setInt(1, IdProv);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Localidad.add(getLocalidad(resultSet));
+				Localidad.add(getLocalidadxProvincia(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,8 +76,13 @@ public class LocalidadDaoImpl implements LocalidadDao {
 		prov.setId(resultSet.getInt("idprovincia"));
 		prov.setNombreProv(resultSet.getString("ProNombre"));
 		return new Localidad(id,nombre,prov);
-	}
+	}	
 	
-	
+	private Localidad getLocalidadxProvincia(ResultSet resultSet) throws SQLException
+	{
+		int id=resultSet.getInt("idlocalidad");
+		String nombre=resultSet.getString("nombre");
+		return new Localidad(id,nombre);
+	}	
 
 }

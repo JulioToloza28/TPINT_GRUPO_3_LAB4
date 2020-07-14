@@ -54,7 +54,6 @@ public class ServletAlumno extends HttpServlet {
 			rd.forward(request, response);
 		}
 		// Filtrar Alumno
-		
 		  if(request.getParameter("btn-filtrar") != null) {
 		  
 			  int materia=0;
