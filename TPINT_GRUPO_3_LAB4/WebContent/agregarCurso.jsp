@@ -3,6 +3,7 @@
 <%@page import="daoImpl.MateriaDaoImpl"%>
 <%@page import="entidades.Materia"%>
 <%@page import="entidades.Profesor"%>
+<%@page import="entidades.Turno"%>
 <%@page import="entidades.Alumno"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,7 +22,6 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
-
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 .bs-example {
@@ -35,7 +35,8 @@
 
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Agregar Curso</li>
+		<li class="breadcrumb-item active" aria-current="page">Agregar
+			Curso</li>
 	</ol>
 	</nav>
 
@@ -57,6 +58,27 @@
 								for (Materia mate : listaMateria) {
 						%>
 						<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
+
+				<div class="col-md-3 mb-3">
+					<label for="sel1">Cuatrimestre N°:</label> <select
+						class="form-control" id="sel1" name="cmbCuatrimestre" required>
+						<option selected disabled value="">Seleccione...</option>
+						<%
+							ArrayList<Turno> listaTurnos = null;
+							if (request.getAttribute("listaTurnos") != null) {
+								listaTurnos = (ArrayList<Turno>) request.getAttribute("listaTurnos");
+							}
+						%>
+						<%
+							if (listaTurnos != null)
+								for (Turno turno : listaTurnos) {
+						%>
+						<option value=<%=turno.getIdTurno()%>><%=turno.getTurno()%></option>
 						<%
 							}
 						%>
@@ -109,7 +131,7 @@
 							if (listaProfesor != null)
 								for (Profesor prof : listaProfesor) {
 						%>
-						<option value=<%=prof.getLegajo()%>><%=prof.getApellido()%>,
+						<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>	| <%=prof.getApellido()%>,
 							<%=prof.getNombre()%></option>
 						<%
 							}
@@ -121,7 +143,7 @@
 
 
 			<H4>Alumnos:</H4>
-			<table id="example" name="tableAlumnos" class="display"
+			<table id="AlumnosCurso" name="tableAlumnos" class="display"
 				style="width: 100%">
 				<thead>
 					<tr>
@@ -151,7 +173,7 @@
 					%>
 					<tr>
 						<td><input type="checkbox" id="cboxAlumno" name="cboxAlumno"
-								value="<%=alumno.getLegajo()%>"></td>
+							value="<%=alumno.getLegajo()%>"></td>
 						<td><%=alumno.getLegajo()%></td>
 						<td><%=alumno.getNombre()%></td>
 						<td><%=alumno.getApellido()%></td>
@@ -174,14 +196,13 @@
 
 
 
-			<button Id="btn-GrabarCurso" name="btn-GrabarCurso" class="btn btn-primary"
-				type="submit">Guardar</button> 
-				<a Id="Retroceder"
-				name="Retroceder" class="btn btn-secondary" type="submit"
-				href="ServletCurso?listCourses=1">Volver</a>
-<!-- 				<a Id="Retroceder" -->
-<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
-<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
+			<button Id="btn-GrabarCurso" name="btn-GrabarCurso"
+				class="btn btn-primary" type="submit">Guardar</button>
+			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary"
+				type="submit" href="ServletCurso?listCourses=1">Volver</a>
+			<!-- 				<a Id="Retroceder" -->
+			<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
+			<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
 		</form>
 
 		<%
@@ -203,6 +224,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-	<script type="text/javascript" src="js/script2.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

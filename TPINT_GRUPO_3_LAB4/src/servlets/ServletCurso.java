@@ -52,7 +52,7 @@ public class ServletCurso extends HttpServlet {
 				request.setAttribute("Mensaje", msj);
 			}
 			
-			request.setAttribute("listaCursoDao", lCursos);
+			request.setAttribute("listaCursos", lCursos);
 			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
 			rd.forward(request, response);
 		}

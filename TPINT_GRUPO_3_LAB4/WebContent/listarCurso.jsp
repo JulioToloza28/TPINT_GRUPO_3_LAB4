@@ -58,10 +58,11 @@ text-align:Center;
 			<div class="col-lg-12">
 				<a href="ServletCurso?AddCourses=1" name="AddCurso"
 					class="btn btn-outline-primary btn-sm">Agregar curso</a><br> <br>
-				<table id="example" class="display" style="width: 100%">
+				<table id="ListarCursos" class="display" style="width: 100%">
 					<thead>
 						<tr>
 							<th>Materia</th>
+							<th>Turno</th>
 							<th>Cuatrimestre</th>
 							<th>Año</th>
 							<th>Profesor</th>
@@ -74,8 +75,8 @@ text-align:Center;
 
 						<%
 							ArrayList<Curso> listaCurso = null;
-							if (request.getAttribute("listaCursoDao") != null) {
-								listaCurso = (ArrayList<Curso>) request.getAttribute("listaCursoDao");
+							if (request.getAttribute("listaCursos") != null) {
+								listaCurso = (ArrayList<Curso>) request.getAttribute("listaCursos");
 							}
 						%>
 						<%
@@ -84,6 +85,7 @@ text-align:Center;
 						%>
 						<tr>
 							<td><%=curso.getMateria()%></td>
+							<td><%=curso.getTurno()%></td>
 							<td><%=curso.getCuatrimestre()%></td>
 							<td><%=curso.getAnio()%></td>
 							<td><%=curso.getProfesor()%></td>

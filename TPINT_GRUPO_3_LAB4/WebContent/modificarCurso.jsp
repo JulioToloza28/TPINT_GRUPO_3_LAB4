@@ -111,7 +111,7 @@
 					<select name="cmbProfesor" class="custom-select "
 						id="validationServer04" required>
 						<option selected style="visibility: hidden"
-							value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
+							value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%> - Legajo: <%=curso.getLegajoProf()%></option>
 						<%
 							ArrayList<Profesor> listaProfesor = null;
 							if (request.getAttribute("listaProfes") != null) {
@@ -123,7 +123,7 @@
 								for (Profesor prof : listaProfesor) {
 						%>
 						<option value=<%=prof.getLegajo()%>><%=prof.getApellido()%>,
-							<%=prof.getNombre()%></option>
+							<%=prof.getNombre()%> - Legajo: <%=prof.getLegajo()%></option>
 						<%
 							}
 						%>
@@ -134,7 +134,7 @@
 
 
 			<H4>Alumnos:</H4>
-			<table id="example" name="tableAlumnos" class="display"
+			<table id="AlumnosCurso" name="tableAlumnos" class="display"
 				style="width: 100%">
 				<thead>
 					<tr>
@@ -221,6 +221,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-	<script type="text/javascript" src="js/script2.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

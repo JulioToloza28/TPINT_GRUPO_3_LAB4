@@ -5,6 +5,31 @@
 $(document).ready(function() {
 	$('#example').DataTable( {
         "scrollX": true
+    } ),
+	$('#AlumnosCurso').DataTable( {
+        "scrollX": true,
+        "displayLength": 100,
+        columnDefs: [
+        	{
+                targets: "_all",
+                className: 'dt-center'
+            }
+          ]
+    } ),
+	$('#ListarCursos').DataTable( {
+        "scrollX": true,
+        "displayLength": 100,
+        "order": [[ 4, "asc" ],[ 3, "asc" ],[ 2, "asc" ],[ 1, "asc" ],[ 0, "asc" ]],
+        columnDefs: [
+        	{
+                targets: 4,
+                className: 'dt-left'
+            },
+        	{
+                targets: "_all",
+                className: 'dt-center'
+            }
+          ]
     } );
 });
 

@@ -3,23 +3,49 @@ package entidades;
 public class Curso {
 	private int Id;
 	private int IdMateria;
+	private int IdTurno;
 	private int Cuatrimestre;
 	private int Anio;
 	private int LegajoProf;
 	private int Estado;
 	private String Materia;
 	private String Profesor;
+	private String Turno;
 	private int CantAlum;
 
 	public Curso() {
 	}
 
-	public Curso(int id, int idMateria, int cuatrimestre, int legajoProf, int estado) {
-		this.Id = id;
-		this.Cuatrimestre = cuatrimestre;
-		this.Estado = estado;
-		this.IdMateria = idMateria;
-		this.LegajoProf = legajoProf;
+	public Curso(int id, int idMateria, int idTurno, int cuatrimestre, int anio, int legajoProf, int estado,
+			String materia, String profesor, String turno, int cantAlum) {
+		super();
+		Id = id;
+		IdMateria = idMateria;
+		IdTurno = idTurno;
+		Cuatrimestre = cuatrimestre;
+		Anio = anio;
+		LegajoProf = legajoProf;
+		Estado = estado;
+		Materia = materia;
+		Profesor = profesor;
+		Turno = turno;
+		CantAlum = cantAlum;
+	}
+
+	public int getIdTurno() {
+		return IdTurno;
+	}
+
+	public void setIdTurno(int idTurno) {
+		IdTurno = idTurno;
+	}
+
+	public String getTurno() {
+		return Turno;
+	}
+
+	public void setTurno(String turno) {
+		Turno = turno;
 	}
 
 	public int getId() {
@@ -92,13 +118,6 @@ public class Curso {
 
 	public void setCantAlum(int cantAlum) {
 		CantAlum = cantAlum;
-	}
-
-	@Override
-	public String toString() {
-		return "Curso [Id=" + Id + ", IdMateria=" + IdMateria + ", Cuatrimestre=" + Cuatrimestre + ", Anio=" + Anio
-				+ ", LegajoProf=" + LegajoProf + ", Estado=" + Estado + ", Materia=" + Materia + ", Profesor="
-				+ Profesor + ", CantAlum=" + CantAlum + "]";
 	}
 
 }
