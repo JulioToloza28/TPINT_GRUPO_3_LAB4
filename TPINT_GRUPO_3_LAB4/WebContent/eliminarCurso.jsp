@@ -87,7 +87,7 @@
 
 					<select name="cmbProfesor" class="custom-select "
 						id="validationServer04" disabled="true">
-						<option value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%> - legajo: <%=curso.getLegajoProf()%></option>
+						<option value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
 					</select>
 				</div>
 			</div>
@@ -95,7 +95,7 @@
 
 
 			<H4>Alumnos:</H4>
-			<table id="AlumnosCurso" name="tableAlumnos" class="display"
+			<table id="AlumnosCursoD" name="tableAlumnos" class="display"
 				style="width: 100%">
 				<thead>
 					<tr>

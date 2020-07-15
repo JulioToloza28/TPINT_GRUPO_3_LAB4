@@ -17,14 +17,17 @@ import entidades.Alumno;
 import entidades.Curso;
 import entidades.Materia;
 import entidades.Profesor;
+import entidades.Turno;
 import negocio.AlumnoNegocio;
 import negocio.CursoNegocio;
 import negocioImpl.AlumnoNegocioImpl;
 import negocioImpl.CursoNegocioImpl;
 import negocio.MateriaNegocio;
 import negocio.ProfesorNegocio;
+import negocio.TurnoNegocio;
 import negocioImpl.MateriaNegocioImpl;
 import negocioImpl.ProfesorNegocioImpl;
+import negocioImpl.TurnoNegocioImpl;
 
 @WebServlet("/ServletCurso")
 public class ServletCurso extends HttpServlet {
@@ -41,6 +44,7 @@ public class ServletCurso extends HttpServlet {
 		AlumnoNegocio alumnoNeg = new AlumnoNegocioImpl();
 		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
 		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
+		TurnoNegocio turnoNeg = new TurnoNegocioImpl();
 
 		// BOTON CURSOS DEL MENU, LISTA LOS CURSOS
 		if (request.getParameter("listCourses") != null) {
@@ -59,11 +63,13 @@ public class ServletCurso extends HttpServlet {
 
 		// BOTON AGREGAR CURSO (SOLICITA LOS DATOS DEL CURSO)
 		if (request.getParameter("AddCourses") != null) {
-			ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
+			ArrayList<Materia> lMateria = materiaNeg.listarMaterias();
+			ArrayList<Turno> lTurno = turnoNeg.listarTurnos();
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
 			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
 
 			request.setAttribute("listaMatDao", lMateria);
+			request.setAttribute("ListaTurnos", lTurno);
 			request.setAttribute("ListaAlumnos", lAlum);
 			request.setAttribute("listaProfes", lProfesor);
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarCurso.jsp");

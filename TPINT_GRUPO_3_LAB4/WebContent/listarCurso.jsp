@@ -61,11 +61,11 @@ text-align:Center;
 				<table id="ListarCursos" class="display" style="width: 100%">
 					<thead>
 						<tr>
+							<th>Profesor</th>
 							<th>Materia</th>
 							<th>Turno</th>
 							<th>Cuatrimestre</th>
 							<th>Año</th>
-							<th>Profesor</th>
 							<th>Cant. Alumnos</th>
 							<th style="width: 60px"></th>
 						</tr>
@@ -84,11 +84,11 @@ text-align:Center;
 								for (Curso curso : listaCurso) {
 						%>
 						<tr>
+							<td><%=curso.getProfesor()%></td>
 							<td><%=curso.getMateria()%></td>
 							<td><%=curso.getTurno()%></td>
 							<td><%=curso.getCuatrimestre()%></td>
 							<td><%=curso.getAnio()%></td>
-							<td><%=curso.getProfesor()%></td>
 							<td><%=curso.getCantAlum()%></td>
 							<td><a type="button" class="btn btn-primary btn-sm"
 								href="ServletCurso?editCourse=<%=curso.getId()%>"><i

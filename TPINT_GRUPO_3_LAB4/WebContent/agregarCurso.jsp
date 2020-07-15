@@ -65,13 +65,13 @@
 				</div>
 
 				<div class="col-md-3 mb-3">
-					<label for="sel1">Cuatrimestre N°:</label> <select
-						class="form-control" id="sel1" name="cmbCuatrimestre" required>
+					<label for="sel1">Turno:</label> <select
+						class="form-control" id="sel1" name="cmbTurno" required>
 						<option selected disabled value="">Seleccione...</option>
 						<%
 							ArrayList<Turno> listaTurnos = null;
-							if (request.getAttribute("listaTurnos") != null) {
-								listaTurnos = (ArrayList<Turno>) request.getAttribute("listaTurnos");
+							if (request.getAttribute("ListaTurnos") != null) {
+								listaTurnos = (ArrayList<Turno>) request.getAttribute("ListaTurnos");
 							}
 						%>
 						<%
@@ -143,7 +143,7 @@
 
 
 			<H4>Alumnos:</H4>
-			<table id="AlumnosCurso" name="tableAlumnos" class="display"
+			<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
 				style="width: 100%">
 				<thead>
 					<tr>
