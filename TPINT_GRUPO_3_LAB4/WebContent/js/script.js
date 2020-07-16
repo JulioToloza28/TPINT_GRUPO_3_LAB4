@@ -5,7 +5,7 @@
 $(document).ready(
 		function() {
 			$('#example').DataTable({
-				"scrollX" : true
+				"scrollX" : false
 			}), $('#AlumnosCursoAM').DataTable({
 				"scrollX" : true,
 				"displayLength" : 100,
@@ -26,7 +26,7 @@ $(document).ready(
 					{
 						"scrollX" : true,
 						"displayLength" : 10,
-						"order" : [[ 0, "asc" ], [ 4, "asc" ], [ 3, "asc" ], [ 2, "asc" ],
+						"order" : [[ 0, "asc" ], [ 4, "desc" ], [ 3, "desc" ], [ 2, "asc" ],
 								[ 1, "asc" ]],
 						columnDefs : [ {
 							targets : 0,

@@ -20,6 +20,8 @@ public class CursoDaoImpl implements CursoDao {
 	String InsertarAlumnoalCurso = "insert into tpint_grupo_3_lab4.alumnoxcurso (IdCurso, LegajoAlumno, idEstadoAcademico, estado) VALUES (?, ? , 2, 1)";
 	String actualizarCurso = "update tpint_grupo_3_lab4.curso set idMateria= ? , idturno=?, Cuatrimestre= ?, Anio= ? , Legajo_pro= ?  where IdCurso= ?";
 	String quitarAlumnodelcurso = "update tpint_grupo_3_lab4.alumnoxcurso set estado = 0 where legajoAlumno= ? and idcurso= ?";
+	String existeCursoActivo = "SELECT count(idmateria) as Cantidad from curso where idMateria=? and idturno=? and Cuatrimestre=? and anio=? and legajo_Pro=? and estado=true and idcurso<>?";
+	String AlumnoEstaInscripto = "SELECT count(*) as Cantidad from alumnoxcurso where idCurso=? and legajoAlumno=? and estado=true;";
 
 	@Override
 	public Curso buscarCurso(int Id) {
@@ -236,6 +238,72 @@ public class CursoDaoImpl implements CursoDao {
 			e.printStackTrace();
 		}
 		return isdeleteExitoso;
+	}
+
+	@Override
+	public boolean VerificarExisteCurso(Curso curso) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet resultSet;
+		int Cantidad = 0;
+		boolean existeCurso = true;
+		try {
+			statement = conexion.prepareStatement(existeCursoActivo);
+			statement.setInt(1, curso.getIdMateria());
+			statement.setInt(2, curso.getIdTurno());
+			statement.setInt(3, curso.getCuatrimestre());
+			statement.setInt(4, curso.getAnio());
+			statement.setInt(5, curso.getLegajoProf());
+			statement.setInt(6, curso.getId());
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Cantidad = (resultSet.getInt("Cantidad"));
+			}
+
+			if (Cantidad == 0)
+				existeCurso = false;
+			else
+				existeCurso = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return existeCurso;
+	}
+
+	@Override
+	public boolean VerificarAlumnoEstaInscripto(int idCurso, String legajoAlumno) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet resultSet;
+		int Cantidad = 0;
+		boolean alumnoEstaInscripto = true;
+		try {
+			statement = conexion.prepareStatement(AlumnoEstaInscripto);
+			statement.setInt(1, idCurso);
+			statement.setInt(2, Integer.parseInt(legajoAlumno.toString()));
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Cantidad = (resultSet.getInt("Cantidad"));
+			}
+
+			if (Cantidad == 0)
+				alumnoEstaInscripto = false;
+			else
+				alumnoEstaInscripto = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return alumnoEstaInscripto;
 	}
 
 }

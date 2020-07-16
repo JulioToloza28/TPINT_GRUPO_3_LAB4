@@ -41,168 +41,173 @@
 	</nav>
 
 	<div class="container">
-		<form style="margin: 40px" method="post" action="ServletCurso">
-			<div class="row">
-				<div class="col-md-3 mb-3">
-					<label for="sel1">Materia:</label> <select name="cmbMateria"
-						class="custom-select " id="validationServer04" required>
-						<option selected disabled value="">Seleccione...</option>
-						<%
-							ArrayList<Materia> listaMateria = null;
-							if (request.getAttribute("listaMatDao") != null) {
-								listaMateria = (ArrayList<Materia>) request.getAttribute("listaMatDao");
-							}
-						%>
-						<%
-							if (listaMateria != null)
-								for (Materia mate : listaMateria) {
-						%>
-						<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
-						<%
-							}
-						%>
-					</select>
-				</div>
+			<form style="margin: 40px" method="post" action="ServletCurso">
+		<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+				<div class="row">
+					<div class="col-md-3 mb-3">
+						<label for="sel1">Materia:</label> <select name="cmbMateria"
+							class="custom-select " id="validationServer04" required>
+							<option selected disabled value="">Seleccione...</option>
+							<%
+								ArrayList<Materia> listaMateria = null;
+								if (request.getAttribute("listaMatDao") != null) {
+									listaMateria = (ArrayList<Materia>) request.getAttribute("listaMatDao");
+								}
+							%>
+							<%
+								if (listaMateria != null)
+									for (Materia mate : listaMateria) {
+							%>
+							<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
 
-				<div class="col-md-3 mb-3">
-					<label for="sel1">Turno:</label> <select
-						class="form-control" id="sel1" name="cmbTurno" required>
-						<option selected disabled value="">Seleccione...</option>
-						<%
-							ArrayList<Turno> listaTurnos = null;
-							if (request.getAttribute("ListaTurnos") != null) {
-								listaTurnos = (ArrayList<Turno>) request.getAttribute("ListaTurnos");
-							}
-						%>
-						<%
-							if (listaTurnos != null)
-								for (Turno turno : listaTurnos) {
-						%>
-						<option value=<%=turno.getIdTurno()%>><%=turno.getTurno()%></option>
-						<%
-							}
-						%>
-					</select>
-				</div>
+					<div class="col-md-3 mb-3">
+						<label for="sel1">Turno:</label> <select class="form-control"
+							id="sel1" name="cmbTurno" required>
+							<option selected disabled value="">Seleccione...</option>
+							<%
+								ArrayList<Turno> listaTurnos = null;
+								if (request.getAttribute("ListaTurnos") != null) {
+									listaTurnos = (ArrayList<Turno>) request.getAttribute("ListaTurnos");
+								}
+							%>
+							<%
+								if (listaTurnos != null)
+									for (Turno turno : listaTurnos) {
+							%>
+							<option value=<%=turno.getIdTurno()%>><%=turno.getTurno()%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
 
-				<div class="col-md-3 mb-3">
-					<label for="sel1">Cuatrimestre N°:</label> <select
-						class="form-control" id="sel1" name="cmbCuatrimestre" required>
-						<option selected disabled value="">Seleccione...</option>
-						<option>1</option>
-						<option>2</option>
-					</select>
-				</div>
+					<div class="col-md-3 mb-3">
+						<label for="sel1">Cuatrimestre N°:</label> <select
+							class="form-control" id="sel1" name="cmbCuatrimestre" required>
+							<option selected disabled value="">Seleccione...</option>
+							<option>1</option>
+							<option>2</option>
+						</select>
+					</div>
 
-				<div class="col-md-3 mb-3">
-					<label for="sel1">Año:</label> <select class="form-control"
-						id="sel1" name="cmbAnio" required>
-						<option selected disabled value="">Seleccione...</option>
-						<%
-							for (int x = 2020; x >= 1990; x--) {
-						%>
-						<option><%=x%></option>
-						<%
-							}
-						%>
-					</select>
-				</div>
+					<div class="col-md-3 mb-3">
+						<label for="sel1">Año:</label> <select class="form-control"
+							id="sel1" name="cmbAnio" required>
+							<option selected disabled value="">Seleccione...</option>
+							<%
+								for (int x = 2020; x >= 1990; x--) {
+							%>
+							<option><%=x%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
 
+				</div>
+		</ol>
+		</nav>
+
+		<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<div class="col-md-3 mb-3">
+			<H4>Profesor:</H4>
 			</div>
+			<div class="col-md-3 mb-3">
 
-
-			<br> <br>
-			<div class="row">
-				<div class="col-md-3 mb-3">
-					<H4>Profesor:</H4>
-				</div>
-				<div class="col-md-3 mb-3">
-
-					<select name="cmbProfesor" class="custom-select "
-						id="validationServer04" required>
-						<option selected disabled value="">Seleccione...</option>
-						<%
-							ArrayList<Profesor> listaProfesor = null;
-							if (request.getAttribute("listaProfes") != null) {
-								listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProfes");
-							}
-						%>
-						<%
-							if (listaProfesor != null)
-								for (Profesor prof : listaProfesor) {
-						%>
-						<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>	| <%=prof.getApellido()%>,
-							<%=prof.getNombre()%></option>
-						<%
-							}
-						%>
-					</select>
-				</div>
-			</div>
-			<br> <br>
-
-
-			<H4>Alumnos:</H4>
-			<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
-				style="width: 100%">
-				<thead>
-					<tr>
-						<th></th>
-						<th>Legajo</th>
-						<th>Nombre</th>
-						<th>Apellido</th>
-						<th>DNI</th>
-						<th>Fecha nacimiento</th>
-						<th>Direccion</th>
-						<th>Localidad</th>
-						<th>Provincia</th>
-						<th>Telefono</th>
-						<th>Mail</th>
-					</tr>
-				</thead>
-				<tbody>
+				<select name="cmbProfesor" class="custom-select "
+					id="validationServer04" required>
+					<option selected disabled value="">Seleccione...</option>
 					<%
-						ArrayList<Alumno> listaAlumno = null;
-						if (request.getAttribute("ListaAlumnos") != null) {
-							listaAlumno = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+						ArrayList<Profesor> listaProfesor = null;
+						if (request.getAttribute("listaProfes") != null) {
+							listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProfes");
 						}
 					%>
 					<%
-						if (listaAlumno != null)
-							for (Alumno alumno : listaAlumno) {
+						if (listaProfesor != null)
+							for (Profesor prof : listaProfesor) {
 					%>
-					<tr>
-						<td><input type="checkbox" id="cboxAlumno" name="cboxAlumno"
-							value="<%=alumno.getLegajo()%>"></td>
-						<td><%=alumno.getLegajo()%></td>
-						<td><%=alumno.getNombre()%></td>
-						<td><%=alumno.getApellido()%></td>
-						<td><%=alumno.getDni()%></td>
-						<td><%=alumno.getFechaNac()%></td>
-						<td><%=alumno.getDireccion()%></td>
-						<td><%=alumno.getLocalidad().getNombreLoc()%></td>
-						<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
-						<td><%=alumno.getTelefono()%></td>
-						<td><%=alumno.getMail()%></td>
-					</tr>
+					<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
+						|
+						<%=prof.getApellido()%>,
+						<%=prof.getNombre()%></option>
 					<%
 						}
 					%>
+				</select>
+			</div>
+		</ol>
+		</nav>
 
 
-				</tbody>
+		<H4>Alumnos:</H4>
+		<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
+			style="width: 100%">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Legajo</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>DNI</th>
+					<th>Fecha nacimiento</th>
+					<th>Direccion</th>
+					<th>Localidad</th>
+					<th>Provincia</th>
+					<th>Telefono</th>
+					<th>Mail</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					ArrayList<Alumno> listaAlumno = null;
+					if (request.getAttribute("ListaAlumnos") != null) {
+						listaAlumno = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+					}
+				%>
+				<%
+					if (listaAlumno != null)
+						for (Alumno alumno : listaAlumno) {
+				%>
+				<tr>
+					<td><input type="checkbox" id="cboxAlumno" name="cboxAlumno"
+						value="<%=alumno.getLegajo()%>"></td>
+					<td><%=alumno.getLegajo()%></td>
+					<td><%=alumno.getNombre()%></td>
+					<td><%=alumno.getApellido()%></td>
+					<td><%=alumno.getDni()%></td>
+					<td><%=alumno.getFechaNac()%></td>
+					<td><%=alumno.getDireccion()%></td>
+					<td><%=alumno.getLocalidad().getNombreLoc()%></td>
+					<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
+					<td><%=alumno.getTelefono()%></td>
+					<td><%=alumno.getMail()%></td>
+				</tr>
+				<%
+					}
+				%>
 
-			</table>
+
+			</tbody>
+
+		</table>
 
 
 
-			<button Id="btn-GrabarCurso" name="btn-GrabarCurso"
-				class="btn btn-primary" type="submit">Guardar</button>
-			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary"
-				type="submit" href="ServletCurso?listCourses=1">Volver</a>
-			<!-- 				<a Id="Retroceder" -->
-			<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
-			<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
+		<button Id="btn-GrabarCurso" name="btn-GrabarCurso"
+			class="btn btn-primary" type="submit">Guardar</button>
+		<a Id="Retroceder" name="Retroceder" class="btn btn-secondary"
+			type="submit" href="ServletCurso?listCourses=1">Volver</a>
+		<!-- 				<a Id="Retroceder" -->
+		<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
+		<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
 		</form>
 
 		<%

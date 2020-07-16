@@ -56,8 +56,8 @@ text-align:Center;
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="ServletCurso?AddCourses=1" name="AddCurso"
-					class="btn btn-outline-primary btn-sm">Agregar curso</a><br> <br>
+			<a href="ServletCurso?AddCourses=1" name="AddCurso" class="btn btn-outline-success "><i class="fa fa-group"></i> Agregar curso</a>
+				<br> <br>
 				<table id="ListarCursos" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -67,7 +67,7 @@ text-align:Center;
 							<th>Cuatrimestre</th>
 							<th>Año</th>
 							<th>Cant. Alumnos</th>
-							<th style="width: 60px"></th>
+							<th style="width: 60px">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
