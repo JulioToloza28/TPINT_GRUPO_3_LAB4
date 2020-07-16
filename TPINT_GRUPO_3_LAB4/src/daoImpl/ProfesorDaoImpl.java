@@ -24,7 +24,8 @@ public class ProfesorDaoImpl implements ProfesorDao{
 	private static final String leerProfesor = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1 and legajo_Pro=?;";
 	private static final String modificarProfesor= "UPDATE profesor set nombre=?,apellido=?, dni=?, fecha_nac=?, direccion=?, Idlocalidad=?, telefono=?, mail=? where legajo_Pro= ?";
     private static final String eliminarProfesor = "UPDATE profesor set estado=0 where legajo_Pro= ?";
-
+    private static final String VerificarDNI="SELECT * FROM tpint_grupo_3_lab4.profesor where ";
+    
 	public boolean agregarProfesor(Profesor profesor)
 	{
 		PreparedStatement statement;
@@ -169,6 +170,35 @@ public class ProfesorDaoImpl implements ProfesorDao{
 			}
 		}
 		return isInsertExitoso;
+	}
+	
+	public boolean VerificarProfesor(String DNI, int Legajo) {
+		boolean resultado=false;
+		
+		String consulta= VerificarDNI +"dni= "+ DNI +" and"+" legajo_Pro <> " + Legajo;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		
+		PreparedStatement statement;
+		ResultSet resultSet;
+
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(consulta);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				return resultado=true;
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return resultado;
+		
+		
 	}
 	
 	//eliminar profesor

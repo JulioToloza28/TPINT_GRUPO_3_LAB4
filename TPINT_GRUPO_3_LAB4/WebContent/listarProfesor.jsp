@@ -4,6 +4,8 @@
 <%@page import="entidades.Localidad"%>
 <%@page import="daoImpl.ProfesorDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="daoImpl.MateriaDaoImpl"%>
+<%@page import="entidades.Materia"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,15 +46,52 @@
 		<li class="breadcrumb-item active" aria-current="page">Profesores</li>
 	</ol>
 	</nav>
+	
 	<div class="container">
+	<form action="ServletAlumno?Param=Filtrar" method="get">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+			<div class="row">
+				<div class="col-lg-10">
+					
+						<label for="sel1">Materias:</label> <select id="cbxMateria"
+							name="cbxMateria" class="custom-select" id="sel1">
+							<option selected disabled value="<>">Seleccione...</option>
+							<%
+								MateriaDaoImpl materiaL = new MateriaDaoImpl();
+							ArrayList<Materia> listaMateria = null;
+							listaMateria = (ArrayList<Materia>) materiaL.listarMaterias();
+							%>
+							<%
+								if (listaMateria != null)
+								for (Materia mate : listaMateria) {
+							%>
+							<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
+							<%
+								}
+							%>
+						</select>
+				
+				</div>
+				
+			</div>
+			<div class="col align-self-center">
+					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-outline-info"
+						type="submit"><i class="fa fa-search"></i>Filtrar</button>
+					
+				</div>
+				</ol>
+			</nav>
+		</form>
 		<div class="row">
 			<div class="col-lg-3"></div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<a id="BtnAgregar" name="BtnAgregar"
+				<!-- <a id="BtnAgregar" name="BtnAgregar"
 					href="ServletsProfesor?BtnAgregar=Profesor"
-					class="btn btn-outline-primary btn-sm">Agregar</a>
+					class="btn btn-outline-primary btn-sm">Agregar</a> -->
+					<a id="BtnAgregar" name="BtnAgregar" href="ServletsProfesor?BtnAgregar=Profesor" type="button" class="btn btn-outline-success"><i class="fa fa-user-plus"></i> Agregar Profesor</a>
 
 				<table id="example" class="display" style="width: 100%">
 					<thead>

@@ -78,7 +78,7 @@ function validateMail() {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Profesor</title>
+<title>Agregar Profesor</title>
 </head>
 <body>
 
@@ -112,6 +112,7 @@ function validateMail() {
 				</div>
 
 			</div>
+			<br>
 			<div class="form-row">
 				<div class="col-md-2 mb-3">
 					<label for="validationServer01">Fecha de Nacimiento</label> <input
@@ -132,6 +133,7 @@ function validateMail() {
 				</div>
 
 			</div>
+			<br>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer02">Direccion</label>  
@@ -169,6 +171,7 @@ function validateMail() {
 					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
+			<br>
 			<button id="btn-aceptarProfesor" name="btn-aceptarProfesor" class="btn btn-primary"  type="submit">Aceptar</button>
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletsProfesor?Param=MenuProfesor">Volver</a>
 		</form>

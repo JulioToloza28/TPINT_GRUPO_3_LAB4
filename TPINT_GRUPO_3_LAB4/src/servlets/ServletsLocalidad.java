@@ -68,7 +68,7 @@ public class ServletsLocalidad extends HttpServlet {
 		if (Provinciaid != null) {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			List<Localidad> listalocalidades = (ArrayList<Localidad>) locDaoImpl.ObtenerLocalidadPorProvincia(Integer.parseInt(Provinciaid));
+			List<Localidad> listalocalidades = (List<Localidad>) locDaoImpl.ObtenerLocalidadPorProvincia(Integer.parseInt(Provinciaid));
 
 			Gson gson = new Gson();
 			String json = gson.toJson(listalocalidades);
