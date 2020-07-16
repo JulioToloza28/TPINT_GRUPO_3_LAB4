@@ -12,6 +12,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Lista de alumnos</title>
+
+
 <link rel="stylesheet" type="text/css"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
@@ -114,21 +116,28 @@
 				<div class="col-sm-12 col-md-6">
 					<div id="example_filter" class="dataTables_filter">
 						<!-- <label>Buscar:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"> -->
-						</label>
+						<!-- </label> -->
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<!-- <a href="ServletAlumno?BtnAgregar=Alumno"
-						class="btn btn-primary btn-sm">Ingresar Nuevo Alumno</a>  -->
+					
 						<a href="ServletAlumno?BtnAgregar=Alumno" type="button" class="btn btn-outline-success"><i class="fa fa-user-plus"></i> Agregar Alumno</a>
-						
-						<!-- <a
-						id="CargarNota" name="CargarNota"
-						href="ServletAlumXcurso?Param=CargarNota"
-						class="btn btn-outline-info btn-sm">Cargar Nota</a>
- -->
+					<%if (request.getAttribute("cantFilas") != null) { %>
+					<div class="alert alert-success" role="alert">Se agrego correctamente</div>
+<%} %>
+
+				<%if (request.getAttribute("AlumnoEliminado") != null) { %>
+				<div class="alert alert-danger" role="alert">Se elimino correctamente</div>
+				
+				<%} %>
+				
+				<% if(request.getAttribute("cantFilasmod")!=null){ %>
+				<div class="alert alert-warning" role="alert">Se modifico correctamente</div>
+				
+				
+				<%} %>
 					<table id="example" class="display" style="width: 100%">
 						<thead>
 							<tr>
@@ -217,21 +226,7 @@
 				</div>
 			</div>
 		</div>
-		<%
-			int aux = 0;
-		if (request.getAttribute("AlumnoEliminado") != null) {
-			aux = 1;
-		}
-		%>
-
-		<%
-			if (aux == 1) {
-		%>
-		<h5>Eliminado correctamente</h5>
-
-		<%
-			}
-		%>
+		
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script type="text/javascript"
