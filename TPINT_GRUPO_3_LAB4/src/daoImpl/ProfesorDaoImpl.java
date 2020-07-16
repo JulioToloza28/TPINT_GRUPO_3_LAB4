@@ -20,11 +20,13 @@ public class ProfesorDaoImpl implements ProfesorDao{
 	
 	private static final String agregarProfesor="INSERT INTO profesor(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?);";
 	//private static final String listarProfe="SELECT * FROM tpint_grupo_3_lab4.profesor where estado=1;";
-	private static final String readAll = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1;";
+	private static final String readAll = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1";
 	private static final String leerProfesor = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1 and legajo_Pro=?;";
 	private static final String modificarProfesor= "UPDATE profesor set nombre=?,apellido=?, dni=?, fecha_nac=?, direccion=?, Idlocalidad=?, telefono=?, mail=? where legajo_Pro= ?";
     private static final String eliminarProfesor = "UPDATE profesor set estado=0 where legajo_Pro= ?";
-    private static final String VerificarDNI="SELECT * FROM tpint_grupo_3_lab4.profesor where ";
+    private static final String VerificarDNI="SELECT * FROM tpint_grupo_3_lab4.profesor where estado=1 ";
+    private static final String filtrar="SELECT distinct p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  inner join curso as C on C.legajo_Pro=p.legajo_Pro inner join alumnoXcurso as AC on AC.idCurso=C.idcurso where p.estado=1";
+    
     
 	public boolean agregarProfesor(Profesor profesor)
 	{
@@ -127,8 +129,7 @@ public class ProfesorDaoImpl implements ProfesorDao{
 				loc.setId(resultSet.getInt("idlocalidad"));
 				loc.setNombreLoc(resultSet.getString("Localidad"));
 				provincia.setId(resultSet.getInt("idprovincia"));
-				String pr = resultSet.getString("Provincia");
-				provincia.setNombreProv("Prueba");
+				provincia.setNombreProv(resultSet.getString("Provincia"));
 				loc.setProvincia(provincia);
 				profe.setLocalidad(loc);
 				profe.setTelefono(resultSet.getString("telefono"));
@@ -172,10 +173,78 @@ public class ProfesorDaoImpl implements ProfesorDao{
 		return isInsertExitoso;
 	}
 	
+	public ArrayList<Profesor> filtroDeProfesor(int idmateria, int cuatrimestre, int anio) {
+
+		String consulta = filtrar;
+		int cont=0;
+
+		if (idmateria != 0) 
+		{
+			consulta = consulta + " and C.idmateria= " + idmateria;
+			cont++;
+		}
+		if (cuatrimestre != 0) 
+		{
+			consulta = consulta + " and C.cuatrimestre= " + cuatrimestre;
+			cont++;
+		}
+		if (anio != 0) 
+		{
+			consulta = consulta + " and C.anio= " + anio;
+			cont++;
+		}
+		if(cont==0) 
+		{
+			consulta=readAll;
+		}
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+
+		ArrayList<Profesor> listProfe = new ArrayList<Profesor>();
+		PreparedStatement statement;
+		ResultSet resultSet;
+
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(consulta);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Localidad loc = new Localidad();
+				Provincia provincia = new Provincia();
+				Profesor profe = new Profesor();
+				profe.setLegajo(resultSet.getInt("legajo_Pro"));
+				profe.setNombre(resultSet.getString("Profesor"));
+				profe.setApellido(resultSet.getString("Apellido"));
+				profe.setDni(resultSet.getString("Dni"));
+				profe.setFechaNac(resultSet.getDate("fecha_nac"));
+				profe.setDireccion(resultSet.getString("direccion"));
+				loc.setId(resultSet.getInt("idlocalidad"));
+				loc.setNombreLoc(resultSet.getString("Localidad"));
+				provincia.setId(resultSet.getInt("idprovincia"));
+				provincia.setNombreProv(resultSet.getString("Provincia"));
+				loc.setProvincia(provincia);
+				profe.setLocalidad(loc);
+				profe.setTelefono(resultSet.getString("telefono"));
+				profe.setMail(resultSet.getString("mail"));
+				listProfe.add(profe);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return listProfe;
+
+
+	}
+	
+	
 	public boolean VerificarProfesor(String DNI, int Legajo) {
 		boolean resultado=false;
 		
-		String consulta= VerificarDNI +"dni= "+ DNI +" and"+" legajo_Pro <> " + Legajo;
+		String consulta= VerificarDNI +" and dni= "+ DNI +" and"+" legajo_Pro <> " + Legajo;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {

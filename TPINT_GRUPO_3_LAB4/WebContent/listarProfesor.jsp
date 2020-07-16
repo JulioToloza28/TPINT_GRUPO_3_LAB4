@@ -48,11 +48,11 @@
 	</nav>
 	
 	<div class="container">
-	<form action="ServletAlumno?Param=Filtrar" method="get">
+	<form action="ServletsProfesor" method="get">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 			<div class="row">
-				<div class="col-lg-10">
+				<div class="col-lg-6">
 					
 						<label for="sel1">Materias:</label> <select id="cbxMateria"
 							name="cbxMateria" class="custom-select" id="sel1">
@@ -72,6 +72,36 @@
 							%>
 						</select>
 				
+				</div>
+				<div class="col-lg-3">
+					<div class="form-group">
+						<label for="sel1">Cuatrimestre:</label> <select
+							id="cbxCuatrimestre" name="cbxCuatrimestre" class="form-control"
+							id="sel1">
+							<option selected disabled value="">Seleccione...</option>
+							<option value="1">1° Cuatrimestre</option>
+							<option value="2">2° Cuatrimestre</option>
+
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="form-group">
+
+						<label for="sel1">Año:</label> <select id="cdxAnio" name="cdxAnio"
+							class="form-control" id="sel1">
+							<option selected disabled value="">Seleccione...</option>
+							<%
+								for (int x = 2020; x >= 1990; x--) {
+							%>
+							<option><%=x%></option>
+							<%
+								}
+							%>
+						</select>
+
+					</div>
+
 				</div>
 				
 			</div>
@@ -117,6 +147,10 @@
 							listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProf");
 						}
 						%>
+						<%if (request.getAttribute("listaFiltradaProf") != null) {
+							listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaFiltradaProf");}%>
+						
+						
 						<%
 							if (listaProfesor != null)
 							for (Profesor profesor : listaProfesor) {
@@ -172,7 +206,7 @@
 		</div>
 	</div>
 
-	<%
+<%-- 	<%
 		int aux = 0;
 	if (request.getAttribute("ProfesorEliminado") != null) {
 		aux = 1;
@@ -184,7 +218,7 @@
 	<h5>Eliminado correctamente</h5>
 	<%
 		}
-	%>
+	%> --%>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"

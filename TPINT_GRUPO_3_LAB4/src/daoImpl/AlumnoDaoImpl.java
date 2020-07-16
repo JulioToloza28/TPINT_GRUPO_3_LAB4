@@ -27,7 +27,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
     private static final String filtrar="SELECT distinct a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoXcurso as AC on AC.legajoAlumno=a.legajo_alum inner join curso as C on C.idcurso=AC.idcurso where a.estado=1";
     private static final String existeTablaAxC = "SELECT count(*) as total FROM tpint_grupo_3_lab4.alumnoxcurso where legajoAlumno= ? and idCurso= ? and estado = 1";
     private static final String filtrarPorProfesor= "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoxcurso as AC on AC.legajoAlumno=a.legajo_alum inner join curso as C on C.idcurso= AC.idCurso where a.estado=1";
-    private static final String VerificarDNI="SELECT * FROM tpint_grupo_3_lab4.alumno where ";
+    private static final String VerificarDNI="SELECT * FROM tpint_grupo_3_lab4.alumno where estado=1 ";
     
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;
@@ -395,7 +395,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		boolean resultado=false;
 		
 		
-		String consulta= VerificarDNI +"dni= "+ DNI +" and"+" legajo_alum <> " + Legajo;
+		String consulta= VerificarDNI +"and dni= "+ DNI +" and"+" legajo_alum <> " + Legajo;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
