@@ -62,6 +62,26 @@ public class ServletsProfesor extends HttpServlet {
 			request.getRequestDispatcher("/agregarProfesor.jsp").forward(request, response);
 		}
           
+       // Filtrar Profesor
+		  if(request.getParameter("btn-filtrar") != null) {
+		  
+			  int materia=0;
+			  int Cuatri=0;
+			  int anio=0;
+			 
+			  if(request.getParameter("cbxMateria")!=null) { materia= Integer.parseInt(request.getParameter("cbxMateria"));}
+			  if(request.getParameter("cbxCuatrimestre")!=null) {Cuatri= Integer.parseInt(request.getParameter("cbxCuatrimestre"));}
+			  if(request.getParameter("cdxAnio")!=null) {anio= Integer.parseInt(request.getParameter("cdxAnio"));}
+						 
+				  ArrayList<Profesor> listaProfe = profDao.filtroDeProfesor(materia,Cuatri,anio);
+				  
+				  request.setAttribute("listaFiltradaProf", listaProfe);
+				  RequestDispatcher rd = request.getRequestDispatcher("/listarProfesor.jsp");
+			      rd.forward(request, response);  		  
+	      }
+		 
+          
+          
 		//Agregar Profesor
           Profesor ProfeAux=new Profesor();
 		int filas=0;

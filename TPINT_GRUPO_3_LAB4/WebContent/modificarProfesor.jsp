@@ -15,7 +15,7 @@
 
 <jsp:include page="Menu.jsp"></jsp:include>
 
-	<form style="margin: 40px">
+	
 	  <nav aria-label="breadcrumb"> 		
 		<ol class="breadcrumb"> 			
 		<li class="breadcrumb-item active" aria-current="page">Modificar Profesor</li> 
@@ -44,6 +44,7 @@
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 		</div>
+		<br>
 		<div class="form-row">			
 			<div class="col-md-2 mb-3">
 				<label for="validationServer01">Fecha de Nacimiento</label> 
@@ -61,6 +62,7 @@
 				<div class="valid-feedback">Looks good!</div>
 			</div>
        </div>
+       <br>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer02">Direccion</label>  
@@ -102,6 +104,7 @@
 					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
+			<br>
 			<button id="btn-EditarProfesor" name="btn-EditarProfesor" class="btn btn-primary" type="submit">Aceptar</button>
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletsProfesor?Param=MenuProfesor">Volver</a>
 
