@@ -8,11 +8,13 @@
 <%@page import="daoImpl.LocalidadDaoImpl" %>
 <%@page import="dao.LocalidadDao" %>
 <%@page import="java.util.ArrayList" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <style>
   #lblCreado{color: #4F8A10!important;background: #DFF2BF!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
-  span#lblError{color: #D8000C!important;background-color: #FFD2D2!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
+  #lblError{color: #D8000C!important;background-color: #FFD2D2!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
   #txtCaracteres{color:red;}
+  
 </style>
 
 <html>
@@ -28,14 +30,12 @@
 
 	  <nav aria-label="breadcrumb"> 		
 		<ol class="breadcrumb"> 			
-		<li class="breadcrumb-item active" aria-current="page">Agregar alumnos</li> 
+		<li class="breadcrumb-item active" aria-current="page">Agregar Alumno</li> 
 		</ol> 		
 	</nav>
 		         
 	<form action="ServletAlumno" method="get" style="margin: 40px">
-	     <div class="row">
-               <label id="lblCreado" name="lblCreado" style="visibility:hidden">Alumno creado</label>
-        </div>
+	
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Nombre</label> 
@@ -49,10 +49,11 @@
 			</div>
 			<div class="col-md-2 mb-3">
 				<label for="validationServer03">DNI</label> 
-				<input name="txtDni" type="text" class="form-control " onKeyPress="return onlyNumber(event)" value="" required>
+				<input id="txtDni" name="txtDni" type="text" class="form-control " onKeyPress="return onlyNumber(event)" value="" required>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 		</div>
+		<br>
 		<div class="form-row">			
 			<div class="col-md-2 mb-3">
 				<label for="validationServer01">Fecha de Nacimiento</label> 
@@ -70,6 +71,7 @@
 				<div class="valid-feedback">Looks good!</div>
 			</div>
        </div>
+       <br>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer02">Direccion</label>  
@@ -109,8 +111,12 @@
 					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
+			<br>
+			
 			<button id="btn-aceptar" name="btn-aceptar" class="btn btn-primary" type="submit">Agregar</button>
-			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
+			<a id="Retroceder" name="Retroceder" class="btn btn-outline-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
+			
+		
 	</form>
 
 	<%
@@ -131,7 +137,7 @@
 	%>
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 	<script>

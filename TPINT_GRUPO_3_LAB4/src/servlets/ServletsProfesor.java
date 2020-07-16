@@ -63,6 +63,7 @@ public class ServletsProfesor extends HttpServlet {
 		}
           
 		//Agregar Profesor
+          Profesor ProfeAux=new Profesor();
 		int filas=0;
 			if(request.getParameter("btn-aceptarProfesor")!=null) 
 			{
@@ -89,12 +90,35 @@ public class ServletsProfesor extends HttpServlet {
 				prof.setMail(request.getParameter("txtMail"));
 				prof.setEstado(true);
 				
+				
 				ProfesorDaoImpl profImp=new ProfesorDaoImpl();
-				if(profImp.agregarProfesor(prof)!=false) 
+				
+				if(profImp.VerificarProfesor(prof.getDni(),100)==false) 
 				{
-					filas=1;
+					if(profImp.agregarProfesor(prof)!=false) 
+					{
+						filas=1;
+					}
+				}else 
+				{
+					ProfeAux=prof;
+					ArrayList<Provincia> listaProv = provDao.listarProvincia();
+					ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
+
+					request.setAttribute("listaProvDao", listaProv);
+					request.setAttribute("listaLocDao", listaLoc);
+					request.setAttribute("ProfesorRep", ProfeAux);
+					RequestDispatcher rd = request.getRequestDispatcher("/VerificarProfesor.jsp");
+					rd.forward(request, response);
+									
 				}
+				
+								
+				
 			}
+			
+
+			
 			if(filas==1) {
 			//REQUEST DISPATCHER
 			request.setAttribute("cantFilas", filas);
@@ -149,10 +173,25 @@ public class ServletsProfesor extends HttpServlet {
 	  				profe.setEstado(true);
 	  				
 	  				ProfesorDaoImpl profeImp=new ProfesorDaoImpl();
-	  				if(profeImp.modificarProfesor(profe)!=false) 
-	  				{
-	  					filas=1;
-	  				}	
+	  				if(profeImp.VerificarProfesor(profe.getDni(),profe.getLegajo())==false){
+	  					if(profeImp.modificarProfesor(profe)!=false) 
+		  				{
+		  					filas=1;
+		  				}		  					
+	  				}else 
+					{
+						
+						ArrayList<Provincia> listaProv = provDao.listarProvincia();
+						ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
+
+						request.setAttribute("listaProvDao", listaProv);
+						request.setAttribute("listaLocDao", listaLoc);
+						request.setAttribute("ProfesorRepMod", profe);
+						RequestDispatcher rd = request.getRequestDispatcher("/VerificarProfesor.jsp");
+						rd.forward(request, response);
+										
+					}
+	  			
 	  				if(filas==1) {
 	  					//REQUEST DISPATCHER
 	  					request.setAttribute("cantFilas", filas);

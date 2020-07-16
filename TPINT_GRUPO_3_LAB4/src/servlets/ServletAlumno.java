@@ -43,6 +43,8 @@ public class ServletAlumno extends HttpServlet {
 		ProvinciaDaoImpl provDao = new ProvinciaDaoImpl();
 		LocalidadDaoImpl locDao = new LocalidadDaoImpl();
 		ReporteDaoImpl reporteDao = new ReporteDaoImpl();
+		Alumno alumAux=new Alumno();
+		
 
 		// listar alumno
 		if ("MenuAlumno".equals(request.getParameter("Param"))) {
@@ -84,7 +86,7 @@ public class ServletAlumno extends HttpServlet {
 			request.getRequestDispatcher("/agregarAlumno.jsp").forward(request, response);
 		}
 
-		// modificar alumno (trae listados de combos y de alumno)
+		// Modificar alumno (trae listados de combos y de alumno)
 		if ("ModificarAlumno".equals(request.getParameter("Param"))) {
 			ArrayList<Provincia> listaProv = provDao.listarProvincia();
 			ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
@@ -92,13 +94,15 @@ public class ServletAlumno extends HttpServlet {
 			Alumno alum = alumDao.ObtenerAlumno(Integer.parseInt(request.getParameter("Data")));
 
 			request.setAttribute("AlumnoAMod", alum);
-
+			alumAux=alum;
+	
 			request.setAttribute("listaProvDao", listaProv);
 			request.setAttribute("listaLocDao", listaLoc);
 			request.getRequestDispatcher("/modificarAlumno.jsp").forward(request, response);
 		}
 
 		// Agregar alumno
+		
 		int filas = 0;
 		if (request.getParameter("btn-aceptar") != null) {
 			
@@ -126,22 +130,28 @@ public class ServletAlumno extends HttpServlet {
 
 			AlumnoDaoImpl alumImp = new AlumnoDaoImpl();
 			
-			if(alumImp.VerificarAlumno(alum.getDni())==false) 
+			if(alumImp.VerificarAlumno(alum.getDni(),100)==false) 
 			{
 				if (alumImp.agregarAlumno(alum) != false) {
 					filas = 1;
 				}
 			}else 
 			{
-				PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('El alumno ya existe');");
-				 out.println("location='agregarAlumno.jsp';"); 
-				out.println("</script>");
 				
+				ArrayList<Provincia> listaProv = provDao.listarProvincia();
+				ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
+
+				request.setAttribute("listaProvDao", listaProv);
+				request.setAttribute("listaLocDao", listaLoc);
+				request.setAttribute("AlumnoRep", alum);
+				RequestDispatcher rd = request.getRequestDispatcher("/VerificarAlumno.jsp");
+				rd.forward(request, response);
+								
 			}
 			
 		}
+		
+		
 		if (filas == 1) {
 			// REQUEST DISPATCHER
 			request.setAttribute("cantFilas", filas);
@@ -155,12 +165,11 @@ public class ServletAlumno extends HttpServlet {
 
 		// Modificar alumno (guarda los datos una vez que se hace click)
 		if (request.getParameter("btn-EditarAlumno") != null) {
-			// Alumno alum = new Alumno();
+			
 			Localidad loc = new Localidad();
 			String a = request.getParameter("cmbLocalidad").toString();
 			loc.setId(Integer.parseInt(a));
 			Alumno alum1 = new Alumno();
-			String algo = request.getParameter("txtlegajo");
 			alum1.setLegajo(Integer.parseInt(request.getParameter("txtlegajo")));
 			alum1.setNombre(request.getParameter("txtNombre"));
 			alum1.setApellido(request.getParameter("txtApellido"));
@@ -179,11 +188,33 @@ public class ServletAlumno extends HttpServlet {
 			alum1.setTelefono(request.getParameter("txtTelefono"));
 			alum1.setMail(request.getParameter("txtEmail"));
 			alum1.setEstado(true);
+			
 
 			AlumnoDaoImpl alumImp = new AlumnoDaoImpl();
-			if (alumImp.modificarAlumno(alum1) != false) {
-				filas = 1;
+			
+			
+			if(alumImp.VerificarAlumno(alum1.getDni(),alum1.getLegajo())==false) 
+			{
+				if (alumImp.modificarAlumno(alum1) != false) {
+					filas = 1;
+				}
+			}else 
+			{
+				alumAux=alum1;
+				ArrayList<Provincia> listaProv = provDao.listarProvincia();
+				ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
+
+				request.setAttribute("listaProvDao", listaProv);
+				request.setAttribute("listaLocDao", listaLoc);
+				request.setAttribute("AlumnoRepModi", alum1);
+				RequestDispatcher rd = request.getRequestDispatcher("/VerificarAlumno.jsp");
+				rd.forward(request, response);
+								
 			}
+			
+			
+			
+			
 			if (filas == 1) {
 				// REQUEST DISPATCHER
 				request.setAttribute("cantFilas", filas);

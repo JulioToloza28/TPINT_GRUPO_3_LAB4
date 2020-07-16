@@ -41,8 +41,10 @@
 	<div class="container">
 
 		<form action="ServletAlumno?Param=Filtrar" method="get">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-6">
 					<div class="form-group">
 						<label for="sel1">Materias:</label> <select id="cbxMateria"
 							name="cbxMateria" class="custom-select" id="sel1">
@@ -93,12 +95,18 @@
 					</div>
 
 				</div>
-				<div class="col-lg-3">
-					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-primary"
-						type="submit">Filtrar</button>
-				</div>
+				
 			</div>
+			<div class="col align-self-center">
+					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-outline-info"
+						type="submit"><i class="fa fa-search"></i>Filtrar</button>
+					
+				</div>
+				</ol>
+			</nav>
 		</form>
+		
+			
 
 		<div class="row">
 			<div class="col-sm-12 col-md-6">
@@ -112,12 +120,15 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<a href="ServletAlumno?BtnAgregar=Alumno"
-						class="btn btn-outline-primary btn-sm">Agregar</a> <a
+					<!-- <a href="ServletAlumno?BtnAgregar=Alumno"
+						class="btn btn-primary btn-sm">Ingresar Nuevo Alumno</a>  -->
+						<a href="ServletAlumno?BtnAgregar=Alumno" type="button" class="btn btn-outline-success"><i class="fa fa-user-plus"></i> Agregar Alumno</a>
+						
+						<!-- <a
 						id="CargarNota" name="CargarNota"
 						href="ServletAlumXcurso?Param=CargarNota"
 						class="btn btn-outline-info btn-sm">Cargar Nota</a>
-
+ -->
 					<table id="example" class="display" style="width: 100%">
 						<thead>
 							<tr>
