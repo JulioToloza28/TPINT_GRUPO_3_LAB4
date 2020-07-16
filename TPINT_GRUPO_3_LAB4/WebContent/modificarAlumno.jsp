@@ -109,21 +109,6 @@
 	</form>
 					<%} %>
 
-	<%
-	  int filas=0;
-	  if(request.getAttribute("cantFilas")!=null)
-	  {
-		  filas=1;
-	  }
-	%>
-	
-	<% if(filas==1)
-		{
-	%>
-	 <h5>Modificado correctamente</h5>
-		
-	<%}%>
-
 
 </body>
 </html>
