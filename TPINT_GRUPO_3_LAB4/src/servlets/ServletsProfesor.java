@@ -159,7 +159,6 @@ public class ServletsProfesor extends HttpServlet {
 	  			Profesor profe = profDao.ObtenerProfesor(Integer.parseInt(request.getParameter("Data")));
 	  			
 	  			request.setAttribute("ProfesorAMod", profe);
-	  			
 	  			request.setAttribute("listaProvDao", listaProv);
 	  			request.setAttribute("listaLocDao", listaLoc);
 	  			request.getRequestDispatcher("/modificarProfesor.jsp").forward(request, response);

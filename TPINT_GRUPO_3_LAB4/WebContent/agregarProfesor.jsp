@@ -175,25 +175,7 @@ function validateMail() {
 			<button id="btn-aceptarProfesor" name="btn-aceptarProfesor" class="btn btn-primary"  type="submit">Aceptar</button>
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletsProfesor?Param=MenuProfesor">Volver</a>
 		</form>
-<%-- 
-		<%
-	  int filas=0;
-	  if(request.getAttribute("cantFilas")!=null)
-	  {
-		  filas=1;
-	  }
-	 
-	
-	%>
-	
-	<% if(filas==1)
-		{
-	%>
-	 <h5>Agregado correctamente</h5>
-		
-	<%
-		}
-	%> --%>
+
 	
 </body>
 </html>
