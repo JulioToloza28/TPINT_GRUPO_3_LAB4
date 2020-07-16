@@ -214,8 +214,11 @@ public class ServletsProfesor extends HttpServlet {
 	  			
 	  				if(filas==1) {
 	  					//REQUEST DISPATCHER
-	  					request.setAttribute("cantFilas", filas);
-	  					RequestDispatcher rd= request.getRequestDispatcher("/modificarProfesor.jsp");
+	  					request.setAttribute("cantFilasMod", filas);
+	  					ArrayList<Profesor> listaProfesor = profDao.listarProfesores();
+	  					
+	  					request.setAttribute("listaProf", listaProfesor);
+	  					RequestDispatcher rd= request.getRequestDispatcher("/listarProfesor.jsp");
 	  					rd.forward(request, response);
 	  					}
 	  			}
