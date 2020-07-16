@@ -153,7 +153,7 @@ function validateMail() {
 								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
 								<%} %>	
 					</select>
-					<div class="invalid-feedback">Please select a valid state.</div>
+					<div class="invalid-feedback">Por favor seleccione una opcion</div>
 				</div>
 				 <div class="col-md-2 mb-3">
 					<label for="validationServer03">Localidad</label> 
@@ -176,24 +176,6 @@ function validateMail() {
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletsProfesor?Param=MenuProfesor">Volver</a>
 		</form>
 
-		<%
-	  int filas=0;
-	  if(request.getAttribute("cantFilas")!=null)
-	  {
-		  filas=1;
-	  }
-	 
-	
-	%>
-	
-	<% if(filas==1)
-		{
-	%>
-	 <h5>Agregado correctamente</h5>
-		
-	<%
-		}
-	%>
 	
 </body>
 </html>

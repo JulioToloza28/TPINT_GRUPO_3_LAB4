@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -10,11 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
 import entidades.Localidad;
 import entidades.Provincia;
 import dao.LocalidadDao;
 import daoImpl.LocalidadDaoImpl;
-import com.google.gson.Gson;
+
 /**
  * Servlet implementation class ServletsLocalidad
  */
@@ -74,7 +78,9 @@ public class ServletsLocalidad extends HttpServlet {
 			String json = gson.toJson(listalocalidades);
 			PrintWriter out = response.getWriter();
 			out.print(json);
-			out.flush();
+			out.flush();			
+			
+			 
 		}
 	}
 

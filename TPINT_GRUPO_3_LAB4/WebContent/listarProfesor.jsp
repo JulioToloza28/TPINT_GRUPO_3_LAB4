@@ -46,14 +46,14 @@
 		<li class="breadcrumb-item active" aria-current="page">Profesores</li>
 	</ol>
 	</nav>
-	
+
 	<div class="container">
-	<form action="ServletsProfesor" method="get">
-		<nav aria-label="breadcrumb">
+		<form action="ServletsProfesor" method="get">
+			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-			<div class="row">
-				<div class="col-lg-6">
-					
+				<div class="row">
+					<div class="col-lg-6">
+
 						<label for="sel1">Materias:</label> <select id="cbxMateria"
 							name="cbxMateria" class="custom-select" id="sel1">
 							<option selected disabled value="<>">Seleccione...</option>
@@ -71,46 +71,48 @@
 								}
 							%>
 						</select>
-				
-				</div>
-				<div class="col-lg-3">
-					<div class="form-group">
-						<label for="sel1">Cuatrimestre:</label> <select
-							id="cbxCuatrimestre" name="cbxCuatrimestre" class="form-control"
-							id="sel1">
-							<option selected disabled value="">Seleccione...</option>
-							<option value="1">1° Cuatrimestre</option>
-							<option value="2">2° Cuatrimestre</option>
-
-						</select>
-					</div>
-				</div>
-				<div class="col-lg-3">
-					<div class="form-group">
-
-						<label for="sel1">Año:</label> <select id="cdxAnio" name="cdxAnio"
-							class="form-control" id="sel1">
-							<option selected disabled value="">Seleccione...</option>
-							<%
-								for (int x = 2020; x >= 1990; x--) {
-							%>
-							<option><%=x%></option>
-							<%
-								}
-							%>
-						</select>
 
 					</div>
+					<div class="col-lg-3">
+						<div class="form-group">
+							<label for="sel1">Cuatrimestre:</label> <select
+								id="cbxCuatrimestre" name="cbxCuatrimestre" class="form-control"
+								id="sel1">
+								<option selected disabled value="">Seleccione...</option>
+								<option value="1">1° Cuatrimestre</option>
+								<option value="2">2° Cuatrimestre</option>
+
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="form-group">
+
+							<label for="sel1">Año:</label> <select id="cdxAnio"
+								name="cdxAnio" class="form-control" id="sel1">
+								<option selected disabled value="">Seleccione...</option>
+								<%
+									for (int x = 2020; x >= 1990; x--) {
+								%>
+								<option><%=x%></option>
+								<%
+									}
+								%>
+							</select>
+
+						</div>
+
+					</div>
 
 				</div>
-				
-			</div>
-			<div class="col align-self-center">
-					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-outline-info"
-						type="submit"><i class="fa fa-search"></i>Filtrar</button>
-					
+				<div class="col align-self-center">
+					<button id="btn-filtrar" name="btn-filtrar"
+						class="btn btn-outline-info" type="submit">
+						<i class="fa fa-search"></i>Filtrar
+					</button>
+
 				</div>
-				</ol>
+			</ol>
 			</nav>
 		</form>
 		<div class="row">
@@ -121,7 +123,33 @@
 				<!-- <a id="BtnAgregar" name="BtnAgregar"
 					href="ServletsProfesor?BtnAgregar=Profesor"
 					class="btn btn-outline-primary btn-sm">Agregar</a> -->
-					<a id="BtnAgregar" name="BtnAgregar" href="ServletsProfesor?BtnAgregar=Profesor" type="button" class="btn btn-outline-success"><i class="fa fa-user-plus"></i> Agregar Profesor</a>
+				<a id="BtnAgregar" name="BtnAgregar"
+					href="ServletsProfesor?BtnAgregar=Profesor" type="button"
+					class="btn btn-outline-success"><i class="fa fa-user-plus"></i>
+					Agregar Profesor</a>
+
+				<%
+					if (request.getAttribute("cantFilas") != null) {
+				%>
+				<div class="alert alert-success" role="alert">Se agrego
+					correctamente</div>
+				<%
+					}
+				%>
+				<%if (request.getAttribute("cantFilasMod") != null) {%>
+				<div class="alert alert-warning" role="alert">Se modifico correctamente</div>
+
+				<%}%>
+				<%
+					if (request.getAttribute("ProfesorEliminado") != null) {
+				%>
+				<div class="alert alert-danger" role="alert">Se elimino
+					correctamente</div>
+
+				<%
+					}
+				%>
+
 
 				<table id="example" class="display" style="width: 100%">
 					<thead>
@@ -147,10 +175,13 @@
 							listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProf");
 						}
 						%>
-						<%if (request.getAttribute("listaFiltradaProf") != null) {
-							listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaFiltradaProf");}%>
-						
-						
+						<%
+							if (request.getAttribute("listaFiltradaProf") != null) {
+							listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaFiltradaProf");
+						}
+						%>
+
+
 						<%
 							if (listaProfesor != null)
 							for (Profesor profesor : listaProfesor) {
@@ -206,7 +237,7 @@
 		</div>
 	</div>
 
-<%-- 	<%
+	<%-- 	<%
 		int aux = 0;
 	if (request.getAttribute("ProfesorEliminado") != null) {
 		aux = 1;
