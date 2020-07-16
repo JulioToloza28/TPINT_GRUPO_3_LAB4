@@ -153,7 +153,7 @@ function validateMail() {
 								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
 								<%} %>	
 					</select>
-					<div class="invalid-feedback">Please select a valid state.</div>
+					<div class="invalid-feedback">Por favor seleccione una opcion</div>
 				</div>
 				 <div class="col-md-2 mb-3">
 					<label for="validationServer03">Localidad</label> 
