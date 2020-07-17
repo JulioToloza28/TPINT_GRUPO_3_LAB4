@@ -44,7 +44,7 @@
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div style="width: 80%; float: left">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="navbar-brand" href="#"> <img
+				<li class="nav-item"><a class="navbar-brand" href="Home.jsp"> <img
 						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="ServletsProfesor?Param=MenuProfesor">Profesores</a></li>
