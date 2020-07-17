@@ -9,7 +9,7 @@
 <body>
 <jsp:include page="Menu.jsp"></jsp:include>
 <div>
-  <img src="img/utn-pacheco.jpg" style="height:700;width:1280px;opacity: 0.5;">
+  <img src="img/UTN.jpg" style="height:700;width:1280px;opacity: 0.5;">
 </div>
 
 </body>
