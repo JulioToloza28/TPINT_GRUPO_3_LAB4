@@ -169,7 +169,7 @@ public class ServletCurso extends HttpServlet {
 		if (request.getParameter("btn-GrabarCurso") != null) {
 			Boolean CancelarGrabado = false;
 			String Msj = null;
-			Alumno alum = null;
+			Alumno A = null;
 			String[] lAlumnosInscriptos;
 			int IdCurso;
 			Curso curs = new Curso();
@@ -210,7 +210,6 @@ public class ServletCurso extends HttpServlet {
 
 			if (CancelarGrabado) {
 				ArrayList<Alumno> lAlumAux = new ArrayList<Alumno>();
-				Alumno A;
 				lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
 				for (int x = 0; x < lAlumnosInscriptos.length; x++) {
 					A = new Alumno();
@@ -231,14 +230,17 @@ public class ServletCurso extends HttpServlet {
 				request.setAttribute("ListaAlumnosAux", lAlumAux);
 				request.setAttribute("ListaAlumnos", lAlum);
 				request.setAttribute("listaProfes", lProfesor);
+				RequestDispatcher rd = request.getRequestDispatcher("/agregarCurso.jsp");
+				rd.forward(request, response);
+			} else {
+
+				ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
+
+				request.setAttribute("listaCursos", lCursos);
+				request.setAttribute("Mensaje", Msj);
+				RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
+				rd.forward(request, response);
 			}
-
-			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
-
-			request.setAttribute("listaCursos", lCursos);
-			request.setAttribute("Mensaje", Msj);
-			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
-			rd.forward(request, response);
 		}
 
 		// BOTON GUARDAR EDICION

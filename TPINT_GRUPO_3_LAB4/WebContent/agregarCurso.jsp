@@ -40,22 +40,31 @@
 			Curso</li>
 	</ol>
 	</nav>
-<%
+	<%
 		Curso curso = null;
-		if (request.getAttribute("CursoElim") != null) {
-			curso = (Curso) request.getAttribute("CursoElim");
+		if (request.getAttribute("CursoAux") != null) {
+			curso = (Curso) request.getAttribute("CursoAux");
 		}
 	%>
 	<div class="container">
-			<form style="margin: 40px" method="post" action="ServletCurso">
-		<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
+		<form style="margin: 40px" method="post" action="ServletCurso">
+			<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
 				<div class="row">
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Materia:</label> <select name="cmbMateria"
 							class="custom-select " id="validationServer04" required>
+							<%
+								if (curso != null) {
+							%>
+							<option selected style="visibility: hidden"
+								value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
+							<%
+								} else {
+							%>
 							<option selected disabled value="">Seleccione...</option>
 							<%
+								}
 								ArrayList<Materia> listaMateria = null;
 								if (request.getAttribute("listaMatDao") != null) {
 									listaMateria = (ArrayList<Materia>) request.getAttribute("listaMatDao");
@@ -75,8 +84,17 @@
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Turno:</label> <select class="form-control"
 							id="sel1" name="cmbTurno" required>
+							<%
+								if (curso != null) {
+							%>
+							<option selected style="visibility: hidden"
+								value=<%=curso.getIdTurno()%>><%=curso.getTurno()%></option>
+							<%
+								} else {
+							%>
 							<option selected disabled value="">Seleccione...</option>
 							<%
+								}
 								ArrayList<Turno> listaTurnos = null;
 								if (request.getAttribute("ListaTurnos") != null) {
 									listaTurnos = (ArrayList<Turno>) request.getAttribute("ListaTurnos");
@@ -96,7 +114,18 @@
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Cuatrimestre N°:</label> <select
 							class="form-control" id="sel1" name="cmbCuatrimestre" required>
+							<%
+								if (curso != null) {
+							%>
+							<option selected style="visibility: hidden"
+								value=<%=curso.getCuatrimestre()%>><%=curso.getCuatrimestre()%></option>
+							<%
+								} else {
+							%>
 							<option selected disabled value="">Seleccione...</option>
+							<%
+								}
+							%>
 							<option>1</option>
 							<option>2</option>
 						</select>
@@ -105,7 +134,18 @@
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Año:</label> <select class="form-control"
 							id="sel1" name="cmbAnio" required>
+							<%
+								if (curso != null) {
+							%>
+							<option selected style="visibility: hidden"
+								value=<%=curso.getAnio()%>><%=curso.getAnio()%></option>
+							<%
+								} else {
+							%>
 							<option selected disabled value="">Seleccione...</option>
+							<%
+								}
+							%>
 							<%
 								for (int x = 2020; x >= 1990; x--) {
 							%>
@@ -117,118 +157,140 @@
 					</div>
 
 				</div>
-		</ol>
-		</nav>
+			</ol>
+			</nav>
 
-		<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			<div class="col-md-3 mb-3">
-			<H4>Profesor:</H4>
-			</div>
-			<div class="col-md-3 mb-3">
+			<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<div class="col-md-3 mb-3">
+					<H4>Profesor:</H4>
+				</div>
+				<div class="col-md-3 mb-3">
 
-				<select name="cmbProfesor" class="custom-select "
-					id="validationServer04" required>
-					<option selected disabled value="">Seleccione...</option>
+					<select name="cmbProfesor" class="custom-select "
+						id="validationServer04" required>
+						<%
+							if (curso != null) {
+						%>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
+						<%
+							} else {
+						%>
+						<option selected disabled value="">Seleccione...</option>
+						<%
+							}
+						%>
+						<%
+							ArrayList<Profesor> listaProfesor = null;
+							if (request.getAttribute("listaProfes") != null) {
+								listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProfes");
+							}
+						%>
+						<%
+							if (listaProfesor != null)
+								for (Profesor prof : listaProfesor) {
+						%>
+						<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
+							|
+							<%=prof.getApellido()%>,
+							<%=prof.getNombre()%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
+			</ol>
+			</nav>
+
+
+			<H4>Alumnos:</H4>
+			<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
+				style="width: 100%">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Legajo</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>DNI</th>
+						<th>Fecha nacimiento</th>
+						<th>Direccion</th>
+						<th>Localidad</th>
+						<th>Provincia</th>
+						<th>Telefono</th>
+						<th>Mail</th>
+					</tr>
+				</thead>
+				<tbody>
 					<%
-						ArrayList<Profesor> listaProfesor = null;
-						if (request.getAttribute("listaProfes") != null) {
-							listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProfes");
+						ArrayList<Alumno> listaAlumno = null;
+						ArrayList<Alumno> listaAlumnoSelecc = null;
+						if (request.getAttribute("ListaAlumnos") != null) {
+							listaAlumno = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+						}
+						if (request.getAttribute("ListaAlumnosAux") != null) {
+							listaAlumnoSelecc = (ArrayList<Alumno>) request.getAttribute("ListaAlumnosAux");
+						}
+						if (listaAlumno != null)
+							for (Alumno alumno : listaAlumno) {
+					%>
+					<tr>
+						<td>
+						<%if(listaAlumnoSelecc!=null){ %>
+								<input type="checkbox" id="cboxAlumno" name="cboxAlumno"
+							value="<%=alumno.getLegajo()%>"
+							<%for (Alumno selecc : listaAlumnoSelecc) {
+						if (selecc.getLegajo() == alumno.getLegajo()) {%>
+							checked <%}
+					}%>><%} else{%>
+							<input type="checkbox" id="cboxAlumno" name="cboxAlumno" value="<%=alumno.getLegajo()%>">
+							<%} %>
+						</td>
+						<td><%=alumno.getLegajo()%></td>
+						<td><%=alumno.getNombre()%></td>
+						<td><%=alumno.getApellido()%></td>
+						<td><%=alumno.getDni()%></td>
+						<td><%=alumno.getFechaNac()%></td>
+						<td><%=alumno.getDireccion()%></td>
+						<td><%=alumno.getLocalidad().getNombreLoc()%></td>
+						<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
+						<td><%=alumno.getTelefono()%></td>
+						<td><%=alumno.getMail()%></td>
+					</tr>
+					<%
 						}
 					%>
-					<%
-						if (listaProfesor != null)
-							for (Profesor prof : listaProfesor) {
-					%>
-					<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
-						|
-						<%=prof.getApellido()%>,
-						<%=prof.getNombre()%></option>
-					<%
-						}
-					%>
-				</select>
-			</div>
-		</ol>
-		</nav>
 
 
-		<H4>Alumnos:</H4>
-		<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
-			style="width: 100%">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Legajo</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
-					<th>DNI</th>
-					<th>Fecha nacimiento</th>
-					<th>Direccion</th>
-					<th>Localidad</th>
-					<th>Provincia</th>
-					<th>Telefono</th>
-					<th>Mail</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					ArrayList<Alumno> listaAlumno = null;
-					if (request.getAttribute("ListaAlumnos") != null) {
-						listaAlumno = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
-					}
-				%>
-				<%
-					if (listaAlumno != null)
-						for (Alumno alumno : listaAlumno) {
-				%>
-				<tr>
-					<td><input type="checkbox" id="cboxAlumno" name="cboxAlumno"
-						value="<%=alumno.getLegajo()%>"></td>
-					<td><%=alumno.getLegajo()%></td>
-					<td><%=alumno.getNombre()%></td>
-					<td><%=alumno.getApellido()%></td>
-					<td><%=alumno.getDni()%></td>
-					<td><%=alumno.getFechaNac()%></td>
-					<td><%=alumno.getDireccion()%></td>
-					<td><%=alumno.getLocalidad().getNombreLoc()%></td>
-					<td><%=alumno.getLocalidad().getProvincia().getNombreProv()%></td>
-					<td><%=alumno.getTelefono()%></td>
-					<td><%=alumno.getMail()%></td>
-				</tr>
-				<%
-					}
-				%>
+				</tbody>
 
-
-			</tbody>
-
-		</table>
+			</table>
 
 
 
-		<button Id="btn-GrabarCurso" name="btn-GrabarCurso"
-			class="btn btn-primary" type="submit">Guardar</button>
-		<a Id="Retroceder" name="Retroceder" class="btn btn-secondary"
-			type="submit" href="ServletCurso?listCourses=1">Volver</a>
-		<!-- 				<a Id="Retroceder" -->
-		<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
-		<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
+			<button Id="btn-GrabarCurso" name="btn-GrabarCurso"
+				class="btn btn-primary" type="submit">Guardar</button>
+			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary"
+				type="submit" href="ServletCurso?listCourses=1">Volver</a>
+			<!-- 				<a Id="Retroceder" -->
+			<!-- 				name="Retroceder" class="btn btn-danger" type="submit" -->
+			<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
 		</form>
 
-		<%
-			int fila = 0;
-			if (request.getAttribute("cantFilas") != null) {
-				fila = 1;
-			}
-		%>
-		<%
-			if (fila == 1) {
-		%>
-		<h2>Agregado Correctamente</h2>
-		<%
-			}
-		%>
+ 		<%
+ 			int fila = 0;
+ 			if (request.getAttribute("cantFilas") != null) {
+ 				fila = 1;
+ 			}
+ 		%>
+ 		<%
+ 			if (fila == 1) {
+ 		%>
+ 		<h2>Agregado Correctamente</h2> -->
+ 		<%
+ 			}
+ 		%>
 
 	</div>
 	<script
