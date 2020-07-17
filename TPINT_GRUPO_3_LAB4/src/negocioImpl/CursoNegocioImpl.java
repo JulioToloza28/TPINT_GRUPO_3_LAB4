@@ -26,6 +26,12 @@ public class CursoNegocioImpl implements CursoNegocio {
 	}
 
 	@Override
+	public ArrayList<Curso> listarCursos(int LegajoProf) {
+		ArrayList<Curso> lCurso = cursoDao.listarCursos(LegajoProf);
+		return lCurso;
+	}
+
+	@Override
 	public boolean eliminarCurso(int Id) {
 		boolean eliminado = cursoDao.eliminarCurso(Id);
 		return eliminado;

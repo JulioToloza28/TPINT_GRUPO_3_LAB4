@@ -14,6 +14,7 @@ public class CursoDaoImpl implements CursoDao {
 
 	String buscarxId = "SELECT * FROM tpint_grupo_3_lab4.listar_cursos where idcurso=";
 	String listarTodos = "SELECT * FROM tpint_grupo_3_lab4.listar_cursos";
+	String listarCursosProf = "SELECT * FROM tpint_grupo_3_lab4.listar_cursos where Legajo_pro=";
 	String eliminar_Curso = "UPDATE tpint_grupo_3_lab4.curso SET estado = 0 WHERE idcurso = ";
 	String agregarCurso = "insert into tpint_grupo_3_lab4.curso (IdMateria, idturno, Cuatrimestre, Anio, Legajo_pro, Estado) VALUES(?, ?, ?, ?, ?, ?)";
 	String ultimoIdCurso = "SELECT idcurso FROM tpint_grupo_3_lab4.curso order by idCurso desc LIMIT 1";
@@ -69,6 +70,45 @@ public class CursoDaoImpl implements CursoDao {
 		Conexion conexion = Conexion.getConexion();
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(listarTodos);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				curso = new Curso();
+
+				curso.setId(resultSet.getInt("idcurso"));
+				curso.setIdMateria(resultSet.getInt("IdMateria"));
+				curso.setIdTurno(resultSet.getInt("idturno"));
+				curso.setCuatrimestre(resultSet.getInt("cuatrimestre"));
+				curso.setAnio(resultSet.getInt("anio"));
+				curso.setLegajoProf(resultSet.getInt("legajo_Pro"));
+				curso.setEstado(resultSet.getInt("estado"));
+				curso.setMateria(resultSet.getString("materia"));
+				curso.setTurno(resultSet.getString("turno"));
+				curso.setProfesor(resultSet.getString("apeNomProf"));
+				curso.setCantAlum(resultSet.getInt("cantAlum"));
+
+				lCursos.add(curso);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lCursos;
+	}
+	
+	@Override
+	public ArrayList<Curso> listarCursos(int LegajoProf) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Curso curso = null;
+		ArrayList<Curso> lCursos = new ArrayList<Curso>();
+		PreparedStatement statement;
+		ResultSet resultSet;
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(listarCursosProf + LegajoProf);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				curso = new Curso();

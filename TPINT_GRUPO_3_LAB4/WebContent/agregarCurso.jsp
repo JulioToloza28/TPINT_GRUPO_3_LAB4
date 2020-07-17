@@ -5,6 +5,7 @@
 <%@page import="entidades.Profesor"%>
 <%@page import="entidades.Turno"%>
 <%@page import="entidades.Alumno"%>
+<%@page import="entidades.Curso"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,7 +40,12 @@
 			Curso</li>
 	</ol>
 	</nav>
-
+<%
+		Curso curso = null;
+		if (request.getAttribute("CursoElim") != null) {
+			curso = (Curso) request.getAttribute("CursoElim");
+		}
+	%>
 	<div class="container">
 			<form style="margin: 40px" method="post" action="ServletCurso">
 		<nav aria-label="breadcrumb">

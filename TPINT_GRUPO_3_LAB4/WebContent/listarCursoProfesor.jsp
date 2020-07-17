@@ -25,10 +25,11 @@
 .bs-example {
 	margin: 20px;
 }
-.MensajeServlet{
-color:navy;
-/* background-color:gray; */
-text-align:Center;
+
+.MensajeServlet {
+	color: navy;
+	/* background-color:gray; */
+	text-align: Center;
 }
 </style>
 
@@ -39,8 +40,7 @@ text-align:Center;
 
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Listar
-			Cursos</li>
+		<li class="breadcrumb-item active" aria-current="page">Mis Cursos</li>
 	</ol>
 	</nav>
 	<%
@@ -48,7 +48,7 @@ text-align:Center;
 			String Mensaje = request.getAttribute("Mensaje").toString();
 	%>
 	<h3 class="MensajeServlet"><%=Mensaje%></h3>
-	
+
 	<%
 		}
 	%>
@@ -56,12 +56,9 @@ text-align:Center;
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-			<a href="ServletCurso?AddCourses=1" name="AddCurso" class="btn btn-outline-success "><i class="fa fa-group"></i> Agregar curso</a>
-				<br> <br>
-				<table id="ListarCursos" class="display" style="width: 100%">
+				<table id="ListarCursosProfesor" class="display" style="width: 100%">
 					<thead>
 						<tr>
-							<th>Profesor</th>
 							<th>Materia</th>
 							<th>Turno</th>
 							<th>Cuatrimestre</th>
@@ -84,19 +81,19 @@ text-align:Center;
 								for (Curso curso : listaCurso) {
 						%>
 						<tr>
-							<td><%=curso.getProfesor()%></td>
 							<td><%=curso.getMateria()%></td>
 							<td><%=curso.getTurno()%></td>
 							<td><%=curso.getCuatrimestre()%></td>
 							<td><%=curso.getAnio()%></td>
 							<td><%=curso.getCantAlum()%></td>
-							<td><a type="button" class="btn btn-outline-warning btn-sm"
-								href="ServletCurso?editCourse=<%=curso.getId()%>"><i
-									class="fa fa-edit"></i>Editar</a> <a type="submit"
-								class="btn btn-outline-danger btn-sm"
-								href="ServletCurso?deleteCourse=<%=curso.getId()%>"> <i
-									class="fa fa-trash-o"></i>Eliminar
-							</a></td>
+							<td><a type="button" class="btn btn-outline-info btn-sm"
+								href="ServletCurso?showCourse-professor=<%=curso.getId()%>"><i
+									class="fa fa-group"></i> Ver Curso</a>
+<!-- 							<a type="submit" class="btn btn-danger btn-sm" -->
+<%-- 								href="ServletCurso?showCourse-professor=<%=curso.getId()%>"> --%>
+<!-- 									<i class="fa fa-trash"></i> -->
+<!-- 							</a> -->
+							</td>
 						</tr>
 						<%
 							}

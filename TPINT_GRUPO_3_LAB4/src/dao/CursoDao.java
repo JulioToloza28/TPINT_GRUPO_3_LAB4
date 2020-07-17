@@ -9,6 +9,8 @@ public interface CursoDao {
 	public Curso buscarCurso(int Id);
 
 	public ArrayList<Curso> listarCursos();
+
+	public ArrayList<Curso> listarCursos(int LegajoProf);
 	
 	public boolean eliminarCurso(int Id);
 	

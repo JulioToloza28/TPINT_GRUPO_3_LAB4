@@ -9,6 +9,8 @@ public interface CursoNegocio {
 
 	public ArrayList<Curso> listarCursos();
 
+	public ArrayList<Curso> listarCursos(int LegajoProf);
+
 	public boolean eliminarCurso(int Id);
 
 	public boolean GrabarCurso(Curso curso);

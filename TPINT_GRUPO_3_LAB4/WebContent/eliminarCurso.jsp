@@ -55,14 +55,14 @@
 			<div class="row">
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Materia:</label> <select name="cmbMateria"
-						class="custom-select " id="validationServer04" disabled="true">
+						class="custom-select" id="validationServer04" disabled="true">
 						<option value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
 					</select>
 				</div>
 				
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Turno:</label> <select
-						class="form-control" id="sel1" name="cmbTurno" disabled="true">
+						class="custom-select" id="sel1" name="cmbTurno" disabled="true">
 						<option selected style="visibility: hidden"
 							value=<%=curso.getIdTurno()%>><%=curso.getTurno()%></option>
 					</select>

@@ -26,12 +26,22 @@ $(document).ready(
 					{
 						"scrollX" : true,
 						"displayLength" : 10,
-						"order" : [[ 0, "asc" ], [ 4, "desc" ], [ 3, "desc" ], [ 2, "asc" ],
-								[ 1, "asc" ]],
+						"order" : [ [ 0, "asc" ], [ 4, "desc" ], [ 3, "desc" ],
+								[ 2, "asc" ], [ 1, "asc" ], [ 5, "asc" ] ],
 						columnDefs : [ {
 							targets : 0,
 							className : 'dt-left'
 						}, {
+							targets : "_all",
+							className : 'dt-center'
+						} ]
+					}), $('#ListarCursosProfesor').DataTable(
+					{
+						"scrollX" : true,
+						"displayLength" : 10,
+						"order" : [ [ 3, "desc" ], [ 2, "desc" ],
+								[ 1, "asc" ], [ 0, "asc" ], [ 4, "asc" ] ],
+						columnDefs : [ {
 							targets : "_all",
 							className : 'dt-center'
 						} ]

@@ -46,6 +46,8 @@ public class ServletCurso extends HttpServlet {
 		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 		TurnoNegocio turnoNeg = new TurnoNegocioImpl();
 
+		System.out.println(request.getParameter("listCoursesProfessor"));
+
 		// BOTON CURSOS DEL MENU, LISTA LOS CURSOS
 		if (request.getParameter("listCourses") != null) {
 			String msj;
@@ -126,6 +128,35 @@ public class ServletCurso extends HttpServlet {
 		// PANTALLA
 		// pw.close();
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		// Listar Curso del usuario tipo profesor
+		if (request.getParameter("listCoursesProfessor") != null) {
+			String msj;
+			HttpSession session = request.getSession();
+
+			int LegajoProf = Integer.parseInt(session.getAttribute("Session_Legajo").toString());
+			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos(LegajoProf);
+
+			if (request.getAttribute("Mensaje") != null) {
+				msj = request.getAttribute("Mensaje").toString();
+				request.setAttribute("Mensaje", msj);
+			}
+
+			request.setAttribute("listaCursos", lCursos);
+			RequestDispatcher rd = request.getRequestDispatcher("/listarCursoProfesor.jsp");
+			rd.forward(request, response);
+		}
+
+		if (request.getParameter("showCourse-professor") != null) {
+			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("showCourse-professor")));
+			ArrayList<Alumno> alum = alumnoNeg
+					.getAlumnosInscriptos(Integer.parseInt(request.getParameter("showCourse-professor")));
+
+			request.setAttribute("CursoElim", curso);
+			request.setAttribute("ListaAlumnos", alum);
+			RequestDispatcher rd = request.getRequestDispatcher("/mostrarCursoProfesor.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -136,6 +167,7 @@ public class ServletCurso extends HttpServlet {
 
 		// BOTON GRABAR CURSO (GRABA EN LA BD)
 		if (request.getParameter("btn-GrabarCurso") != null) {
+			Boolean CancelarGrabado = false;
 			String Msj = null;
 			Alumno alum = null;
 			String[] lAlumnosInscriptos;
@@ -160,13 +192,47 @@ public class ServletCurso extends HttpServlet {
 					IdCurso = cursoNeg.UltimoId(); // Obtengo el Id del curso Grabado
 					for (int x = 0; x < lAlumnosInscriptos.length; x++) {
 						if (!cursoNeg.VerificarAlumnoEstaInscripto(IdCurso, lAlumnosInscriptos[x])) {
-							cursoNeg.InsertarAlumnoAlCurso(IdCurso, lAlumnosInscriptos[x]);
+							if (!cursoNeg.InsertarAlumnoAlCurso(IdCurso, lAlumnosInscriptos[x])) {
+								CancelarGrabado = true;
+								Msj = "ERROR: Hubo un error al insertar uno o varios alumnos";
+							}
 						}
 					}
 					Msj = "Curso creado correctamente";
+				} else {
+					CancelarGrabado = true;
+					Msj = "ERROR: Hubo un error al crear curso";
 				}
-			} else
+			} else {
+				CancelarGrabado = true;
 				Msj = "ERROR: Ya existe este curso con el mismo profesor";
+			}
+
+			if (CancelarGrabado) {
+				ArrayList<Alumno> lAlumAux = new ArrayList<Alumno>();
+				Alumno A;
+				lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
+				for (int x = 0; x < lAlumnosInscriptos.length; x++) {
+					A = new Alumno();
+					A.setLegajo(Integer.parseInt(lAlumnosInscriptos[x].toString()));
+					lAlumAux.add(A);
+				}
+				ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
+				MateriaNegocio materiaNeg = new MateriaNegocioImpl();
+				TurnoNegocio turnoNeg = new TurnoNegocioImpl();
+				ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
+				ArrayList<Turno> lTurno = turnoNeg.listarTurnos();
+				ArrayList<Alumno> lAlum = alumnoNeg.readAll();
+				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+
+				request.setAttribute("CursoAux", curs);
+				request.setAttribute("listaMatDao", lMateria);
+				request.setAttribute("ListaTurnos", lTurno);
+				request.setAttribute("ListaAlumnosAux", lAlumAux);
+				request.setAttribute("ListaAlumnos", lAlum);
+				request.setAttribute("listaProfes", lProfesor);
+			}
+
 			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
 			request.setAttribute("listaCursos", lCursos);
