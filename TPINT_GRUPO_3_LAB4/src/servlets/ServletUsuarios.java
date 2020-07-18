@@ -101,6 +101,7 @@ public class ServletUsuarios extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 
+		// Ingresar
 		if (request.getParameter("btnIngresar") != null) {
 			// Entra por haber echo click en el hyperlink mostrar usuarios
 			UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
@@ -108,30 +109,25 @@ public class ServletUsuarios extends HttpServlet {
 					request.getParameter("txtClave"));
 			System.out.println(usuario);
 			session.setAttribute("Usuario2", usuario);
-			if (usuario != null) {
+			if (usuario.getId() != 0) {
 				session.setAttribute("Session_user", usuario.getUsername());
 				session.setAttribute("Session_type", usuario.getTipoUsuario().getTipo());
 				session.setAttribute("Session_Legajo", usuario.getLegajo());
 				// session.setAttribute("Session_user", request.getParameter("txtUsuario"));
-				if (usuario.getTipoUsuario().getId() == 1)
+				if (usuario.getTipoUsuario().getId() == 1) {
 					request.getRequestDispatcher("Home.jsp").forward(request, response);
-				else
-					request.getRequestDispatcher("ServletCurso?listCoursesProfessor=0")
-							.forward(request, response);
-				// response.sendRedirect("/TPINT_GRUPO_3_LAB4/Menu.jsp");
+				} else if (usuario.getTipoUsuario().getId() != 1) {
+					request.getRequestDispatcher("ServletCurso?listCoursesProfessor=0").forward(request, response);
+
+				}
 			} else {
 				PrintWriter out = response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Usuario y clave incorrecta');");
 				out.println("location='login.jsp';");
 				out.println("</script>");
+
 			}
-
-			/*
-			 * RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-			 * rd.forward(request, response);
-			 */
 		}
-
 	}
 }
