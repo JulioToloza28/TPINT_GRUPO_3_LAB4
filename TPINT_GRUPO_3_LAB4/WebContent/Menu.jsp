@@ -34,8 +34,12 @@
 </head>
 <body>
 <%
-		System.out.println(session.getAttribute("Usuario2"));
 		Usuario usuario = null;
+		int LegProf=0;
+		
+		if (session.getAttribute("Session_Legajo") != null) {
+			LegProf = Integer.parseInt(session.getAttribute("Session_Legajo").toString());}
+		
 		if (session.getAttribute("Usuario2") != null) {
 			usuario = (Usuario) session.getAttribute("Usuario2");
 			
@@ -79,7 +83,7 @@
 				<li class="nav-item"><a class="navbar-brand" href="#"> <img
 						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="ServletCurso?listCourses=1">Cursos</a></li>
+					href="ServletCurso?listCoursesProfessor=0">Cursos</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="ServletAlumno?Param=MenuAlumno">Alumnos</a></li>
 				<li class="nav-item"><a class="nav-link" href="reporte.jsp">Reportes</a></li>

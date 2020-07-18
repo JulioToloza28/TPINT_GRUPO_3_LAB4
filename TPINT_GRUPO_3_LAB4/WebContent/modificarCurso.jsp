@@ -4,6 +4,7 @@
 <%@page import="entidades.Curso"%>
 <%@page import="entidades.Alumno"%>
 <%@page import="entidades.Materia"%>
+<%@page import="entidades.Turno"%>
 <%@page import="entidades.Profesor"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,70 +40,96 @@
 			Curso</li>
 	</ol>
 	</nav>
+	
 	<%
 		Curso curso = null;
-		if (request.getAttribute("CursoElim") != null) {
-			curso = (Curso) request.getAttribute("CursoElim");
+		if (request.getAttribute("CursoModif") != null) {
+			curso = (Curso) request.getAttribute("CursoModif");
 		}
 	%>
 	<div class="container">
 		<form style="margin: 40px" method="post" action="ServletCurso">
-			<div class="row">
+			<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<div class="row">
 
-				<input type="hidden" name="txtIdCurso" id="txtIdCurso" value="<%=curso.getId()%>">
+					<input type="hidden" name="txtIdCurso" id="txtIdCurso"
+						value="<%=curso.getId()%>">
 
-				<div class="col-md-3 mb-3">
-					<label for="sel1">Materia:</label> <select name="cmbMateria"
-						class="custom-select " id="validationServer04" required>
-						<option selected style="visibility: hidden"
-							value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
-						<%
-							ArrayList<Materia> listaMateria = null;
-							if (request.getAttribute("listaMatDao") != null) {
-								listaMateria = (ArrayList<Materia>) request.getAttribute("listaMatDao");
-							}
-						%>
-						<%
-							if (listaMateria != null)
-								for (Materia mate : listaMateria) {
-						%>
-						<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
-						<%
-							}
-						%>
-					</select>
+					<div class="col-md-3 mb-3">
+						<label for="sel1">Materia:</label> <select name="cmbMateria"
+							class="custom-select " id="validationServer04" required>
+							<option selected style="visibility: hidden"
+								value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
+							<%
+								ArrayList<Materia> listaMateria = null;
+								if (request.getAttribute("listaMaterias") != null) {
+									listaMateria = (ArrayList<Materia>) request.getAttribute("listaMaterias");
+								}
+							%>
+							<%
+								if (listaMateria != null)
+									for (Materia mate : listaMateria) {
+							%>
+							<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
+
+					<div class="col-md-3 mb-3">
+						<label for="sel1">Turno:</label> <select class="form-control"
+							id="sel1" name="cmbTurno" required>
+							<option selected style="visibility: hidden"
+								value=<%=curso.getIdTurno()%>><%=curso.getTurno()%></option>
+							<%
+								ArrayList<Turno> listaTurnos = null;
+								if (request.getAttribute("ListaTurnos") != null) {
+									listaTurnos = (ArrayList<Turno>) request.getAttribute("ListaTurnos");
+								}
+							%>
+							<%
+								if (listaTurnos != null)
+									for (Turno turno : listaTurnos) {
+							%>
+							<option value=<%=turno.getIdTurno()%>><%=turno.getTurno()%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
+
+					<div class="col-md-3 mb-3">
+						<label for="sel1">Cuatrimestre N°:</label> <select
+							class="form-control" id="sel1" name="cmbCuatrimestre" required>
+							<option selected style="visibility: hidden"
+								value=<%=curso.getCuatrimestre()%>><%=curso.getCuatrimestre()%></option>
+							<option>1</option>
+							<option>2</option>
+						</select>
+					</div>
+
+					<div class="col-md-3 mb-3">
+						<label for="sel1">Año:</label> <select class="form-control"
+							id="sel1" name="cmbAnio" required>
+							<option selected style="visibility: hidden"
+								value=<%=curso.getAnio()%>><%=curso.getAnio()%></option>
+							<%
+								for (int x = 2020; x >= 2000; x--) {
+							%>
+							<option><%=x%></option>
+							<%
+								}
+							%>
+						</select>
+					</div>
+
 				</div>
-
-				<div class="col-md-3 mb-3">
-					<label for="sel1">Cuatrimestre N°:</label> <select
-						class="form-control" id="sel1" name="cmbCuatrimestre" required>
-						<option selected style="visibility: hidden"
-							value=<%=curso.getCuatrimestre()%>><%=curso.getCuatrimestre()%></option>
-						<option>1</option>
-						<option>2</option>
-					</select>
-				</div>
-
-				<div class="col-md-3 mb-3">
-					<label for="sel1">Año:</label> <select class="form-control"
-						id="sel1" name="cmbAnio" required>
-						<option selected style="visibility: hidden"
-							value=<%=curso.getAnio()%>><%=curso.getAnio()%></option>
-						<%
-							for (int x = 2020; x >= 2000; x--) {
-						%>
-						<option><%=x%></option>
-						<%
-							}
-						%>
-					</select>
-				</div>
-
-			</div>
-
-
-			<br> <br>
-			<div class="row">
+			</ol>
+			</nav>
+			<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
 				<div class="col-md-3 mb-3">
 					<H4>Profesor:</H4>
 				</div>
@@ -122,19 +149,29 @@
 							if (listaProfesor != null)
 								for (Profesor prof : listaProfesor) {
 						%>
-						<option value=<%=prof.getLegajo()%>><%=prof.getApellido()%>,
+						<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
+							|
+							<%=prof.getApellido()%>,
 							<%=prof.getNombre()%></option>
 						<%
 							}
 						%>
 					</select>
 				</div>
-			</div>
-			<br> <br>
-
-
+			</ol>
+			</nav>
+<%
+		if (request.getAttribute("Mensaje") != null) {
+			String Mensaje = request.getAttribute("Mensaje").toString();
+	%>
+	<div class="alert alert-danger" role="alert">
+		<%=Mensaje%>
+	</div>
+	<%
+		}
+	%>
 			<H4>Alumnos:</H4>
-			<table id="example" name="tableAlumnos" class="display"
+			<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
 				style="width: 100%">
 				<thead>
 					<tr>
@@ -219,6 +256,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-	<script type="text/javascript" src="js/script2.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

@@ -9,6 +9,8 @@ public interface CursoNegocio {
 
 	public ArrayList<Curso> listarCursos();
 
+	public ArrayList<Curso> listarCursos(int LegajoProf);
+
 	public boolean eliminarCurso(int Id);
 
 	public boolean GrabarCurso(Curso curso);
@@ -20,4 +22,8 @@ public interface CursoNegocio {
 	public boolean ActualizarCurso(Curso curso);
 	
 	public boolean EliminarAlumnoDelCurso(int legajoAlumno, int idCurso);
+	
+	public int VerificarExisteCurso(Curso curso);
+	
+	public boolean VerificarAlumnoEstaInscripto(int idCurso, String legajoAlumno);
 }

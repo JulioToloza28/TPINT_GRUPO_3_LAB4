@@ -32,7 +32,8 @@
 
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Eliminar Curso</li>
+		<li class="breadcrumb-item active" aria-current="page">Eliminar
+			Curso</li>
 	</ol>
 	</nav>
 
@@ -54,8 +55,16 @@
 			<div class="row">
 				<div class="col-md-3 mb-3">
 					<label for="sel1">Materia:</label> <select name="cmbMateria"
-						class="custom-select " id="validationServer04" disabled="true">
+						class="custom-select" id="validationServer04" disabled="true">
 						<option value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
+					</select>
+				</div>
+				
+				<div class="col-md-3 mb-3">
+					<label for="sel1">Turno:</label> <select
+						class="custom-select" id="sel1" name="cmbTurno" disabled="true">
+						<option selected style="visibility: hidden"
+							value=<%=curso.getIdTurno()%>><%=curso.getTurno()%></option>
 					</select>
 				</div>
 
@@ -84,7 +93,6 @@
 					<H4>Profesor:</H4>
 				</div>
 				<div class="col-md-3 mb-3">
-
 					<select name="cmbProfesor" class="custom-select "
 						id="validationServer04" disabled="true">
 						<option value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
@@ -95,7 +103,7 @@
 
 
 			<H4>Alumnos:</H4>
-			<table id="example" name="tableAlumnos" class="display"
+			<table id="AlumnosCursoD" name="tableAlumnos" class="display"
 				style="width: 100%">
 				<thead>
 					<tr>
@@ -148,9 +156,9 @@
 				class="btn btn-danger" type="submit"
 				href="ServletCurso?deleteConfirmedCourse=<%=curso.getId()%>">Eliminar</a>
 			<a Id="Retroceder" name="Retroceder" class="btn btn-primary"
-				type="submit" href="ServletCurso?listCourses=1">Volver</a> 
-<!-- 				<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" -->
-<!-- 				type="submit" href="ServletCurso?listCourses=1">Volver</a> -->
+				type="submit" href="ServletCurso?listCourses=1">Volver</a>
+			<!-- 				<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" -->
+			<!-- 				type="submit" href="ServletCurso?listCourses=1">Volver</a> -->
 		</form>
 
 		<%

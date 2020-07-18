@@ -26,6 +26,12 @@ public class CursoNegocioImpl implements CursoNegocio {
 	}
 
 	@Override
+	public ArrayList<Curso> listarCursos(int LegajoProf) {
+		ArrayList<Curso> lCurso = cursoDao.listarCursos(LegajoProf);
+		return lCurso;
+	}
+
+	@Override
 	public boolean eliminarCurso(int Id) {
 		boolean eliminado = cursoDao.eliminarCurso(Id);
 		return eliminado;
@@ -59,6 +65,18 @@ public class CursoNegocioImpl implements CursoNegocio {
 	public boolean EliminarAlumnoDelCurso(int legajoAlumno, int idCurso) {
 		boolean Estado = cursoDao.EliminarAlumnoDelCurso(legajoAlumno, idCurso);
 		return false;
+	}
+
+	@Override
+	public int VerificarExisteCurso(Curso curso) {
+		int existe = cursoDao.VerificarExisteCurso(curso);
+		return existe;
+	}
+
+	@Override
+	public boolean VerificarAlumnoEstaInscripto(int idCurso, String legajoAlumno) {
+		boolean existe = cursoDao.VerificarAlumnoEstaInscripto(idCurso, legajoAlumno);
+		return existe;
 	}
 
 }

@@ -8,7 +8,7 @@ import entidades.Materia;
 
 public class MateriaDaoImpl implements MateriaDao {
 
-	String listarTodo = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1";
+	String listarTodo = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1 order by nombre asc";
 	String buscarxID = "SELECT * FROM tpint_grupo_3_lab4.materia where estado=1 and idMateria=";
 
 	@Override

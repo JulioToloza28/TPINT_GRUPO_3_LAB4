@@ -40,39 +40,26 @@
 
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Listar
-			Cursos</li>
+		<li class="breadcrumb-item active" aria-current="page">Mis Cursos</li>
 	</ol>
 	</nav>
+	<%
+		if (request.getAttribute("Mensaje") != null) {
+			String Mensaje = request.getAttribute("Mensaje").toString();
+	%>
+	<h3 class="MensajeServlet"><%=Mensaje%></h3>
+
+	<%
+		}
+	%>
 
 	<div class="container">
-		<%
-			if (request.getAttribute("Mensaje") != null) {
-				String Mensaje = request.getAttribute("Mensaje").toString();
-				String Clase = "";
-				if (Mensaje == "Curso Editado correctamente.")
-					Clase = "warning";
-				else if (Mensaje == "Curso creado correctamente.")
-					Clase = "success";
-				else
-					Clase = "danger";
-		%>
-
-		<div class="alert alert-<%=Clase%>" role="alert">
-			<%=Mensaje%>
-		</div>
-		<%
-			}
-		%>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="ServletCurso?AddCourses=1" name="AddCurso"
-					class="btn btn-outline-success "><i class="fa fa-group"></i>
-					Agregar curso</a> <br> <br>
-				<table id="ListarCursos" class="display" style="width: 100%">
+			<div></div>
+				<table id="ListarCursosProfesor" class="display" style="width: 100%">
 					<thead>
 						<tr>
-							<th>Profesor</th>
 							<th>Materia</th>
 							<th>Turno</th>
 							<th>Cuatrimestre</th>
@@ -95,21 +82,17 @@
 								for (Curso curso : listaCurso) {
 						%>
 						<tr>
-							<td><%=curso.getProfesor()%></td>
 							<td><%=curso.getMateria()%></td>
 							<td><%=curso.getTurno()%></td>
 							<td><%=curso.getCuatrimestre()%></td>
 							<td><%=curso.getAnio()%></td>
 							<td><%=curso.getCantAlum()%></td>
-							<td><a type="button"
-								class="btn btn-outline-secondary btn-sm"
-								href="ServletCurso?editCourse=<%=curso.getId()%>"><i
-									class="fa fa-edit"></i>Editar</a> <a type="submit"
-								class="btn btn-outline-danger btn-sm"
-								href="ServletCurso?deleteCourse=<%=curso.getId()%>"> <i
-									class="fa fa-trash-o"></i>Eliminar
-							</a></td>
-						</tr>
+							<td><a type="button" class="btn btn-outline-secondary btn-sm"
+								href="ServletCurso?showCourse-professor=<%=curso.getId()%>" data-toggle="tooltip" title="Ver Curso"><i
+									class="fa fa-group"></i></a>
+									<button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip" title="Cargar Notas"><i class="fa fa-pencil-square"></i></button>
+									<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="Reportes"><i class="fa fa-bar-chart-o"></i></button>
+						</td></tr>
 						<%
 							}
 						%>
