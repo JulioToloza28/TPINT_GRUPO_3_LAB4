@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class ServletCurso extends HttpServlet {
 		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
 		TurnoNegocio turnoNeg = new TurnoNegocioImpl();
 
-		System.out.println(request.getParameter("listCoursesProfessor"));
+		// System.out.println(request.getParameter("listCoursesProfessor"));
 
 		// BOTON CURSOS DEL MENU, LISTA LOS CURSOS
 		if (request.getParameter("listCourses") != null) {
@@ -70,7 +69,7 @@ public class ServletCurso extends HttpServlet {
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
 			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
 
-			request.setAttribute("listaMatDao", lMateria);
+			request.setAttribute("listaMaterias", lMateria);
 			request.setAttribute("ListaTurnos", lTurno);
 			request.setAttribute("ListaAlumnos", lAlum);
 			request.setAttribute("listaProfes", lProfesor);
@@ -88,8 +87,8 @@ public class ServletCurso extends HttpServlet {
 			ArrayList<Alumno> lAlum = alumnoNeg.readAll();
 			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
 
-			request.setAttribute("CursoElim", curso);
-			request.setAttribute("listaMatDao", lMateria);
+			request.setAttribute("CursoModif", curso);
+			request.setAttribute("listaMaterias", lMateria);
 			request.setAttribute("ListaTurnos", lTurno);
 			request.setAttribute("ListaAlumnosInsc", lAlumInsc);
 			request.setAttribute("ListaAlumnos", lAlum);
@@ -115,7 +114,7 @@ public class ServletCurso extends HttpServlet {
 		if (request.getParameter("deleteConfirmedCourse") != null) {
 			String Msj = "ERROR: No se pudo eliminar el curso";
 			if (cursoNeg.eliminarCurso(Integer.parseInt(request.getParameter("deleteConfirmedCourse")))) {
-				Msj = "Curso eliminado correctamente";
+				Msj = "Curso eliminado correctamente.";
 			}
 
 			request.setAttribute("Mensaje", Msj);
@@ -129,7 +128,7 @@ public class ServletCurso extends HttpServlet {
 		// pw.close();
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		// Listar Curso del usuario tipo profesor
+		// Listar Cursos del usuario tipo profesor
 		if (request.getParameter("listCoursesProfessor") != null) {
 			String msj;
 			HttpSession session = request.getSession();
@@ -147,6 +146,7 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
+		// Mostrar datos y alumnos del curso seleccionado por el profesor
 		if (request.getParameter("showCourse-professor") != null) {
 			Curso curso = cursoNeg.buscarCurso(Integer.parseInt(request.getParameter("showCourse-professor")));
 			ArrayList<Alumno> alum = alumnoNeg
@@ -164,6 +164,9 @@ public class ServletCurso extends HttpServlet {
 
 		CursoNegocio cursoNeg = new CursoNegocioImpl();
 		AlumnoNegocio alumnoNeg = new AlumnoNegocioImpl();
+		ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
+		MateriaNegocio materiaNeg = new MateriaNegocioImpl();
+		TurnoNegocio turnoNeg = new TurnoNegocioImpl();
 
 		// BOTON GRABAR CURSO (GRABA EN LA BD)
 		if (request.getParameter("btn-GrabarCurso") != null) {
@@ -185,7 +188,8 @@ public class ServletCurso extends HttpServlet {
 			aux = request.getParameter("cmbProfesor");
 			curs.setLegajoProf(Integer.parseInt(aux));
 			curs.setId(0);
-			if (!cursoNeg.VerificarExisteCurso(curs)) {
+			int VerificaCurso = cursoNeg.VerificarExisteCurso(curs);
+			if (VerificaCurso == 0) {
 				if (cursoNeg.GrabarCurso(curs)) { // SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE EXITOSA Y
 													// PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
 					lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
@@ -194,21 +198,22 @@ public class ServletCurso extends HttpServlet {
 						if (!cursoNeg.VerificarAlumnoEstaInscripto(IdCurso, lAlumnosInscriptos[x])) {
 							if (!cursoNeg.InsertarAlumnoAlCurso(IdCurso, lAlumnosInscriptos[x])) {
 								CancelarGrabado = true;
-								Msj = "ERROR: Hubo un error al insertar uno o varios alumnos";
+								Msj = "ERROR: Hubo un error al insertar uno o varios alumnos.";
 							}
 						}
 					}
-					Msj = "Curso creado correctamente";
+					Msj = "Curso creado correctamente.";
 				} else {
 					CancelarGrabado = true;
-					Msj = "ERROR: Hubo un error al crear curso";
+					Msj = "ERROR: Hubo un error al crear curso.";
 				}
 			} else {
 				CancelarGrabado = true;
-				Msj = "ERROR: Ya existe este curso con el mismo profesor";
+				Msj = "ERROR: Ya existe este curso con el mismo profesor.";
 			}
 
 			if (CancelarGrabado) {
+				curs = cursoNeg.buscarCurso(VerificaCurso);
 				ArrayList<Alumno> lAlumAux = new ArrayList<Alumno>();
 				lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
 				for (int x = 0; x < lAlumnosInscriptos.length; x++) {
@@ -216,9 +221,6 @@ public class ServletCurso extends HttpServlet {
 					A.setLegajo(Integer.parseInt(lAlumnosInscriptos[x].toString()));
 					lAlumAux.add(A);
 				}
-				ProfesorNegocio profesorNeg = new ProfesorNegocioImpl();
-				MateriaNegocio materiaNeg = new MateriaNegocioImpl();
-				TurnoNegocio turnoNeg = new TurnoNegocioImpl();
 				ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
 				ArrayList<Turno> lTurno = turnoNeg.listarTurnos();
 				ArrayList<Alumno> lAlum = alumnoNeg.readAll();
@@ -230,8 +232,10 @@ public class ServletCurso extends HttpServlet {
 				request.setAttribute("ListaAlumnosAux", lAlumAux);
 				request.setAttribute("ListaAlumnos", lAlum);
 				request.setAttribute("listaProfes", lProfesor);
+				request.setAttribute("Mensaje", Msj);
 				RequestDispatcher rd = request.getRequestDispatcher("/agregarCurso.jsp");
 				rd.forward(request, response);
+
 			} else {
 
 				ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
@@ -248,8 +252,11 @@ public class ServletCurso extends HttpServlet {
 			String Msj = null;
 			String[] lNvaAlumnosInscriptos;
 			List<Alumno> lVjaAlumnosInscriptos;
+			ArrayList<Alumno> lAlumAux = new ArrayList<Alumno>();
+			Alumno A = null;
 			Curso curs = new Curso();
 			String aux = new String();
+			Boolean CancelarGrabado = false;
 			aux = request.getParameter("txtIdCurso");
 			curs.setId(Integer.parseInt(aux));
 			aux = request.getParameter("cmbMateria");
@@ -262,7 +269,8 @@ public class ServletCurso extends HttpServlet {
 			curs.setAnio(Integer.parseInt(aux));
 			aux = request.getParameter("cmbProfesor");
 			curs.setLegajoProf(Integer.parseInt(aux));
-			if (!cursoNeg.VerificarExisteCurso(curs)) {
+			int VerificaCurso = cursoNeg.VerificarExisteCurso(curs);
+			if (VerificaCurso == 0) {
 				if (cursoNeg.ActualizarCurso(curs)) { // SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE
 														// EXITOSA Y
 														// PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
@@ -270,7 +278,10 @@ public class ServletCurso extends HttpServlet {
 					lVjaAlumnosInscriptos = alumnoNeg.getAlumnosInscriptos(curs.getId());
 					for (int x = 0; x < lNvaAlumnosInscriptos.length; x++) {
 						if (!alumnoNeg.verifEstaInscripto(lNvaAlumnosInscriptos[x], curs.getId())) {
-							cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lNvaAlumnosInscriptos[x]);
+							if (!cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lNvaAlumnosInscriptos[x])) {
+								CancelarGrabado = true;
+								Msj = "ERROR: Hubo un error al agregar uno o varios alumno/s.";
+							}
 						}
 					}
 					for (Alumno alum : lVjaAlumnosInscriptos) {
@@ -281,19 +292,53 @@ public class ServletCurso extends HttpServlet {
 							}
 						}
 						if (existe == false) {
-							cursoNeg.EliminarAlumnoDelCurso(alum.getLegajo(), curs.getId());
+							if (!cursoNeg.EliminarAlumnoDelCurso(alum.getLegajo(), curs.getId())) {
+								CancelarGrabado = true;
+								Msj = "ERROR: Hubo un error al eliminar uno o varios alumno/s.";
+							}
 						}
 					}
-					Msj = "Curso Editado correctamente";
+					Msj = "Curso Editado correctamente.";
+				} else {
+					CancelarGrabado = true;
+					Msj = "ERROR: Hubo un error al modificar el curso.";
 				}
-			} else
-				Msj = "ERROR: Ya existe este curso con el mismo profesor";
-			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
+			} else {
+				CancelarGrabado = true;
+				Msj = "ERROR: Ya existe este curso con el mismo profesor.";
+			}
 
-			request.setAttribute("listaCursos", lCursos);
-			request.setAttribute("Mensaje", Msj);
-			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
-			rd.forward(request, response);
+			if (CancelarGrabado) {
+				Curso curso = cursoNeg.buscarCurso(VerificaCurso);
+				curso.setId(curs.getId());
+				lNvaAlumnosInscriptos = request.getParameterValues("cboxAlumno");
+				for (int x = 0; x < lNvaAlumnosInscriptos.length; x++) {
+					A = new Alumno();
+					A.setLegajo(Integer.parseInt(lNvaAlumnosInscriptos[x].toString()));
+					lAlumAux.add(A);
+				}
+				ArrayList<Materia> lMateria = (ArrayList<Materia>) materiaNeg.listarMaterias();
+				ArrayList<Turno> lTurno = turnoNeg.listarTurnos();
+				ArrayList<Alumno> lAlum = alumnoNeg.readAll();
+				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+
+				request.setAttribute("ListaAlumnosInsc", lAlumAux);
+				request.setAttribute("CursoModif", curso);
+				request.setAttribute("listaMaterias", lMateria);
+				request.setAttribute("ListaTurnos", lTurno);
+				request.setAttribute("ListaAlumnos", lAlum);
+				request.setAttribute("listaProfes", lProfesor);
+				request.setAttribute("Mensaje", Msj);
+				RequestDispatcher rd = request.getRequestDispatcher("/modificarCurso.jsp");
+				rd.forward(request, response);
+			} else {
+				ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
+
+				request.setAttribute("listaCursos", lCursos);
+				request.setAttribute("Mensaje", Msj);
+				RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
+				rd.forward(request, response);
+			}
 		}
 
 		doGet(request, response);

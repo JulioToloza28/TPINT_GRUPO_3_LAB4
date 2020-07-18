@@ -40,10 +40,11 @@
 			Curso</li>
 	</ol>
 	</nav>
+	
 	<%
 		Curso curso = null;
-		if (request.getAttribute("CursoElim") != null) {
-			curso = (Curso) request.getAttribute("CursoElim");
+		if (request.getAttribute("CursoModif") != null) {
+			curso = (Curso) request.getAttribute("CursoModif");
 		}
 	%>
 	<div class="container">
@@ -62,8 +63,8 @@
 								value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
 							<%
 								ArrayList<Materia> listaMateria = null;
-								if (request.getAttribute("listaMatDao") != null) {
-									listaMateria = (ArrayList<Materia>) request.getAttribute("listaMatDao");
+								if (request.getAttribute("listaMaterias") != null) {
+									listaMateria = (ArrayList<Materia>) request.getAttribute("listaMaterias");
 								}
 							%>
 							<%
@@ -129,37 +130,46 @@
 			</nav>
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-					<div class="col-md-3 mb-3">
-						<H4>Profesor:</H4>
-					</div>
-					<div class="col-md-3 mb-3">
+				<div class="col-md-3 mb-3">
+					<H4>Profesor:</H4>
+				</div>
+				<div class="col-md-3 mb-3">
 
-						<select name="cmbProfesor" class="custom-select "
-							id="validationServer04" required>
-							<option selected style="visibility: hidden"
-								value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
-							<%
-								ArrayList<Profesor> listaProfesor = null;
-								if (request.getAttribute("listaProfes") != null) {
-									listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProfes");
-								}
-							%>
-							<%
-								if (listaProfesor != null)
-									for (Profesor prof : listaProfesor) {
-							%>
-							<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
-								|
-								<%=prof.getApellido()%>,
-								<%=prof.getNombre()%></option>
-							<%
-								}
-							%>
-						</select>
-					</div>
+					<select name="cmbProfesor" class="custom-select "
+						id="validationServer04" required>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
+						<%
+							ArrayList<Profesor> listaProfesor = null;
+							if (request.getAttribute("listaProfes") != null) {
+								listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaProfes");
+							}
+						%>
+						<%
+							if (listaProfesor != null)
+								for (Profesor prof : listaProfesor) {
+						%>
+						<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
+							|
+							<%=prof.getApellido()%>,
+							<%=prof.getNombre()%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
 			</ol>
 			</nav>
-
+<%
+		if (request.getAttribute("Mensaje") != null) {
+			String Mensaje = request.getAttribute("Mensaje").toString();
+	%>
+	<div class="alert alert-danger" role="alert">
+		<%=Mensaje%>
+	</div>
+	<%
+		}
+	%>
 			<H4>Alumnos:</H4>
 			<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
 				style="width: 100%">

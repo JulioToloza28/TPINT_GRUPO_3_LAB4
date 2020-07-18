@@ -66,8 +66,8 @@
 							<%
 								}
 								ArrayList<Materia> listaMateria = null;
-								if (request.getAttribute("listaMatDao") != null) {
-									listaMateria = (ArrayList<Materia>) request.getAttribute("listaMatDao");
+								if (request.getAttribute("listaMaterias") != null) {
+									listaMateria = (ArrayList<Materia>) request.getAttribute("listaMaterias");
 								}
 							%>
 							<%
@@ -203,6 +203,16 @@
 			</ol>
 			</nav>
 
+	<%
+		if (request.getAttribute("Mensaje") != null) {
+			String Mensaje = request.getAttribute("Mensaje").toString();
+	%>
+	<div class="alert alert-danger" role="alert">
+		<%=Mensaje%>
+	</div>
+	<%
+		}
+	%>
 
 			<H4>Alumnos:</H4>
 			<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
@@ -237,15 +247,20 @@
 					%>
 					<tr>
 						<td>
-						<%if(listaAlumnoSelecc!=null){ %>
-								<input type="checkbox" id="cboxAlumno" name="cboxAlumno"
-							value="<%=alumno.getLegajo()%>"
+							<%
+								if (listaAlumnoSelecc != null) {
+							%> <input type="checkbox"
+							id="cboxAlumno" name="cboxAlumno" value="<%=alumno.getLegajo()%>"
 							<%for (Alumno selecc : listaAlumnoSelecc) {
-						if (selecc.getLegajo() == alumno.getLegajo()) {%>
+							if (selecc.getLegajo() == alumno.getLegajo()) {%>
 							checked <%}
-					}%>><%} else{%>
-							<input type="checkbox" id="cboxAlumno" name="cboxAlumno" value="<%=alumno.getLegajo()%>">
-							<%} %>
+						}%>>
+							<%
+								} else {
+							%> <input type="checkbox" id="cboxAlumno"
+							name="cboxAlumno" value="<%=alumno.getLegajo()%>"> <%
+ 	}
+ %>
 						</td>
 						<td><%=alumno.getLegajo()%></td>
 						<td><%=alumno.getNombre()%></td>
@@ -278,19 +293,20 @@
 			<!-- 				href="ServletCurso?listCourses=1">Volver</a> -->
 		</form>
 
- 		<%
- 			int fila = 0;
- 			if (request.getAttribute("cantFilas") != null) {
- 				fila = 1;
- 			}
- 		%>
- 		<%
- 			if (fila == 1) {
- 		%>
- 		<h2>Agregado Correctamente</h2> -->
- 		<%
- 			}
- 		%>
+		<%
+			int fila = 0;
+			if (request.getAttribute("cantFilas") != null) {
+				fila = 1;
+			}
+		%>
+		<%
+			if (fila == 1) {
+		%>
+		<h2>Agregado Correctamente</h2>
+		-->
+		<%
+			}
+		%>
 
 	</div>
 	<script

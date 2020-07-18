@@ -68,8 +68,8 @@ public class CursoNegocioImpl implements CursoNegocio {
 	}
 
 	@Override
-	public boolean VerificarExisteCurso(Curso curso) {
-		boolean existe = cursoDao.VerificarExisteCurso(curso);
+	public int VerificarExisteCurso(Curso curso) {
+		int existe = cursoDao.VerificarExisteCurso(curso);
 		return existe;
 	}
 

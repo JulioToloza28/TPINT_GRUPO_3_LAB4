@@ -21,7 +21,7 @@ public class CursoDaoImpl implements CursoDao {
 	String InsertarAlumnoalCurso = "insert into tpint_grupo_3_lab4.alumnoxcurso (IdCurso, LegajoAlumno, idEstadoAcademico, estado) VALUES (?, ? , 2, 1)";
 	String actualizarCurso = "update tpint_grupo_3_lab4.curso set idMateria= ? , idturno=?, Cuatrimestre= ?, Anio= ? , Legajo_pro= ?  where IdCurso= ?";
 	String quitarAlumnodelcurso = "update tpint_grupo_3_lab4.alumnoxcurso set estado = 0 where legajoAlumno= ? and idcurso= ?";
-	String existeCursoActivo = "SELECT count(idmateria) as Cantidad from curso where idMateria=? and idturno=? and Cuatrimestre=? and anio=? and legajo_Pro=? and estado=true and idcurso<>?";
+	String existeCursoActivo = "SELECT count(idmateria) as Cantidad, idcurso from curso where idMateria=? and idturno=? and Cuatrimestre=? and anio=? and legajo_Pro=? and estado=true and idcurso<>?";
 	String AlumnoEstaInscripto = "SELECT count(*) as Cantidad from alumnoxcurso where idCurso=? and legajoAlumno=? and estado=true;";
 
 	@Override
@@ -94,7 +94,7 @@ public class CursoDaoImpl implements CursoDao {
 
 		return lCursos;
 	}
-	
+
 	@Override
 	public ArrayList<Curso> listarCursos(int LegajoProf) {
 		try {
@@ -281,7 +281,7 @@ public class CursoDaoImpl implements CursoDao {
 	}
 
 	@Override
-	public boolean VerificarExisteCurso(Curso curso) {
+	public int VerificarExisteCurso(Curso curso) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -291,6 +291,7 @@ public class CursoDaoImpl implements CursoDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet resultSet;
 		int Cantidad = 0;
+		int Id = 0;
 		boolean existeCurso = true;
 		try {
 			statement = conexion.prepareStatement(existeCursoActivo);
@@ -303,16 +304,19 @@ public class CursoDaoImpl implements CursoDao {
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Cantidad = (resultSet.getInt("Cantidad"));
+				if (Cantidad == 0) {
+					existeCurso = false;
+					Id = 0;
+				} else {
+					existeCurso = true;
+					Id = (resultSet.getInt("IdCurso"));
+				}
 			}
 
-			if (Cantidad == 0)
-				existeCurso = false;
-			else
-				existeCurso = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return existeCurso;
+		return Id;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public interface CursoNegocio {
 	
 	public boolean EliminarAlumnoDelCurso(int legajoAlumno, int idCurso);
 	
-	public boolean VerificarExisteCurso(Curso curso);
+	public int VerificarExisteCurso(Curso curso);
 	
 	public boolean VerificarAlumnoEstaInscripto(int idCurso, String legajoAlumno);
 }

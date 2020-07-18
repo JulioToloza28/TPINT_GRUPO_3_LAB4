@@ -56,6 +56,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
+			<div></div>
 				<table id="ListarCursosProfesor" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -86,15 +87,12 @@
 							<td><%=curso.getCuatrimestre()%></td>
 							<td><%=curso.getAnio()%></td>
 							<td><%=curso.getCantAlum()%></td>
-							<td><a type="button" class="btn btn-outline-info btn-sm"
-								href="ServletCurso?showCourse-professor=<%=curso.getId()%>"><i
-									class="fa fa-group"></i> Ver Curso</a>
-<!-- 							<a type="submit" class="btn btn-danger btn-sm" -->
-<%-- 								href="ServletCurso?showCourse-professor=<%=curso.getId()%>"> --%>
-<!-- 									<i class="fa fa-trash"></i> -->
-<!-- 							</a> -->
-							</td>
-						</tr>
+							<td><a type="button" class="btn btn-outline-secondary btn-sm"
+								href="ServletCurso?showCourse-professor=<%=curso.getId()%>" data-toggle="tooltip" title="Ver Curso"><i
+									class="fa fa-group"></i></a>
+									<button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip" title="Cargar Notas"><i class="fa fa-pencil-square"></i></button>
+									<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="Reportes"><i class="fa fa-bar-chart-o"></i></button>
+						</td></tr>
 						<%
 							}
 						%>

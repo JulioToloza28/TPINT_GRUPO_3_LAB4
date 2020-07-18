@@ -25,10 +25,11 @@
 .bs-example {
 	margin: 20px;
 }
-.MensajeServlet{
-color:navy;
-/* background-color:gray; */
-text-align:Center;
+
+.MensajeServlet {
+	color: navy;
+	/* background-color:gray; */
+	text-align: Center;
 }
 </style>
 
@@ -43,21 +44,31 @@ text-align:Center;
 			Cursos</li>
 	</ol>
 	</nav>
-	<%
-		if (request.getAttribute("Mensaje") != null) {
-			String Mensaje = request.getAttribute("Mensaje").toString();
-	%>
-	<h3 class="MensajeServlet"><%=Mensaje%></h3>
-	
-	<%
-		}
-	%>
 
 	<div class="container">
+		<%
+			if (request.getAttribute("Mensaje") != null) {
+				String Mensaje = request.getAttribute("Mensaje").toString();
+				String Clase = "";
+				if (Mensaje == "Curso Editado correctamente.")
+					Clase = "warning";
+				else if (Mensaje == "Curso creado correctamente.")
+					Clase = "success";
+				else
+					Clase = "danger";
+		%>
+
+		<div class="alert alert-<%=Clase%>" role="alert">
+			<%=Mensaje%>
+		</div>
+		<%
+			}
+		%>
 		<div class="row">
 			<div class="col-lg-12">
-			<a href="ServletCurso?AddCourses=1" name="AddCurso" class="btn btn-outline-success "><i class="fa fa-group"></i> Agregar curso</a>
-				<br> <br>
+				<a href="ServletCurso?AddCourses=1" name="AddCurso"
+					class="btn btn-outline-success "><i class="fa fa-group"></i>
+					Agregar curso</a> <br> <br>
 				<table id="ListarCursos" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -90,7 +101,8 @@ text-align:Center;
 							<td><%=curso.getCuatrimestre()%></td>
 							<td><%=curso.getAnio()%></td>
 							<td><%=curso.getCantAlum()%></td>
-							<td><a type="button" class="btn btn-outline-warning btn-sm"
+							<td><a type="button"
+								class="btn btn-outline-secondary btn-sm"
 								href="ServletCurso?editCourse=<%=curso.getId()%>"><i
 									class="fa fa-edit"></i>Editar</a> <a type="submit"
 								class="btn btn-outline-danger btn-sm"
