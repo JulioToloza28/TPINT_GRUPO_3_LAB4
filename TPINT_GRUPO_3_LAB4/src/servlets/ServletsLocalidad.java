@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 import entidades.Localidad;
 import entidades.Provincia;
@@ -74,11 +74,11 @@ public class ServletsLocalidad extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			List<Localidad> listalocalidades = (List<Localidad>) locDaoImpl.ObtenerLocalidadPorProvincia(Integer.parseInt(Provinciaid));
 
-			Gson gson = new Gson();
-			String json = gson.toJson(listalocalidades);
-			PrintWriter out = response.getWriter();
-			out.print(json);
-			out.flush();			
+//			Gson gson = new Gson();
+//			String json = gson.toJson(listalocalidades);
+//			PrintWriter out = response.getWriter();
+//			out.print(json);
+//			out.flush();			
 			
 			 
 		}

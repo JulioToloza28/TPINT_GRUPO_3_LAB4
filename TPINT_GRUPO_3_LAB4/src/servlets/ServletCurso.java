@@ -171,9 +171,10 @@ public class ServletCurso extends HttpServlet {
 		// BOTON GRABAR CURSO (GRABA EN LA BD)
 		if (request.getParameter("btn-GrabarCurso") != null) {
 			Boolean CancelarGrabado = false;
+			int CantidadAlumSelec = 0;
 			String Msj = null;
 			Alumno A = null;
-			String[] lAlumnosInscriptos;
+			String[] lAlumnosInscriptos = null;
 			int IdCurso;
 			Curso curs = new Curso();
 			String aux = new String();
@@ -188,24 +189,34 @@ public class ServletCurso extends HttpServlet {
 			aux = request.getParameter("cmbProfesor");
 			curs.setLegajoProf(Integer.parseInt(aux));
 			curs.setId(0);
+			if (request.getParameterValues("cboxAlumno") != null) {
+				lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
+				CantidadAlumSelec = lAlumnosInscriptos.length;
+			}
 			int VerificaCurso = cursoNeg.VerificarExisteCurso(curs);
 			if (VerificaCurso == 0) {
-				if (cursoNeg.GrabarCurso(curs)) { // SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE EXITOSA Y
-													// PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
-					lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
-					IdCurso = cursoNeg.UltimoId(); // Obtengo el Id del curso Grabado
-					for (int x = 0; x < lAlumnosInscriptos.length; x++) {
-						if (!cursoNeg.VerificarAlumnoEstaInscripto(IdCurso, lAlumnosInscriptos[x])) {
-							if (!cursoNeg.InsertarAlumnoAlCurso(IdCurso, lAlumnosInscriptos[x])) {
-								CancelarGrabado = true;
-								Msj = "ERROR: Hubo un error al insertar uno o varios alumnos.";
+				if (CantidadAlumSelec > 0) {
+
+					if (cursoNeg.GrabarCurso(curs)) { // SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE
+														// EXITOSA Y
+														// PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
+						IdCurso = cursoNeg.UltimoId(); // Obtengo el Id del curso Grabado
+						for (int x = 0; x < CantidadAlumSelec; x++) {
+							if (!cursoNeg.VerificarAlumnoEstaInscripto(IdCurso, lAlumnosInscriptos[x])) {
+								if (!cursoNeg.InsertarAlumnoAlCurso(IdCurso, lAlumnosInscriptos[x])) {
+									CancelarGrabado = true;
+									Msj = "ERROR: Hubo un error al insertar uno o varios alumnos.";
+								}
 							}
 						}
+						Msj = "Curso creado correctamente.";
+					} else {
+						CancelarGrabado = true;
+						Msj = "ERROR: Hubo un error al crear curso.";
 					}
-					Msj = "Curso creado correctamente.";
 				} else {
 					CancelarGrabado = true;
-					Msj = "ERROR: Hubo un error al crear curso.";
+					Msj = "ERROR: No selecciono ningún Alumno.";
 				}
 			} else {
 				CancelarGrabado = true;
@@ -216,7 +227,7 @@ public class ServletCurso extends HttpServlet {
 				curs = cursoNeg.buscarCurso(VerificaCurso);
 				ArrayList<Alumno> lAlumAux = new ArrayList<Alumno>();
 				lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
-				for (int x = 0; x < lAlumnosInscriptos.length; x++) {
+				for (int x = 0; x < CantidadAlumSelec; x++) {
 					A = new Alumno();
 					A.setLegajo(Integer.parseInt(lAlumnosInscriptos[x].toString()));
 					lAlumAux.add(A);
