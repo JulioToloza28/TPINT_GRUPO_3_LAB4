@@ -35,8 +35,7 @@
 
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Lista de
-			alumnos</li>
+		<li class="breadcrumb-item active" aria-current="page">Alumnos</li>
 	</ol>
 	</nav>
 
@@ -100,7 +99,7 @@
 				
 			</div>
 			<div class="col align-self-center">
-					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-outline-info"
+					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-outline-info "
 						type="submit"><i class="fa fa-search"></i>Filtrar</button>
 					
 				</div>
@@ -108,6 +107,9 @@
 			</nav>
 		</form>
 		
+		<div class="col-md-4 offset-md-4">
+     <a href="ServletAlumno?BtnAgregar=Alumno" type="button" class="btn btn-outline-success btn-block "><i class="fa fa-user-plus "></i> Agregar Alumno</a>
+    </div>
 			
 
 		<div class="row">
@@ -121,9 +123,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
-					
-						<a href="ServletAlumno?BtnAgregar=Alumno" type="button" class="btn btn-outline-success"><i class="fa fa-user-plus"></i> Agregar Alumno</a>
+				<div class="col-lg-11 ">
+					<br>
+					<!-- 	<a href="ServletAlumno?BtnAgregar=Alumno" type="button" class="btn btn-outline-success "><i class="fa fa-user-plus "></i> Agregar Alumno</a> -->
 					<%if (request.getAttribute("cantFilas") != null) { %>
 					<div class="alert alert-success" role="alert">Se agrego correctamente</div>
 <%} %>

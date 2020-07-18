@@ -32,6 +32,7 @@
 		<li class="breadcrumb-item active" aria-current="page">Agregar Alumno</li> 
 		</ol> 		
 		</nav>
+		
 		<%} %>
 		
 		  <%  if(request.getAttribute("AlumnoRepModi")!=null){ 
@@ -41,13 +42,15 @@
 		<li class="breadcrumb-item active" aria-current="page">Modificar Alumno</li> 
 		</ol> 		
 		</nav>
+		
 		<%} %>     
 		         	         
 	<form action="ServletAlumno" method="get" style="margin: 40px">
-	
+	<div class="alert alert-danger" role="alert">(*)DNI ya registrado</div>
 	<input value="<%=alum.getLegajo()%>" name="txtlegajo" type="hidden" class="form-control">
 	<%-- <input value="<%=alum.getLocalidad().getId()%>" name="txtGetIdLocalidad" type="hidden" class="form-control"> --%>
 		<div class="form-row">
+		
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Nombre</label> 
 				<input value="<%=alum.getNombre() %>" name="txtNombre" type="text" class="form-control" id="validationServer01" required>
@@ -137,7 +140,8 @@
 			<%} %>
 			
 			
-			<label id="lblError" name="lblError">(*)DNI ya registrado</label>
+			<!-- <label id="lblError" name="lblError">(*)DNI ya registrado</label> -->
+			
 
 	</form>
 					

@@ -51,7 +51,10 @@
 		<form action="ServletsProfesor" method="get">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<div class="row">
+				
+				<div class="row">			
+				
+					
 					<div class="col-lg-6">
 
 						<label for="sel1">Materias:</label> <select id="cbxMateria"
@@ -115,20 +118,22 @@
 			</ol>
 			</nav>
 		</form>
-		<div class="row">
+		
+		<div class="col-md-4 offset-md-4">	<a id="BtnAgregar" name="BtnAgregar"
+					href="ServletsProfesor?BtnAgregar=Profesor" type="button"
+					class="btn btn-outline-success btn-block"><i class="fa fa-user-plus"></i>
+					Agregar Profesor</a></div>
+					<br>
+	<!-- 	<div class="row">
 			<div class="col-lg-3"></div>
-		</div>
+		</div> -->
 		<div class="row">
 			<div class="col-lg-12">
 				<!-- <a id="BtnAgregar" name="BtnAgregar"
 					href="ServletsProfesor?BtnAgregar=Profesor"
 					class="btn btn-outline-primary btn-sm">Agregar</a> -->
-				<a id="BtnAgregar" name="BtnAgregar"
-					href="ServletsProfesor?BtnAgregar=Profesor" type="button"
-					class="btn btn-outline-success"><i class="fa fa-user-plus"></i>
-					Agregar Profesor</a>
-
-				<%
+			
+<%
 					if (request.getAttribute("cantFilas") != null) {
 				%>
 				<div class="alert alert-success" role="alert">Se agrego
@@ -149,6 +154,7 @@
 				<%
 					}
 				%>
+			
 
 
 				<table id="example" class="display" style="width: 100%">

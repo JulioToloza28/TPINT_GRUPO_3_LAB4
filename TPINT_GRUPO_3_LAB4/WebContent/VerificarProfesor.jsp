@@ -30,6 +30,7 @@
 		<li class="breadcrumb-item active" aria-current="page">Agregar Profesor</li> 
 		</ol> 		
 		</nav>
+		
 		<%} %>
 		
 		<%  if(request.getAttribute("ProfesorRepMod")!=null){
@@ -39,11 +40,13 @@
 		<li class="breadcrumb-item active" aria-current="page">Modificar Profesor</li> 
 		</ol> 		
 		</nav>
+		
 		<%} %>
 		
   		        			         
 	<form action="ServletsProfesor" method="get" style="margin: 40px">
 	<input value="<%=profe.getLegajo()%>" name="txtlegajo" type="hidden" class="form-control">
+	<div class="alert alert-danger" role="alert">(*)DNI ya registrado</div>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="validationServer01">Nombre</label> 
@@ -129,7 +132,7 @@
 		<button id="btn-EditarProfesor" name="btn-EditarProfesor" class="btn btn-primary" type="submit">Aceptar</button>
 		<%} %>
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletsProfesor?Param=MenuProfesor">Volver</a>
-          <label id="lblError" name="lblError">(*)DNI ya registrado</label>
+         
 	</form>
 	
 
