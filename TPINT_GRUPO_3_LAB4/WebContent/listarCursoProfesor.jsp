@@ -90,7 +90,7 @@
 							<td><a type="button" class="btn btn-outline-secondary btn-sm"
 								href="ServletCurso?showCourse-professor=<%=curso.getId()%>" data-toggle="tooltip" title="Ver Curso"><i
 									class="fa fa-group"></i></a>
-									<button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip" title="Cargar Notas"><i class="fa fa-pencil-square"></i></button>
+									<a type="button" class="btn btn-outline-success btn-sm" href="ServletAlumXcurso?uploadNotes=<%=curso.getId()%>" data-toggle="tooltip" title="Cargar Notas"><i class="fa fa-pencil-square"></i></a>
 									<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="Reportes"><i class="fa fa-bar-chart-o"></i></button>
 						</td></tr>
 						<%

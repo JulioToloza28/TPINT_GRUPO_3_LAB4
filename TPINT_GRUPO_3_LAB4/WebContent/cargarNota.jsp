@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.AlumnosPorCursos"%>
-<%@page import="daoImpl.AlumnoPorCursoDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,20 +43,13 @@
 						</thead>
 						<tbody>
 
-							<%
-								AlumnoPorCursoDaoImpl AlumnoxProfe = new AlumnoPorCursoDaoImpl();
-							ArrayList<AlumnosPorCursos> NotasdeAlumnos = null;
-							int cont = 0;
-							int id = (int) session.getAttribute("Session_Legajo");
-							int idcurso = 5; //Falta asociar el id del curso
 
-							NotasdeAlumnos = AlumnoxProfe.filtrarPorProfesor(id, idcurso);
-							cont++;
-							%>
 
 							<%
-								if (NotasdeAlumnos != null) {
-								for (AlumnosPorCursos alumnoXNota : NotasdeAlumnos) {
+								if (request.getAttribute("listaAlumNotas") != null) {
+									ArrayList<AlumnosPorCursos> NotasdeAlumnos = (ArrayList<AlumnosPorCursos>) request
+											.getAttribute("listaAlumNotas");
+									for (AlumnosPorCursos alumnoXNota : NotasdeAlumnos) {
 							%>
 							<tr>
 
@@ -65,30 +57,57 @@
 								<td><%=alumnoXNota.getAlumno().getNombre()%></td>
 								<td>
 									<div class="form-group">
+										
+											<%
+											if (alumnoXNota.getParcial1() == 0) {
+											%>
+											<input type="text" class="form-control" id="notaParcial1"
+											name="notaParcial1" placeholder="Calificar">
+										<%
+											} else {
+										%>
 										<input type="text" class="form-control" id="notaParcial1"
-											name="notaParcial1" placeholder="Parcial1"
-											value="<%=alumnoXNota.getParcial1()%>">
+											name="notaParcial1" placeholder="Calificar" value="<%=alumnoXNota.getParcial1()%>">
+										<%
+											}
+										%>
+
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
+									<%if(alumnoXNota.getParcial2()==0){ %>
 										<input type="text" class="form-control" id="notaParcial2"
-											name="notaParcial2" placeholder="Parcial2"
+											name="notaParcial2" placeholder="Calificar">
+											<%}else{ %>
+										<input type="text" class="form-control" id="notaParcial2"
+											name="notaParcial2" placeholder="Calificar"
 											value="<%=alumnoXNota.getParcial2()%>">
+											<%} %>
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
+									<%if(alumnoXNota.getRecuperatorio1()==0){ %>
 										<input type="text" class="form-control" id="Recuperatorio1"
-											name="Recuperatorio1" placeholder="Recuperatorio 1"
+											name="Recuperatorio1" placeholder="Calificar">
+											<%}else{ %>
+										<input type="text" class="form-control" id="Recuperatorio1"
+											name="Recuperatorio1" placeholder="Calificar"
 											value="<%=alumnoXNota.getRecuperatorio1()%>">
+											<%} %>
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
+									<%if(alumnoXNota.getRecuperatorio2()==0){ %>
 										<input type="text" class="form-control" id="Recuperatorio2"
-											name="Recuperatorio2" placeholder="Recuperatorio 2"
+											name="Recuperatorio2" placeholder="Calificar"
+											<%}else{ %>
+										<input type="text" class="form-control" id="Recuperatorio2"
+											name="Recuperatorio2" placeholder="Calificar"
 											value="<%=alumnoXNota.getRecuperatorio2()%>">
+											<%} %>
 									</div>
 								</td>
 								<td>
@@ -98,18 +117,16 @@
 											<option selected disabled value="">Seleccione..</option>
 											<%
 												if (alumnoXNota.getEstadoAca().getId() == 1) {
-											%><option value="1"
-												Selected>Promocionado</option>
+											%><option value="1" Selected>Libre</option>
 											<%
 												} else {
-											%><option value="1">Promocionado</option>
+											%><option value="1">Libre</option>
 											<%
 												}
 											%>
 											<%
 												if (alumnoXNota.getEstadoAca().getId() == 2) {
-											%><option value="2"
-												Selected>Cursando</option>
+											%><option value="2" Selected>Cursando</option>
 											<%
 												} else {
 											%><option value="2">Cursando</option>
@@ -118,8 +135,7 @@
 											%>
 											<%
 												if (alumnoXNota.getEstadoAca().getId() == 3) {
-											%><option value="3"
-												Selected>Regular</option>
+											%><option value="3" Selected>Regular</option>
 											<%
 												} else {
 											%><option value="3">Regular</option>
@@ -128,11 +144,10 @@
 											%>
 											<%
 												if (alumnoXNota.getEstadoAca().getId() == 4) {
-											%><option value="4"
-												Selected>Libre</option>
+											%><option value="4" Selected>Promocionado</option>
 											<%
 												} else {
-											%><option value="4">Libre</option>
+											%><option value="4">Promocionado</option>
 											<%
 												}
 											%>
@@ -171,7 +186,7 @@
 					<button id="btnGuardar" name="btnGuardar" class="btn btn-primary"
 						type="submit">Guardar Notas</button>
 					<a id="Retroceder" name="Retroceder" class="btn btn-secondary"
-						type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
+						type="submit" href="ServletCurso?listCoursesProfessor=0">Volver</a>
 				</div>
 			</div>
 		</div>
