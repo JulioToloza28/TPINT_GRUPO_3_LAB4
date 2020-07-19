@@ -37,7 +37,7 @@
 			<h2 class="text-center">Login</h2>
 			<div class="form-group">
 				<input type="text" class="form-control" name="txtUsuario"
-					placeholder="Usuario" required="required">
+					placeholder="Usuario" required="required" autocomplete="off">
 			</div>
 			<div class="form-group">
 				<input type="password" class="form-control" name="txtClave"

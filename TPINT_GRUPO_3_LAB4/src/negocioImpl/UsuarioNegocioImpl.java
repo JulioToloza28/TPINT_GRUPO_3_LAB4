@@ -31,4 +31,22 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 		}
 		return estado;
 	}
+	
+	@Override
+	public boolean validarUserName(String user) {
+		boolean isUser = usuarioDao.validarUserName(user);
+		return isUser;
+	}
+	
+	@Override
+	public boolean eliminarUsuario(int idUsuario) {
+		boolean isDeleteExitoso = usuarioDao.eliminarUsuario(idUsuario);
+		return isDeleteExitoso;
+	}
+	
+	@Override
+	public boolean actualizarClave(String clave,int idUsuario) {
+		boolean isChangeExitoso = usuarioDao.actualizarClave(clave,idUsuario);
+		return isChangeExitoso;
+	}
 }

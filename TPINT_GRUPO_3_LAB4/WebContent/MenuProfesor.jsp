@@ -49,7 +49,7 @@
 		</div>
 		<div style="width: 20%; float: right">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#"><%=session.getAttribute("Session_user")%>
+				<li class="nav-item"><a class="nav-link" href="#" style="pointer-events:none;"><%=session.getAttribute("Session_user")%>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"
 					data-toggle="modal" data-target="#logoutModal"> <i

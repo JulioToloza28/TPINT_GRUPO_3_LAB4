@@ -14,6 +14,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	private static final String obtenerTodos = "SELECT * FROM usuario a  inner join tipousuario b on b.idtipoUsuario = a.idTipoUsuario Where estado=1";
 	private static final String obtenerUsuario = "SELECT * FROM tpint_grupo_3_lab4.usuario a  inner join tpint_grupo_3_lab4.tipousuario b on b.idtipoUsuario = a.idTipoUsuario Where a.nombreUsuario= ? and a.Contrasenia= ? and a.estado=1";
 	private static final String agregarUsuario = "INSERT INTO usuario(nombreUsuario, Contrasenia, idTipoUsuario, legajo_Pro, estado) values(?,?,?,?,?)";
+	private static final String validarUserName = "SELECT * FROM tpint_grupo_3_lab4.usuario Where nombreUsuario= ? and estado=1";
+	private static final String eliminarUsuario = "UPDATE usuario set estado=0 where idusuario= ?";
+	private static final String actualizarClave = "UPDATE usuario set Contrasenia=? where idusuario= ?";
 
 	public ArrayList<Usuario> obtenerTodos() {
 		PreparedStatement statement;
@@ -96,5 +99,79 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		}
 
 		return isInsertExitoso;
+	}
+
+	public boolean validarUserName(String user) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		boolean isUser = false;
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(validarUserName);
+			statement.setString(1, user);
+			resultSet = statement.executeQuery();
+			System.out.println(resultSet);
+			while (resultSet.next()) {
+				isUser = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUser;
+	}
+
+	public boolean eliminarUsuario(int idUsuario) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isDeleteExitoso = false;
+		try {
+
+			statement = conexion.prepareStatement(eliminarUsuario);
+			statement.setInt(1, idUsuario);
+			// statement.setInt(2, alum1.getEstado());
+
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isDeleteExitoso = true;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (Exception ex1) {
+				ex1.printStackTrace();
+			}
+		}
+		return isDeleteExitoso;
+	}
+	
+	public boolean actualizarClave(String clave,int idUsuario) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isChangeExitoso = false;
+		try {
+
+			statement = conexion.prepareStatement(actualizarClave);
+			statement.setString(1, clave);
+			statement.setInt(2, idUsuario);
+			
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isChangeExitoso = true;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (Exception ex1) {
+				ex1.printStackTrace();
+			}
+		}
+		return isChangeExitoso;
 	}
 }
