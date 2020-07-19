@@ -36,16 +36,20 @@
 							if (listaProfesor != null)
 								for (Profesor prof : listaProfesor) {
 						%>
-						<option value=<%=prof.getLegajo()%>><%=prof.getNombre()%>
+						<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
+							-
+							<%=prof.getNombre()%>
 							<%=prof.getApellido()%></option>
 						<%
 							}
 						%>
+
 					</select>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="validationServer04" class="col-sm-2 col-form-label">Tipo Usuario</label>
+				<label for="validationServer04" class="col-sm-2 col-form-label">Tipo
+					Usuario</label>
 				<div class="col-sm-2">
 					<select name="cmbTipoUsuario" class="custom-select "
 						id="validationServer04" required>
@@ -70,13 +74,15 @@
 			<div class="form-group row ">
 				<label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control" id="inputPassword" name="txtUsuario">
+					<input type="text" class="form-control" id="inputPassword"
+						name="txtUsuario" autocomplete="off">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
 				<div class="col-sm-2">
-					<input type="password" class="form-control" id="inputPassword" name="txtClave">
+					<input type="password" class="form-control" id="inputPassword"
+						name="txtClave" autocomplete="off">
 				</div>
 
 			</div>
@@ -88,15 +94,30 @@
 		</form>
 
 		<%
-			int fila = 0;
-			if (request.getAttribute("cantFilas") != null) {
-				fila = 1;
+			if (request.getAttribute("msj") != null) {
+		%>
+		<div class="alert alert-danger alert-dismissible fade show"
+			role="alert">
+			<strong><%=request.getAttribute("msj")%></strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<%
 			}
 		%>
 		<%
-			if (fila == 1) {
+			if (request.getAttribute("cantFilas") != null) {
 		%>
-		<h2>Usuario Agregado Correctamente</h2>
+		<div class="alert alert-success alert-dismissible fade show"
+			role="alert">
+			<strong>Usuario Agregado Correctamente</strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 		<%
 			}
 		%>

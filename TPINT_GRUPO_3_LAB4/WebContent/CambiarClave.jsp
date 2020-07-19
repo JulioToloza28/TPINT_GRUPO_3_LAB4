@@ -1,3 +1,5 @@
+<%@page import="entidades.Usuario"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,16 +35,35 @@
 	</nav>
 
 	<div class="container">
-		<form action="servletUsuario" method="post">
+		<form action="ServletUsuarios?changePass=1" method="post">
 			<div class="form-row">
 				<div class="col-md-3 mb-3">
 					<label for="txtClave">Ingrese nueva clave</label> <input
-						type="text" class="form-control" name="txtClave" required>
-					<input type="submit" class="btn btn-primary mt-2" value="Aceptar"
-						name="btnAceptar">
+						type="password" class="form-control" name="txtClave" required>
+					<input
+						value="<%=Integer.parseInt(request.getParameter("idUsuario"))%>"
+						name="txtId" type="hidden" class="form-control"> <input
+						type="submit" class="btn btn-primary mt-2" value="Aceptar"
+						name="btnAceptar"> <a Id="Retroceder" name="Retroceder"
+						class="btn btn-secondary mt-2" type="submit"
+						href="ServletUsuarios?Param=1">Volver</a>
 				</div>
 			</div>
 		</form>
+		<%
+			if (request.getAttribute("msjChange") != null) {
+		%>
+		<div class="alert alert-success alert-dismissible fade show"
+			role="alert">
+			<strong><%=request.getAttribute("msjChange")%></strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<%
+			}
+		%>
 	</div>
 </body>
 </html>
