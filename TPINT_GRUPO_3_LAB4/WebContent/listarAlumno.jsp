@@ -112,7 +112,7 @@
     </div>
 			
 
-		<div class="row">
+		<div class="table-responsive">
 			<div class="col-sm-12 col-md-6">
 				<div class="dataTables_length" id="example_length"></div>
 				<div class="col-sm-12 col-md-6">
@@ -123,7 +123,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-11 ">
+				<div class="col-lg-12 ">
 					<br>
 					<!-- 	<a href="ServletAlumno?BtnAgregar=Alumno" type="button" class="btn btn-outline-success "><i class="fa fa-user-plus "></i> Agregar Alumno</a> -->
 					<%if (request.getAttribute("cantFilas") != null) { %>

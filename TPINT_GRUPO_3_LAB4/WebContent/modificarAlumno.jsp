@@ -70,7 +70,7 @@
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationServer04">Provincia</label> 
-					<select  name="cmbProvincia" class="custom-select " id="txtselectProvincia"  required>
+					<select  name="cmbProvincia" class="custom-select " id="txtselectProvincia" onchange="return cambiar_Localidad()" required>
 <%-- 						<option selected disabled value="<%=alum.getLocalidad().getProvincia().getId()%>"><%=alum.getLocalidad().getProvincia().getNombreProv()%></option> --%>
 						<%
 						  ArrayList<Provincia>ListarProvi=null;
@@ -108,6 +108,40 @@
 
 	</form>
 					<%} %>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+	<script>
+		
+	
+  function cambiar_Localidad(){ 
+	var ProvinciaId;
+	ProvinciaId = document.getElementById('cmbProvincia').value;
+	$.ajax({
+		type : 'POST',
+		url : 'ServletsLocalidad',
+	    dataType : "json", 
+		data : {
+			Provinciaid : ProvinciaId
+		},
+		success : function(result) {
+			console.log(result);
+			 if (result) {
+				$("#cmbLocalidad option:not(:disabled)").remove();
+				$.each(result, function(index, option) {
+					console.log("option: " + option)
+					$("#cmbLocalidad").append(
+							'<option value="' + option.Id + '">'
+									+ option.Nombre + '</option>')					
+				}); 
+			}
+		},
+		error : function(data) {
+			alert('fail');
+		}
+	})
+}; 
 
 
 </body>

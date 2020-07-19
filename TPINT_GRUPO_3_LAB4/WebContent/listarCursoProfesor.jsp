@@ -90,8 +90,8 @@
 							<td><a type="button" class="btn btn-outline-secondary btn-sm"
 								href="ServletCurso?showCourse-professor=<%=curso.getId()%>" data-toggle="tooltip" title="Ver Curso"><i
 									class="fa fa-group"></i></a>
-									<button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip" title="Cargar Notas"><i class="fa fa-pencil-square"></i></button>
-									<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="Reportes"><i class="fa fa-bar-chart-o"></i></button>
+									<button type="button" class="btn btn-outline-success btn-sm" title="Cargar Notas"data-toggle="modal" data-target="#VentanaCargaNota"><i class="fa fa-pencil-square"></i></button>
+									
 						</td></tr>
 						<%
 							}
@@ -103,6 +103,28 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal cargar nota -->
+	
+<div class="modal fade" id="VentanaCargaNota" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cargar Nota</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guradar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 	<script

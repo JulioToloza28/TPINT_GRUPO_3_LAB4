@@ -121,11 +121,21 @@ public class ServletUsuarios extends HttpServlet {
 
 				}
 			} else {
-				PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Usuario y clave incorrecta');");
-				out.println("location='login.jsp';");
-				out.println("</script>");
+				
+				/*
+				 * int error=1; request.setAttribute("Error", error);
+				 * request.getRequestDispatcher("login.jsp").forward(request, response);
+				 */
+				 
+				
+					
+					  PrintWriter out = response.getWriter();
+					  out.println("<script type=\"text/javascript\">");
+					  out.println("alert('Usuario y clave incorrecta');");
+					  out.println("location='login.jsp';"); out.println("</script>");
+					 
+				 
+			
 
 			}
 		}
