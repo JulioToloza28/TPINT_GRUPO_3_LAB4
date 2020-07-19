@@ -12,12 +12,13 @@
 </head>
 <body>
 	<jsp:include page="Menu.jsp"></jsp:include>
-	<div class="container">
-		<nav aria-label="breadcrumb">
+	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">Nuevo
 				Usuario</li>
 		</nav>
+	<div class="container">
+		
 
 		<form action="ServletUsuarios" method="post" style="margin: 40px">
 			<div class="form-group row">
@@ -86,7 +87,7 @@
 				</div>
 
 			</div>
-
+<br>
 			<input Id="btnGuardar" name="btnGuardar" class="btn btn-primary"
 				type="submit" Value="Guardar"> <a Id="Retroceder"
 				name="Retroceder" class="btn btn-secondary" type="submit"

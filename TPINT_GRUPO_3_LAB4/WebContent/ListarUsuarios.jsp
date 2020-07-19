@@ -23,12 +23,18 @@
 </head>
 <body>
 	<jsp:include page="Menu.jsp"></jsp:include>
-	<div class="container">
-		<nav aria-label="breadcrumb">
+	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">Usuarios</li>
 		</ol>
 		</nav>
+		
+		<div class="col-md-4 offset-md-4">
+<a href="ServletUsuarios?AddUser=1" type="button" class="btn btn-outline-success btn-block"><i class="fa fa-user-circle-o"></i> Agregar Usuario</a>
+</div>
+	
+	<div class="container">
+		
 
 		<%
 			ArrayList<Usuario> listaUsuario = null;
@@ -39,8 +45,8 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="ServletUsuarios?AddUser=1"
-					class="btn btn-outline-primary btn-sm">Agregar</a>
+				<!-- <a href="ServletUsuarios?AddUser=1"
+					class="btn btn-outline-primary btn-sm">Agregar</a> -->
 				<%
 					if (request.getAttribute("msjChange") != null) {
 				%>
@@ -59,10 +65,10 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>User</th>
-							<th>legajo_Pro</th>
+							<th>Usuario</th>
+							<th>Legajo</th>
 							<th>Tipo</th>
-							<th>acciones</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -79,12 +85,39 @@
 							<td><a href="CambiarClave.jsp?idUsuario=<%=user.getId()%>"
 								type="submit" class="btn btn-info btn-sm" data-toggle="tooltip"
 								data-placement="top" title="Cambiar Clave"> <i
-									class="fa fa-refresh"></i></a> <a
-								href="ServletUsuarios?deleteUser=<%=user.getId()%>"
-								type="submit" class="btn btn-danger btn-sm"
-								data-toggle="tooltip" data-placement="top"
-								title="Eliminar Usuario"> <i class="fa fa-trash"></i></a></td>
+									class="fa fa-refresh"></i></a> 
+									 <button class="btn btn-danger btn-sm" type="button" onClick="modalEliminar(this)" id="<%=user.getId()%>"
+									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
+								data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+									
+								</td>
 						</tr>
+						
+						<div class="modal fade" id="VentEliminar" tabindex="-1"
+								role="dialog" aria-labelledby="exampleModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+											<button class="close" type="button" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">X</span>
+											</button>
+										</div>
+										<div class="modal-body">Esta seguro que desea eliminar
+											el registro?</div>
+										<div class="modal-footer">
+											<button class="btn btn-secondary" type="button"
+												data-dismiss="modal">Cancel</button>
+											<a class="btn btn-danger test" id="LegajoEliminar"
+												href="">Eliminar</a>
+												
+										</div>
+									</div>
+								</div>
+							</div>
+						
 						<%
 							}
 						%>
@@ -98,5 +131,18 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript">
+function modalEliminar(btn){
+	var LegajoAlumno = btn.id;
+	var hr = "ServletUsuarios?deleteUser="+LegajoAlumno;
+	jQuery.noConflict();
+	$('#VentEliminar').modal('show');
+	var enlace = document.querySelector('.test');
+	enlace.href = hr;
+	
+}
+
+
+</script>	
 </body>
 </html>
