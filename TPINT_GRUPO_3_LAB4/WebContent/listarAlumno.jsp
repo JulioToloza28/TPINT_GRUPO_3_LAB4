@@ -235,11 +235,9 @@
 				</div>
 			</div>
 		</div>
-		
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script type="text/javascript"
-			src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 
 <script type="text/javascript">
