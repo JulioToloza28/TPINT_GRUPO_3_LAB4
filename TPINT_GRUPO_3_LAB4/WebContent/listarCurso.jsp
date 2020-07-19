@@ -25,7 +25,6 @@
 .bs-example {
 	margin: 20px;
 }
-
 .MensajeServlet {
 	color: navy;
 	/* background-color:gray; */

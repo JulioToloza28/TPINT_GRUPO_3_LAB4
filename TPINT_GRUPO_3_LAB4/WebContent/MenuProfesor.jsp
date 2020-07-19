@@ -42,14 +42,16 @@
 						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="ServletCurso?listCourses=1">Cursos</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="ServletAlumno?Param=MenuAlumno">Alumnos</a></li>
-				<li class="nav-item"><a class="nav-link" href="reporte.jsp">Reportes</a></li>
+			<!-- 	<li class="nav-item"><a class="nav-link"
+					href="ServletAlumno?Param=MenuAlumno">Alumnos</a></li> -->
+				<!-- <li class="nav-item"><a class="nav-link" href="reporte.jsp">Reportes</a></li> -->
 			</ul>
 		</div>
 		<div style="width: 20%; float: right">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#" style="pointer-events:none;"><%=session.getAttribute("Session_user")%>
+			<li class="nav-item"><a class="navbar-brand" href="#"> <img
+						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
+				<li class="nav-item"><a class="nav-link" href="#"><%=session.getAttribute("Session_user")%>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"
 					data-toggle="modal" data-target="#logoutModal"> <i

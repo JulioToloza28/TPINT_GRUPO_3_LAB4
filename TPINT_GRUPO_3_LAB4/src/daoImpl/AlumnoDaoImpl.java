@@ -129,8 +129,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 				loc.setId(resultSet.getInt("idlocalidad"));
 				loc.setNombreLoc(resultSet.getString("Localidad"));
 				provincia.setId(resultSet.getInt("idprovincia"));
-				String pr = resultSet.getString("Provincia");
-				provincia.setNombreProv("Prueba");
+				provincia.setNombreProv(resultSet.getString("Provincia"));
 				loc.setProvincia(provincia);
 				alum.setLocalidad(loc);
 				alum.setTelefono(resultSet.getString("telefono"));
