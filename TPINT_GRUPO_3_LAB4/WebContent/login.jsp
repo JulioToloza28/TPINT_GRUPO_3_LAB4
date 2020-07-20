@@ -31,24 +31,47 @@
 				src="img/logo.png" alt="Logo" style="width: 40px;">
 		</a></li>
 	</nav>
+	
 
 	<div class="login-form">
-		<form action="ServletUsuarios?Param=2" method="post">
+		<form action="ServletUsuarios?Param=2" method="post" onsubmit="return error();">
 			<h2 class="text-center">Login</h2>
 			<div class="form-group">
 				<input type="text" class="form-control" name="txtUsuario"
-					placeholder="Usuario" required="required">
+					placeholder="Usuario" required="required" autocomplete="off">
 			</div>
 			<div class="form-group">
 				<input type="password" class="form-control" name="txtClave"
 					placeholder="Clave" required="required">
 			</div>
 			<div class="form-group">
-				<input type="submit" value="Ingresar"
+				<input  type="submit" value="Ingresar"
 					class="btn btn-primary btn-block" name="btnIngresar">
 			</div>
+			
+			
+		<div class="modal fade" id="VentanaMUsuarioError" tabindex="-1" role="dialog">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title">Usuario y/o Clave incorrectos</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <p>El usuario o la clave ingresados son incorrectos.</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			
 		</form>
 	</div>
+	
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 	<script
@@ -56,6 +79,15 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	
+	<script type="text/javascript">
+	 	function error(){
+	 		
+	 		$('#VentanaMUsuarioError').modal('show')
+	 		return false;
+	 	}
+	
+	</script>
 
 </body>
 </html>

@@ -64,7 +64,7 @@
 							<th>Materia</th>
 							<th>Turno</th>
 							<th>Cuatrimestre</th>
-							<th>Año</th>
+							<th>AÃ±o</th>
 							<th>Cant. Alumnos</th>
 							<th>Acciones</th>
 						</tr>
@@ -97,10 +97,6 @@
 								href="ServletAlumXcurso?uploadNotes=<%=curso.getId()%>"
 								data-toggle="tooltip" title="Cargar Notas"><i
 									class="fa fa-pencil-square"></i></a>
-								<button type="button" class="btn btn-outline-primary btn-sm"
-									data-toggle="tooltip" title="Reportes">
-									<i class="fa fa-bar-chart-o"></i>
-								</button></td>
 						</tr>
 						<%
 							}
@@ -112,6 +108,28 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal cargar nota -->
+	
+<div class="modal fade" id="VentanaCargaNota" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cargar Nota</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guradar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 	<script

@@ -39,7 +39,7 @@
 	</ol>
 	</nav>
 
-	<div class="container">
+	<div class="container" style="max-width: 90% !important;">
 
 		<form action="ServletAlumno?Param=Filtrar" method="get">
 		<nav aria-label="breadcrumb">
@@ -112,7 +112,7 @@
     </div>
 			
 
-		<div class="row">
+		<div class="table-responsive">
 			<div class="col-sm-12 col-md-6">
 				<div class="dataTables_length" id="example_length"></div>
 				<div class="col-sm-12 col-md-6">
@@ -123,7 +123,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-11 ">
+				<div class="col-lg-12 ">
 					<br>
 					<!-- 	<a href="ServletAlumno?BtnAgregar=Alumno" type="button" class="btn btn-outline-success "><i class="fa fa-user-plus "></i> Agregar Alumno</a> -->
 					<%if (request.getAttribute("cantFilas") != null) { %>
@@ -192,8 +192,12 @@
 									href="ServletAlumno?Param=ModificarAlumno&amp;Data=<%=alumno.getLegajo()%>"
 									name="btn-EditarAlumno"
 									class="btn btn-outline-secondary btn-sm">Editar</a></td>
-								<td><a data-toggle="modal" data-target="#VentEliminar"
-									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a></td>
+								<td>
+								 <button type="button" onClick="modalEliminar(this)" id="<%=alumno.getLegajo()%>"
+									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm"> Eliminar</button>
+<%-- 								<a onClick="modalEliminar(this)" id="<%=alumno.getLegajo()%>" data-toggle="modal" data-target="#VentEliminar" --%>
+<!-- 									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm">Eliminar</a>					 -->
+									</td>
 							</tr>
 							<div class="modal fade" id="VentEliminar" tabindex="-1"
 								role="dialog" aria-labelledby="exampleModalLabel"
@@ -212,12 +216,15 @@
 										<div class="modal-footer">
 											<button class="btn btn-secondary" type="button"
 												data-dismiss="modal">Cancel</button>
-											<a class="btn btn-danger"
-												href="ServletAlumno?Param=EliminarAlumno&amp;Data=<%=alumno.getLegajo()%>"">Eliminar</a>
+											<a class="btn btn-danger test" id="LegajoEliminar"
+												href="">Eliminar</a>
+												
 										</div>
 									</div>
 								</div>
 							</div>
+							
+							
 							<%
 								}
 							%>
@@ -228,11 +235,24 @@
 				</div>
 			</div>
 		</div>
-		
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script type="text/javascript"
-			src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
+
+<script type="text/javascript">
+function modalEliminar(btn){
+	var LegajoAlumno = btn.id;
+	var hr = "ServletAlumno?Param=EliminarAlumno&Data="+LegajoAlumno;
+	jQuery.noConflict();
+	$('#VentEliminar').modal('show');
+	var enlace = document.querySelector('.test');
+	enlace.href = hr;
+	
+}
+
+
+</script>		
+		
 </body>
 </html>

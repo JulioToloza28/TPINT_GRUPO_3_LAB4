@@ -47,7 +47,7 @@
 	</ol>
 	</nav>
 
-	<div class="container">
+	<div class="container" >
 		<form action="ServletsProfesor" method="get">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -207,11 +207,17 @@
 								href="ServletsProfesor?Param=ModificarProfesor&amp;Data=<%=profesor.getLegajo()%>"
 								name="btn-EditarProfesor"
 								class="btn btn-outline-secondary btn-sm">Editar</a></td>
-							<td><a data-toggle="modal" data-target="#VentEliminar"
+							<td> <button type="button" onClick="modalEliminar(this)" id="<%=profesor.getLegajo()%>"
+									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm"> Eliminar</button>
+							
+						<%-- 	<a href="ServletsProfesor?Param=EliminarProfesor&amp;Data=<%=profesor.getLegajo()%>" 
 								name="btn-EliminarProfesor"
-								class="btn btn-outline-danger btn-sm">Eliminar</a></td>
+								class="btn btn-outline-danger btn-sm">Eliminar</a> --%>
+								
+								</td>
 						</tr>
-						<div class="modal fade" id="VentEliminar" tabindex="-1"
+						
+					 	<div class="modal fade" id="VentEliminar" tabindex="-1"
 							role="dialog" aria-labelledby="exampleModalLabel"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -225,15 +231,16 @@
 									</div>
 									<div class="modal-body">Esta seguro que desea eliminar el
 										registro?</div>
+										 <input type="hidden" class="form-control" id="recipient-name"> 
 									<div class="modal-footer">
 										<button class="btn btn-secondary" type="button"
 											data-dismiss="modal">Cancel</button>
-										<a class="btn btn-danger"
-											href="ServletsProfesor?Param=EliminarProfesor&amp;Data=<%=profesor.getLegajo()%>"">Eliminar</a>
+										<a class="btn btn-danger test" id="LegajoEliminar"
+												href="">Eliminar</a>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> 
 						<%
 							}
 						%>
@@ -243,23 +250,23 @@
 		</div>
 	</div>
 
-	<%-- 	<%
-		int aux = 0;
-	if (request.getAttribute("ProfesorEliminado") != null) {
-		aux = 1;
-	}
-	%>
-	<%
-		if (aux == 1) {
-	%>
-	<h5>Eliminado correctamente</h5>
-	<%
-		}
-	%> --%>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript">
+function modalEliminar(btn){
+	var LegajoAlumno = btn.id;
+	var hr = "ServletsProfesor?Param=EliminarProfesor&Data="+LegajoAlumno;
+	jQuery.noConflict();
+	$('#VentEliminar').modal('show');
+	var enlace = document.querySelector('.test');
+	enlace.href = hr;
+	
+}
+
+
+</script>	
 </body>
 </html>

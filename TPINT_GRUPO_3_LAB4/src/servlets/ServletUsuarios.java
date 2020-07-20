@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import daoImpl.UsuarioDaoImpl;
+import entidades.Alumno;
+import entidades.Curso;
 import entidades.Profesor;
 import entidades.TipoUsuario;
 import entidades.Usuario;
@@ -67,6 +69,32 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarUsuario.jsp");
 			rd.forward(request, response);
 		}
+
+		/*
+		 * int filas = 0; if ("EliminarUsuario".equals(request.getParameter("Param"))) {
+		 * int idUsuario = Integer.parseInt(request.getParameter("Data"));
+		 * UsuarioDao.eliminarUsuario(idUsuario);
+		 * 
+		 * if (UsuarioDao.eliminarUsuario(idUsuario) != false) { filas = 1; } if (filas
+		 * == 1) { // REQUEST DISPATCHER request.setAttribute("UsuarioEliminado",
+		 * filas); ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
+		 * 
+		 * request.setAttribute("listaUsuarios", lista);
+		 * 
+		 * RequestDispatcher rd =
+		 * request.getRequestDispatcher("/ServletUsuarios?Param=1"); rd.forward(request,
+		 * response); } }
+		 */
+
+		// PARA ELIMINAR UN USUARIO
+		if (request.getParameter("deleteUser") != null) {
+			UsuarioDao.eliminarUsuario(Integer.parseInt(request.getParameter("deleteUser")));
+
+			ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
+			// request.setAttribute("listaUsuario", lista);
+			RequestDispatcher rd = request.getRequestDispatcher("/ServletUsuarios?Param=1");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
@@ -91,14 +119,34 @@ public class ServletUsuarios extends HttpServlet {
 			user.setLegajo(Integer.parseInt(request.getParameter("cmbProfesor")));
 			user.setEstado(1);
 
-			if (UsuarioDao.agregarUsuario(user) != false) {
-				filas = 1;
+			/* VALIDA SI EL USERNAME EXISTE */
+			String message = "";
+			boolean existe = UsuarioDao.validarUserName(request.getParameter("txtUsuario"));
+			System.out.println(existe);
+
+			if (existe != true) {
+				if (UsuarioDao.agregarUsuario(user) != false) {
+					filas = 1;
+				}
+			} else {
+				message = "Ya existe ese usuario. Por favor ingrese otro";
+				request.setAttribute("msj", message);
+				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+				ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
+
+				request.setAttribute("listaProfes", lProfesor);
+				request.setAttribute("listaTipoUsuario", listaTipoUsuario);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
+				dispatcher.forward(request, response);
 			}
 
-			request.setAttribute("listaUsuario", UsuarioDao.obtenerTodos());
-			request.setAttribute("cantFilas", filas);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
-			dispatcher.forward(request, response);
+			if (filas == 1) {
+				// request.setAttribute("listaUsuario", UsuarioDao.obtenerTodos());
+				request.setAttribute("cantFilas", filas);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
+				dispatcher.forward(request, response);
+			}
+
 		}
 
 		// Ingresar
@@ -121,13 +169,39 @@ public class ServletUsuarios extends HttpServlet {
 
 				}
 			} else {
-				PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Usuario y clave incorrecta');");
-				out.println("location='login.jsp';");
-				out.println("</script>");
+				
+				/*
+				 * int error=1; request.setAttribute("Error", error);
+				 * request.getRequestDispatcher("login.jsp").forward(request, response);
+				 */
+				 
+				
+					
+					  PrintWriter out = response.getWriter();
+					  out.println("<script type=\"text/javascript\">");
+					  out.println("alert('Usuario y clave incorrecta');");
+					  out.println("location='login.jsp';"); out.println("</script>");
+					 
+				 
+			
 
 			}
 		}
+
+		// PARA CAMBIAR LA CLAVE DEL USUARIO
+		if (request.getParameter("changePass") != null) {
+			String clave = request.getParameter("txtClave");
+			int idUsuario = Integer.parseInt(request.getParameter("txtId"));
+			boolean resp = UsuarioDao.actualizarClave(clave, idUsuario);
+			String message = "";
+			if (resp == true) {
+				message = "Clave cambiada con exito";
+			}
+
+			request.setAttribute("msjChange", message);
+			RequestDispatcher rd = request.getRequestDispatcher("/CambiarClave.jsp?idUsuario=" +idUsuario);
+			rd.forward(request, response);
+		}
+
 	}
 }

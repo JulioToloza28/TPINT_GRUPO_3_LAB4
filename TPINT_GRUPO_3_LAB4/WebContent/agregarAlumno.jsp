@@ -126,33 +126,35 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 	<script>
-
-function cambiar_Localidad(){ 
+		
+	
+  function cambiar_Localidad(){ 
 	var ProvinciaId;
 	ProvinciaId = document.getElementById('cmbProvincia').value;
 	$.ajax({
 		type : 'POST',
 		url : 'ServletsLocalidad',
-		dataType : "json",
+	    dataType : "json", 
 		data : {
 			Provinciaid : ProvinciaId
 		},
 		success : function(result) {
-			if (result) {
+			console.log(result);
+			 if (result) {
 				$("#cmbLocalidad option:not(:disabled)").remove();
 				$.each(result, function(index, option) {
 					console.log("option: " + option)
 					$("#cmbLocalidad").append(
 							'<option value="' + option.Id + '">'
 									+ option.Nombre + '</option>')					
-				});
+				}); 
 			}
 		},
 		error : function(data) {
 			alert('fail');
 		}
 	})
-};
+};   
 
 function onlyLetter(e) {
     key = e.keyCode || e.which;

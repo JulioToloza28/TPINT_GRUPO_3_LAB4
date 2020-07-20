@@ -225,7 +225,7 @@ public class ServletAlumno extends HttpServlet {
 			}
 		}
 
-		// Eliminar alumno
+		//Eliminar 
 		if ("EliminarAlumno".equals(request.getParameter("Param"))) {
 			int Legajo_alum = Integer.parseInt(request.getParameter("Data"));
 			AlumnoDaoImpl alumDaoImpl = new AlumnoDaoImpl();
