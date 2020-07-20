@@ -226,7 +226,6 @@ public class ServletCurso extends HttpServlet {
 			if (CancelarGrabado) {
 				curs = cursoNeg.buscarCurso(VerificaCurso);
 				ArrayList<Alumno> lAlumAux = new ArrayList<Alumno>();
-				lAlumnosInscriptos = request.getParameterValues("cboxAlumno");
 				for (int x = 0; x < CantidadAlumSelec; x++) {
 					A = new Alumno();
 					A.setLegajo(Integer.parseInt(lAlumnosInscriptos[x].toString()));
@@ -237,8 +236,9 @@ public class ServletCurso extends HttpServlet {
 				ArrayList<Alumno> lAlum = alumnoNeg.readAll();
 				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
 
-				request.setAttribute("CursoAux", curs);
-				request.setAttribute("listaMatDao", lMateria);
+				if (VerificaCurso > 0)
+					request.setAttribute("CursoAux", curs);
+				request.setAttribute("listaMaterias", lMateria);
 				request.setAttribute("ListaTurnos", lTurno);
 				request.setAttribute("ListaAlumnosAux", lAlumAux);
 				request.setAttribute("ListaAlumnos", lAlum);
@@ -261,7 +261,8 @@ public class ServletCurso extends HttpServlet {
 		// BOTON GUARDAR EDICION
 		if (request.getParameter("btn-EditarCurso") != null) {
 			String Msj = null;
-			String[] lNvaAlumnosInscriptos;
+			String[] lNvaAlumnosInscriptos = null;
+			int CantidadAlumSelec = 0;
 			List<Alumno> lVjaAlumnosInscriptos;
 			ArrayList<Alumno> lAlumAux = new ArrayList<Alumno>();
 			Alumno A = null;
@@ -280,39 +281,47 @@ public class ServletCurso extends HttpServlet {
 			curs.setAnio(Integer.parseInt(aux));
 			aux = request.getParameter("cmbProfesor");
 			curs.setLegajoProf(Integer.parseInt(aux));
+			if (request.getParameterValues("cboxAlumno") != null) {
+				lNvaAlumnosInscriptos = request.getParameterValues("cboxAlumno");
+				CantidadAlumSelec = lNvaAlumnosInscriptos.length;
+			}
 			int VerificaCurso = cursoNeg.VerificarExisteCurso(curs);
 			if (VerificaCurso == 0) {
-				if (cursoNeg.ActualizarCurso(curs)) { // SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE
-														// EXITOSA Y
-														// PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
-					lNvaAlumnosInscriptos = request.getParameterValues("cboxAlumno");
-					lVjaAlumnosInscriptos = alumnoNeg.getAlumnosInscriptos(curs.getId());
-					for (int x = 0; x < lNvaAlumnosInscriptos.length; x++) {
-						if (!alumnoNeg.verifEstaInscripto(lNvaAlumnosInscriptos[x], curs.getId())) {
-							if (!cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lNvaAlumnosInscriptos[x])) {
-								CancelarGrabado = true;
-								Msj = "ERROR: Hubo un error al agregar uno o varios alumno/s.";
+				if (CantidadAlumSelec > 0) {
+					if (cursoNeg.ActualizarCurso(curs)) { // SI GRABARCURSO DEVUELVE TRUE, LA GRABACION DEL CURSO FUE
+															// EXITOSA Y
+															// PROCEDE A GRABAR LA LISTA DE ALUMNOS INSCRIPTOS
+						lVjaAlumnosInscriptos = alumnoNeg.getAlumnosInscriptos(curs.getId());
+						for (int x = 0; x < CantidadAlumSelec; x++) {
+							if (!alumnoNeg.verifEstaInscripto(lNvaAlumnosInscriptos[x], curs.getId())) {
+								if (!cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lNvaAlumnosInscriptos[x])) {
+									CancelarGrabado = true;
+									Msj = "ERROR: Hubo un error al agregar uno o varios alumno/s.";
+								}
 							}
 						}
+						for (Alumno alum : lVjaAlumnosInscriptos) {
+							boolean existe = false;
+							for (int i = 0; i < lNvaAlumnosInscriptos.length; i++) {
+								if (alum.getLegajo() == Integer.parseInt(lNvaAlumnosInscriptos[i])) {
+									existe = true;
+								}
+							}
+							if (existe == false) {
+								if (!cursoNeg.EliminarAlumnoDelCurso(alum.getLegajo(), curs.getId())) {
+									CancelarGrabado = true;
+									Msj = "ERROR: Hubo un error al eliminar uno o varios alumno/s.";
+								}
+							}
+						}
+						Msj = "Curso Editado correctamente.";
+					} else {
+						CancelarGrabado = true;
+						Msj = "ERROR: Hubo un error al modificar el curso.";
 					}
-					for (Alumno alum : lVjaAlumnosInscriptos) {
-						boolean existe = false;
-						for (int i = 0; i < lNvaAlumnosInscriptos.length; i++) {
-							if (alum.getLegajo() == Integer.parseInt(lNvaAlumnosInscriptos[i])) {
-								existe = true;
-							}
-						}
-						if (existe == false) {
-							if (!cursoNeg.EliminarAlumnoDelCurso(alum.getLegajo(), curs.getId())) {
-								CancelarGrabado = true;
-								Msj = "ERROR: Hubo un error al eliminar uno o varios alumno/s.";
-							}
-						}
-					}
-					Msj = "Curso Editado correctamente.";
 				} else {
 					CancelarGrabado = true;
-					Msj = "ERROR: Hubo un error al modificar el curso.";
+					Msj = "ERROR: No selecciono ningún Alumno.";
 				}
 			} else {
 				CancelarGrabado = true;
@@ -320,10 +329,14 @@ public class ServletCurso extends HttpServlet {
 			}
 
 			if (CancelarGrabado) {
-				Curso curso = cursoNeg.buscarCurso(VerificaCurso);
+				Curso curso = null;
+				if (VerificaCurso == 0 && CantidadAlumSelec == 0) {
+					curso = cursoNeg.buscarCurso(curs.getId());
+				} else {
+					curso = cursoNeg.buscarCurso(VerificaCurso);
+				}
 				curso.setId(curs.getId());
-				lNvaAlumnosInscriptos = request.getParameterValues("cboxAlumno");
-				for (int x = 0; x < lNvaAlumnosInscriptos.length; x++) {
+				for (int x = 0; x < CantidadAlumSelec; x++) {
 					A = new Alumno();
 					A.setLegajo(Integer.parseInt(lNvaAlumnosInscriptos[x].toString()));
 					lAlumAux.add(A);

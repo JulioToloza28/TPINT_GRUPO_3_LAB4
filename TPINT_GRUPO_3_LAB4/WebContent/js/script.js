@@ -45,6 +45,12 @@ $(document).ready(
 							targets : "_all",
 							className : 'dt-center'
 						} ]
+					}), $('#TablaCargarNotas').DataTable({
+						"scrollX" : false,
+						columnDefs : [ {
+							targets : "_all",
+							className : 'dt-center'
+						} ]
 					});
 		});
 
