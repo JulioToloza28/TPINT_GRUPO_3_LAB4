@@ -16,9 +16,8 @@ import entidades.EstadoAcademico;
 public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao {
 
 	private static final String readAll = "SELECT * FROM tpint_grupo_3_lab4.listar_notas";
-	private static final String cargarNotaAlumno = "UPDATE `tpint_grupo_3_lab4`.`alumnoxcurso` SET `notaParcial1` = ?, `notaParcial2` = ?, `notaRecuperatorio1` = ?, `notaRecuperatorio2` = ?, `idEstadoAcademico` = ? WHERE `legajoAlumno` = ? and `idCurso` = ?";
+	private static final String cargarNotaAlumno = "UPDATE `tpint_grupo_3_lab4`.`alumnoxcurso` SET `notaParcial1` = ?, `notaParcial2` = ?, `notaRecuperatorio1` = ?, `notaRecuperatorio2` = ?, `idEstadoAcademico` = ? WHERE `legajoAlumno` = ? and `idCurso` = ? and estado=1";
 	private static final String mostrarCalifAlumnos = "SELECT * FROM tpint_grupo_3_lab4.listar_cargarnotas where idcurso = ?";
-	private static final String calificarAlumnos = "SELECT * FROM tpint_grupo_3_lab4.alumnoxcurso where idcurso=?";
 
 	public boolean cargarNotaAlumno(AlumnosPorCursos NotaAlum) {
 		PreparedStatement statement;
@@ -152,20 +151,20 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao {
 		PreparedStatement statement;
 		ResultSet resultSet;
 		AlumnosPorCursos ACaux = null;
-		Alumno alumAux=null;
-		Curso cursoAux=null;
-		EstadoAcademico EAaux=null;
-		
+		Alumno alumAux = null;
+		Curso cursoAux = null;
+		EstadoAcademico EAaux = null;
+
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try {
 			statement = conexion.prepareStatement(mostrarCalifAlumnos);
 			statement.setInt(1, IdCurso);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				ACaux=new AlumnosPorCursos();
-				alumAux=new Alumno();
-				cursoAux=new Curso();
-				EAaux=new EstadoAcademico();
+				ACaux = new AlumnosPorCursos();
+				alumAux = new Alumno();
+				cursoAux = new Curso();
+				EAaux = new EstadoAcademico();
 				ACaux.setId(resultSet.getInt("idAlumnoXCurso"));
 				alumAux.setLegajo(resultSet.getInt("legajoAlumno"));
 				alumAux.setNombre(resultSet.getString("alumno"));
@@ -180,7 +179,7 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao {
 				EAaux.setNombres(resultSet.getString("estadoacademico"));
 				ACaux.setEstadoAca(EAaux);
 				ACaux.setEstado(true);
-				
+
 				listAlumnoConNotas.add(ACaux);
 			}
 		} catch (SQLException e) {
@@ -194,5 +193,4 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

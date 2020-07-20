@@ -27,12 +27,31 @@
 	<form action="ServletAlumXcurso" method="post" style="margin: 40px">
 
 		<div class="container">
+			<%
+				int IdCurso = 0;
+				if (request.getAttribute("CursoId") != null) {
+					IdCurso = Integer.parseInt(request.getAttribute("CursoId").toString());
+				}
+			%>
+			<%
+				if (request.getAttribute("Mensaje") != null) {
+					String Mensaje = request.getAttribute("Mensaje").toString();
+			%>
+			<div class="alert alert-danger" role="alert">
+				<%=Mensaje%>
+			</div>
+			<%
+				}
+			%>
+			<input type="hidden" name="txtIdCurso" id="txtIdCurso"
+				value="<%=IdCurso%>">
 			<div class="row">
 				<div class="col-lg-12">
-					<table id="example" class="display" style="width: 100%">
+					<table id="TablaCargarNotas" class="display" style="width: 100%">
 						<thead>
 							<tr>
-								<th></th>
+								<th>Ocultar</th>
+								<th>Legajo</th>
 								<th>Alumno</th>
 								<th>Parcial 1</th>
 								<th>Parcial 2</th>
@@ -51,23 +70,26 @@
 											.getAttribute("listaAlumNotas");
 									for (AlumnosPorCursos alumnoXNota : NotasdeAlumnos) {
 							%>
-							<tr>
 
-								<td><%=alumnoXNota.getAlumno().getLegajo()%></td>
+							<tr>
+								<td><input type="hidden" name="LegAlumno" id="LegAlumno"
+									value="<%=alumnoXNota.getAlumno().getLegajo()%>"></td>
+								<td><label id="LegAlumno" name="LegAlumno"><%=alumnoXNota.getAlumno().getLegajo()%></label></td>
 								<td><%=alumnoXNota.getAlumno().getNombre()%></td>
 								<td>
 									<div class="form-group">
-										
-											<%
+
+										<%
 											if (alumnoXNota.getParcial1() == 0) {
-											%>
-											<input type="text" class="form-control" id="notaParcial1"
+										%>
+										<input type="text" class="form-control" id="notaParcial1"
 											name="notaParcial1" placeholder="Calificar">
 										<%
 											} else {
 										%>
 										<input type="text" class="form-control" id="notaParcial1"
-											name="notaParcial1" placeholder="Calificar" value="<%=alumnoXNota.getParcial1()%>">
+											name="notaParcial1" placeholder="Calificar"
+											value="<%=alumnoXNota.getParcial1()%>">
 										<%
 											}
 										%>
@@ -76,38 +98,56 @@
 								</td>
 								<td>
 									<div class="form-group">
-									<%if(alumnoXNota.getParcial2()==0){ %>
+										<%
+											if (alumnoXNota.getParcial2() == 0) {
+										%>
 										<input type="text" class="form-control" id="notaParcial2"
 											name="notaParcial2" placeholder="Calificar">
-											<%}else{ %>
+										<%
+											} else {
+										%>
 										<input type="text" class="form-control" id="notaParcial2"
 											name="notaParcial2" placeholder="Calificar"
 											value="<%=alumnoXNota.getParcial2()%>">
-											<%} %>
+										<%
+											}
+										%>
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-									<%if(alumnoXNota.getRecuperatorio1()==0){ %>
+										<%
+											if (alumnoXNota.getRecuperatorio1() == 0) {
+										%>
 										<input type="text" class="form-control" id="Recuperatorio1"
 											name="Recuperatorio1" placeholder="Calificar">
-											<%}else{ %>
+										<%
+											} else {
+										%>
 										<input type="text" class="form-control" id="Recuperatorio1"
 											name="Recuperatorio1" placeholder="Calificar"
 											value="<%=alumnoXNota.getRecuperatorio1()%>">
-											<%} %>
+										<%
+											}
+										%>
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
-									<%if(alumnoXNota.getRecuperatorio2()==0){ %>
+										<%
+											if (alumnoXNota.getRecuperatorio2() == 0) {
+										%>
 										<input type="text" class="form-control" id="Recuperatorio2"
-											name="Recuperatorio2" placeholder="Calificar"
-											<%}else{ %>
+											name="Recuperatorio2" placeholder="Calificar">
+										<%
+											} else {
+										%>
 										<input type="text" class="form-control" id="Recuperatorio2"
 											name="Recuperatorio2" placeholder="Calificar"
 											value="<%=alumnoXNota.getRecuperatorio2()%>">
-											<%} %>
+										<%
+											}
+										%>
 									</div>
 								</td>
 								<td>
@@ -183,8 +223,8 @@
 					</table>
 
 
-					<button id="btnGuardar" name="btnGuardar" class="btn btn-primary"
-						type="submit">Guardar Notas</button>
+					<button id="btnActualizarNotas" name="btnActualizarNotas"
+						class="btn btn-primary" type="submit">Guardar Notas</button>
 					<a id="Retroceder" name="Retroceder" class="btn btn-secondary"
 						type="submit" href="ServletCurso?listCoursesProfessor=0">Volver</a>
 				</div>

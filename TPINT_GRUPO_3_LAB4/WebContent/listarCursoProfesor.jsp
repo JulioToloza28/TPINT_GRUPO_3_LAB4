@@ -47,8 +47,9 @@
 		if (request.getAttribute("Mensaje") != null) {
 			String Mensaje = request.getAttribute("Mensaje").toString();
 	%>
-	<h3 class="MensajeServlet"><%=Mensaje%></h3>
-
+	<div class="alert alert-success" role="alert">
+		<%=Mensaje%>
+	</div>
 	<%
 		}
 	%>
@@ -56,7 +57,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-			<div></div>
+				<div></div>
 				<table id="ListarCursosProfesor" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -87,12 +88,20 @@
 							<td><%=curso.getCuatrimestre()%></td>
 							<td><%=curso.getAnio()%></td>
 							<td><%=curso.getCantAlum()%></td>
-							<td><a type="button" class="btn btn-outline-secondary btn-sm"
-								href="ServletCurso?showCourse-professor=<%=curso.getId()%>" data-toggle="tooltip" title="Ver Curso"><i
-									class="fa fa-group"></i></a>
-									<a type="button" class="btn btn-outline-success btn-sm" href="ServletAlumXcurso?uploadNotes=<%=curso.getId()%>" data-toggle="tooltip" title="Cargar Notas"><i class="fa fa-pencil-square"></i></a>
-									<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="Reportes"><i class="fa fa-bar-chart-o"></i></button>
-						</td></tr>
+							<td><a type="button"
+								class="btn btn-outline-secondary btn-sm"
+								href="ServletCurso?showCourse-professor=<%=curso.getId()%>"
+								data-toggle="tooltip" title="Ver Curso"><i
+									class="fa fa-group"></i></a> <a type="button"
+								class="btn btn-outline-success btn-sm"
+								href="ServletAlumXcurso?uploadNotes=<%=curso.getId()%>"
+								data-toggle="tooltip" title="Cargar Notas"><i
+									class="fa fa-pencil-square"></i></a>
+								<button type="button" class="btn btn-outline-primary btn-sm"
+									data-toggle="tooltip" title="Reportes">
+									<i class="fa fa-bar-chart-o"></i>
+								</button></td>
+						</tr>
 						<%
 							}
 						%>
