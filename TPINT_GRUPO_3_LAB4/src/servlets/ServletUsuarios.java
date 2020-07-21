@@ -189,19 +189,28 @@ public class ServletUsuarios extends HttpServlet {
 		}
 
 		// PARA CAMBIAR LA CLAVE DEL USUARIO
-		if (request.getParameter("changePass") != null) {
-			String clave = request.getParameter("txtClave");
-			int idUsuario = Integer.parseInt(request.getParameter("txtId"));
-			boolean resp = UsuarioDao.actualizarClave(clave, idUsuario);
-			String message = "";
-			if (resp == true) {
-				message = "Clave cambiada con exito";
-			}
+		if (request.getParameter("BtnLegajo") != null) {
 
-			request.setAttribute("msjChange", message);
-			RequestDispatcher rd = request.getRequestDispatcher("/CambiarClave.jsp?idUsuario=" +idUsuario);
-			rd.forward(request, response);
+			int cont=0;
+			String clave = request.getParameter("contraseñaModificar");
+			int idUsuario = Integer.parseInt(request.getParameter("iduserAModificar")); 
+			
+			if(UsuarioDao.actualizarClave(clave, idUsuario)==true) 
+			{
+				cont=1;
+				request.setAttribute("contraseñaU", cont);
+				
+				UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
+				ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
+
+				request.setAttribute("listaUsuarios", lista);
+
+				RequestDispatcher rd = request.getRequestDispatcher("/ListarUsuarios.jsp");
+				rd.forward(request, response);
+			}		
+
 		}
+		 
 
 	}
 }
