@@ -42,9 +42,13 @@
 						type="password" class="form-control" name="txtClave" required>
 					<input
 						value="<%=Integer.parseInt(request.getParameter("idUsuario"))%>"
-						name="txtId" type="hidden" class="form-control"> <input
+						name="txtId" type="hidden" class="form-control"> 
+						
+						<input
 						type="submit" class="btn btn-primary mt-2" value="Aceptar"
-						name="btnAceptar"> <a Id="Retroceder" name="Retroceder"
+						name="btnAceptar"> 
+						
+						<a Id="Retroceder" name="Retroceder"
 						class="btn btn-secondary mt-2" type="submit"
 						href="ServletUsuarios?Param=1">Volver</a>
 				</div>
