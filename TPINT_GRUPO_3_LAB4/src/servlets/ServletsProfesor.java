@@ -21,6 +21,7 @@ import daoImpl.AlumnoDaoImpl;
 import daoImpl.LocalidadDaoImpl;
 import daoImpl.ProfesorDaoImpl;
 import daoImpl.ProvinciaDaoImpl;
+import daoImpl.UsuarioDaoImpl;
 import entidades.Alumno;
 import entidades.Localidad;
 import entidades.Profesor;
@@ -226,10 +227,14 @@ public class ServletsProfesor extends HttpServlet {
 					if("EliminarProfesor".equals(request.getParameter("Param"))){
 					int Legajo_profe = Integer.parseInt(request.getParameter("Data"));
 					ProfesorDaoImpl profeDaoImpl = new ProfesorDaoImpl();
-					profeDaoImpl.eliminarProfesor(Legajo_profe);
+					UsuarioDaoImpl UsuarioBorar=new UsuarioDaoImpl();
+					/* profeDaoImpl.eliminarProfesor(Legajo_profe); */
+					
 					
 					if(profeDaoImpl.eliminarProfesor(Legajo_profe)!=false) 
 					{
+						UsuarioBorar.eliminarUsuPro(Legajo_profe);
+						
 						filas=1;
 					}	
 					if(filas==1) {

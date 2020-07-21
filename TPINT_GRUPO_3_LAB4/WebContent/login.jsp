@@ -62,8 +62,8 @@
 				        <p>El usuario o la clave ingresados son incorrectos.</p>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
+				        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				     
 				      </div>
 				    </div>
 				  </div>

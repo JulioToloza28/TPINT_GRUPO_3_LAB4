@@ -17,6 +17,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	private static final String validarUserName = "SELECT * FROM tpint_grupo_3_lab4.usuario Where nombreUsuario= ? and estado=1";
 	private static final String eliminarUsuario = "UPDATE usuario set estado=0 where idusuario= ?";
 	private static final String actualizarClave = "UPDATE usuario set Contrasenia=? where idusuario= ?";
+	private static final String eliminarUsuPro = "UPDATE usuario set estado=0 where legajo_Pro= ?";
 
 	public ArrayList<Usuario> obtenerTodos() {
 		PreparedStatement statement;
@@ -149,6 +150,32 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		}
 		return isDeleteExitoso;
 	}
+	
+	public boolean eliminarUsuPro(int legajo) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isDeleteExitoso = false;
+		try {
+
+			statement = conexion.prepareStatement(eliminarUsuPro);
+			statement.setInt(1, legajo);
+			
+
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isDeleteExitoso = true;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (Exception ex1) {
+				ex1.printStackTrace();
+			}
+		}
+		return isDeleteExitoso;
+	}
+	
 	
 	public boolean actualizarClave(String clave,int idUsuario) {
 		PreparedStatement statement;

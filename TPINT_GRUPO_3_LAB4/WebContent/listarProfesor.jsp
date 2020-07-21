@@ -230,7 +230,7 @@
 										</button>
 									</div>
 									<div class="modal-body">Esta seguro que desea eliminar el
-										registro?</div>
+										registro?. -Se eliminara el usuario y los cursos asociados</div>
 										 <input type="hidden" class="form-control" id="recipient-name"> 
 									<div class="modal-footer">
 										<button class="btn btn-secondary" type="button"
