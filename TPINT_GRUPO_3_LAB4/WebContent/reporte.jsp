@@ -33,10 +33,13 @@
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label for="sel1">Cursos:</label> <select id="cbxMateria"
+								<label for="sel1">Opciones de Reporte:</label> <select id="cbxMateria"
 									name="cboCursos" class="custom-select" id="sel1">
 									<option selected disabled value="<>">Seleccione...</option>
-									<%
+									<option value="1">Opcion 1</option>
+									<option value="2">Opcion 2</option>
+									<option value="3">Opcion 2</option>
+									<%-- <%
 										CursoDaoImpl curso = new CursoDaoImpl();
 										ArrayList<Curso> listaCurso = null;
 										listaCurso = (ArrayList<Curso>) curso.listarCursos();
@@ -48,7 +51,7 @@
 									<option value=<%=itemCurso.getId()%>><%=itemCurso.getId()%></option>
 									<%
 										}
-									%>
+									%> --%>
 								</select>
 							</div>
 						</div>
@@ -103,9 +106,11 @@
 							</div>
 
 						</div>
-						<div class="col-lg-3">
-							<button id="btn-reporte" name="btn-reporte"
-								class="btn btn-primary" type="submit">Generar reporte</button>
+						<br>
+						<div class="col-lg-12">
+						<button id="btn-reporte" name="btn-reporte" type="button" class="btn btn-outline-info btn-block"><i class="fa fa-list-alt"></i> Generar Reporte</button>
+							<!-- <button id="btn-reporte" name="btn-reporte"
+								class="btn btn-primary" type="submit">Generar reporte</button> -->
 						</div>
 					</div>
 				</form>
@@ -118,14 +123,14 @@
 		}
 	%>
 
-			<table border="1">
+				<table class="display" style="width: 100%">
 				<tr>
-					<td><b>CURSO</b></td>
+				
 					<td><b>MATERIA</b></td>
 					<td><b>CUATRIMESTRE</b></td>
 					<td><b>AÑO</b></td>
-					<td><b>NO APROBADOS</b></td>
 					<td><b>APROBADOS</b></td>
+					<td><b>NO APROBADOS</b></td>
 					<td><b>TOTAL</b></td>
 				</tr>
 
