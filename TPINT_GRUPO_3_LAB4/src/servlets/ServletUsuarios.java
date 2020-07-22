@@ -89,9 +89,12 @@ public class ServletUsuarios extends HttpServlet {
 		// PARA ELIMINAR UN USUARIO
 		if (request.getParameter("deleteUser") != null) {
 			UsuarioDao.eliminarUsuario(Integer.parseInt(request.getParameter("deleteUser")));
+			int cant=1;
 
 			ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
-			// request.setAttribute("listaUsuario", lista);
+			request.setAttribute("listaUsuario", lista);
+			request.setAttribute("EliminadoUsuario", cant);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/ServletUsuarios?Param=1");
 			rd.forward(request, response);
 		}
@@ -141,10 +144,15 @@ public class ServletUsuarios extends HttpServlet {
 			}
 
 			if (filas == 1) {
-				// request.setAttribute("listaUsuario", UsuarioDao.obtenerTodos());
+				
 				request.setAttribute("cantFilas", filas);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
-				dispatcher.forward(request, response);
+				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+				ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
+
+				request.setAttribute("listaProfes", lProfesor);
+				request.setAttribute("listaTipoUsuario", listaTipoUsuario);
+				RequestDispatcher rd = request.getRequestDispatcher("/agregarUsuario.jsp");
+				rd.forward(request, response);
 			}
 
 		}

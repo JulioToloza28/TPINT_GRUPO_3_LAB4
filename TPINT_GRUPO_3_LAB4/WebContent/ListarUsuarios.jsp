@@ -38,9 +38,14 @@
 	
 
 	<div class="container">
-<%if (request.getAttribute("contraseñaU") != null) {
+	
+		<%if (request.getAttribute("contraseñaU") != null) {%>
+				<div class="alert alert-warning" role="alert">Se modifico la contraseña correctamente</div>
+
+				<%}%>
+<%if (request.getAttribute("EliminadoUsuario") != null) {
 				%>
-				<div class="alert alert-success" role="alert">Se modifico la contraseña</div>
+				<div class="alert alert-danger" role="alert">Se elimino correctamente</div>
 				<%
 					}
 				%>
@@ -145,7 +150,7 @@
 											</button>
 										</div>
 										<div class="modal-body">
-										<div class="input-group">
+										
 											<label for="recipient-name" class="col-form-label">Nueva contraseña: </label> 
 												
 													<input type="password" class="form-control"
@@ -158,7 +163,7 @@
 											<input type="hidden" class="form-control" id="iduserAModificar"
 												name="iduserAModificar">
 												</div>
-										</div>
+										
 										</div>
 										<div class="modal-footer">
 											<button class="btn btn-secondary" type="button"
