@@ -27,4 +27,7 @@ public interface CursoDao {
 	public int VerificarExisteCurso(Curso curso);
 	
 	public boolean VerificarAlumnoEstaInscripto(int idCurso, String legajoAlumno);
+	
+	public boolean EliminarCursosdesdeProfesor(int legajoProf);
+	
 }
