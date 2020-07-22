@@ -238,6 +238,7 @@ public class ServletsProfesor extends HttpServlet {
 						UsuarioBorrar.eliminarUsuPro(Legajo_profe);
 						borrarCursos.EliminarCursosdesdeProfesor(Legajo_profe);
 						
+						
 						filas=1;
 					}	
 					if(filas==1) {
