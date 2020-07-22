@@ -1,3 +1,4 @@
+
 package servlets;
 
 import java.io.IOException;
@@ -115,7 +116,7 @@ public class ServletAlumXcurso extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/cargarNota.jsp");
 				rd.forward(request, response);
 			} else {
-				Msj = "La grabación se realizó correctamente.";
+				Msj = "La grabaciÃ³n se realizÃ³ correctamente.";
 				request.setAttribute("Mensaje", Msj);
 				RequestDispatcher rd = request.getRequestDispatcher("ServletCurso?listCoursesProfessor=0");
 				rd.forward(request, response);

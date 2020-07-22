@@ -39,8 +39,8 @@
 
 	<div class="container">
 	
-		<%if (request.getAttribute("contraseñaU") != null) {%>
-				<div class="alert alert-warning" role="alert">Se modifico la contraseña correctamente</div>
+		<%if (request.getAttribute("contraseÃ±aU") != null) {%>
+				<div class="alert alert-warning" role="alert">Se modifico la contraseÃ±a correctamente</div>
 
 				<%}%>
 <%if (request.getAttribute("EliminadoUsuario") != null) {
@@ -133,7 +133,7 @@
 								</div>
 							</div>
 						</div>
-						<!--MODAL CAMBIAR CONTRASEÑA-->
+						<!--MODAL CAMBIAR CONTRASEÃ‘A-->
 
 						<div class="modal fade" id="VentCambiarContras" tabindex="-1"
 							role="dialog" aria-labelledby="exampleModalLabel"
@@ -143,7 +143,7 @@
 									<form action="ServletUsuarios" method="post">
 										<div class="modal-header">
 											<h5 class="modal-title" id="exampleModalLabel">Cambiar
-												Contraseña</h5>
+												ContraseÃ±a</h5>
 											<button class="close" type="button" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">X</span>
@@ -151,10 +151,10 @@
 										</div>
 										<div class="modal-body">
 										
-											<label for="recipient-name" class="col-form-label">Nueva contraseña: </label> 
+											<label for="recipient-name" class="col-form-label">Nueva contraseÃ±a: </label> 
 												
 													<input type="password" class="form-control"
-												id="contraseñaModificar" name="contraseñaModificar">
+												id="contraseÃ±aModificar" name="contraseÃ±aModificar">
 												<div class="input-group-append">
 											<button id="show_password" class="btn btn-secondary"
 										type="button" onclick="mostrarPassword()">
@@ -184,11 +184,12 @@
 			</div>
 		</div>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script src="js/espanol.js"></script>	
+
 	<script type="text/javascript">
 		function modalEliminar(btn) {
 			var LegajoAlumno = btn.id;
@@ -210,7 +211,7 @@
 		}
 		
 		function mostrarPassword(){
-			var cambio = document.getElementById("contraseñaModificar");
+			var cambio = document.getElementById("contraseÃ±aModificar");
 			if(cambio.type == "password"){
 				cambio.type = "text";
 				$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');

@@ -39,6 +39,9 @@ public class ServletAlumno extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Date myDate = new Date();
+		 SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+		 
 		AlumnoDaoImpl alumDao = new AlumnoDaoImpl();
 		ProvinciaDaoImpl provDao = new ProvinciaDaoImpl();
 		LocalidadDaoImpl locDao = new LocalidadDaoImpl();
@@ -135,8 +138,7 @@ public class ServletAlumno extends HttpServlet {
 					filas = 1;
 				}
 			}else 
-			{
-				
+			{				
 				ArrayList<Provincia> listaProv = provDao.listarProvincia();
 				ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
 
@@ -144,8 +146,7 @@ public class ServletAlumno extends HttpServlet {
 				request.setAttribute("listaLocDao", listaLoc);
 				request.setAttribute("AlumnoRep", alum);
 				RequestDispatcher rd = request.getRequestDispatcher("/VerificarAlumno.jsp");
-				rd.forward(request, response);
-								
+				rd.forward(request, response);								
 			}
 			
 		}
