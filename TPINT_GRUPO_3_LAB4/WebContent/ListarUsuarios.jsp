@@ -34,27 +34,45 @@
 			class="btn btn-outline-success btn-block"><i
 			class="fa fa-user-circle-o"></i> Agregar Usuario</a>
 	</div>
-	
-	
+
+
 
 	<div class="container">
+		<%
+			if (request.getAttribute("cantFilas") != null) {
+		%>
+		<div class="alert alert-success" role="alert">Usuario Agregado
+			Correctamente</div>
 	
 		<%if (request.getAttribute("contraseñaU") != null) {%>
 				<div class="alert alert-warning" role="alert">Se modifico la contraseña correctamente</div>
 
-				<%}%>
-<%if (request.getAttribute("EliminadoUsuario") != null) {
-				%>
-				<div class="alert alert-danger" role="alert">Se elimino correctamente</div>
-				<%
-					}
-				%>
+		<%
+			}
+		%>
+		<%
+			if (request.getAttribute("contrase�aU") != null) {
+		%>
+		<div class="alert alert-warning" role="alert">Se modifico la
+			contrase�a correctamente</div>
+
+		<%
+			}
+		%>
+		<%
+			if (request.getAttribute("EliminadoUsuario") != null) {
+		%>
+		<div class="alert alert-danger" role="alert">Se elimino
+			correctamente</div>
+		<%
+			}
+		%>
 
 		<%
 			ArrayList<Usuario> listaUsuario = null;
-		if (request.getAttribute("listaUsuarios") != null) {
-			listaUsuario = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
-		}
+			if (request.getAttribute("listaUsuarios") != null) {
+				listaUsuario = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
+			}
 		%>
 
 		<div class="row">
@@ -87,8 +105,10 @@
 					</thead>
 					<tbody>
 						<%
+							int IdUsuarioActual = 0;
+							IdUsuarioActual = Integer.parseInt(session.getAttribute("Session_Id").toString());
 							if (listaUsuario != null)
-							for (Usuario user : listaUsuario) {
+								for (Usuario user : listaUsuario) {
 						%>
 						<tr>
 							<td><%=user.getId()%> <input type="hidden" name="idUsuario"
@@ -101,13 +121,26 @@
 									data-toggle="tooltip" data-placement="top"
 									title="Cambiar Clave">
 									<i class="fa fa-refresh"></i>
-								</button>
+								</button> <%
+ 	if (user.getId() != 1 && user.getId() != IdUsuarioActual) {
+ %>
 								<button class="btn btn-danger btn-sm" type="button"
 									onClick="modalEliminar(this)" id="<%=user.getId()%>"
-									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm"
+									name="btn-EliminarAlumno"
 									data-toggle="tooltip" data-placement="top" title="Eliminar">
 									<i class="fa fa-trash"></i>
-								</button></td>
+								</button> <%
+ 	} else {
+ %>
+								<button class="btn btn-outline-danger btn-sm" type="button"
+									onClick="modalEliminar(this)" id="<%=user.getId()%>"
+									name="btn-EliminarAlumno"
+									data-toggle="tooltip" data-placement="top" title="Eliminar"
+									disabled=true>
+									<i class="fa fa-trash"></i>
+								</button> <%
+ 	}
+ %></td>
 						</tr>
 						<!--MODAL ELIMINAR-->
 						<div class="modal fade" id="VentEliminar" tabindex="-1"
@@ -150,7 +183,8 @@
 											</button>
 										</div>
 										<div class="modal-body">
-										
+
+                      
 											<label for="recipient-name" class="col-form-label">Nueva contraseña: </label> 
 												
 													<input type="password" class="form-control"
@@ -164,6 +198,7 @@
 												name="iduserAModificar">
 												</div>
 										
+                      
 										</div>
 										<div class="modal-footer">
 											<button class="btn btn-secondary" type="button"
@@ -209,13 +244,13 @@
 			var inputUsser = document.getElementById("iduserAModificar");
 			inputUsser.value = IdUsser;
 		}
-		
+
 		function mostrarPassword(){
 			var cambio = document.getElementById("contraseñaModificar");
 			if(cambio.type == "password"){
 				cambio.type = "text";
 				$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-			}else{
+			} else {
 				cambio.type = "password";
 				$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
 			}

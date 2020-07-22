@@ -13,4 +13,5 @@ public interface UsuarioDao {
 	public boolean validarUserName(String user);
 	public boolean eliminarUsuario(int idUsuario);
 	public boolean actualizarClave(String clave,int idUsuario);
+	public boolean validarLegajo(int legajoUsuario);
 }

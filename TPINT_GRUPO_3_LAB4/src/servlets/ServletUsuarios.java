@@ -49,6 +49,9 @@ public class ServletUsuarios extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		
+		
+		//Listar Usuarios
 		if (request.getParameter("Param") != null) {
 			// Entra por haber echo click en el hyperlink mostrar usuarios
 			UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
@@ -60,6 +63,7 @@ public class ServletUsuarios extends HttpServlet {
 			rd.forward(request, response);
 		}
 
+		//Carga pantalla AgregarUsuario
 		if (request.getParameter("AddUser") != null) {
 			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
 			ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
@@ -89,12 +93,12 @@ public class ServletUsuarios extends HttpServlet {
 		// PARA ELIMINAR UN USUARIO
 		if (request.getParameter("deleteUser") != null) {
 			UsuarioDao.eliminarUsuario(Integer.parseInt(request.getParameter("deleteUser")));
-			int cant=1;
+			int cant = 1;
 
 			ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
 			request.setAttribute("listaUsuarios", lista);
 			request.setAttribute("EliminadoUsuario", cant);
-			
+
 			RequestDispatcher rd = request.getRequestDispatcher("/ListarUsuarios.jsp");
 			rd.forward(request, response);
 		}
@@ -113,8 +117,8 @@ public class ServletUsuarios extends HttpServlet {
 		if (request.getParameter("btnGuardar") != null) {
 			Usuario user = new Usuario();
 			TipoUsuario tipoUser = new TipoUsuario();
-			String a = request.getParameter("cmbTipoUsuario");
-			tipoUser.setId(Integer.parseInt(a));
+//			String a = request.getParameter("cmbTipoUsuario");
+			tipoUser.setId(2);
 
 			user.setUsername(request.getParameter("txtUsuario"));
 			user.setPass(request.getParameter("txtClave"));
@@ -124,6 +128,22 @@ public class ServletUsuarios extends HttpServlet {
 
 			/* VALIDA SI EL USERNAME EXISTE */
 			String message = "";
+			
+			boolean existeLegajo = UsuarioDao.validarLegajo(Integer.parseInt(request.getParameter("cmbProfesor").toString()));
+			System.out.println(existeLegajo);
+
+			if (existeLegajo == true) {
+				message = "Ya existe un usuario para ese profesor. Por favor ingrese otro";
+				request.setAttribute("msj", message);
+				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+				ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
+
+				request.setAttribute("listaProfes", lProfesor);
+				request.setAttribute("listaTipoUsuario", listaTipoUsuario);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
+				dispatcher.forward(request, response);
+			}else {
+			
 			boolean existe = UsuarioDao.validarUserName(request.getParameter("txtUsuario"));
 			System.out.println(existe);
 
@@ -141,17 +161,19 @@ public class ServletUsuarios extends HttpServlet {
 				request.setAttribute("listaTipoUsuario", listaTipoUsuario);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
 				dispatcher.forward(request, response);
-			}
+			}}
+			
+			
 
 			if (filas == 1) {
-				
-				request.setAttribute("cantFilas", filas);
-				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
-				ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
 
-				request.setAttribute("listaProfes", lProfesor);
-				request.setAttribute("listaTipoUsuario", listaTipoUsuario);
-				RequestDispatcher rd = request.getRequestDispatcher("/agregarUsuario.jsp");
+				request.setAttribute("cantFilas", filas);
+				UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
+				ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
+
+				request.setAttribute("listaUsuarios", lista);
+
+				RequestDispatcher rd = request.getRequestDispatcher("/ListarUsuarios.jsp");
 				rd.forward(request, response);
 			}
 
@@ -169,6 +191,7 @@ public class ServletUsuarios extends HttpServlet {
 				session.setAttribute("Session_user", usuario.getUsername());
 				session.setAttribute("Session_type", usuario.getTipoUsuario().getTipo());
 				session.setAttribute("Session_Legajo", usuario.getLegajo());
+				session.setAttribute("Session_Id", usuario.getId());
 				// session.setAttribute("Session_user", request.getParameter("txtUsuario"));
 				if (usuario.getTipoUsuario().getId() == 1) {
 					request.getRequestDispatcher("Home.jsp").forward(request, response);
@@ -177,21 +200,17 @@ public class ServletUsuarios extends HttpServlet {
 
 				}
 			} else {
-				
+
 				/*
 				 * int error=1; request.setAttribute("Error", error);
 				 * request.getRequestDispatcher("login.jsp").forward(request, response);
 				 */
-				 
-				
-					
-					  PrintWriter out = response.getWriter();
-					  out.println("<script type=\"text/javascript\">");
-					  out.println("alert('Usuario y clave incorrecta');");
-					  out.println("location='login.jsp';"); out.println("</script>");
-					 
-				 
-			
+
+				PrintWriter out = response.getWriter();
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Usuario y clave incorrecta');");
+				out.println("location='login.jsp';");
+				out.println("</script>");
 
 			}
 		}
@@ -199,15 +218,14 @@ public class ServletUsuarios extends HttpServlet {
 		// PARA CAMBIAR LA CLAVE DEL USUARIO
 		if (request.getParameter("BtnLegajo") != null) {
 
-			int cont=0;
-			String clave = request.getParameter("contraseñaModificar");
-			int idUsuario = Integer.parseInt(request.getParameter("iduserAModificar")); 
-			
-			if(UsuarioDao.actualizarClave(clave, idUsuario)==true) 
-			{
-				cont=1;
-				request.setAttribute("contraseñaU", cont);
-				
+			int cont = 0;
+			String clave = request.getParameter("contraseÃ±aModificar");
+			int idUsuario = Integer.parseInt(request.getParameter("iduserAModificar"));
+
+			if (UsuarioDao.actualizarClave(clave, idUsuario) == true) {
+				cont = 1;
+				request.setAttribute("contraseÃ±aU", cont);
+
 				UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
 				ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
 
@@ -215,10 +233,9 @@ public class ServletUsuarios extends HttpServlet {
 
 				RequestDispatcher rd = request.getRequestDispatcher("/ListarUsuarios.jsp");
 				rd.forward(request, response);
-			}		
+			}
 
 		}
-		 
 
 	}
 }

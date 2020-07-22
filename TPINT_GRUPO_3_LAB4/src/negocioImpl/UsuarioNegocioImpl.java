@@ -49,4 +49,10 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 		boolean isChangeExitoso = usuarioDao.actualizarClave(clave,idUsuario);
 		return isChangeExitoso;
 	}
+
+	@Override
+	public boolean validarLegajo(int legajoUsuario) {
+		boolean existe = usuarioDao.validarLegajo(legajoUsuario);
+		return existe;
+	}
 }

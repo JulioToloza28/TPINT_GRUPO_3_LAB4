@@ -16,6 +16,7 @@
 .bs-example {
 	margin: 20px;
 }
+
 .MensajeServlet {
 	color: navy;
 	/* background-color:gray; */
@@ -56,9 +57,11 @@
 		%>
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="ServletCurso?AddCourses=1" name="AddCurso"
-					class="btn btn-outline-success "><i class="fa fa-group"></i>
-					Agregar curso</a> <br> <br>
+				<div class="col-md-4 offset-md-4">
+					<a href="ServletCurso?AddCourses=1" name="AddCurso"
+						class="btn btn-outline-success btn-block"><i class="fa fa-group"></i>
+						Agregar curso</a>
+				</div>
 				<table id="ListarCursos" class="display" style="width: 100%">
 					<thead>
 						<tr>
