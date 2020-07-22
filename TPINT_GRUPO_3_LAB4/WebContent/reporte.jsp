@@ -29,26 +29,15 @@
 		<div class="row">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<form action="ServletAlumno?Param=reporte" method="get">
+				<form action="ServletReporte?Param=reporte" method="get">
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label for="sel1">Cursos:</label> <select id="cbxMateria"
-									name="cboCursos" class="custom-select" id="sel1">
+								<label for="sel1">Opciones de Reporte:</label> <select
+									id="cboTipo" name="cboTipo" class="custom-select" id="sel1">
 									<option selected disabled value="<>">Seleccione...</option>
-									<%
-										CursoDaoImpl curso = new CursoDaoImpl();
-										ArrayList<Curso> listaCurso = null;
-										listaCurso = (ArrayList<Curso>) curso.listarCursos();
-									%>
-									<%
-										if (listaCurso != null)
-											for (Curso itemCurso : listaCurso) {
-									%>
-									<option value=<%=itemCurso.getId()%>><%=itemCurso.getId()%></option>
-									<%
-										}
-									%>
+									<option value="1">Notas</option>
+									<option value="2">Estado academico</option>
 								</select>
 							</div>
 						</div>
@@ -103,53 +92,106 @@
 							</div>
 
 						</div>
-						<div class="col-lg-3">
-							<button id="btn-reporte" name="btn-reporte"
-								class="btn btn-primary" type="submit">Generar reporte</button>
+						<br>
+						<div class="col-lg-12">
+							<input id="btn-reporte" name="btn-reporte" type="submit"
+								class="btn btn-outline-info btn-block"><i
+								class="fa fa-list-alt"></i> Generar Reporte
+							<!-- <button id="btn-reporte" name="btn-reporte"
+								class="btn btn-primary" type="submit">Generar reporte</button> -->
 						</div>
 					</div>
 				</form>
 			</ol>
 			</nav>
 			<%
-		ArrayList<Reporte> listaA = new ArrayList<Reporte>();
-		if (request.getAttribute("listaReporte") != null) {
-			listaA = (ArrayList<Reporte>) request.getAttribute("listaReporte");
-		}
-	%>
+				ArrayList<Reporte> listaA = new ArrayList<Reporte>();
+				if (request.getAttribute("listaReporte") != null) {
+					listaA = (ArrayList<Reporte>) request.getAttribute("listaReporte");
+				}
+			%>
+			<%
+				if (request.getAttribute("tipoReporte") != null) {
 
-			<table border="1">
-				<tr>
-					<td><b>CURSO</b></td>
-					<td><b>MATERIA</b></td>
-					<td><b>CUATRIMESTRE</b></td>
-					<td><b>AÑO</b></td>
-					<td><b>NO APROBADOS</b></td>
-					<td><b>APROBADOS</b></td>
-					<td><b>TOTAL</b></td>
-				</tr>
+					String dat = request.getAttribute("tipoReporte").toString();
 
-				<%
-					for (Reporte a : listaA) {
-				%>
+					if (Integer.parseInt(dat) == 1) {
+			%>
 
-				<tr>
-					<td><%=a.getCurso().getId()%></td>
-					<td><%=a.getMateria().getNombre()%></td>
-					<td><%=a.getCurso().getCuatrimestre()%></td>
-					<td><%=a.getCurso().getAnio()%></td>
-					<td><%=a.getTotal_no_aprobados()%></td>
-					<td><%=a.getTotal_aprobados()%></td>
-					<td><%=a.getTotal_alumnos()%></td>
-				</tr>
+			<table class="table table-bordered" style="width: 100%">
+				<thead>
+					<tr>
 
-				<%
-					}
-				%>
+						<td><b>MATERIA</b></td>
+						<td><b>CUATRIMESTRE</b></td>
+						<td><b>AÑO</b></td>
+						<td><b>APROBADOS</b></td>
+						<td><b>NO APROBADOS</b></td>
+						<td><b>TOTAL</b></td>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						for (Reporte a : listaA) {
+					%>
 
-
-
+					<tr>
+						<td><%=a.getMateria().getNombre()%></td>
+						<td><%=a.getCurso().getCuatrimestre()%></td>
+						<td><%=a.getCurso().getAnio()%></td>
+						<td><%=a.getTotal_no_aprobados()%></td>
+						<td><%=a.getTotal_aprobados()%></td>
+						<td><%=a.getTotal_alumnos()%></td>
+					</tr>
+					<%
+						}
+					%>
+				</tbody>
 			</table>
+			<%
+				} else {
+			%>
+
+			<table class="table table-bordered" style="width: 100%">
+				<thead>
+					<tr>
+
+						<td><b>MATERIA</b></td>
+						<td><b>CUATRIMESTRE</b></td>
+						<td><b>AÑO</b></td>
+						<td><b>LIBRES</b></td>
+						<td><b>EN CURSO</b></td>
+						<td><b>REGULARIZADOS</b></td>
+						<td><b>PROMOCIONADOS</b></td>
+						<td><b>TOTAL</b></td>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						for (Reporte a : listaA) {
+					%>
+
+					<tr>
+						<td><%=a.getMateria().getNombre()%></td>
+						<td><%=a.getCurso().getCuatrimestre()%></td>
+						<td><%=a.getCurso().getAnio()%></td>
+						<td><%=a.getTotal_alumnos_libres()%></td>
+						<td><%=a.getTotal_alumnos_en_curso()%></td>
+						<td><%=a.getTotal_alumnos_regularizados()%></td>
+						<td><%=a.getTotal_aprobados()%></td>
+						<td><%=a.getTotal_alumnos()%></td>
+					</tr>
+					<%
+						}
+					%>
+				</tbody>
+			</table>
+
+			<%
+				}
+				}
+			%>
+
 
 			<script type="text/javascript" src="js/script.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>

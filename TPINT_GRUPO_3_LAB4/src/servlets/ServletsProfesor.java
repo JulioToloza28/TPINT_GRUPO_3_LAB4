@@ -21,10 +21,13 @@ import daoImpl.AlumnoDaoImpl;
 import daoImpl.LocalidadDaoImpl;
 import daoImpl.ProfesorDaoImpl;
 import daoImpl.ProvinciaDaoImpl;
+import daoImpl.UsuarioDaoImpl;
 import entidades.Alumno;
 import entidades.Localidad;
 import entidades.Profesor;
 import entidades.Provincia;
+import negocio.CursoNegocio;
+import negocioImpl.CursoNegocioImpl;
 
 @WebServlet("/ServletsProfesor")
 public class ServletsProfesor extends HttpServlet {
@@ -132,11 +135,9 @@ public class ServletsProfesor extends HttpServlet {
 					rd.forward(request, response);
 									
 				}
-				
 								
-				
-			}
 			
+			}			
 
 			
 			if(filas==1) {
@@ -226,10 +227,15 @@ public class ServletsProfesor extends HttpServlet {
 					if("EliminarProfesor".equals(request.getParameter("Param"))){
 					int Legajo_profe = Integer.parseInt(request.getParameter("Data"));
 					ProfesorDaoImpl profeDaoImpl = new ProfesorDaoImpl();
-					profeDaoImpl.eliminarProfesor(Legajo_profe);
+					UsuarioDaoImpl UsuarioBorrar=new UsuarioDaoImpl();
+					CursoNegocio borrarCursos=new CursoNegocioImpl();
+					
 					
 					if(profeDaoImpl.eliminarProfesor(Legajo_profe)!=false) 
 					{
+						UsuarioBorrar.eliminarUsuPro(Legajo_profe);
+						borrarCursos.EliminarCursosdesdeProfesor(Legajo_profe);
+						
 						filas=1;
 					}	
 					if(filas==1) {

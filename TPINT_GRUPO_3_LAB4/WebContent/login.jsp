@@ -38,7 +38,7 @@
 			<h2 class="text-center">Login</h2>
 			<div class="form-group">
 				<input type="text" class="form-control" name="txtUsuario"
-					placeholder="Usuario" required="required">
+					placeholder="Usuario" required="required" autocomplete="off">
 			</div>
 			<div class="form-group">
 				<input type="password" class="form-control" name="txtClave"
@@ -62,8 +62,8 @@
 				        <p>El usuario o la clave ingresados son incorrectos.</p>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
+				        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				     
 				      </div>
 				    </div>
 				  </div>

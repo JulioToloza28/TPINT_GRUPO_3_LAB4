@@ -30,7 +30,7 @@
 	</ol>
 	</nav>
 
-	<div class="container">
+	<div class="container" >
 		<form action="ServletsProfesor" method="get">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -60,8 +60,8 @@
 								id="cbxCuatrimestre" name="cbxCuatrimestre" class="form-control"
 								id="sel1">
 								<option selected disabled value="">Seleccione...</option>
-								<option value="1">1° Cuatrimestre</option>
-								<option value="2">2° Cuatrimestre</option>
+								<option value="1">1Â° Cuatrimestre</option>
+								<option value="2">2Â° Cuatrimestre</option>
 
 							</select>
 						</div>
@@ -69,7 +69,7 @@
 					<div class="col-lg-3">
 						<div class="form-group">
 
-							<label for="sel1">Año:</label> <select id="cdxAnio"
+							<label for="sel1">AÃ±o:</label> <select id="cdxAnio"
 								name="cdxAnio" class="form-control" id="sel1">
 								<option selected disabled value="">Seleccione...</option>
 								<%
@@ -162,11 +162,17 @@
 								href="ServletsProfesor?Param=ModificarProfesor&amp;Data=<%=profesor.getLegajo()%>"
 								name="btn-EditarProfesor"
 								class="btn btn-outline-secondary btn-sm">Editar</a></td>
-							<td><a data-toggle="modal" data-target="#VentEliminar"
+							<td> <button type="button" onClick="modalEliminar(this)" id="<%=profesor.getLegajo()%>"
+									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm"> Eliminar</button>
+							
+						<%-- 	<a href="ServletsProfesor?Param=EliminarProfesor&amp;Data=<%=profesor.getLegajo()%>" 
 								name="btn-EliminarProfesor"
-								class="btn btn-outline-danger btn-sm">Eliminar</a></td>
+								class="btn btn-outline-danger btn-sm">Eliminar</a> --%>
+								
+								</td>
 						</tr>
-						<div class="modal fade" id="VentEliminar" tabindex="-1"
+						
+					 	<div class="modal fade" id="VentEliminar" tabindex="-1"
 							role="dialog" aria-labelledby="exampleModalLabel"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -179,16 +185,17 @@
 										</button>
 									</div>
 									<div class="modal-body">Esta seguro que desea eliminar el
-										registro?</div>
+										registro?. -Se eliminara el usuario y los cursos asociados</div>
+										 <input type="hidden" class="form-control" id="recipient-name"> 
 									<div class="modal-footer">
 										<button class="btn btn-secondary" type="button"
 											data-dismiss="modal">Cancel</button>
-										<a class="btn btn-danger"
-											href="ServletsProfesor?Param=EliminarProfesor&amp;Data=<%=profesor.getLegajo()%>"">Eliminar</a>
+										<a class="btn btn-danger test" id="LegajoEliminar"
+												href="">Eliminar</a>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> 
 						<%
 							}
 						%>
@@ -198,9 +205,23 @@
 		</div>
 	</div>
 
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-<script src="js/espanol.js"></script>	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript">
+function modalEliminar(btn){
+	var LegajoAlumno = btn.id;
+	var hr = "ServletsProfesor?Param=EliminarProfesor&Data="+LegajoAlumno;
+	jQuery.noConflict();
+	$('#VentEliminar').modal('show');
+	var enlace = document.querySelector('.test');
+	enlace.href = hr;
+	
+}
+
+
+</script>	
 </body>
 </html>
