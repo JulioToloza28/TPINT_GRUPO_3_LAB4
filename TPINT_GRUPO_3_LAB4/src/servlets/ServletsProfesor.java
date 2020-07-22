@@ -138,8 +138,7 @@ public class ServletsProfesor extends HttpServlet {
 				
 								
 				
-			}
-			
+			}			
 
 			
 			if(filas==1) {
