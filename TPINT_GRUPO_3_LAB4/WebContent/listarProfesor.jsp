@@ -69,7 +69,7 @@
 					<div class="col-lg-3">
 						<div class="form-group">
 
-							<label for="sel1">AÃ±o:</label> <select id="cdxAnio"
+							<label for="sel1">Año:</label> <select id="cdxAnio"
 								name="cdxAnio" class="form-control" id="sel1">
 								<option selected disabled value="">Seleccione...</option>
 								<%

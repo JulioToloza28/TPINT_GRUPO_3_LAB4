@@ -38,42 +38,36 @@
 
 
 	<div class="container">
-		<%
-			if (request.getAttribute("cantFilas") != null) {
-		%>
-		<div class="alert alert-success" role="alert">Usuario Agregado
-			Correctamente</div>
+		
+		<%if (request.getAttribute("cantFilas") != null) {%>
+		
+		<div class="alert alert-success" role="alert">Usuario Agregado Correctamente</div>
+		
+		<%}%>
+			
 	
 		<%if (request.getAttribute("contraseñaU") != null) {%>
-				<div class="alert alert-warning" role="alert">Se modifico la contraseña correctamente</div>
+				
+			<div class="alert alert-warning" role="alert">Se modifico la contraseña correctamente</div>
+      
+        <%}%>
+		
+		<%if (request.getAttribute("contrase�aU") != null) {%>
+		
+		     <div class="alert alert-warning" role="alert">Se modifico la contrase�a correctamente</div>
 
-		<%
-			}
-		%>
-		<%
-			if (request.getAttribute("contrase�aU") != null) {
-		%>
-		<div class="alert alert-warning" role="alert">Se modifico la
-			contrase�a correctamente</div>
+		<%}	%>
+		
+		<%if (request.getAttribute("EliminadoUsuario") != null) {%>
+		
+		<div class="alert alert-danger" role="alert">Se elimino correctamente</div>
+		
+		<%}	%>
 
-		<%
-			}
-		%>
-		<%
-			if (request.getAttribute("EliminadoUsuario") != null) {
-		%>
-		<div class="alert alert-danger" role="alert">Se elimino
-			correctamente</div>
-		<%
-			}
-		%>
-
-		<%
-			ArrayList<Usuario> listaUsuario = null;
+		<%ArrayList<Usuario> listaUsuario = null;
 			if (request.getAttribute("listaUsuarios") != null) {
 				listaUsuario = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
-			}
-		%>
+			}%>
 
 		<div class="row">
 			<div class="col-lg-12">
@@ -121,26 +115,21 @@
 									data-toggle="tooltip" data-placement="top"
 									title="Cambiar Clave">
 									<i class="fa fa-refresh"></i>
-								</button> <%
- 	if (user.getId() != 1 && user.getId() != IdUsuarioActual) {
- %>
+								</button>
+								 <%	if (user.getId() != 1 && user.getId() != IdUsuarioActual) { %>
 								<button class="btn btn-danger btn-sm" type="button"
 									onClick="modalEliminar(this)" id="<%=user.getId()%>"
 									name="btn-EliminarAlumno"
 									data-toggle="tooltip" data-placement="top" title="Eliminar">
 									<i class="fa fa-trash"></i>
-								</button> <%
- 	} else {
- %>
+								</button> <%} else { %>
 								<button class="btn btn-outline-danger btn-sm" type="button"
 									onClick="modalEliminar(this)" id="<%=user.getId()%>"
 									name="btn-EliminarAlumno"
 									data-toggle="tooltip" data-placement="top" title="Eliminar"
 									disabled=true>
 									<i class="fa fa-trash"></i>
-								</button> <%
- 	}
- %></td>
+								</button> <%} %></td>
 						</tr>
 						<!--MODAL ELIMINAR-->
 						<div class="modal fade" id="VentEliminar" tabindex="-1"
@@ -210,10 +199,9 @@
 								</div>
 							</div>
 						</div>
-
-						<%
+ 					 	<%
 							}
-						%>
+						%> 
 					</tbody>
 				</table>
 			</div>
@@ -233,9 +221,7 @@
 			$('#VentEliminar').modal('show');
 			var enlace = document.querySelector('.test');
 			enlace.href = hr;
-
 		}
-
 		function modalCambiarCon(btn) {
 			var IdUsser = btn.id;
 			jQuery.noConflict();
@@ -244,7 +230,6 @@
 			var inputUsser = document.getElementById("iduserAModificar");
 			inputUsser.value = IdUsser;
 		}
-
 		function mostrarPassword(){
 			var cambio = document.getElementById("contraseñaModificar");
 			if(cambio.type == "password"){
