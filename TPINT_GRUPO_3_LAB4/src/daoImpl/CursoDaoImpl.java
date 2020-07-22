@@ -370,7 +370,6 @@ public class CursoDaoImpl implements CursoDao {
 			isExtoso=true;
 		}
 		
-				
 		
 		return isExtoso;
 		

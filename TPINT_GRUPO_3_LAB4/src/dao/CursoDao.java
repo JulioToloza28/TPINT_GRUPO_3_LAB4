@@ -29,4 +29,5 @@ public interface CursoDao {
 	public boolean VerificarAlumnoEstaInscripto(int idCurso, String legajoAlumno);
 	
 	public boolean EliminarCursosdesdeProfesor(int legajoProf);
+	
 }
