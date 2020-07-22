@@ -135,9 +135,8 @@ public class ServletsProfesor extends HttpServlet {
 					rd.forward(request, response);
 									
 				}
-				
 								
-				
+			
 			}			
 
 			
