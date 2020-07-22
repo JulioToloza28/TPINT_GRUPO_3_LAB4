@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.AlumnosPorCursos"%>
 <%@page import="daoImpl.AlumnoPorCursoDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,19 +8,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cargar nota</title>
-<link rel="stylesheet" type="text/css"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 </head>
 <body>
 	<jsp:include page="Menu.jsp"></jsp:include>
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" aria-current="page">Cargar
-			notas</li>
+		<li class="breadcrumb-item active" aria-current="page">Cargar notas</li>
 	</ol>
 	</nav>
 
@@ -54,41 +48,39 @@
 							NotasdeAlumnos = AlumnoxProfe.filtrarPorProfesor(id, idcurso);
 							cont++;
 							%>
-
 							<%
 								if (NotasdeAlumnos != null) {
 								for (AlumnosPorCursos alumnoXNota : NotasdeAlumnos) {
 							%>
 							<tr>
-
 								<td><%=alumnoXNota.getAlumno().getLegajo()%></td>
 								<td><%=alumnoXNota.getAlumno().getNombre()%></td>
 								<td>
 									<div class="form-group">
-										<input type="text" class="form-control" id="notaParcial1"
-											name="notaParcial1" placeholder="Parcial1"
-											value="<%=alumnoXNota.getParcial1()%>">
+										<input  type="text" class="form-control" id="notaParcial1"
+											name="notaParcial1" placeholder="Parcial1" min=0 max=10
+											value="<%=alumnoXNota.getParcial1()%>" onKeyPress="return onlyNumber(event)">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
 										<input type="text" class="form-control" id="notaParcial2"
-											name="notaParcial2" placeholder="Parcial2"
-											value="<%=alumnoXNota.getParcial2()%>">
+											name="notaParcial2" placeholder="Parcial2" min=0 max=10
+											value="<%=alumnoXNota.getParcial2()%>" onKeyPress="return onlyNumber(event)">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
 										<input type="text" class="form-control" id="Recuperatorio1"
-											name="Recuperatorio1" placeholder="Recuperatorio 1"
-											value="<%=alumnoXNota.getRecuperatorio1()%>">
+											name="Recuperatorio1" placeholder="Recuperatorio 1" min=0 max=10
+											value="<%=alumnoXNota.getRecuperatorio1()%>" onKeyPress="return onlyNumber(event)">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
 										<input type="text" class="form-control" id="Recuperatorio2"
-											name="Recuperatorio2" placeholder="Recuperatorio 2"
-											value="<%=alumnoXNota.getRecuperatorio2()%>">
+											name="Recuperatorio2" placeholder="Recuperatorio 2" min=0 max=10
+											value="<%=alumnoXNota.getRecuperatorio2()%>" onKeyPress="return onlyNumber(event)">
 									</div>
 								</td>
 								<td>
@@ -141,17 +133,12 @@
 									</div>
 								</td>
 							</tr>
-
-
 							<%
 								}
 							%>
-
 							<%
 								}
 							%>
-
-
 						</tbody>
 						<tfoot>
 							<tr>
@@ -166,20 +153,16 @@
 							</tr>
 						</tfoot>
 					</table>
-
-
-					<button id="btnGuardar" name="btnGuardar" class="btn btn-primary"
-						type="submit">Guardar Notas</button>
-					<a id="Retroceder" name="Retroceder" class="btn btn-secondary"
-						type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
+					<button id="btnGuardar" name="btnGuardar" class="btn btn-primary" type="submit">Guardar Notas</button>
+					<a id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
 				</div>
 			</div>
 		</div>
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script type="text/javascript"
-			src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-		<script type="text/javascript" src="js/script.js"></script>
 	</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<jsp:include page="scriptValidaciones.jsp"></jsp:include>
 </body>
 </html>

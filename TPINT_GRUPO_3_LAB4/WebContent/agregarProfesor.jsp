@@ -5,13 +5,9 @@
 <%@page import="daoImpl.LocalidadDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
- <style>
-  #lblCreado{color: #4F8A10!important;background: #DFF2BF!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
-  span#lblError{color: #D8000C!important;background-color: #FFD2D2!important;margin:10px 22px;font-size:14px;vertical-align:middle;}
-  #txtCaracteres{color:red;}
-</style>
-
-
+<%@page import="java.time.*" %>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,33 +27,27 @@
 		<form action="ServletsProfesor" method="get" style="margin: 40px">
 			<div class="form-row">
 				<div class="col-md-3 mb-3">
-					<label for="validationServer01">Nombre</label> <input
-						name="txtNombre" type="text" class="form-control"
-						onKeyPress="return onlyLetter(event)" required>
-					<div class="valid-feedback">Looks good!</div>
+					<label for="txtNombre">Nombre</label> 
+					<input id="txtNombre" name="txtNombre" type="text" class="form-control" onKeyPress="return onlyLetter(event)" onFocusOut="return validateNombre()" required>
 				</div>
 				<div class="col-md-3 mb-3">
-					<label for="validationServer02">Apellido</label> <input
-						name="txtApellido" type="text" class="form-control "
-						onKeyPress="return onlyLetter(event)" value="" required>
-					<div class="valid-feedback">Looks good!</div>
+					<label for="txtApellido">Apellido</label> 
+					<input id="txtApellido" name="txtApellido" type="text" class="form-control" onKeyPress="return onlyLetter(event)" onFocusOut="return validateApellido()" required>
 				</div>
 				<div class="col-md-2 mb-3">
-					<label for="validationServer03">DNI</label> <input name="txtDNI"
-						type="text" class="form-control " onKeyPress="return onlyNumber(event)" value=""
-						required>
-					<div class="valid-feedback">Looks good!</div>
-
+					<label for="txtDni">DNI</label> 
+					<input id="txtDni" name="txtDni" type="text" class="form-control " onKeyPress="return onlyNumber(event)" onFocusOut="return validateDni()" required>
 				</div>
-
 			</div>
 			<br>
 			<div class="form-row">
 				<div class="col-md-2 mb-3">
-					<label for="validationServer01">Fecha de Nacimiento</label> <input
-						name="txtFechaNac" max="2020-07-09" min="1900-01-01" type="date" class="form-control"
-						id="validationServer01" required>
-					<div class="valid-feedback">Looks good!</div>
+					<label for="txtFechaNac">Fecha de Nacimiento</label> 
+					<%
+				Date myDate = new Date();
+				SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");				
+				%>
+					<input name="txtFechaNac"  max="<%=dmyFormat.format(myDate)%>" type="date" class="form-control" id="txtFechaNac" onFocusOut="return validateFechaNac()" required>
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationServer01">Telefono</label> <input
@@ -66,22 +56,19 @@
 					<div class="valid-feedback">Looks good!</div>
 				</div>
 				<div class="col-md-3 mb-3">
-					<label for="validationServer01">Email</label> 
-					<input id="txtMail" name="txtMail" type="email" class="form-control" onFocusOut="return validateMail()" required>
-					<div class="valid-feedback">Looks good!</div>
+					<label for="txtEmail">Email</label> 
+					<input id="txtEmail" name="txtEmail" type="email" class="form-control" onFocusOut="return validateMail()" required>
 				</div>
-
 			</div>
 			<br>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
-				<label for="validationServer02">Direccion</label>  
-				<input name="txtDireccion" type="text" class="form-control " id="validationServer02" value="" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtDireccion">Direccion</label>  
+				<input name="txtDireccion" type="text" class="form-control " id="txtDireccion" onFocusOut="return validateDireccion()" required>
 				</div>
 				<div class="col-md-3 mb-3">
-					<label for="validationServer04">Provincia</label> 
-					<select name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()">
+					<label for="cmbProvincia">Provincia</label> 
+					<select name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()" onFocusOut="return validateProvincia()">
 						<option selected disabled value="">Provincia</option>
 						<%
 						  ArrayList<Provincia>ListarProvi=null;
@@ -92,11 +79,10 @@
 								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
 								<%} %>	
 					</select>
-					<div class="invalid-feedback">Por favor seleccione una opcion</div>
 				</div>
 				 <div class="col-md-2 mb-3">
-					<label for="validationServer03">Localidad</label> 
-					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" required>
+					<label for="cmbLocalidad">Localidad</label> 
+					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
 						<option selected disabled value="">Localidad</option>
 						<%
 						  ArrayList<Localidad> listaLocalidad = null;
@@ -109,7 +95,6 @@
 					<option value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
 					<%}%>
 					</select>
-					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
 			<br>
@@ -117,94 +102,9 @@
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletsProfesor?Param=MenuProfesor">Volver</a>
 		</form>
 		
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
 
-<script>
+<jsp:include page="librerias.jsp"></jsp:include>
+<jsp:include page="scriptValidaciones.jsp"></jsp:include>
 
-function cambiar_Localidad(){ 
-	var ProvinciaId;
-	ProvinciaId = document.getElementById('cmbProvincia').value;
-	$.ajax({
-		type : 'POST',
-		url : 'ServletsLocalidad',
-	    dataType : "json", 
-		data : {
-			Provinciaid : ProvinciaId
-		},
-		success : function(result) {
-			console.log(result);
-			 if (result) {
-				$("#cmbLocalidad option:not(:disabled)").remove();
-				$.each(result, function(index, option) {
-					console.log("option: " + option)
-					$("#cmbLocalidad").append(
-							'<option value="' + option.Id + '">'
-									+ option.Nombre + '</option>')					
-				}); 
-			}
-		},
-		error : function(data) {
-			alert('fail');
-		}
-	})
-};   
-
-function onlyLetter(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toLowerCase();
-    letter = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-    special = "8-37-39-46";
-    special_key = false
-    for (var i in special) {
-        if (key == special[i]) {
-            special_key = true;
-            break;
-        }
-    }
-    if (letter.indexOf(tecla) == -1 && !special_key) {
-        return false;
-    }
-}
-
-function onlyNumber(car) {
-    var key = window.Event ? car.which : car.keyCode;
-    return (key >= 48 && key <= 57)
-}
-
-function validateMin() {
-    var Min_Length = 8;
-    var length = $("#txtTelefono").val().length;
-    if (length < Min_Length)
-    {
-        $("#txtTelefono").addClass("is-invalid");
-        $("#txtTelefono").after("<p id='txtCaracteres'>La cantidad de caracteres es 8 o 10, usted escribio " + length + " caracteres</p>");
-        return false;
-    }
-    else{$("#txtTelefono").addClass("is-valid");}
-}
-function cleanError() {
-    $("#txtCaracteres").remove();
-    $("#txtTelefono").removeClass("is-invalid");
-    //$("#txtTelefono").addClass("is-valid");
-}
-
-function validateMail() {
-    obj = document.getElementById("txtMail");
-    valueForm = obj.value;
-    var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-    if (valueForm.search(mailFormat) == 0) {
-    	$("#txtMail").addClass("is-valid");
-    	$("#txtMail").removeClass("is-invalid");
-    } else {
-    	$("#txtMail").addClass("is-invalid");
-    }
-}
-
-</script>
-
-	
 </body>
 </html>

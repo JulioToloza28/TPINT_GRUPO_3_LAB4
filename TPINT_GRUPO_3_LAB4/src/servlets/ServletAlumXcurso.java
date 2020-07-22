@@ -49,11 +49,23 @@ public class ServletAlumXcurso extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//Guarda los alumnos con las notas
+		  AlumnoPorCursoDaoImpl alumPorCursoDaoImpl = new AlumnoPorCursoDaoImpl();
+		  AlumnoDaoImpl alumDaoImpl = new AlumnoDaoImpl();
+
+		  //Guarda los alumnos con las notas
 		  if (request.getParameter("btnGuardar") != null) 
 		  {	
-			  
-		  
+			  AlumnosPorCursos alumPorCurso = new AlumnosPorCursos();
+			  Alumno alum = new Alumno();
+			  request.getParameter("Alumno");
+			  request.getParameter("Curso");
+			  //request.getParameter("Curso");
+			  alumPorCurso.setParcial1(Integer.parseInt(request.getParameter("notaParcial1")));
+			  alumPorCurso.setParcial2(Integer.parseInt(request.getParameter("notaParcial2")));
+			  alumPorCurso.setRecuperatorio1(Integer.parseInt(request.getParameter("Recuperatorio1")));
+			  alumPorCurso.setRecuperatorio2(Integer.parseInt(request.getParameter("Recuperatorio2")));
+			 // alumPorCurso.setEstadoAca(request.getParameter("cmbEstadoAc"));
+
 		  }
 
 		doGet(request, response);

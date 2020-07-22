@@ -93,7 +93,7 @@ public class ServletsProfesor extends HttpServlet {
 				Profesor prof = new Profesor();			
 				prof.setNombre(request.getParameter("txtNombre"));
 				prof.setApellido(request.getParameter("txtApellido"));
-				prof.setDni(request.getParameter("txtDNI"));
+				prof.setDni(request.getParameter("txtDni"));
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 				Date parsed = null;
 				try {
@@ -107,7 +107,7 @@ public class ServletsProfesor extends HttpServlet {
 				prof.setDireccion(request.getParameter("txtDireccion"));
 				prof.setLocalidad(loc);
 				prof.setTelefono(request.getParameter("txtTelefono"));
-				prof.setMail(request.getParameter("txtMail"));
+				prof.setMail(request.getParameter("txtEmail"));
 				prof.setEstado(true);
 				
 				

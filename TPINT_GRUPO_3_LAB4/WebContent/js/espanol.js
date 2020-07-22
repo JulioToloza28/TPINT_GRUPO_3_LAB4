@@ -17,7 +17,7 @@
 												"sPrevious" : "Anterior"
 											},
 											"sProcessing" : "Procesando...",
-										},
+										}
 									});
 				});
 

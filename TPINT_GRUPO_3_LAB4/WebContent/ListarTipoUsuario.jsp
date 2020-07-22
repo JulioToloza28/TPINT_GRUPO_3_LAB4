@@ -43,5 +43,6 @@
 			%>
 		</tbody>
 	</table>
+<script src="js/espanol.js"></script>	
 </body>
 </html>
