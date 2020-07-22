@@ -33,23 +33,25 @@
 
 </head>
 <body>
-<%
+	<%
 		Usuario usuario = null;
-		int LegProf=0;
-		
+		int LegProf = 0;
+
 		if (session.getAttribute("Session_Legajo") != null) {
-			LegProf = Integer.parseInt(session.getAttribute("Session_Legajo").toString());}
-		
+			LegProf = Integer.parseInt(session.getAttribute("Session_Legajo").toString());
+		}
+
 		if (session.getAttribute("Usuario2") != null) {
 			usuario = (Usuario) session.getAttribute("Usuario2");
-			
-			if (usuario.getTipoUsuario().getId() == 1) {	
+
+			if (usuario.getTipoUsuario().getId() == 1) {
 	%>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div style="width: 80%; float: left">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="navbar-brand" href="Home.jsp"> <img
-						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
+				<li class="nav-item"><a class="navbar-brand" href="Home.jsp">
+						<img src="img/logo.png" alt="Logo" style="width: 40px;">
+				</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="ServletsProfesor?Param=MenuProfesor"> Profesores</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -63,7 +65,8 @@
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link"
 					href="ServletUsuarios?Param=1">Usuarios</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" style="pointer-events:none;"><%=session.getAttribute("Session_user")%>
+				<li class="nav-item"><a class="nav-link" href="#"
+					style="pointer-events: none;"><%=session.getAttribute("Session_user")%>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"
 					data-toggle="modal" data-target="#logoutModal"> <i
@@ -83,15 +86,17 @@
 				<li class="nav-item"><a class="navbar-brand" href="#"> <img
 						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="ServletCurso?listCoursesProfessor=0"><h3>Bienvenido <%=session.getAttribute("Session_user")%></h3></a></li>
-			<!-- 	<li class="nav-item"><a class="nav-link"
+					href="ServletCurso?listCoursesProfessor=0"><h3>
+							Bienvenido
+							<%=session.getAttribute("Session_user")%></h3></a></li>
+				<!-- 	<li class="nav-item"><a class="nav-link"
 					href="ServletAlumno?Param=MenuAlumno">Alumnos</a></li>
 				<li class="nav-item"><a class="nav-link" href="reporte.jsp">Reportes</a></li> -->
 			</ul>
 		</div>
 		<div style="width: 20%; float: right">
 			<ul class="navbar-nav">
-			<li class="nav-item"><a class="navbar-brand" href="#"> <img
+				<li class="nav-item"><a class="navbar-brand" href="#"> <img
 						src="img/logoUsuario.png" alt="Logo" style="width: 40px;"></a></li>
 				<li class="nav-item"><a class="nav-link" href="#"><%=session.getAttribute("Session_user")%>
 				</a></li>
@@ -133,7 +138,7 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 </body>
 </html>

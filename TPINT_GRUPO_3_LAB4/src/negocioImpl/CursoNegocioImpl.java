@@ -64,7 +64,7 @@ public class CursoNegocioImpl implements CursoNegocio {
 	@Override
 	public boolean EliminarAlumnoDelCurso(int legajoAlumno, int idCurso) {
 		boolean Estado = cursoDao.EliminarAlumnoDelCurso(legajoAlumno, idCurso);
-		return false;
+		return Estado;
 	}
 
 	@Override

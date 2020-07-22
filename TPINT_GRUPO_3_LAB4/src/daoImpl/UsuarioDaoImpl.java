@@ -18,6 +18,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	private static final String eliminarUsuario = "UPDATE usuario set estado=0 where idusuario= ?";
 	private static final String actualizarClave = "UPDATE usuario set Contrasenia=? where idusuario= ?";
 	private static final String eliminarUsuPro = "UPDATE usuario set estado=0 where legajo_Pro= ?";
+	private static final String validarLegajoDelUsuario = "SELECT * FROM tpint_grupo_3_lab4.usuario Where legajo_Pro= ? and estado=1";
+	
 
 	public ArrayList<Usuario> obtenerTodos() {
 		PreparedStatement statement;
@@ -200,5 +202,30 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			}
 		}
 		return isChangeExitoso;
+	}
+
+	@Override
+	public boolean validarLegajo(int legajoUsuario) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		boolean isUser = false;
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(validarLegajoDelUsuario);
+			statement.setInt(1, legajoUsuario);
+			resultSet = statement.executeQuery();
+			System.out.println(resultSet);
+			while (resultSet.next()) {
+				isUser = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUser;
 	}
 }

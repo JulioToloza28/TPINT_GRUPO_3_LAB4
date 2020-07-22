@@ -48,30 +48,6 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-group row">
-				<label for="validationServer04" class="col-sm-2 col-form-label">Tipo
-					Usuario</label>
-				<div class="col-sm-2">
-					<select name="cmbTipoUsuario" class="custom-select "
-						id="validationServer04" required>
-						<option selected disabled value="">Seleccione...</option>
-						<%
-							ArrayList<TipoUsuario> listaTipoUsuario = null;
-							if (request.getAttribute("listaTipoUsuario") != null) {
-								listaTipoUsuario = (ArrayList<TipoUsuario>) request.getAttribute("listaTipoUsuario");
-							}
-						%>
-						<%
-							if (listaTipoUsuario != null)
-								for (TipoUsuario tipo : listaTipoUsuario) {
-						%>
-						<option value=<%=tipo.getId()%>><%=tipo.getTipo()%></option>
-						<%
-							}
-						%>
-					</select>
-				</div>
-			</div>
 			<div class="form-group row ">
 				<label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
 				<div class="col-sm-2">
@@ -97,28 +73,8 @@
 		<%
 			if (request.getAttribute("msj") != null) {
 		%>
-		<div class="alert alert-danger alert-dismissible fade show"
-			role="alert">
-			<strong><%=request.getAttribute("msj")%></strong>
-			<button type="button" class="close" data-dismiss="alert"
-				aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<%
-			}
-		%>
-		<%
-			if (request.getAttribute("cantFilas") != null) {
-		%>
-		<div class="alert alert-success alert-dismissible fade show"
-			role="alert">
-			<strong>Usuario Agregado Correctamente</strong>
-			<button type="button" class="close" data-dismiss="alert"
-				aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
+		<div class="alert alert-danger" role="alert"><%=request.getAttribute("msj")%></div>
+			
 		<%
 			}
 		%>
