@@ -43,15 +43,18 @@
 		%>
 		<div class="alert alert-success" role="alert">Usuario Agregado
 			Correctamente</div>
+	
+		<%if (request.getAttribute("contraseÃ±aU") != null) {%>
+				<div class="alert alert-warning" role="alert">Se modifico la contraseÃ±a correctamente</div>
 
 		<%
 			}
 		%>
 		<%
-			if (request.getAttribute("contraseñaU") != null) {
+			if (request.getAttribute("contraseï¿½aU") != null) {
 		%>
 		<div class="alert alert-warning" role="alert">Se modifico la
-			contraseña correctamente</div>
+			contraseï¿½a correctamente</div>
 
 		<%
 			}
@@ -163,7 +166,7 @@
 								</div>
 							</div>
 						</div>
-						<!--MODAL CAMBIAR CONTRASEÑA-->
+						<!--MODAL CAMBIAR CONTRASEÃ‘A-->
 
 						<div class="modal fade" id="VentCambiarContras" tabindex="-1"
 							role="dialog" aria-labelledby="exampleModalLabel"
@@ -173,7 +176,7 @@
 									<form action="ServletUsuarios" method="post">
 										<div class="modal-header">
 											<h5 class="modal-title" id="exampleModalLabel">Cambiar
-												Contraseña</h5>
+												ContraseÃ±a</h5>
 											<button class="close" type="button" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">X</span>
@@ -181,18 +184,21 @@
 										</div>
 										<div class="modal-body">
 
-											<label for="recipient-name" class="col-form-label">Nueva
-												contraseña: </label> <input type="password" class="form-control"
-												id="contraseñaModificar" name="contraseñaModificar">
-											<div class="input-group-append">
-												<button id="show_password" class="btn btn-secondary"
-													type="button" onclick="mostrarPassword()">
-													<span class="fa fa-eye-slash icon"></span>
-												</button>
-												<input type="hidden" class="form-control"
-													id="iduserAModificar" name="iduserAModificar">
-											</div>
-
+                      
+											<label for="recipient-name" class="col-form-label">Nueva contraseÃ±a: </label> 
+												
+													<input type="password" class="form-control"
+												id="contraseÃ±aModificar" name="contraseÃ±aModificar">
+												<div class="input-group-append">
+											<button id="show_password" class="btn btn-secondary"
+										type="button" onclick="mostrarPassword()">
+										<span class="fa fa-eye-slash icon"></span>
+									</button>
+											<input type="hidden" class="form-control" id="iduserAModificar"
+												name="iduserAModificar">
+												</div>
+										
+                      
 										</div>
 										<div class="modal-footer">
 											<button class="btn btn-secondary" type="button"
@@ -213,11 +219,12 @@
 			</div>
 		</div>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script src="js/espanol.js"></script>	
+
 	<script type="text/javascript">
 		function modalEliminar(btn) {
 			var LegajoAlumno = btn.id;
@@ -238,9 +245,9 @@
 			inputUsser.value = IdUsser;
 		}
 
-		function mostrarPassword() {
-			var cambio = document.getElementById("contraseñaModificar");
-			if (cambio.type == "password") {
+		function mostrarPassword(){
+			var cambio = document.getElementById("contraseÃ±aModificar");
+			if(cambio.type == "password"){
 				cambio.type = "text";
 				$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
 			} else {

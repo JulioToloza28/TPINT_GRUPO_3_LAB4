@@ -39,10 +39,12 @@ public class ServletAlumno extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Date myDate = new Date();
+		 SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+		 
 		AlumnoDaoImpl alumDao = new AlumnoDaoImpl();
 		ProvinciaDaoImpl provDao = new ProvinciaDaoImpl();
 		LocalidadDaoImpl locDao = new LocalidadDaoImpl();
-		ReporteDaoImpl reporteDao = new ReporteDaoImpl();
 		Alumno alumAux=new Alumno();
 		
 
@@ -136,8 +138,7 @@ public class ServletAlumno extends HttpServlet {
 					filas = 1;
 				}
 			}else 
-			{
-				
+			{				
 				ArrayList<Provincia> listaProv = provDao.listarProvincia();
 				ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
 
@@ -145,8 +146,7 @@ public class ServletAlumno extends HttpServlet {
 				request.setAttribute("listaLocDao", listaLoc);
 				request.setAttribute("AlumnoRep", alum);
 				RequestDispatcher rd = request.getRequestDispatcher("/VerificarAlumno.jsp");
-				rd.forward(request, response);
-								
+				rd.forward(request, response);								
 			}
 			
 		}
@@ -241,27 +241,6 @@ public class ServletAlumno extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}
-		
-		//reporte
-		
-		  if(request.getParameter("btn-reporte") != null) {
-		  
-			  int materia=0;
-			  int Cuatri=0;
-			  int anio=0;
-			  int curso=0;
-			  if(request.getParameter("cboCursos")!=null) { curso= Integer.parseInt(request.getParameter("cboCursos"));}
-			  if(request.getParameter("cboMateria")!=null) { materia= Integer.parseInt(request.getParameter("cboMateria"));}
-			  if(request.getParameter("cboCuatrimestre")!=null) {Cuatri= Integer.parseInt(request.getParameter("cboCuatrimestre"));}
-			  if(request.getParameter("cdoAnio")!=null) {anio= Integer.parseInt(request.getParameter("cdoAnio"));}
-			  
-			  
-		  ArrayList<Reporte> listReporte = reporteDao.obtenerDatos(curso,materia,Cuatri,anio);
-		  System.out.println(listReporte);
-		  request.setAttribute("listaReporte", listReporte);
-		  RequestDispatcher rd = request.getRequestDispatcher("/reporte.jsp");
-	      rd.forward(request, response);
-	      }
 	}
 
 	private RequestDispatcher getRequestDispatcher(String string) {

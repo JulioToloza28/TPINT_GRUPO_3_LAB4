@@ -79,4 +79,11 @@ public class CursoNegocioImpl implements CursoNegocio {
 		return existe;
 	}
 
+	@Override
+	public boolean EliminarCursosdesdeProfesor(int legajoProf) {
+		boolean eliminado =cursoDao.EliminarCursosdesdeProfesor(legajoProf);
+	
+		return eliminado;
+	}
+
 }

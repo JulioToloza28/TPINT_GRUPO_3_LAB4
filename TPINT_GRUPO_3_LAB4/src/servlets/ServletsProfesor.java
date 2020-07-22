@@ -26,6 +26,8 @@ import entidades.Alumno;
 import entidades.Localidad;
 import entidades.Profesor;
 import entidades.Provincia;
+import negocio.CursoNegocio;
+import negocioImpl.CursoNegocioImpl;
 
 @WebServlet("/ServletsProfesor")
 public class ServletsProfesor extends HttpServlet {
@@ -94,7 +96,7 @@ public class ServletsProfesor extends HttpServlet {
 				Profesor prof = new Profesor();			
 				prof.setNombre(request.getParameter("txtNombre"));
 				prof.setApellido(request.getParameter("txtApellido"));
-				prof.setDni(request.getParameter("txtDNI"));
+				prof.setDni(request.getParameter("txtDni"));
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 				Date parsed = null;
 				try {
@@ -108,7 +110,7 @@ public class ServletsProfesor extends HttpServlet {
 				prof.setDireccion(request.getParameter("txtDireccion"));
 				prof.setLocalidad(loc);
 				prof.setTelefono(request.getParameter("txtTelefono"));
-				prof.setMail(request.getParameter("txtMail"));
+				prof.setMail(request.getParameter("txtEmail"));
 				prof.setEstado(true);
 				
 				
@@ -133,11 +135,9 @@ public class ServletsProfesor extends HttpServlet {
 					rd.forward(request, response);
 									
 				}
-				
 								
-				
-			}
 			
+			}			
 
 			
 			if(filas==1) {
@@ -227,13 +227,14 @@ public class ServletsProfesor extends HttpServlet {
 					if("EliminarProfesor".equals(request.getParameter("Param"))){
 					int Legajo_profe = Integer.parseInt(request.getParameter("Data"));
 					ProfesorDaoImpl profeDaoImpl = new ProfesorDaoImpl();
-					UsuarioDaoImpl UsuarioBorar=new UsuarioDaoImpl();
-					/* profeDaoImpl.eliminarProfesor(Legajo_profe); */
+					UsuarioDaoImpl UsuarioBorrar=new UsuarioDaoImpl();
+					CursoNegocio borrarCursos=new CursoNegocioImpl();
 					
 					
 					if(profeDaoImpl.eliminarProfesor(Legajo_profe)!=false) 
 					{
-						UsuarioBorar.eliminarUsuPro(Legajo_profe);
+						UsuarioBorrar.eliminarUsuPro(Legajo_profe);
+						borrarCursos.EliminarCursosdesdeProfesor(Legajo_profe);
 						
 						filas=1;
 					}	

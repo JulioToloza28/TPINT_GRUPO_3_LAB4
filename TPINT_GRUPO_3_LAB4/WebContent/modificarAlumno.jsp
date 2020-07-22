@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Provincia" %>
 <%@page import="entidades.Localidad" %>
 <%@page import="entidades.Alumno" %>
 <%@page import="daoImpl.AlumnoDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
-
+<%@page import="java.time.*" %>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -27,51 +28,46 @@
 	<form action="ServletAlumno" method="get" style="margin: 40px">
 	<input value="<%=alum.getLegajo()%>" name="txtlegajo" type="hidden" class="form-control">
 	<input value="<%=alum.getDni()%>" name="txtDniViejo" type="hidden" class="form-control">
-	<%-- <input value="<%=alum.getLocalidad().getId()%>" name="txtGetIdLocalidad" type="hidden" class="form-control"> --%>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
-				<label for="validationServer01">Nombre</label> 
-				<input value="<%=alum.getNombre() %>" name="txtNombre" type="text" class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtNombre">Nombre</label> 
+				<input value="<%=alum.getNombre() %>" id="txtNombre" name="txtNombre" type="text" class="form-control"  onKeyPress="return onlyLetter(event)" onFocusOut="return validateNombre()" required>
 			</div>
 			<div class="col-md-3 mb-3">
-				<label for="validationServer02">Apellido</label> 
-				<input  value="<%=alum.getApellido() %>" name="txtApellido" type="text" class="form-control " id="validationServer02" value="" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtApellido">Apellido</label> 
+				<input  value="<%=alum.getApellido() %>" id="txtApellido" name="txtApellido" type="text" class="form-control "  onKeyPress="return onlyLetter(event)" onFocusOut="return validateApellido()" required>
 			</div>
 			<div class="col-md-2 mb-3">
-				<label for="validationServer03">DNI</label> 
-				<input  value="<%=alum.getDni() %>" name="txtDni" type="text" class="form-control " id="validationServer02" value="" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtDni">DNI</label> 
+				<input  value="<%=alum.getDni() %>" name="txtDni" type="text" class="form-control " id="txtDni" maxlength="10"  onKeyPress="return onlyNumber(event)" onFocusOut="return validateDni()" required>
 			</div>
 		</div>
 		<div class="form-row">			
 			<div class="col-md-2 mb-3">
-				<label for="validationServer01">Fecha de Nacimiento</label> 
-				<input  value="<%=alum.getFechaNac() %>" name="txtFechaNac" type="date" class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtFechaNac">Fecha de Nacimiento</label> 
+				<%
+				Date myDate = new Date();
+				SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");				
+				%>
+				<input  value="<%=alum.getFechaNac() %>" id="txtFechaNac" name="txtFechaNac" max="<%=dmyFormat.format(myDate)%>" type="date" class="form-control" onFocusOut="return validateFechaNac()" required>
 			</div>
 			<div class="col-md-3 mb-3">
-				<label for="validationServer01">Telefono</label> 
-				<input value="<%=alum.getTelefono() %>" name="txtTelefono" type="text" class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtTelefono">Telefono</label> 
+				<input value="<%=alum.getTelefono() %>" name="txtTelefono" type="text" class="form-control" id="txtTelefono" maxlength="10" onKeyPress="return onlyNumber(event)" onFocusOut="return validateMin()" onKeyUp="return cleanError()" required>
 			</div>
 			<div class="col-md-3 mb-3">
-				<label for="validationServer01">Email</label> 
-				<input value="<%=alum.getMail() %>" name="txtEmail" type="text" class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtEmail">Email</label> 
+				<input value="<%=alum.getMail() %>" name="txtEmail" type="email" class="form-control" id="txtEmail" onFocusOut="return validateMail()"  required>
 			</div>
        </div>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
-				<label for="validationServer02">Direccion</label>  
-				<input value="<%=alum.getDireccion() %>" name="txtDireccion" type="text" class="form-control " id="validationServer02" value="" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtDireccion">Direccion</label>  
+				<input value="<%=alum.getDireccion() %>" name="txtDireccion" type="text" class="form-control " id="txtDireccion" onFocusOut="return validateDireccion()" required>
 				</div>
 				<div class="col-md-3 mb-3">
-					<label for="validationServer04">Provincia</label> 
-					<select  name="cmbProvincia" class="custom-select " id="txtselectProvincia" onchange="return cambiar_Localidad()" required>
-<%-- 						<option selected disabled value="<%=alum.getLocalidad().getProvincia().getId()%>"><%=alum.getLocalidad().getProvincia().getNombreProv()%></option> --%>
+					<label for="cmbProvincia">Provincia</label> 
+					<select  name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()" onFocusOut="return validateProvincia()" required>
 						<%
 						  ArrayList<Provincia>ListarProvi=null;
 							if(request.getAttribute("listaProvDao")!=null){
@@ -84,11 +80,10 @@
 								<option value="<%=prov.getId()%>"><%=prov.getNombreProv() %></option>								
 							<%}  %>	
 					</select>
-					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
 				 <div class="col-md-2 mb-3">
-					<label for="validationServer03">Localidad</label> 
-					<select name="cmbLocalidad" class="custom-select " id="txtselectLocalidad" required>
+					<label for="cmbLocalidad">Localidad</label> 
+					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
 						<option  selected style="visibility:hidden" value="<%=alum.getLocalidad().getId()%>"><%=alum.getLocalidad().getNombreLoc()%></option>
 						<%ArrayList<Localidad> listaLocalidad = null;
 					      if (request.getAttribute("listaLocDao") != null) {
@@ -100,7 +95,6 @@
 					<%}%>
 						
 					</select>
-					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
 			<button id="btn-EditarAlumno" name="btn-EditarAlumno" class="btn btn-primary" type="submit">Aceptar</button>
@@ -108,41 +102,8 @@
 
 	</form>
 					<%} %>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-	<script>
-		
+<jsp:include page="librerias.jsp"></jsp:include>
+<jsp:include page="scriptValidaciones.jsp"></jsp:include>
 	
-  function cambiar_Localidad(){ 
-	var ProvinciaId;
-	ProvinciaId = document.getElementById('cmbProvincia').value;
-	$.ajax({
-		type : 'POST',
-		url : 'ServletsLocalidad',
-	    dataType : "json", 
-		data : {
-			Provinciaid : ProvinciaId
-		},
-		success : function(result) {
-			console.log(result);
-			 if (result) {
-				$("#cmbLocalidad option:not(:disabled)").remove();
-				$.each(result, function(index, option) {
-					console.log("option: " + option)
-					$("#cmbLocalidad").append(
-							'<option value="' + option.Id + '">'
-									+ option.Nombre + '</option>')					
-				}); 
-			}
-		},
-		error : function(data) {
-			alert('fail');
-		}
-	})
-}; 
-
-
 </body>
 </html>

@@ -1,10 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import="entidades.Provincia" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="entidades.Provincia" %>
 <%@page import="entidades.Localidad" %>
 <%@page import="entidades.Profesor" %>
 <%@page import="daoImpl.ProfesorDaoImpl" %>
+<%@page import="daoImpl.LocalidadDaoImpl" %>
+<%@page import="daoImpl.ProvinciaDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
+<%@page import="java.time.*" %>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,9 +22,6 @@
 <body>
 
 <jsp:include page="Menu.jsp"></jsp:include>
-
-	
-	
 		
 	 <%  Profesor profe=null;
   		         if(request.getAttribute("ProfesorRep")!=null){
@@ -49,80 +50,72 @@
 	<div class="alert alert-danger" role="alert">(*)DNI ya registrado</div>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
-				<label for="validationServer01">Nombre</label> 
-				<input value="<%=profe.getNombre() %>" name="txtNombre" type="text" class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtNombre">Nombre</label> 
+				<input value="<%=profe.getNombre() %>" name="txtNombre" type="text" class="form-control" id="txtNombre" onFocusOut="return validateNombre()" required>
 			</div>
 			<div class="col-md-3 mb-3">
-				<label for="validationServer02">Apellido</label> 
-				<input  value="<%=profe.getApellido() %>" name="txtApellido" type="text" class="form-control " id="validationServer02" value="" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtApellido">Apellido</label> 
+				<input  value="<%=profe.getApellido() %>" name="txtApellido" type="text" class="form-control " id="txtApellido" onFocusOut="return validateApellido()" required>
 			</div>
 			<div class="col-md-2 mb-3">
-				<label for="validationServer03">DNI</label> 
-				<input  value="<%=profe.getDni() %>" name="txtDni" type="text"  class="form-control is-invalid" id="validationServer02" value="" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtDni">DNI</label> 
+				<input  value="<%=profe.getDni() %>" name="txtDni" type="text"  class="form-control is-invalid" id="txtDni" onFocusOut="return validateDni()" required>
 			</div>
 		</div>
 		<br>
 		<div class="form-row">			
 			<div class="col-md-2 mb-3">
-				<label for="validationServer01">Fecha de Nacimiento</label> 
-				<input  value="<%=profe.getFechaNac() %>" name="txtFechaNac" type="date" class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtFechaNac">Fecha de Nacimiento</label> 
+				<%
+				Date myDate = new Date();
+				SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");				
+				%>
+				<input  value="<%=profe.getFechaNac() %>" name="txtFechaNac" max="<%=dmyFormat.format(myDate)%>" type="date" class="form-control" id="txtFechaNac" onFocusOut="return validateFechaNac()" required>
 			</div>
 			<div class="col-md-3 mb-3">
-				<label for="validationServer01">Telefono</label> 
-				<input value="<%=profe.getTelefono() %>" name="txtTelefono" type="text" class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtTelefono">Telefono</label> 
+				<input value="<%=profe.getTelefono() %>" name="txtTelefono" type="text" class="form-control" id="txtTelefono" onFocusOut="return validateMin()" required>
 			</div>
 			<div class="col-md-3 mb-3">
-				<label for="validationServer01">Email</label> 
-				<input value="<%=profe.getMail() %>" name="txtEmail" type="text" class="form-control" id="validationServer01" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtEmail">Email</label> 
+				<input value="<%=profe.getMail() %>" name="txtEmail" type="text" class="form-control" id="txtEmail" onFocusOut="return validateMail()" required>
 			</div>
        </div>
        <br>
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
-				<label for="validationServer02">Direccion</label>  
-				<input value="<%=profe.getDireccion() %>" name="txtDireccion" type="text" class="form-control " id="validationServer02" value="" required>
-				<div class="valid-feedback">Looks good!</div>
+				<label for="txtDireccion">Direccion</label>  
+				<input value="<%=profe.getDireccion() %>" name="txtDireccion" type="text" class="form-control " id="txtDireccion" onFocusOut="return validateDireccion()" required>
 				</div>
 				<div class="col-md-3 mb-3">
-					<label for="validationServer04">Provincia</label> 
-					<select  name="cmbProvincia" class="custom-select " id="txtselectProvincia"  required>
-						<option selected disabled value=""></option>
-					<%-- 	<%
+					<label for="cmbProvincia">Provincia</label> 
+					<select name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()" onFocusOut="return validateProvincia()">
+						<option selected disabled value="">Provincia</option>
+						<%
 						  ArrayList<Provincia>ListarProvi=null;
 							if(request.getAttribute("listaProvDao")!=null){
 							ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");}%>
 							<% if(ListarProvi!=null)
-								for(Provincia prov : ListarProvi) {%>
-								<%if(profe.getLocalidad().getProvincia().getId()==prov.getId()){%>
-								<option selected style="visibility:hidden" value="<%=prov.getId()%>"><%=prov.getNombreProv()%></option>
-								<%}  %>	
-								<option value="<%=prov.getId()%>"><%=prov.getNombreProv() %></option>								
-							<%}  %>	 --%>
+								for(Provincia prov : ListarProvi){%>
+								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
+								<%} %>	
 					</select>
-					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
 				 <div class="col-md-2 mb-3">
-					<label for="validationServer03">Localidad</label> 
-					<select name="cmbLocalidad" class="custom-select " id="txtselectLocalidad" required>
-					
-						<option  selected style="visibility:hidden" value=""></option>
-					<%-- 	<%ArrayList<Localidad> listaLocalidad = null;
+					<label for="cmbLocalidad">Localidad</label> 
+					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
+						<option selected disabled value="">Localidad</option>
+						<%
+						  ArrayList<Localidad> listaLocalidad = null;
+						  LocalidadDaoImpl LocDaoImpl = new LocalidadDaoImpl();
 					      if (request.getAttribute("listaLocDao") != null) {
 						  listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
 					}%>
 					<%if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {%>
 					<option value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
-					<%}%> --%>
-						
+					<%}%>
 					</select>
-					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
 			<br>
@@ -135,6 +128,7 @@
          
 	</form>
 	
-
+<jsp:include page="librerias.jsp"></jsp:include>
+<jsp:include page="scriptValidaciones.jsp"></jsp:include>
 </body>
 </html>

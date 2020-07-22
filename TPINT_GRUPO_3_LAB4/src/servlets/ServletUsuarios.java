@@ -219,12 +219,12 @@ public class ServletUsuarios extends HttpServlet {
 		if (request.getParameter("BtnLegajo") != null) {
 
 			int cont = 0;
-			String clave = request.getParameter("contraseñaModificar");
+			String clave = request.getParameter("contraseÃ±aModificar");
 			int idUsuario = Integer.parseInt(request.getParameter("iduserAModificar"));
 
 			if (UsuarioDao.actualizarClave(clave, idUsuario) == true) {
 				cont = 1;
-				request.setAttribute("contraseñaU", cont);
+				request.setAttribute("contraseÃ±aU", cont);
 
 				UsuarioDaoImpl UsuarioDao = new UsuarioDaoImpl();
 				ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();

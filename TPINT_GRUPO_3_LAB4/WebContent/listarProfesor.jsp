@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Profesor"%>
 <%@page import="entidades.Localidad"%>
 <%@page import="daoImpl.ProfesorDaoImpl"%>
@@ -11,31 +10,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Lista de profesores</title>
-<link rel="stylesheet" type="text/css"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <style>
 .bs-example {
 	margin: 20px;
 }
 </style>
-<link rel="stylesheet" type="text/css"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
-
 </head>
 <body>
 
@@ -51,14 +34,10 @@
 		<form action="ServletsProfesor" method="get">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				
 				<div class="row">			
-				
-					
 					<div class="col-lg-6">
-
-						<label for="sel1">Materias:</label> <select id="cbxMateria"
-							name="cbxMateria" class="custom-select" id="sel1">
+						<label for="sel1">Materias:</label> 
+						<select id="cbxMateria" name="cbxMateria" class="custom-select" id="sel1">
 							<option selected disabled value="<>">Seleccione...</option>
 							<%
 								MateriaDaoImpl materiaL = new MateriaDaoImpl();
@@ -74,7 +53,6 @@
 								}
 							%>
 						</select>
-
 					</div>
 					<div class="col-lg-3">
 						<div class="form-group">
@@ -82,8 +60,8 @@
 								id="cbxCuatrimestre" name="cbxCuatrimestre" class="form-control"
 								id="sel1">
 								<option selected disabled value="">Seleccione...</option>
-								<option value="1">1° Cuatrimestre</option>
-								<option value="2">2° Cuatrimestre</option>
+								<option value="1">1Â° Cuatrimestre</option>
+								<option value="2">2Â° Cuatrimestre</option>
 
 							</select>
 						</div>
@@ -91,7 +69,7 @@
 					<div class="col-lg-3">
 						<div class="form-group">
 
-							<label for="sel1">Año:</label> <select id="cdxAnio"
+							<label for="sel1">AÃ±o:</label> <select id="cdxAnio"
 								name="cdxAnio" class="form-control" id="sel1">
 								<option selected disabled value="">Seleccione...</option>
 								<%
@@ -102,61 +80,40 @@
 									}
 								%>
 							</select>
-
 						</div>
-
 					</div>
-
 				</div>
 				<div class="col align-self-center">
 					<button id="btn-filtrar" name="btn-filtrar"
 						class="btn btn-outline-info" type="submit">
 						<i class="fa fa-search"></i>Filtrar
 					</button>
-
 				</div>
 			</ol>
 			</nav>
 		</form>
-		
 		<div class="col-md-4 offset-md-4">	<a id="BtnAgregar" name="BtnAgregar"
 					href="ServletsProfesor?BtnAgregar=Profesor" type="button"
 					class="btn btn-outline-success btn-block"><i class="fa fa-user-plus"></i>
 					Agregar Profesor</a></div>
 					<br>
-	<!-- 	<div class="row">
-			<div class="col-lg-3"></div>
-		</div> -->
 		<div class="row">
 			<div class="col-lg-12">
-				<!-- <a id="BtnAgregar" name="BtnAgregar"
-					href="ServletsProfesor?BtnAgregar=Profesor"
-					class="btn btn-outline-primary btn-sm">Agregar</a> -->
-			
-<%
+				<%
 					if (request.getAttribute("cantFilas") != null) {
 				%>
-				<div class="alert alert-success" role="alert">Se agrego
-					correctamente</div>
+				<div class="alert alert-success" role="alert">Se agrego correctamente</div>
 				<%
 					}
 				%>
 				<%if (request.getAttribute("cantFilasMod") != null) {%>
 				<div class="alert alert-warning" role="alert">Se modifico correctamente</div>
-
 				<%}%>
 				<%
 					if (request.getAttribute("ProfesorEliminado") != null) {
 				%>
-				<div class="alert alert-danger" role="alert">Se elimino
-					correctamente</div>
-
-				<%
-					}
-				%>
-			
-
-
+				<div class="alert alert-danger" role="alert">Se elimino correctamente</div>
+				<%}%>
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -186,8 +143,6 @@
 							listaProfesor = (ArrayList<Profesor>) request.getAttribute("listaFiltradaProf");
 						}
 						%>
-
-
 						<%
 							if (listaProfesor != null)
 							for (Profesor profesor : listaProfesor) {
