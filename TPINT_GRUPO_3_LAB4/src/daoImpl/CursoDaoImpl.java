@@ -349,5 +349,31 @@ public class CursoDaoImpl implements CursoDao {
 		}
 		return alumnoEstaInscripto;
 	}
+	
+	public boolean EliminarCursosdesdeProfesor(int legajoProf) {
+		
+		boolean isExtoso=false;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		ArrayList<Curso> lCursos = new ArrayList<Curso>();
+		
+		lCursos=this.listarCursos(legajoProf);
+		
+		for(int i=0;i<lCursos.size();i++) 
+		{
+			this.eliminarCurso(lCursos.get(i).getId());
+			isExtoso=true;
+		}
+		
+				
+		
+		return isExtoso;
+		
+		
+	}
 
 }

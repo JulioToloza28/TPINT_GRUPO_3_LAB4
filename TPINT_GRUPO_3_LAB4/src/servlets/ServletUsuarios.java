@@ -92,10 +92,10 @@ public class ServletUsuarios extends HttpServlet {
 			int cant=1;
 
 			ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
-			request.setAttribute("listaUsuario", lista);
+			request.setAttribute("listaUsuarios", lista);
 			request.setAttribute("EliminadoUsuario", cant);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/ServletUsuarios?Param=1");
+			RequestDispatcher rd = request.getRequestDispatcher("/ListarUsuarios.jsp");
 			rd.forward(request, response);
 		}
 	}
