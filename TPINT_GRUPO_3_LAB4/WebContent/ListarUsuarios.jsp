@@ -48,7 +48,7 @@
 	
 		<%if (request.getAttribute("contraseñaU") != null) {%>
 				
-			<div class="alert alert-warning" role="alert">Se modifico la contraseña correctamente</div>
+			<div class="alert alert-warning" role="alert">La clave se modifico correctamente</div>
       
         <%}%>
 		
@@ -105,7 +105,7 @@
 								</button> <%} else { %>
 								<button class="btn btn-outline-danger btn-sm" type="button"
 									onClick="modalEliminar(this)" id="<%=user.getId()%>"
-									name="btn-EliminarAlumno"
+									name="<%=user.getUsername()%>"
 									data-toggle="tooltip" data-placement="top" title="Eliminar"
 									disabled=true>
 									<i class="fa fa-trash"></i>
@@ -118,14 +118,14 @@
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+										<h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
 										<button class="close" type="button" data-dismiss="modal"
 											aria-label="Close">
 											<span aria-hidden="true">X</span>
 										</button>
 									</div>
 									<div class="modal-body">Esta seguro que desea eliminar el
-										registro?</div>
+										Usuario?</div>
 									<div class="modal-footer">
 										<button class="btn btn-secondary" type="button"
 											data-dismiss="modal">Cancel</button>
@@ -145,7 +145,7 @@
 									<form action="ServletUsuarios" method="post">
 										<div class="modal-header">
 											<h5 class="modal-title" id="exampleModalLabel">Cambiar
-												Contraseña</h5>
+												Clave</h5>
 											<button class="close" type="button" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">X</span>
@@ -154,11 +154,12 @@
 										<div class="modal-body">
 
                       
-											<label for="recipient-name" class="col-form-label">Nueva contraseña: </label> 
+											<label for="recipient-name" class="col-form-label">Ingrese la nueva clave : </label> 
 												
 													<input type="password" class="form-control"
 												id="contraseñaModificar" name="contraseñaModificar" required="">
-													<button id="show_password" class="btn btn-secondary"
+												<br>
+													<button id="show_password" class="btn btn-primary"
 										type="button" onclick="mostrarPassword()">
 										<span class="fa fa-eye-slash icon"></span>
 									</button>
@@ -198,8 +199,8 @@
 
 	<script type="text/javascript">
 		function modalEliminar(btn) {
-			var LegajoAlumno = btn.id;
-			var hr = "ServletUsuarios?deleteUser=" + LegajoAlumno;
+			var Legajo = btn.id;
+			var hr = "ServletUsuarios?deleteUser=" + Legajo;
 			jQuery.noConflict();
 			$('#VentEliminar').modal('show');
 			var enlace = document.querySelector('.test');
@@ -209,9 +210,10 @@
 			var IdUsser = btn.id;
 			jQuery.noConflict();
 			$('#VentCambiarContras').modal('show');
-			/* $('#VentCambiarContras').find('.modal-title').text(IdUsser); */
+			/* $('#VentCambiarContras').find('.modal-title').text(IdUsser);  ussername */
 			var inputUsser = document.getElementById("iduserAModificar");
 			inputUsser.value = IdUsser;
+		
 		}
 		function mostrarPassword(){
 			var cambio = document.getElementById("contraseñaModificar");
