@@ -96,8 +96,12 @@
 							if(request.getAttribute("listaProvDao")!=null){
 							ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");}%>
 							<% if(ListarProvi!=null)
-								for(Provincia prov : ListarProvi){%>
-								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
+								for(Provincia prov : ListarProvi){ %>
+									<%if(profe.getLocalidad().getProvincia().getId()==prov.getId()){ %>
+								<option selected value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
+								<%} %>	
+								
+								<option  value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
 								<%} %>	
 					</select>
 				</div>
@@ -113,7 +117,10 @@
 					}%>
 					<%if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {%>
-					<option value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
+						<%if(profe.getLocalidad().getId()==loc.getId()){ %>
+						<option selected value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
+						<%} %>
+					<option  value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
 					<%}%>
 					</select>
 				</div>

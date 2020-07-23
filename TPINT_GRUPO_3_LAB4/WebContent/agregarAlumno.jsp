@@ -68,7 +68,7 @@
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="cmbProvincia">Provincia</label> 
-					<select name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()" onFocusOut="return validateProvincia()">
+					<select name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()" onFocusOut="return validateProvincia()" required>
 						<option selected disabled value="">Provincia</option>
 						<%
 						  ArrayList<Provincia>ListarProvi=null;

@@ -124,13 +124,31 @@ public class ServletsProfesor extends HttpServlet {
 					}
 				}else 
 				{
-					ProfeAux=prof;
+					
 					ArrayList<Provincia> listaProv = provDao.listarProvincia();
 					ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
+					
+					for(int i=0;i<listaLoc.size();i++) {
+						if(prof.getLocalidad().getId()==listaLoc.get(i).getId()) {
+							Localidad auxL=new Localidad();
+							Provincia auxP=new Provincia();
+							auxL.setId(listaLoc.get(i).getId());
+							auxL.setNombreLoc(listaLoc.get(i).getNombreLoc());
+							auxP=listaLoc.get(i).getProvincia();
+							
+							auxL.setProvincia(auxP);
+							
+							prof.setLocalidad(auxL);
+							
+						}
+					}
+					
+					
+					
 
 					request.setAttribute("listaProvDao", listaProv);
 					request.setAttribute("listaLocDao", listaLoc);
-					request.setAttribute("ProfesorRep", ProfeAux);
+					request.setAttribute("ProfesorRep", prof);
 					RequestDispatcher rd = request.getRequestDispatcher("/VerificarProfesor.jsp");
 					rd.forward(request, response);
 									
@@ -203,6 +221,21 @@ public class ServletsProfesor extends HttpServlet {
 						
 						ArrayList<Provincia> listaProv = provDao.listarProvincia();
 						ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
+						
+						for(int i=0;i<listaLoc.size();i++) {
+							if(profe.getLocalidad().getId()==listaLoc.get(i).getId()) {
+								Localidad auxL=new Localidad();
+								Provincia auxP=new Provincia();
+								auxL.setId(listaLoc.get(i).getId());
+								auxL.setNombreLoc(listaLoc.get(i).getNombreLoc());
+								auxP=listaLoc.get(i).getProvincia();
+								
+								auxL.setProvincia(auxP);
+								
+								profe.setLocalidad(auxL);
+								
+							}
+						}
 
 						request.setAttribute("listaProvDao", listaProv);
 						request.setAttribute("listaLocDao", listaLoc);
