@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputPassword" class="col-sm-2 col-form-label">ContraseÃ±a</label>
+				<label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
 				<div class="col-sm-2">
 					<input type="password" class="form-control" id="inputPassword"
 						name="txtClave" autocomplete="off">

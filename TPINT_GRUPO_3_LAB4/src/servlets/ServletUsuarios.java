@@ -65,7 +65,7 @@ public class ServletUsuarios extends HttpServlet {
 
 		//Carga pantalla AgregarUsuario
 		if (request.getParameter("AddUser") != null) {
-			ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+			ArrayList<Profesor> lProfesor = profesorNeg.listarProfesoresSinUsuarios();
 			ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
 
 			request.setAttribute("listaProfes", lProfesor);
@@ -74,22 +74,7 @@ public class ServletUsuarios extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		/*
-		 * int filas = 0; if ("EliminarUsuario".equals(request.getParameter("Param"))) {
-		 * int idUsuario = Integer.parseInt(request.getParameter("Data"));
-		 * UsuarioDao.eliminarUsuario(idUsuario);
-		 * 
-		 * if (UsuarioDao.eliminarUsuario(idUsuario) != false) { filas = 1; } if (filas
-		 * == 1) { // REQUEST DISPATCHER request.setAttribute("UsuarioEliminado",
-		 * filas); ArrayList<Usuario> lista = UsuarioDao.obtenerTodos();
-		 * 
-		 * request.setAttribute("listaUsuarios", lista);
-		 * 
-		 * RequestDispatcher rd =
-		 * request.getRequestDispatcher("/ServletUsuarios?Param=1"); rd.forward(request,
-		 * response); } }
-		 */
-
+		
 		// PARA ELIMINAR UN USUARIO
 		if (request.getParameter("deleteUser") != null) {
 			UsuarioDao.eliminarUsuario(Integer.parseInt(request.getParameter("deleteUser")));
@@ -201,16 +186,11 @@ public class ServletUsuarios extends HttpServlet {
 				}
 			} else {
 
-				/*
-				 * int error=1; request.setAttribute("Error", error);
-				 * request.getRequestDispatcher("login.jsp").forward(request, response);
-				 */
-
-				PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Usuario y clave incorrecta');");
-				out.println("location='login.jsp';");
-				out.println("</script>");
+				
+				  int error=1;
+				  request.setAttribute("UsuarioYaExiste", error);
+				  request.getRequestDispatcher("login.jsp").forward(request, response);
+				 
 
 			}
 		}
