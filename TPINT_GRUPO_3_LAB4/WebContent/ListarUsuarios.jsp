@@ -15,7 +15,7 @@
 	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
@@ -52,11 +52,11 @@
       
         <%}%>
 		
-		<%if (request.getAttribute("contrase�aU") != null) {%>
+		<%-- <%if (request.getAttribute("contrase�aU") != null) {%>
 		
 		     <div class="alert alert-warning" role="alert">Se modifico la contrase�a correctamente</div>
 
-		<%}	%>
+		<%}	%> --%>
 		
 		<%if (request.getAttribute("EliminadoUsuario") != null) {%>
 		
@@ -210,7 +210,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<!-- <script type="text/javascript" src="js/script.js"></script> -->
 <script src="js/espanol.js"></script>	
 
 	<script type="text/javascript">
