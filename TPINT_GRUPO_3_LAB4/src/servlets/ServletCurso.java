@@ -116,18 +116,15 @@ public class ServletCurso extends HttpServlet {
 			if (cursoNeg.eliminarCurso(Integer.parseInt(request.getParameter("deleteConfirmedCourse")))) {
 				Msj = "Curso eliminado correctamente.";
 			}
+			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
 			request.setAttribute("Mensaje", Msj);
-			RequestDispatcher rd = request.getRequestDispatcher("ServletCurso?listCourses=1");
+			request.setAttribute("listaCursos", lCursos);
+			RequestDispatcher rd = request.getRequestDispatcher("/listarCurso.jsp");
 			rd.forward(request, response);
 		}
 
-		// PrintWriter pw= response.getWriter();
-		// pw.println("<html><body>Prueba PrintWriter</body></html>"); //IMPRIMO EN
-		// PANTALLA
-		// pw.close();
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		
 		// Listar Cursos del usuario tipo profesor
 		if (request.getParameter("listCoursesProfessor") != null) {
 			String msj;

@@ -1,6 +1,7 @@
 package entidades;
 
 public class Curso {
+
 	private int Id;
 	private int IdMateria;
 	private int IdTurno;
@@ -120,4 +121,12 @@ public class Curso {
 		CantAlum = cantAlum;
 	}
 
+	@Override
+	public String toString() {
+		return "Materia: " + Materia + " - Turno: " + Turno + " - Cuatrimestre: " + Cuatrimestre + " - Año: " + Anio + ".";
+	}
+	
+	public String toStringSinMateria() {
+		return "Turno: " + Turno + " - Cuatrimestre: " + Cuatrimestre + " - Año: " + Anio + ".";
+	}
 }
