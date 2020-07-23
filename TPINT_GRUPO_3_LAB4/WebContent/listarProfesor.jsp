@@ -31,7 +31,7 @@
 	</ol>
 	</nav>
 
-	<div class="container" >
+	<div class="container" style="max-width: 90% !important;">
 		<form action="ServletsProfesor" method="get">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
