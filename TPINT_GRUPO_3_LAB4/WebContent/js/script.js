@@ -39,17 +39,22 @@ $(document).ready(
 					{
 						"scrollX" : true,
 						"displayLength" : 10,
-						"order" : [ [ 3, "desc" ], [ 2, "desc" ],
-								[ 1, "asc" ], [ 0, "asc" ], [ 4, "asc" ] ],
+						"order" : [ [ 3, "desc" ], [ 2, "desc" ], [ 1, "asc" ],
+								[ 0, "asc" ], [ 4, "asc" ] ],
 						columnDefs : [ {
 							targets : "_all",
 							className : 'dt-center'
 						} ]
 					}), $('#TablaCargarNotas').DataTable({
-						"scrollX" : false,
-						columnDefs : [ {
-							targets : "_all",
-							className : 'dt-center'
-						} ]
-					});
+				"scrollX" : false,
+				"displayLength" : 100,
+				"order" : [ [ 0, "asc" ] ],
+				columnDefs : [ {
+					targets : 1,
+					className : 'dt-left'
+				}, {
+					targets : "_all",
+					className : 'dt-center'
+				} ]
+			});
 		});

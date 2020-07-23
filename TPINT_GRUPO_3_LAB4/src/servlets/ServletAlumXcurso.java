@@ -17,7 +17,9 @@ import entidades.AlumnosPorCursos;
 import entidades.Curso;
 import entidades.EstadoAcademico;
 import negocio.AlumnoPorCursoNegocio;
+import negocio.CursoNegocio;
 import negocioImpl.AlumnoPorCursoNegocioImpl;
+import negocioImpl.CursoNegocioImpl;
 
 /**
  * Servlet implementation class ServletAlumXcurso
@@ -35,13 +37,17 @@ public class ServletAlumXcurso extends HttpServlet {
 			throws ServletException, IOException {
 
 		AlumnoPorCursoNegocio alumCurNeg = new AlumnoPorCursoNegocioImpl();
+		CursoNegocio cursoNeg = new CursoNegocioImpl();
 
 		// Lista los alumnos con las notas
 		if (request.getParameter("uploadNotes") != null) {
-			ArrayList<AlumnosPorCursos> listaAlum = alumCurNeg
-					.ObtenerCalificacionesAlumnos(Integer.parseInt(request.getParameter("uploadNotes")));
+			int CursoId = Integer.parseInt(request.getParameter("uploadNotes").toString());
+			ArrayList<AlumnosPorCursos> listaAlum = alumCurNeg.ObtenerCalificacionesAlumnos(CursoId);
+			Curso curso = cursoNeg.buscarCurso(CursoId);
+			
 			request.setAttribute("listaAlumNotas", listaAlum);
-			request.setAttribute("CursoId", request.getParameter("uploadNotes"));
+			request.setAttribute("InfoCurso", curso);
+			request.setAttribute("CursoId", CursoId);
 			RequestDispatcher rd = request.getRequestDispatcher("/cargarNota.jsp");
 			rd.forward(request, response);
 		}
@@ -83,22 +89,22 @@ public class ServletAlumXcurso extends HttpServlet {
 					aux.setParcial1(0);
 				else
 					aux.setParcial1(Integer.parseInt(ListaParcial1[x].toString()));
-				
+
 				if (ListaParcial2[x].toString() == "")
 					aux.setParcial2(0);
 				else
 					aux.setParcial2(Integer.parseInt(ListaParcial2[x].toString()));
-				
+
 				if (ListaRecuperatorio1[x].toString() == "")
 					aux.setRecuperatorio1(0);
 				else
 					aux.setRecuperatorio1(Integer.parseInt(ListaRecuperatorio1[x].toString()));
-				
+
 				if (ListaRecuperatorio2[x].toString() == "")
 					aux.setRecuperatorio2(0);
 				else
 					aux.setRecuperatorio2(Integer.parseInt(ListaRecuperatorio2[x].toString()));
-				
+
 				EstadoAc.setId(Integer.parseInt(ListaEstadoAcademico[x].toString()));
 				aux.setEstadoAca(EstadoAc);
 
@@ -116,7 +122,7 @@ public class ServletAlumXcurso extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/cargarNota.jsp");
 				rd.forward(request, response);
 			} else {
-				Msj = "La grabaciÃ³n se realizÃ³ correctamente.";
+				Msj = "La grabación se realizó correctamente.";
 				request.setAttribute("Mensaje", Msj);
 				RequestDispatcher rd = request.getRequestDispatcher("ServletCurso?listCoursesProfessor=0");
 				rd.forward(request, response);

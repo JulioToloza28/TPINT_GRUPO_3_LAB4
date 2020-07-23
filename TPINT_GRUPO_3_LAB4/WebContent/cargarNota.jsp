@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.AlumnosPorCursos"%>
+<%@page import="entidades.Curso"%>
 <%@page import="java.util.ArrayList"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,6 +17,7 @@
 	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 </head>
 <body>
+
 	<jsp:include page="Menu.jsp"></jsp:include>
 	<nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
@@ -27,6 +29,24 @@
 	<form action="ServletAlumXcurso" method="post" style="margin: 40px">
 
 		<div class="container">
+
+			<%
+				Curso CursoActual = null;
+				if (request.getAttribute("InfoCurso") != null) {
+					CursoActual = (Curso) request.getAttribute("InfoCurso");
+				}
+			%>
+
+			<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<div>
+					<h1 class="display-4"><%=CursoActual.getMateria()%></h1>
+					<h2 class="lead"><%=CursoActual.toStringSinMateria()%></h2>
+				</div>
+			</ol>
+			</nav>
+
+
 			<%
 				int IdCurso = 0;
 				if (request.getAttribute("CursoId") != null) {
@@ -50,7 +70,6 @@
 					<table id="TablaCargarNotas" class="display" style="width: 100%">
 						<thead>
 							<tr>
-								<th>Ocultar</th>
 								<th>Legajo</th>
 								<th>Alumno</th>
 								<th>Parcial 1</th>
@@ -73,8 +92,8 @@
 
 							<tr>
 								<td><input type="hidden" name="LegAlumno" id="LegAlumno"
-									value="<%=alumnoXNota.getAlumno().getLegajo()%>"></td>
-								<td><label id="LegAlumno" name="LegAlumno"><%=alumnoXNota.getAlumno().getLegajo()%></label></td>
+									value="<%=alumnoXNota.getAlumno().getLegajo()%>"> <label
+									id="LegAlumno" name="LegAlumno"><%=alumnoXNota.getAlumno().getLegajo()%></label></td>
 								<td><%=alumnoXNota.getAlumno().getNombre()%></td>
 								<td>
 									<div class="form-group">
@@ -82,13 +101,13 @@
 										<%
 											if (alumnoXNota.getParcial1() == 0) {
 										%>
-										<input type="text" class="form-control" id="notaParcial1"
-											name="notaParcial1" placeholder="Calificar">
+										<input type="number" max="10" min="1" class="form-control"
+											id="notaParcial1" name="notaParcial1" placeholder="Calificar">
 										<%
 											} else {
 										%>
-										<input type="text" class="form-control" id="notaParcial1"
-											name="notaParcial1" placeholder="Calificar"
+										<input type="number" max="10" min="1" class="form-control"
+											id="notaParcial1" name="notaParcial1" placeholder="Calificar"
 											value="<%=alumnoXNota.getParcial1()%>">
 										<%
 											}
@@ -101,13 +120,13 @@
 										<%
 											if (alumnoXNota.getParcial2() == 0) {
 										%>
-										<input type="text" class="form-control" id="notaParcial2"
-											name="notaParcial2" placeholder="Calificar">
+										<input type="number" max="10" min="1" class="form-control"
+											id="notaParcial2" name="notaParcial2" placeholder="Calificar">
 										<%
 											} else {
 										%>
-										<input type="text" class="form-control" id="notaParcial2"
-											name="notaParcial2" placeholder="Calificar"
+										<input type="number" max="10" min="1" class="form-control"
+											id="notaParcial2" name="notaParcial2" placeholder="Calificar"
 											value="<%=alumnoXNota.getParcial2()%>">
 										<%
 											}
@@ -119,13 +138,15 @@
 										<%
 											if (alumnoXNota.getRecuperatorio1() == 0) {
 										%>
-										<input type="text" class="form-control" id="Recuperatorio1"
-											name="Recuperatorio1" placeholder="Calificar">
+										<input type="number" max="10" min="1" class="form-control"
+											id="Recuperatorio1" name="Recuperatorio1"
+											placeholder="Calificar">
 										<%
 											} else {
 										%>
-										<input type="text" class="form-control" id="Recuperatorio1"
-											name="Recuperatorio1" placeholder="Calificar"
+										<input type="number" max="10" min="1" class="form-control"
+											id="Recuperatorio1" name="Recuperatorio1"
+											placeholder="Calificar"
 											value="<%=alumnoXNota.getRecuperatorio1()%>">
 										<%
 											}
@@ -137,13 +158,15 @@
 										<%
 											if (alumnoXNota.getRecuperatorio2() == 0) {
 										%>
-										<input type="text" class="form-control" id="Recuperatorio2"
-											name="Recuperatorio2" placeholder="Calificar">
+										<input type="number" max="10" min="1" class="form-control"
+											id="Recuperatorio2" name="Recuperatorio2"
+											placeholder="Calificar">
 										<%
 											} else {
 										%>
-										<input type="text" class="form-control" id="Recuperatorio2"
-											name="Recuperatorio2" placeholder="Calificar"
+										<input type="number" max="10" min="1" class="form-control"
+											id="Recuperatorio2" name="Recuperatorio2"
+											placeholder="Calificar"
 											value="<%=alumnoXNota.getRecuperatorio2()%>">
 										<%
 											}

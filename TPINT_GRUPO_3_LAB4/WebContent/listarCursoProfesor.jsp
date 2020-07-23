@@ -64,7 +64,7 @@
 							<th>Materia</th>
 							<th>Turno</th>
 							<th>Cuatrimestre</th>
-							<th>AÃ±o</th>
+							<th>Año</th>
 							<th>Cant. Alumnos</th>
 							<th>Acciones</th>
 						</tr>

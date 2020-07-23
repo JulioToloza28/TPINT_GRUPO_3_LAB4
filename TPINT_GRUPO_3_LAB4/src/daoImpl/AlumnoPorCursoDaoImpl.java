@@ -17,7 +17,7 @@ public class AlumnoPorCursoDaoImpl implements AlumnoPorCursoDao {
 
 	private static final String readAll = "SELECT * FROM tpint_grupo_3_lab4.listar_notas";
 	private static final String cargarNotaAlumno = "UPDATE `tpint_grupo_3_lab4`.`alumnoxcurso` SET `notaParcial1` = ?, `notaParcial2` = ?, `notaRecuperatorio1` = ?, `notaRecuperatorio2` = ?, `idEstadoAcademico` = ? WHERE `legajoAlumno` = ? and `idCurso` = ? and estado=1";
-	private static final String mostrarCalifAlumnos = "SELECT * FROM tpint_grupo_3_lab4.listar_cargarnotas where idcurso = ?";
+	private static final String mostrarCalifAlumnos = "SELECT * FROM tpint_grupo_3_lab4.listar_cargarnotas where idcurso = ? order by legajoAlumno asc";
 
 	public boolean cargarNotaAlumno(AlumnosPorCursos NotaAlum) {
 		PreparedStatement statement;
