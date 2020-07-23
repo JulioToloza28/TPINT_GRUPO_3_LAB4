@@ -123,6 +123,8 @@
 						<td><b>MATERIA</b></td>
 						<td><b>CUATRIMESTRE</b></td>
 						<td><b>AÑO</b></td>
+						<td><b>TURNO</b></td>
+						<td><b>PROFE</b></td>
 						<td><b>APROBADOS</b></td>
 						<td><b>NO APROBADOS</b></td>
 						<td><b>TOTAL</b></td>
@@ -139,6 +141,7 @@
 						<td><%=a.getMateria().getNombre()%></td>
 						<td><%=a.getCurso().getCuatrimestre()%></td>
 						<td><%=a.getCurso().getAnio()%></td>
+						<td><%=a.getTurno().getTurno()%></td>
 						<td><%=Aprobados%> %</td>
 						<td><%=N_Aprobado%> %</td>						
 						<td><%=a.getTotal_alumnos()%></td>

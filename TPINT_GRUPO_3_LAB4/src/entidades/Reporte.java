@@ -4,6 +4,8 @@ public class Reporte {
 	private int Id;
 	private Curso curso;
 	private Materia materia;
+	private Profesor profesor;
+	private Turno turno;
 	private int total_alumnos_libres;
 	private int total_alumnos_en_curso;
 	private int total_alumnos_regularizados;
@@ -72,12 +74,28 @@ public class Reporte {
 		this.total_alumnos_libres = total_alumnos_libres;
 	}
 
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+
+	public Turno getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
 	@Override
 	public String toString() {
-		return "Reporte [Id=" + Id + ", curso=" + curso + ", materia=" + materia + ", total_alumnos_libres="
-				+ total_alumnos_libres + ", total_alumnos_en_curso=" + total_alumnos_en_curso
-				+ ", total_alumnos_regularizados=" + total_alumnos_regularizados + ", total_no_aprobados="
-				+ total_no_aprobados + ", total_aprobados=" + total_aprobados + ", total_alumnos=" + total_alumnos
-				+ "]";
+		return "Reporte [Id=" + Id + ", curso=" + curso + ", materia=" + materia + ", profesor=" + profesor + ", turno="
+				+ turno + ", total_alumnos_libres=" + total_alumnos_libres + ", total_alumnos_en_curso="
+				+ total_alumnos_en_curso + ", total_alumnos_regularizados=" + total_alumnos_regularizados
+				+ ", total_no_aprobados=" + total_no_aprobados + ", total_aprobados=" + total_aprobados
+				+ ", total_alumnos=" + total_alumnos + "]";
 	}
 }
