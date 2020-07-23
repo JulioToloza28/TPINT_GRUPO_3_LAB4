@@ -3,6 +3,7 @@
 <%@page import="entidades.Localidad" %>
 <%@page import="entidades.Alumno" %>
 <%@page import="daoImpl.AlumnoDaoImpl" %>
+<%@page import="daoImpl.LocalidadDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.time.*" %>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -85,9 +86,11 @@
 					<label for="cmbLocalidad">Localidad</label> 
 					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
 						<option  selected style="visibility:hidden" value="<%=alum.getLocalidad().getId()%>"><%=alum.getLocalidad().getNombreLoc()%></option>
-						<%ArrayList<Localidad> listaLocalidad = null;
+						<%
+						LocalidadDaoImpl locDaoImpl = new LocalidadDaoImpl();
+						ArrayList<Localidad> listaLocalidad = null;
 					      if (request.getAttribute("listaLocDao") != null) {
-						  listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
+                          listaLocalidad = (ArrayList<Localidad>)locDaoImpl.ObtenerLocalidadPorProvincia(alum.getLocalidad().getProvincia().getId());
 					}%>
 					<%if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {%>
@@ -103,7 +106,8 @@
 	</form>
 					<%} %>
 <jsp:include page="librerias.jsp"></jsp:include>
-<jsp:include page="scriptValidaciones.jsp"></jsp:include>
+<jsp:include page="scriptValidaciones.jsp"></jsp:include>	
+	
 	
 </body>
 </html>
