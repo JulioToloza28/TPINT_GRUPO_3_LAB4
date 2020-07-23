@@ -98,23 +98,29 @@
 							if(request.getAttribute("listaProvDao")!=null){
 							ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");}%>
 							<% if(ListarProvi!=null)
-								for(Provincia prov : ListarProvi){%>
-								<option value=<%=prov.getId()%>><%=prov.getNombreProv() %></option>
-								<%} %>	
+								for(Provincia prov : ListarProvi) {%>
+								<%if(alum.getLocalidad().getProvincia().getId()==prov.getId()){%>
+								<option selected style="visibility:hidden" value="<%=prov.getId()%>"><%=prov.getNombreProv()%></option>
+								<%}  %>	
+								<option value="<%=prov.getId()%>"><%=prov.getNombreProv() %></option>								
+							<%}  %>	
 					</select>
 				</div>
 				 <div class="col-md-2 mb-3">
 					<label for="cmbLocalidad">Localidad</label> 
 					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
 						<option selected disabled value="">Localidad</option>
-						<%
-						  ArrayList<Localidad> listaLocalidad = null;
-						  LocalidadDaoImpl LocDaoImpl = new LocalidadDaoImpl();
+					<%
+						LocalidadDaoImpl locDaoImpl = new LocalidadDaoImpl();
+						ArrayList<Localidad> listaLocalidad = null;
 					      if (request.getAttribute("listaLocDao") != null) {
-						  listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
+                          listaLocalidad = (ArrayList<Localidad>)locDaoImpl.ObtenerLocalidadPorProvincia(alum.getLocalidad().getProvincia().getId());
 					}%>
 					<%if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {%>
+						<%if(alum.getLocalidad().getId()==loc.getId()){%>
+								<option selected style="visibility:hidden" value="<%=loc.getId()%>"><%=loc.getNombreLoc()%></option>
+								<%}  %>	
 					<option value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
 					<%}%>
 					</select>

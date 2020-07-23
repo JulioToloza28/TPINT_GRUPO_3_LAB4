@@ -141,6 +141,21 @@ public class ServletAlumno extends HttpServlet {
 			{				
 				ArrayList<Provincia> listaProv = provDao.listarProvincia();
 				ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
+				
+				for(int i=0;i<listaLoc.size();i++) {
+					if(alum.getLocalidad().getId()==listaLoc.get(i).getId()) {
+						Localidad auxL=new Localidad();
+						Provincia auxP=new Provincia();
+						auxL.setId(listaLoc.get(i).getId());
+						auxL.setNombreLoc(listaLoc.get(i).getNombreLoc());
+						auxP=listaLoc.get(i).getProvincia();
+						
+						auxL.setProvincia(auxP);
+						
+						alum.setLocalidad(auxL);
+						
+					}
+				}
 
 				request.setAttribute("listaProvDao", listaProv);
 				request.setAttribute("listaLocDao", listaLoc);
@@ -204,6 +219,21 @@ public class ServletAlumno extends HttpServlet {
 				ArrayList<Provincia> listaProv = provDao.listarProvincia();
 				ArrayList<Localidad> listaLoc = locDao.obtenerListLocalidad();
 
+				for(int i=0;i<listaLoc.size();i++) {
+					if(alum1.getLocalidad().getId()==listaLoc.get(i).getId()) {
+						Localidad auxL=new Localidad();
+						Provincia auxP=new Provincia();
+						auxL.setId(listaLoc.get(i).getId());
+						auxL.setNombreLoc(listaLoc.get(i).getNombreLoc());
+						auxP=listaLoc.get(i).getProvincia();
+						
+						auxL.setProvincia(auxP);
+						
+						alum1.setLocalidad(auxL);
+						
+					}
+				}
+				
 				request.setAttribute("listaProvDao", listaProv);
 				request.setAttribute("listaLocDao", listaLoc);
 				request.setAttribute("AlumnoRepModi", alum1);
