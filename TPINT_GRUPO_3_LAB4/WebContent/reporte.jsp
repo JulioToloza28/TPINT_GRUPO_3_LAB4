@@ -35,8 +35,8 @@
 							<div class="form-group">
 								<label for="sel1">Opciones de Reporte:</label> <select
 									id="cboTipo" name="cboTipo" class="custom-select" id="sel1">
-									<option selected disabled value="<>">Seleccione...</option>
-									<option value="1">Notas</option>
+									
+									<option selected value="1">Notas</option>
 									<option value="2">Estado academico</option>
 								</select>
 							</div>
@@ -94,10 +94,8 @@
 						</div>
 						<br>
 						<div class="col-lg-12">
-							<input id="btn-reporte" name="btn-reporte" type="submit"
-								class="btn btn-outline-info btn-block"><i
-								class="fa fa-list-alt"></i> Generar Reporte
-							<!-- <button id="btn-reporte" name="btn-reporte"
+							<button id="btn-reporte" name="btn-reporte" type="submit" class="btn btn-outline-info btn-block" > <i class="fa fa-list-alt"> </i>Generar reporte </button>
+				<!-- 			<button id="btn-reporte" name="btn-reporte"
 								class="btn btn-primary" type="submit">Generar reporte</button> -->
 						</div>
 					</div>
@@ -133,14 +131,16 @@
 				<tbody>
 					<%
 						for (Reporte a : listaA) {
+							int Aprobados=a.getTotal_aprobados()*100/a.getTotal_alumnos();
+							int N_Aprobado=a.getTotal_no_aprobados()*100/a.getTotal_alumnos();
 					%>
-
+							
 					<tr>
 						<td><%=a.getMateria().getNombre()%></td>
 						<td><%=a.getCurso().getCuatrimestre()%></td>
 						<td><%=a.getCurso().getAnio()%></td>
-						<td><%=a.getTotal_no_aprobados()%></td>
-						<td><%=a.getTotal_aprobados()%></td>
+						<td><%=Aprobados%> %</td>
+						<td><%=N_Aprobado%> %</td>						
 						<td><%=a.getTotal_alumnos()%></td>
 					</tr>
 					<%
