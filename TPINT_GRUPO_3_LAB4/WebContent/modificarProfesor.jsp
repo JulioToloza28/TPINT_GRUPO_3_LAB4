@@ -4,6 +4,7 @@
 <%@page import="entidades.Localidad" %>
 <%@page import="entidades.Profesor" %>
 <%@page import="daoImpl.ProfesorDaoImpl" %>
+<%@page import="daoImpl.LocalidadDaoImpl" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.time.*" %>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -72,6 +73,7 @@
 					<label for="cmbProvincia">Provincia</label> 
 					<select  name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()" onFocusOut="return validateProvincia()" required>
 						<%
+						
 						  ArrayList<Provincia>ListarProvi=null;
 							if(request.getAttribute("listaProvDao")!=null){
 							ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");}%>
@@ -89,9 +91,11 @@
 					<label for="cmbLocalidad">Localidad</label> 
 					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
 						<option  selected style="visibility:hidden" value="<%=profe.getLocalidad().getId()%>"><%=profe.getLocalidad().getNombreLoc()%></option>
-						<%ArrayList<Localidad> listaLocalidad = null;
+						<%
+						LocalidadDaoImpl locDaoImpl = new LocalidadDaoImpl();
+						ArrayList<Localidad> listaLocalidad = null;
 					      if (request.getAttribute("listaLocDao") != null) {
-						  listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocDao");
+					    	  listaLocalidad = (ArrayList<Localidad>)locDaoImpl.ObtenerLocalidadPorProvincia(profe.getLocalidad().getProvincia().getId());
 					}%>
 					<%if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {%>
