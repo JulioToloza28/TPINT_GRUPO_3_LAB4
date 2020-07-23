@@ -1,4 +1,6 @@
 <%@page import="entidades.Usuario"%>
+<%@page import="entidades.Profesor"%>
+<%@page import="daoImpl.ProfesorDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -34,15 +36,19 @@
 </head>
 <body>
 	<%
+	ProfesorDaoImpl buscarProf=new ProfesorDaoImpl();
+	Profesor profe=new Profesor();
 		Usuario usuario = null;
 		int LegProf = 0;
 
 		if (session.getAttribute("Session_Legajo") != null) {
 			LegProf = Integer.parseInt(session.getAttribute("Session_Legajo").toString());
+			
 		}
 
 		if (session.getAttribute("Usuario2") != null) {
 			usuario = (Usuario) session.getAttribute("Usuario2");
+			profe=buscarProf.ObtenerProfesor(usuario.getLegajo());
 
 			if (usuario.getTipoUsuario().getId() == 1) {
 	%>
@@ -86,9 +92,8 @@
 				<li class="nav-item"><a class="navbar-brand" href="#"> <img
 						src="img/logo.png" alt="Logo" style="width: 40px;"></a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="ServletCurso?listCoursesProfessor=0"><h3>
-							Bienvenido
-							<%=session.getAttribute("Session_user")%></h3></a></li>
+					href="ServletCurso?listCoursesProfessor=0"><h4>
+							Bienvenido/a : <%=profe.getNombre() %> <%=profe.getApellido() %> </h4></a></li>
 				<!-- 	<li class="nav-item"><a class="nav-link"
 					href="ServletAlumno?Param=MenuAlumno">Alumnos</a></li>
 				<li class="nav-item"><a class="nav-link" href="reporte.jsp">Reportes</a></li> -->
