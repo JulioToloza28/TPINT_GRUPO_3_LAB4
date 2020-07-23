@@ -14,6 +14,10 @@ public class ProfesorNegocioImpl implements ProfesorNegocio {
 	public ArrayList<Profesor> listarProfe() {
 		return profesorDao.listarProfesores();
 	}
+	
+	public ArrayList<Profesor> listarProfesoresSinUsuarios(){
+		return profesorDao.listarProfesoresSinUsuarios();
+	}
 
 	@Override
 	public boolean agregarProfesor(Profesor profesorAgregado) {

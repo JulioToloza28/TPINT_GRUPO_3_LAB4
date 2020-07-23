@@ -52,11 +52,6 @@
       
         <%}%>
 		
-		<%-- <%if (request.getAttribute("contrase�aU") != null) {%>
-		
-		     <div class="alert alert-warning" role="alert">Se modifico la contrase�a correctamente</div>
-
-		<%}	%> --%>
 		
 		<%if (request.getAttribute("EliminadoUsuario") != null) {%>
 		
@@ -71,22 +66,7 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<!-- <a href="ServletUsuarios?AddUser=1"
-					class="btn btn-outline-primary btn-sm">Agregar</a> -->
-				<%
-					if (request.getAttribute("msjChange") != null) {
-				%>
-				<div class="alert alert-success alert-dismissible fade show"
-					role="alert">
-					<strong><%=request.getAttribute("msj")%></strong>
-					<button type="button" class="close" data-dismiss="alert"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<%
-					}
-				%>
+				
 				<table id="example" class="display" style="width: 100%">
 					<thead>
 						<tr>
@@ -177,15 +157,18 @@
 											<label for="recipient-name" class="col-form-label">Nueva contraseña: </label> 
 												
 													<input type="password" class="form-control"
-												id="contraseñaModificar" name="contraseñaModificar">
-												<div class="input-group-append">
-											<button id="show_password" class="btn btn-secondary"
+												id="contraseñaModificar" name="contraseñaModificar" required="">
+													<button id="show_password" class="btn btn-secondary"
 										type="button" onclick="mostrarPassword()">
 										<span class="fa fa-eye-slash icon"></span>
 									</button>
+													
+												<div class="input-group-append">
+										
 											<input type="hidden" class="form-control" id="iduserAModificar"
 												name="iduserAModificar">
 												</div>
+											
 										
                       
 										</div>

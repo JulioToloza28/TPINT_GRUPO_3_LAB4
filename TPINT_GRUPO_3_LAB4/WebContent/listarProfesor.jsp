@@ -61,8 +61,8 @@
 								id="cbxCuatrimestre" name="cbxCuatrimestre" class="form-control"
 								id="sel1">
 								<option selected disabled value="">Seleccione...</option>
-								<option value="1">1Â° Cuatrimestre</option>
-								<option value="2">2Â° Cuatrimestre</option>
+								<option value="1">1° Cuatrimestre</option>
+								<option value="2">2° Cuatrimestre</option>
 
 							</select>
 						</div>

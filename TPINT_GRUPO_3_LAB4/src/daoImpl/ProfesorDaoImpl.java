@@ -19,7 +19,7 @@ import entidades.Provincia;
 public class ProfesorDaoImpl implements ProfesorDao{
 	
 	private static final String agregarProfesor="INSERT INTO profesor(nombre, apellido, dni, fecha_nac, direccion, idlocalidad, telefono, mail, estado) values(?,?,?,?,?,?,?,?,?);";
-	//private static final String listarProfe="SELECT * FROM tpint_grupo_3_lab4.profesor where estado=1;";
+	private static final String listarProfesSinUsuario="SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1 and p.legajo_Pro not in (SELECT legajo_Pro FROM tpint_grupo_3_lab4.usuario)";
 	private static final String readAll = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1";
 	private static final String leerProfesor = "SELECT p.legajo_Pro,p.nombre as Profesor,p.apellido,p.dni,p.fecha_nac,p.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,p.telefono,p.mail from profesor as p inner join localidad as loc on p.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia  where estado=1 and legajo_Pro=?;";
 	private static final String modificarProfesor= "UPDATE profesor set nombre=?,apellido=?, dni=?, fecha_nac=?, direccion=?, Idlocalidad=?, telefono=?, mail=? where legajo_Pro= ?";
@@ -100,6 +100,50 @@ public class ProfesorDaoImpl implements ProfesorDao{
 		}
 		return listProfesor;
 	} 
+	
+	//listar solo Profesores sin usuarios
+	public ArrayList<Profesor> listarProfesoresSinUsuarios() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Profesor> listProfesor = new ArrayList<Profesor>();
+		PreparedStatement statement;
+		ResultSet resultSet;
+
+		Conexion conexion = Conexion.getConexion();
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(listarProfesSinUsuario);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Localidad loc = new Localidad();
+				Provincia provincia = new Provincia();
+				Profesor profe = new Profesor();
+				profe.setLegajo(resultSet.getInt("legajo_Pro"));
+				profe.setNombre(resultSet.getString("Profesor"));
+				profe.setApellido(resultSet.getString("Apellido"));
+				profe.setDni(resultSet.getString("Dni"));
+				profe.setFechaNac(resultSet.getDate("fecha_nac"));
+				profe.setDireccion(resultSet.getString("direccion"));
+				loc.setId(resultSet.getInt("idlocalidad"));
+				loc.setNombreLoc(resultSet.getString("Localidad"));
+				provincia.setId(resultSet.getInt("idprovincia"));
+				provincia.setNombreProv(resultSet.getString("Provincia"));
+				loc.setProvincia(provincia);
+				profe.setLocalidad(loc);
+				profe.setTelefono(resultSet.getString("telefono"));
+				profe.setMail(resultSet.getString("mail"));
+				listProfesor.add(profe);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return listProfesor;
+	} 
+	
+	
 	//obtener profesor
 	public Profesor ObtenerProfesor(int Legajo) {
 		try {
