@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import dao.ReporteDao;
 import entidades.Curso;
 import entidades.Materia;
+import entidades.Profesor;
 import entidades.Reporte;
+import entidades.Turno;
 
 public class ReporteDaoImpl implements ReporteDao {
 	private static final String obtenerDatosNotas = "SELECT * FROM tpint_grupo_3_lab4.datos_reporte where idcurso >= 0 ";
@@ -52,6 +54,8 @@ public class ReporteDaoImpl implements ReporteDao {
 					Reporte reporte = new Reporte();
 					Curso curso = new Curso();
 					Materia materia = new Materia();
+					Turno turno = new Turno();
+					Profesor profesor = new Profesor();
 
 					reporte.setTotal_no_aprobados(resultSet.getInt("total_noAprobados"));
 					reporte.setTotal_aprobados(resultSet.getInt("total_Aprobados"));
@@ -63,8 +67,17 @@ public class ReporteDaoImpl implements ReporteDao {
 					reporte.setCurso(curso);
 
 					materia.setId(resultSet.getInt("idMateria"));
-					materia.setNombre(resultSet.getString("MAteria"));
+					materia.setNombre(resultSet.getString("Materia"));
 					reporte.setMateria(materia);
+					
+					turno.setIdTurno(resultSet.getInt("idturno"));
+					turno.setTurno(resultSet.getString("turno"));
+					reporte.setTurno(turno);
+					
+					/*profesor.setLegajo(resultSet.getInt("legajo_profesor"));
+					profesor.setNombre(resultSet.getString("nombre_profesor"));
+					profesor.setApellido(resultSet.getString("apellido_profesor"));
+					reporte.setProfesor(profesor);*/
 
 					listReporte.add(reporte);
 				}
@@ -82,6 +95,8 @@ public class ReporteDaoImpl implements ReporteDao {
 					Reporte reporte = new Reporte();
 					Curso curso = new Curso();
 					Materia materia = new Materia();
+					Turno turno = new Turno();
+					Profesor profesor = new Profesor();
 
 					reporte.setTotal_alumnos_libres(resultSet.getInt("total_alumnos_libres"));
 					reporte.setTotal_alumnos_en_curso(resultSet.getInt("total_alumnos_en_curso"));
@@ -96,6 +111,15 @@ public class ReporteDaoImpl implements ReporteDao {
 					materia.setId(resultSet.getInt("idMateria"));
 					materia.setNombre(resultSet.getString("MAteria"));
 					reporte.setMateria(materia);
+					
+					turno.setIdTurno(resultSet.getInt("idturno"));
+					turno.setTurno(resultSet.getString("turno"));
+					reporte.setTurno(turno);
+					
+					/*profesor.setLegajo(resultSet.getInt("legajo_profesor"));
+					profesor.setNombre(resultSet.getString("nombre_profesor"));
+					profesor.setApellido(resultSet.getString("apellido_profesor"));
+					reporte.setProfesor(profesor);*/
 
 					listReporte.add(reporte);
 				}
