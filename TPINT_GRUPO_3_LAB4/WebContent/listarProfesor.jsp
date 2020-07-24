@@ -21,7 +21,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <style>
 .bs-example {margin: 20px;}
-td{padding: 1px 2px!important;font-size: 14px;text-align:center;} 
+td{padding: 5px!important;font-size: 14px;text-align:center;} 
 th {font-size: 14px;text-align:center;}
 
 </style>

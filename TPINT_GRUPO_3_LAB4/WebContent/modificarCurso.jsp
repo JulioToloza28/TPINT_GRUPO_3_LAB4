@@ -11,23 +11,16 @@
 <html>
 <head>
 <title>Modificar Curso</title>
-<link rel="stylesheet" type="text/css"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
-.bs-example {
-	margin: 20px;
-}
+.bs-example {margin: 20px;}
+td{padding: 5px!important;font-size: 14px;text-align:center;} 
+th {font-size: 14px;text-align:center;}
 </style>
 
 </head>
@@ -52,10 +45,8 @@
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<div class="row">
-
 					<input type="hidden" name="txtIdCurso" id="txtIdCurso"
 						value="<%=curso.getId()%>">
-
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Materia:</label> <select name="cmbMateria"
 							class="custom-select " id="validationServer04" required>
@@ -208,7 +199,7 @@
 						<th>Nombre</th>
 						<th>Apellido</th>
 						<th>DNI</th>
-						<th>Fecha nacimiento</th>
+						<th>Nacimiento</th>
 						<th>Direccion</th>
 						<th>Localidad</th>
 						<th>Provincia</th>
