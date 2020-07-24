@@ -50,7 +50,7 @@ public class ServletReporte extends HttpServlet {
 			  
 			  
 		  ArrayList<Reporte> listReporte = reporteDao.obtenerDatosNotas(materia,Cuatri,anio,reporte);
-		  System.out.println(listReporte);
+//		  System.out.println(listReporte);
 		  request.setAttribute("tipoReporte", reporte);
 		  request.setAttribute("listaReporte", listReporte);
 		  RequestDispatcher rd = request.getRequestDispatcher("/reporte.jsp");

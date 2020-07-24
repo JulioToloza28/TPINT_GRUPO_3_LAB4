@@ -35,7 +35,7 @@
 							<div class="form-group">
 								<label for="sel1">Opciones de Reporte:</label> <select
 									id="cboTipo" name="cboTipo" class="custom-select" id="sel1">
-									
+
 									<option selected value="1">Notas</option>
 									<option value="2">Estado academico</option>
 								</select>
@@ -94,8 +94,11 @@
 						</div>
 						<br>
 						<div class="col-lg-12">
-							<button id="btn-reporte" name="btn-reporte" type="submit" class="btn btn-outline-info btn-block" > <i class="fa fa-list-alt"> </i>Generar reporte </button>
-				<!-- 			<button id="btn-reporte" name="btn-reporte"
+							<button id="btn-reporte" name="btn-reporte" type="submit"
+								class="btn btn-outline-info btn-block">
+								<i class="fa fa-list-alt"> </i>Generar reporte
+							</button>
+							<!-- 			<button id="btn-reporte" name="btn-reporte"
 								class="btn btn-primary" type="submit">Generar reporte</button> -->
 						</div>
 					</div>
@@ -116,9 +119,9 @@
 					if (Integer.parseInt(dat) == 1) {
 			%>
 
-			<table class="table table-bordered" style="width: 100%">
-				<thead>
-					<tr>
+			<table class="table table-bordered table-striped" style="width: 100%">
+				<thead class="thead-dark">
+					<tr class="table-primary">
 
 						<td><b>MATERIA</b></td>
 						<td><b>CUATRIMESTRE</b></td>
@@ -133,62 +136,86 @@
 				<tbody>
 					<%
 						for (Reporte a : listaA) {
-							int Aprobados=a.getTotal_aprobados()*100/a.getTotal_alumnos();
-							int N_Aprobado=a.getTotal_no_aprobados()*100/a.getTotal_alumnos();
+									int Aprobados = a.getTotal_aprobados() * 100 / a.getTotal_alumnos();
+									int N_Aprobado = a.getTotal_no_aprobados() * 100 / a.getTotal_alumnos();
 					%>
-							
+
 					<tr>
-						<td><%=a.getMateria().getNombre()%></td>
+						<td ><%=a.getMateria().getNombre()%></td>
 						<td><%=a.getCurso().getCuatrimestre()%></td>
-						<td><%=a.getCurso().getAnio()%></td>
+						<td ><%=a.getCurso().getAnio()%></td>
 						<td><%=a.getTurno().getTurno()%></td>
+						<td ><%=a.getProfesor().getNombre()%> <%=a.getProfesor().getApellido()%></td>
 						<td><%=Aprobados%> %</td>
-						<td><%=N_Aprobado%> %</td>						
+						<td ><%=N_Aprobado%> %</td>
 						<td><%=a.getTotal_alumnos()%></td>
 					</tr>
 					<%
 						}
 					%>
+
 				</tbody>
 			</table>
 			<%
 				} else {
 			%>
 
-			<table class="table table-bordered" style="width: 100%">
-				<thead>
-					<tr>
+			<%
+				for (Reporte a : listaA) {
+			%>
+			<div class="col-lg-12">
+				<div class="p-3 mb-2 mt-3 bg-primary text-white">MATERIA: <%=a.getMateria().getNombre()%>
+					- AÑO: <%=a.getCurso().getAnio()%>- CUATRI: <%=a.getCurso().getCuatrimestre()%>
+					- PROFESOR: <%=a.getProfesor().getNombre()%> <%=a.getProfesor().getApellido()%></div>
 
-						<td><b>MATERIA</b></td>
-						<td><b>CUATRIMESTRE</b></td>
-						<td><b>AÑO</b></td>
-						<td><b>LIBRES</b></td>
-						<td><b>EN CURSO</b></td>
-						<td><b>REGULARIZADOS</b></td>
-						<td><b>PROMOCIONADOS</b></td>
-						<td><b>TOTAL</b></td>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						for (Reporte a : listaA) {
-					%>
 
-					<tr>
-						<td><%=a.getMateria().getNombre()%></td>
-						<td><%=a.getCurso().getCuatrimestre()%></td>
-						<td><%=a.getCurso().getAnio()%></td>
-						<td><%=a.getTotal_alumnos_libres()%></td>
-						<td><%=a.getTotal_alumnos_en_curso()%></td>
-						<td><%=a.getTotal_alumnos_regularizados()%></td>
-						<td><%=a.getTotal_aprobados()%></td>
-						<td><%=a.getTotal_alumnos()%></td>
-					</tr>
-					<%
-						}
-					%>
-				</tbody>
-			</table>
+				<h5>Cursando</h5>
+				<div class="col-lg-12">
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped" role="progressbar"
+							style="width: <%=a.getTotal_alumnos_en_curso()%>%"
+							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_alumnos_en_curso()%>
+							%
+						</div>
+					</div>
+				</div>
+				<h5>Promocionado</h5>
+				<div class="col-lg-12">
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped bg-success"
+							role="progressbar"
+							style="width: <%=a.getTotal_aprobados()%>%"
+							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_aprobados()%>
+							%
+						</div>
+					</div>
+				</div>
+				<h5>Regularizado</h5>
+				<div class="col-lg-12">
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped bg-info"
+							role="progressbar"
+							style="width: <%=a.getTotal_alumnos_regularizados()%>%"
+							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_alumnos_regularizados()%>
+							%
+						</div>
+					</div>
+				</div>
+				<h5>Libres</h5>
+				<div class="col-lg-12">
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped bg-danger"
+							role="progressbar"
+							style="width: <%=a.getTotal_alumnos_libres()%>%"
+							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_alumnos_libres()%>
+							%
+						</div>
+					</div>
+				</div>
+			</div>
+			<%
+				}
+			%>
 
 			<%
 				}
