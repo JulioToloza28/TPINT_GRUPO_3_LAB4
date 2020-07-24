@@ -227,6 +227,13 @@
 				}
 				}
 			%>
+			
+			<%if (listaA.size()==0) { %>
+			<div class="col-lg-12">
+				<div class="alert alert-danger" role="alert">No se encontro ningun registro</div>
+				</div>
+				<%} %>
+			
 
 			<script type="text/javascript" src="js/script.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
