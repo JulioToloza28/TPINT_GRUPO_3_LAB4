@@ -74,10 +74,10 @@ public class ReporteDaoImpl implements ReporteDao {
 					turno.setTurno(resultSet.getString("turno"));
 					reporte.setTurno(turno);
 					
-					/*profesor.setLegajo(resultSet.getInt("legajo_profesor"));
+					profesor.setLegajo(resultSet.getInt("legajo_profesor"));
 					profesor.setNombre(resultSet.getString("nombre_profesor"));
 					profesor.setApellido(resultSet.getString("apellido_profesor"));
-					reporte.setProfesor(profesor);*/
+					reporte.setProfesor(profesor);
 
 					listReporte.add(reporte);
 				}
@@ -116,10 +116,10 @@ public class ReporteDaoImpl implements ReporteDao {
 					turno.setTurno(resultSet.getString("turno"));
 					reporte.setTurno(turno);
 					
-					/*profesor.setLegajo(resultSet.getInt("legajo_profesor"));
+					profesor.setLegajo(resultSet.getInt("legajo_profesor"));
 					profesor.setNombre(resultSet.getString("nombre_profesor"));
 					profesor.setApellido(resultSet.getString("apellido_profesor"));
-					reporte.setProfesor(profesor);*/
+					reporte.setProfesor(profesor);
 
 					listReporte.add(reporte);
 				}
