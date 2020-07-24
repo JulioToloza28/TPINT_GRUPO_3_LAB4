@@ -69,8 +69,8 @@
 									id="cboCuatrimestre" name="cboCuatrimestre"
 									class="form-control" id="sel1">
 									<option selected disabled value="">Seleccione...</option>
-									<option value="1">1° Cuatrimestre</option>
-									<option value="2">2° Cuatrimestre</option>
+									<option value="1">1Â° Cuatrimestre</option>
+									<option value="2">2Â° Cuatrimestre</option>
 
 								</select>
 							</div>
@@ -78,7 +78,7 @@
 						<div class="col-lg-3">
 							<div class="form-group">
 
-								<label for="sel1">Año:</label> <select id="cdoAnio"
+								<label for="sel1">AÃ±o:</label> <select id="cdoAnio"
 									name="cdoAnio" class="form-control" id="sel1">
 									<option selected disabled value="">Seleccione...</option>
 									<%
@@ -128,7 +128,7 @@
 
 						<td><b>MATERIA</b></td>
 						<td><b>CUATRIMESTRE</b></td>
-						<td><b>AÑO</b></td>
+						<td><b>AÃ‘O</b></td>
 						<td><b>TURNO</b></td>
 						<td><b>PROFE</b></td>
 						<td><b>APROBADOS</b></td>
@@ -139,8 +139,10 @@
 				<tbody>
 					<%
 						for (Reporte a : listaA) {
+
 							int Aprobados = ((a.getTotal_aprobados() + a.getTotal_alumnos_regularizados()) * 100) / a.getTotal_alumnos();
 							int N_Aprobado = ((a.getTotal_alumnos_en_curso() +a.getTotal_alumnos_libres()) * 100) / a.getTotal_alumnos();
+
 					%>
 
 					<tr>
@@ -175,7 +177,7 @@
 				<div class="p-3 mb-2 mt-3 bg-primary text-white">
 					MATERIA:
 					<%=a.getMateria().getNombre()%>
-					- AÑO:
+					- AÃ‘O:
 					<%=a.getCurso().getAnio()%>- CUATRI:
 					<%=a.getCurso().getCuatrimestre()%>
 					- TURNO:
