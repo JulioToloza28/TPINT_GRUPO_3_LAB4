@@ -33,7 +33,7 @@
 		<li class="breadcrumb-item active" aria-current="page">Agregar Alumno</li> 
 		</ol> 		
 		</nav>
-		
+	
 		<%} %>
 		
 		  <%  if(request.getAttribute("AlumnoRepModi")!=null){ 

@@ -25,7 +25,7 @@
 	<div class="container"></div>
 
 	<div class="container">
-
+	
 		<div class="row">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -170,6 +170,7 @@
 					int alum_regulares = a.getTotal_alumnos_regularizados() * 100 / a.getTotal_alumnos();
 					int alum_libres = a.getTotal_alumnos_libres() * 100 / a.getTotal_alumnos();
 			%>
+			
 			<div class="col-lg-12">
 				<div class="p-3 mb-2 mt-3 bg-primary text-white">
 					MATERIA:

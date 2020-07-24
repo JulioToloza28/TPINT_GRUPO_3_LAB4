@@ -90,7 +90,6 @@
 	 <div class="col-md-2 mb-3">
 					<label for="cmbLocalidad">Localidad</label> 
 					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
-						<%-- <option  selected style="visibility:hidden" value="<%=profe.getLocalidad().getId()%>"><%=profe.getLocalidad().getNombreLoc()%></option> --%>
 						<%
 						LocalidadDaoImpl locDaoImpl = new LocalidadDaoImpl();
 						ArrayList<Localidad> listaLocalidad = null;
