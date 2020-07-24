@@ -50,6 +50,7 @@
 										MateriaDaoImpl materiaL = new MateriaDaoImpl();
 										ArrayList<Materia> listaMateria = null;
 										listaMateria = (ArrayList<Materia>) materiaL.listarMaterias();
+									
 									%>
 									<%
 										if (listaMateria != null)
@@ -107,10 +108,11 @@
 			</ol>
 			</nav>
 			<%
+			boolean verificacion=false;
 				ArrayList<Reporte> listaA = new ArrayList<Reporte>();
 				if (request.getAttribute("listaReporte") != null) {
 					listaA = (ArrayList<Reporte>) request.getAttribute("listaReporte");
-				}
+				}else{verificacion=true;}
 			%>
 			<%
 				if (request.getAttribute("tipoReporte") != null) {
@@ -232,7 +234,7 @@
 				}
 			%>
 			
-			<%if (listaA.size()==0) { %>
+			<%if (listaA.size()==0 && verificacion!=true) { %>
 			<div class="col-lg-12">
 				<div class="alert alert-danger" role="alert">No se encontro ningun registro</div>
 				</div>

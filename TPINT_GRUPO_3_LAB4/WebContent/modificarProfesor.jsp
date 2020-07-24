@@ -80,17 +80,17 @@
 							<% if(ListarProvi!=null)
 								for(Provincia prov : ListarProvi) {%>
 								<%if(profe.getLocalidad().getProvincia().getId()==prov.getId()){%>
-								<option selected style="visibility:hidden" value="<%=prov.getId()%>"><%=prov.getNombreProv()%></option>
-								<%}  %>	
+								<option selected value="<%=prov.getId()%>"><%=prov.getNombreProv()%></option>
+								<%} else {  %>	
 								<option value="<%=prov.getId()%>"><%=prov.getNombreProv() %></option>								
-							<%}  %>	
+							<%} } %>	
 					</select>
 					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
-				 <div class="col-md-2 mb-3">
+	 <div class="col-md-2 mb-3">
 					<label for="cmbLocalidad">Localidad</label> 
 					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
-						<option  selected style="visibility:hidden" value="<%=profe.getLocalidad().getId()%>"><%=profe.getLocalidad().getNombreLoc()%></option>
+						<%-- <option  selected style="visibility:hidden" value="<%=profe.getLocalidad().getId()%>"><%=profe.getLocalidad().getNombreLoc()%></option> --%>
 						<%
 						LocalidadDaoImpl locDaoImpl = new LocalidadDaoImpl();
 						ArrayList<Localidad> listaLocalidad = null;
@@ -99,8 +99,12 @@
 					}%>
 					<%if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {%>
-					<option value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
-					<%}%>
+						<%if(profe.getLocalidad().getId()==loc.getId()){%>
+					<option selected value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
+					<%} else {%>
+					<option  value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
+					<%}} %>
+				
 						
 					</select>
 				</div>
@@ -110,7 +114,8 @@
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletsProfesor?Param=MenuProfesor">Volver</a>
 
 	</form>
-					<%} %>
+				 	<%} %> 
+
 
 <jsp:include page="librerias.jsp"></jsp:include>
 <jsp:include page="scriptValidaciones.jsp"></jsp:include>

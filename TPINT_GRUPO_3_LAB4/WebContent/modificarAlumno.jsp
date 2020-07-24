@@ -76,10 +76,11 @@
 							<% if(ListarProvi!=null)
 								for(Provincia prov : ListarProvi) {%>
 								<%if(alum.getLocalidad().getProvincia().getId()==prov.getId()){%>
-								<option selected style="visibility:hidden" value="<%=prov.getId()%>"><%=prov.getNombreProv()%></option>
-								<%}  %>	
+								<option selected value="<%=prov.getId()%>"><%=prov.getNombreProv()%></option>
+								<%} else{  %>	
 								<option value="<%=prov.getId()%>"><%=prov.getNombreProv() %></option>								
 							<%}  %>	
+							<%} %>
 					</select>
 				</div>
 				 <div class="col-md-2 mb-3">
@@ -95,10 +96,10 @@
 					<%if (listaLocalidad != null)
 						for (Localidad loc : listaLocalidad) {%>
 						<%if(alum.getLocalidad().getId()==loc.getId()){%>
-								<option selected style="visibility:hidden" value="<%=loc.getId()%>"><%=loc.getNombreLoc()%></option>
-								<%}  %>	
+								<option selected value="<%=loc.getId()%>"><%=loc.getNombreLoc()%></option>
+								<%} else { %>	
 					<option value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
-					<%}%>
+					<%}}}%>
 						
 					</select>
 				</div>
@@ -107,7 +108,7 @@
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
 
 	</form>
-					<%} %>
+					
 <jsp:include page="librerias.jsp"></jsp:include>
 <jsp:include page="scriptValidaciones.jsp"></jsp:include>	
 	
