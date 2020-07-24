@@ -104,7 +104,6 @@
 	
 <jsp:include page="librerias.jsp"></jsp:include>
 <jsp:include page="scriptValidaciones.jsp"></jsp:include>
-	
-	
+
 </body>
 </html>
