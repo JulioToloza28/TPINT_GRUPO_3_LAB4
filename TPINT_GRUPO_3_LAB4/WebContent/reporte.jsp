@@ -25,7 +25,7 @@
 	<div class="container"></div>
 
 	<div class="container">
-	
+
 		<div class="row">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -69,8 +69,8 @@
 									id="cboCuatrimestre" name="cboCuatrimestre"
 									class="form-control" id="sel1">
 									<option selected disabled value="">Seleccione...</option>
-									<option value="1">1° Cuatrimestre</option>
-									<option value="2">2° Cuatrimestre</option>
+									<option value="1">1Â° Cuatrimestre</option>
+									<option value="2">2Â° Cuatrimestre</option>
 
 								</select>
 							</div>
@@ -78,7 +78,7 @@
 						<div class="col-lg-3">
 							<div class="form-group">
 
-								<label for="sel1">Año:</label> <select id="cdoAnio"
+								<label for="sel1">AÃ±o:</label> <select id="cdoAnio"
 									name="cdoAnio" class="form-control" id="sel1">
 									<option selected disabled value="">Seleccione...</option>
 									<%
@@ -128,7 +128,7 @@
 
 						<td><b>MATERIA</b></td>
 						<td><b>CUATRIMESTRE</b></td>
-						<td><b>AÑO</b></td>
+						<td><b>AÃ‘O</b></td>
 						<td><b>TURNO</b></td>
 						<td><b>PROFE</b></td>
 						<td><b>APROBADOS</b></td>
@@ -139,8 +139,10 @@
 				<tbody>
 					<%
 						for (Reporte a : listaA) {
-									int Aprobados = ((a.getTotal_aprobados() + a.getTotal_alumnos_regularizados()) * 100) / a.getTotal_alumnos();
-									int N_Aprobado = ((a.getTotal_alumnos_en_curso() +a.getTotal_alumnos_libres()) * 100) / a.getTotal_alumnos();
+
+							int Aprobados = ((a.getTotal_aprobados() + a.getTotal_alumnos_regularizados()) * 100) / a.getTotal_alumnos();
+							int N_Aprobado = ((a.getTotal_alumnos_en_curso() +a.getTotal_alumnos_libres()) * 100) / a.getTotal_alumnos();
+
 					%>
 
 					<tr>
@@ -175,9 +177,11 @@
 				<div class="p-3 mb-2 mt-3 bg-primary text-white">
 					MATERIA:
 					<%=a.getMateria().getNombre()%>
-					- AÑO:
+					- AÃ‘O:
 					<%=a.getCurso().getAnio()%>- CUATRI:
-					<%=a.getCurso().getCuatrimestre()%> - TURNO: <%=a.getTurno().getTurno()%>
+					<%=a.getCurso().getCuatrimestre()%>
+					- TURNO:
+					<%=a.getTurno().getTurno()%>
 					- PROFESOR:
 					<%=a.getProfesor().getNombre()%>
 					<%=a.getProfesor().getApellido()%></div>
@@ -187,8 +191,8 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped" role="progressbar"
-							style="width: <%=alum_cursando%>%"
-							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_cursando%>
+							style="width: <%=alum_cursando%>%" aria-valuenow="10"
+							aria-valuemin="0" aria-valuemax="100"><%=alum_cursando%>
 							%
 						</div>
 					</div>
@@ -207,8 +211,7 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped bg-info"
-							role="progressbar"
-							style="width: <%=alum_regulares%>%"
+							role="progressbar" style="width: <%=alum_regulares%>%"
 							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_regulares%>
 							%
 						</div>
@@ -218,8 +221,7 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped bg-danger"
-							role="progressbar"
-							style="width: <%=alum_libres%>%"
+							role="progressbar" style="width: <%=alum_libres%>%"
 							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_libres%>
 							%
 						</div>
@@ -234,13 +236,14 @@
 				}
 				}
 			%>
-			
+
 			<%if (listaA.size()==0 && verificacion!=true) { %>
 			<div class="col-lg-12">
-				<div class="alert alert-danger" role="alert">No se encontro ningun registro</div>
-				</div>
-				<%} %>
-			
+				<div class="alert alert-danger" role="alert">No se encontro
+					ningun registro</div>
+			</div>
+			<%} %>
+
 
 			<script type="text/javascript" src="js/script.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>

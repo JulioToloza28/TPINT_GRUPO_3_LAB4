@@ -57,9 +57,9 @@ public class ReporteDaoImpl implements ReporteDao {
 					Turno turno = new Turno();
 					Profesor profesor = new Profesor();
 
-					reporte.setTotal_alumnos_libres(resultSet.getInt("total_alumnos_libres"));
-					reporte.setTotal_alumnos_en_curso(resultSet.getInt("total_alumnos_en_curso"));
-					reporte.setTotal_alumnos_regularizados(resultSet.getInt("total_alumnos_regularizados"));
+					reporte.setTotal_alumnos_libres(resultSet.getInt("total_alumnos_libres")); 					
+					reporte.setTotal_alumnos_en_curso(resultSet.getInt("total_alumnos_en_curso")); 					
+					reporte.setTotal_alumnos_regularizados(resultSet.getInt("total_alumnos_regularizados")); 					
 					reporte.setTotal_aprobados(resultSet.getInt("total_alumnos_promocionados"));
 
 					reporte.setTotal_alumnos(resultSet.getInt("total_alumnos"));
@@ -135,3 +135,4 @@ public class ReporteDaoImpl implements ReporteDao {
 
 	}
 }
+
