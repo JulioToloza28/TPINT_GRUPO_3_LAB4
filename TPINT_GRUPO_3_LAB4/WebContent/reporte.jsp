@@ -25,7 +25,7 @@
 	<div class="container"></div>
 
 	<div class="container">
-	
+
 		<div class="row">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -139,8 +139,8 @@
 				<tbody>
 					<%
 						for (Reporte a : listaA) {
-									int Aprobados = a.getTotal_aprobados() * 100 / a.getTotal_alumnos();
-									int N_Aprobado = a.getTotal_no_aprobados() * 100 / a.getTotal_alumnos();
+							int Aprobados = ((a.getTotal_aprobados() + a.getTotal_alumnos_regularizados()) * 100) / a.getTotal_alumnos();
+							int N_Aprobado = ((a.getTotal_alumnos_en_curso() +a.getTotal_alumnos_libres()) * 100) / a.getTotal_alumnos();
 					%>
 
 					<tr>
@@ -177,7 +177,9 @@
 					<%=a.getMateria().getNombre()%>
 					- AÑO:
 					<%=a.getCurso().getAnio()%>- CUATRI:
-					<%=a.getCurso().getCuatrimestre()%> - TURNO: <%=a.getTurno().getTurno()%>
+					<%=a.getCurso().getCuatrimestre()%>
+					- TURNO:
+					<%=a.getTurno().getTurno()%>
 					- PROFESOR:
 					<%=a.getProfesor().getNombre()%>
 					<%=a.getProfesor().getApellido()%></div>
@@ -187,8 +189,8 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped" role="progressbar"
-							style="width: <%=alum_cursando%>%"
-							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_cursando%>
+							style="width: <%=alum_cursando%>%" aria-valuenow="10"
+							aria-valuemin="0" aria-valuemax="100"><%=alum_cursando%>
 							%
 						</div>
 					</div>
@@ -207,8 +209,7 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped bg-info"
-							role="progressbar"
-							style="width: <%=alum_regulares%>%"
+							role="progressbar" style="width: <%=alum_regulares%>%"
 							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_regulares%>
 							%
 						</div>
@@ -218,8 +219,7 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped bg-danger"
-							role="progressbar"
-							style="width: <%=alum_libres%>%"
+							role="progressbar" style="width: <%=alum_libres%>%"
 							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_libres%>
 							%
 						</div>
@@ -234,13 +234,14 @@
 				}
 				}
 			%>
-			
+
 			<%if (listaA.size()==0 && verificacion!=true) { %>
 			<div class="col-lg-12">
-				<div class="alert alert-danger" role="alert">No se encontro ningun registro</div>
-				</div>
-				<%} %>
-			
+				<div class="alert alert-danger" role="alert">No se encontro
+					ningun registro</div>
+			</div>
+			<%} %>
+
 
 			<script type="text/javascript" src="js/script.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
