@@ -40,7 +40,7 @@
 			</div>
 			<div class="col-md-2 mb-3">
 				<label for="txtDni">DNI</label> 
-				<input  value="<%=alum.getDni() %>" name="txtDni" type="text" class="form-control " id="txtDni" maxlength="10"  onKeyPress="return onlyNumber(event)" onFocusOut="return validateDni()" required>
+				<input  value="<%=alum.getDni() %>" id="txtDni" name="txtDni" type="text" class="form-control "  maxlength="10"  onKeyPress="return onlyNumber(event)" onFocusOut="return validateDni()" required>
 			</div>
 		</div>
 		<div class="form-row">			
@@ -106,12 +106,9 @@
 			</div>
 			<button id="btn-EditarAlumno" name="btn-EditarAlumno" class="btn btn-primary" type="submit">Aceptar</button>
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletAlumno?Param=MenuAlumno">Volver</a>
-
 	</form>
 					
 <jsp:include page="librerias.jsp"></jsp:include>
 <jsp:include page="scriptValidaciones.jsp"></jsp:include>	
-	
-	
 </body>
 </html>

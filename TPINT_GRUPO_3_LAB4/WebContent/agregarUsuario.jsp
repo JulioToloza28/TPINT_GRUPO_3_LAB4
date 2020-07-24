@@ -18,8 +18,6 @@
 				Usuario</li>
 		</nav>
 	<div class="container">
-		
-
 		<form action="ServletUsuarios" method="post" style="margin: 40px">
 			<div class="form-group row">
 				<label for="validationServer04" class="col-sm-2 col-form-label">Profesor</label>
@@ -51,8 +49,8 @@
 			<div class="form-group row ">
 				<label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control" id="inputPassword"
-						name="txtUsuario" autocomplete="off" required>
+					<input type="text" class="form-control" id="inputUsuario"
+						name="txtUsuario" autocomplete="off"  onKeyPress="return onlyLetter(event)" required>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -61,15 +59,13 @@
 					<input type="password" class="form-control" id="inputPassword"
 						name="txtClave" autocomplete="off" required>
 				</div>
-
 			</div>
-<br>
+			<br>
 			<input Id="btnGuardar" name="btnGuardar" class="btn btn-primary"
 				type="submit" Value="Guardar"> <a Id="Retroceder"
 				name="Retroceder" class="btn btn-secondary" type="submit"
 				href="ServletUsuarios?Param=1">Volver</a>
 		</form>
-
 		<%
 			if (request.getAttribute("msj") != null) {
 		%>
@@ -84,5 +80,6 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<jsp:include page="scriptValidaciones.jsp"></jsp:include>
 </body>
 </html>
