@@ -168,13 +168,13 @@
 					int alum_regulares = a.getTotal_alumnos_regularizados() * 100 / a.getTotal_alumnos();
 					int alum_libres = a.getTotal_alumnos_libres() * 100 / a.getTotal_alumnos();
 			%>
-			<div class="col-lg-12">
+			<div class="col-lg-12 mb-4">
 				<div class="p-3 mb-2 mt-3 bg-primary text-white">
 					MATERIA:
 					<%=a.getMateria().getNombre()%>
 					- AÑO:
 					<%=a.getCurso().getAnio()%>- CUATRI:
-					<%=a.getCurso().getCuatrimestre()%>
+					<%=a.getCurso().getCuatrimestre()%> - TURNO: <%=a.getTurno().getTurno()%>
 					- PROFESOR:
 					<%=a.getProfesor().getNombre()%>
 					<%=a.getProfesor().getApellido()%></div>
