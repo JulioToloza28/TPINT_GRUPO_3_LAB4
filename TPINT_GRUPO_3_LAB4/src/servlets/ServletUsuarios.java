@@ -161,7 +161,6 @@ public class ServletUsuarios extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/ListarUsuarios.jsp");
 				rd.forward(request, response);
 			}
-
 		}
 		// Ingresar
 		if (request.getParameter("btnIngresar") != null) {
