@@ -163,6 +163,10 @@
 
 			<%
 				for (Reporte a : listaA) {
+					int alum_cursando= a.getTotal_alumnos_en_curso() * 100 / a.getTotal_alumnos();
+					int alum_promocionados = a.getTotal_aprobados() * 100 / a.getTotal_alumnos();
+					int alum_regulares = a.getTotal_alumnos_regularizados() * 100 / a.getTotal_alumnos();
+					int alum_libres = a.getTotal_alumnos_libres() * 100 / a.getTotal_alumnos();
 			%>
 			<div class="col-lg-12">
 				<div class="p-3 mb-2 mt-3 bg-primary text-white">
@@ -180,8 +184,8 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped" role="progressbar"
-							style="width: <%=a.getTotal_alumnos_en_curso()%>%"
-							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_alumnos_en_curso()%>
+							style="width: <%=alum_cursando%>%"
+							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_cursando%>
 							%
 						</div>
 					</div>
@@ -190,8 +194,8 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped bg-success"
-							role="progressbar" style="width: <%=a.getTotal_aprobados()%>%"
-							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_aprobados()%>
+							role="progressbar" style="width: <%=alum_promocionados%>%"
+							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_promocionados%>
 							%
 						</div>
 					</div>
@@ -201,8 +205,8 @@
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped bg-info"
 							role="progressbar"
-							style="width: <%=a.getTotal_alumnos_regularizados()%>%"
-							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_alumnos_regularizados()%>
+							style="width: <%=alum_regulares%>%"
+							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_regulares%>
 							%
 						</div>
 					</div>
@@ -212,8 +216,8 @@
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped bg-danger"
 							role="progressbar"
-							style="width: <%=a.getTotal_alumnos_libres()%>%"
-							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_alumnos_libres()%>
+							style="width: <%=alum_libres%>%"
+							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=alum_libres%>
 							%
 						</div>
 					</div>
