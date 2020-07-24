@@ -128,7 +128,7 @@
 
 						<td><b>MATERIA</b></td>
 						<td><b>CUATRIMESTRE</b></td>
-						<td><b>AÃ‘O</b></td>
+						<td><b>AÑO</b></td>
 						<td><b>TURNO</b></td>
 						<td><b>PROFE</b></td>
 						<td><b>APROBADOS</b></td>
@@ -175,7 +175,7 @@
 				<div class="p-3 mb-2 mt-3 bg-primary text-white">
 					MATERIA:
 					<%=a.getMateria().getNombre()%>
-					- AÑ‘O:
+					- AÑO:
 					<%=a.getCurso().getAnio()%>- CUATRI:
 					<%=a.getCurso().getCuatrimestre()%> - TURNO: <%=a.getTurno().getTurno()%>
 					- PROFESOR:
