@@ -120,7 +120,7 @@ public class ServletUsuarios extends HttpServlet {
 			if (existeLegajo == true) {
 				message = "Ya existe un usuario para ese profesor. Por favor ingrese otro";
 				request.setAttribute("msj", message);
-				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+				ArrayList<Profesor> lProfesor = profesorNeg.listarProfesoresSinUsuarios();
 				ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
 
 				request.setAttribute("listaProfes", lProfesor);
