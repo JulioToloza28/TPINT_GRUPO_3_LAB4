@@ -52,7 +52,7 @@
 				<input name="txtFechaNac"  class="form-control" type="date" id="txtFechaNac" max="<%=dmyFormat.format(myDate)%>" onFocusOut="return validateFechaNac()" required>
 			</div>
 			<div class="col-md-3 mb-3">
-				<label for="validationServer01">Telefono</label> 
+				<label for="txtTelefono">Telefono</label> 
 				<input id="txtTelefono" name="txtTelefono" type="text" class="form-control" maxlength="10" onKeyPress="return onlyNumber(event)" onFocusOut="return validateMin()" onKeyUp="return cleanError()" required>
 			</div>
 			<div class="col-md-3 mb-3">
