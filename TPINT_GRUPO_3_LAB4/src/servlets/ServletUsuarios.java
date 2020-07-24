@@ -128,7 +128,6 @@ public class ServletUsuarios extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
 				dispatcher.forward(request, response);
 			}else {
-			
 			boolean existe = UsuarioDao.validarUserName(request.getParameter("txtUsuario"));
 			System.out.println(existe);
 
