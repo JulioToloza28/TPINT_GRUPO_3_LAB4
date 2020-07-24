@@ -51,8 +51,8 @@
 			<div class="form-group row ">
 				<label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control" id="inputPassword"
-						name="txtUsuario" autocomplete="off" required>
+					<input type="text" class="form-control" id="inputUsuario"
+						name="txtUsuario" autocomplete="off"  onKeyPress="return onlyLetter(event)" required>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -84,5 +84,7 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	
+	<jsp:include page="scriptValidaciones.jsp"></jsp:include>
 </body>
 </html>
