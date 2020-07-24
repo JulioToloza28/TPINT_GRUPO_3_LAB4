@@ -163,7 +163,6 @@ public class ServletUsuarios extends HttpServlet {
 			}
 
 		}
-
 		// Ingresar
 		if (request.getParameter("btnIngresar") != null) {
 			// Entra por haber echo click en el hyperlink mostrar usuarios
