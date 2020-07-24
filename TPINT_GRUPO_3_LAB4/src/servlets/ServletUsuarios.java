@@ -73,7 +73,6 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarUsuario.jsp");
 			rd.forward(request, response);
 		}
-
 		
 		// PARA ELIMINAR UN USUARIO
 		if (request.getParameter("deleteUser") != null) {
@@ -120,7 +119,7 @@ public class ServletUsuarios extends HttpServlet {
 			if (existeLegajo == true) {
 				message = "Ya existe un usuario para ese profesor. Por favor ingrese otro";
 				request.setAttribute("msj", message);
-				ArrayList<Profesor> lProfesor = profesorNeg.listarProfe();
+				ArrayList<Profesor> lProfesor = profesorNeg.listarProfesoresSinUsuarios();
 				ArrayList<TipoUsuario> listaTipoUsuario = tipoUsuarioNeg.obtenerTodos();
 
 				request.setAttribute("listaProfes", lProfesor);
@@ -128,7 +127,6 @@ public class ServletUsuarios extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/agregarUsuario.jsp");
 				dispatcher.forward(request, response);
 			}else {
-			
 			boolean existe = UsuarioDao.validarUserName(request.getParameter("txtUsuario"));
 			System.out.println(existe);
 
@@ -161,9 +159,7 @@ public class ServletUsuarios extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/ListarUsuarios.jsp");
 				rd.forward(request, response);
 			}
-
 		}
-
 		// Ingresar
 		if (request.getParameter("btnIngresar") != null) {
 			// Entra por haber echo click en el hyperlink mostrar usuarios

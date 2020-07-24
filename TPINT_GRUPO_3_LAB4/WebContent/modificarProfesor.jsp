@@ -73,7 +73,6 @@
 					<label for="cmbProvincia">Provincia</label> 
 					<select  name="cmbProvincia" class="custom-select " id="cmbProvincia" onchange="return cambiar_Localidad()" onFocusOut="return validateProvincia()" required>
 						<%
-						
 						  ArrayList<Provincia>ListarProvi=null;
 							if(request.getAttribute("listaProvDao")!=null){
 							ListarProvi = (ArrayList<Provincia>) request.getAttribute("listaProvDao");}%>
@@ -87,7 +86,7 @@
 					</select>
 					<div class="invalid-feedback">Please select a valid state.</div>
 				</div>
-	 <div class="col-md-2 mb-3">
+				 <div class="col-md-2 mb-3">
 					<label for="cmbLocalidad">Localidad</label> 
 					<select name="cmbLocalidad" class="custom-select " id="cmbLocalidad" onFocusOut="return validateLocalidad()" required>
 						<%
@@ -103,8 +102,6 @@
 					<%} else {%>
 					<option  value=<%=loc.getId()%>><%=loc.getNombreLoc()%></option>
 					<%}} %>
-				
-						
 					</select>
 				</div>
 			</div>
@@ -113,8 +110,7 @@
 			<a Id="Retroceder" name="Retroceder" class="btn btn-secondary" type="submit" href="ServletsProfesor?Param=MenuProfesor">Volver</a>
 
 	</form>
-				 	<%} %> 
-
+					<%} %>
 
 <jsp:include page="librerias.jsp"></jsp:include>
 <jsp:include page="scriptValidaciones.jsp"></jsp:include>
