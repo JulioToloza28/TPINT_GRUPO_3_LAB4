@@ -73,7 +73,6 @@ public class ServletUsuarios extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarUsuario.jsp");
 			rd.forward(request, response);
 		}
-
 		
 		// PARA ELIMINAR UN USUARIO
 		if (request.getParameter("deleteUser") != null) {
