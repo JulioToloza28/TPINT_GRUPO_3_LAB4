@@ -26,7 +26,6 @@
 	</nav>
 		         
 	<form action="ServletAlumno" method="get" style="margin: 40px">
-	
 		<div class="form-row">
 			<div class="col-md-3 mb-3">
 				<label for="txtNombre">Nombre</label> 

@@ -18,8 +18,6 @@
 				Usuario</li>
 		</nav>
 	<div class="container">
-		
-
 		<form action="ServletUsuarios" method="post" style="margin: 40px">
 			<div class="form-group row">
 				<label for="validationServer04" class="col-sm-2 col-form-label">Profesor</label>
@@ -61,15 +59,13 @@
 					<input type="password" class="form-control" id="inputPassword"
 						name="txtClave" autocomplete="off" required>
 				</div>
-
 			</div>
-<br>
+			<br>
 			<input Id="btnGuardar" name="btnGuardar" class="btn btn-primary"
 				type="submit" Value="Guardar"> <a Id="Retroceder"
 				name="Retroceder" class="btn btn-secondary" type="submit"
 				href="ServletUsuarios?Param=1">Volver</a>
 		</form>
-
 		<%
 			if (request.getAttribute("msj") != null) {
 		%>
