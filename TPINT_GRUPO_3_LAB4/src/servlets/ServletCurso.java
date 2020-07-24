@@ -176,7 +176,7 @@ public class ServletCurso extends HttpServlet {
 				Materia mat = materiaNeg.buscarMateria(curs.getIdMateria());
 				curs.setMateria(mat.getNombre());
 			}
-			
+
 			if (curs.getIdTurno() > 0) {
 				Turno turn = turnoNeg.buscarTurno(curs.getIdTurno());
 				curs.setTurno(turn.getTurno());
@@ -304,7 +304,7 @@ public class ServletCurso extends HttpServlet {
 
 		// BOTON GUARDAR EDICION
 		if (request.getParameter("btn-EditarCurso") != null) {
-			String Msj = null;
+			String Msj = "";
 			String[] lNvaAlumnosInscriptos = null;
 			int CantidadAlumSelec = 0;
 			List<Alumno> lVjaAlumnosInscriptos;
@@ -313,6 +313,7 @@ public class ServletCurso extends HttpServlet {
 			Curso curs = new Curso();
 			String aux = new String();
 			Boolean CancelarGrabado = false;
+			Boolean VerifAlumnosEstaOk = false;
 			aux = request.getParameter("txtIdCurso");
 			curs.setId(Integer.parseInt(aux));
 			aux = request.getParameter("cmbMateria");
@@ -338,12 +339,20 @@ public class ServletCurso extends HttpServlet {
 						lVjaAlumnosInscriptos = alumnoNeg.getAlumnosInscriptos(curs.getId());
 						for (int x = 0; x < CantidadAlumSelec; x++) {
 							if (!alumnoNeg.verifEstaInscripto(lNvaAlumnosInscriptos[x], curs.getId())) {
-								if (!cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lNvaAlumnosInscriptos[x])) {
+								if (!alumnoNeg.verifEstaCursandoMateria(lNvaAlumnosInscriptos[x], curs.getIdMateria(),
+										curs.getIdTurno(), curs.getCuatrimestre(), curs.getAnio())) {
+									if (!cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lNvaAlumnosInscriptos[x])) {
+										CancelarGrabado = true;
+										Msj = "ERROR: Hubo un error al agregar uno o varios alumno/s.";
+									}
+								} else {
 									CancelarGrabado = true;
-									Msj = "ERROR: Hubo un error al agregar uno o varios alumno/s.";
+									Msj += "ERROR: El alumno con legajo " + lNvaAlumnosInscriptos[x]
+											+ " ya esta cursando la materia al mismo tiempo con otro profesor.";
 								}
 							}
 						}
+
 						for (Alumno alum : lVjaAlumnosInscriptos) {
 							boolean existe = false;
 							for (int i = 0; i < lNvaAlumnosInscriptos.length; i++) {
@@ -358,7 +367,6 @@ public class ServletCurso extends HttpServlet {
 								}
 							}
 						}
-						Msj = "Curso Editado correctamente.";
 					} else {
 						CancelarGrabado = true;
 						Msj = "ERROR: Hubo un error al modificar el curso.";
@@ -374,7 +382,7 @@ public class ServletCurso extends HttpServlet {
 
 			if (CancelarGrabado) {
 				Curso curso = null;
-				if (VerificaCurso == 0 && CantidadAlumSelec == 0) {
+				if (VerificaCurso == 0 || CantidadAlumSelec == 0) {
 					curso = cursoNeg.buscarCurso(curs.getId());
 				} else {
 					curso = cursoNeg.buscarCurso(VerificaCurso);
@@ -400,6 +408,7 @@ public class ServletCurso extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/modificarCurso.jsp");
 				rd.forward(request, response);
 			} else {
+				Msj = "Curso Editado correctamente.";
 				ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
 				request.setAttribute("listaCursos", lCursos);

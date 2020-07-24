@@ -28,6 +28,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
     private static final String existeTablaAxC = "SELECT count(*) as total FROM tpint_grupo_3_lab4.alumnoxcurso where legajoAlumno= ? and idCurso= ? and estado = 1";
     private static final String filtrarPorProfesor= "SELECT a.legajo_alum,a.nombre as Alumno,a.apellido,a.dni,a.fecha_nac,a.direccion,loc.idlocalidad,loc.nombre as Localidad,prov.idprovincia,prov.nombre as Provincia,a.telefono,a.mail from alumno as a inner join localidad as loc on a.idlocalidad=loc.idlocalidad inner join provincia as prov on prov.idprovincia=loc.idprovincia inner join alumnoxcurso as AC on AC.legajoAlumno=a.legajo_alum inner join curso as C on C.idcurso= AC.idCurso where a.estado=1";
     private static final String VerificarDNI="SELECT * FROM tpint_grupo_3_lab4.alumno where estado=1 ";
+    private static final String verificarCursandoMateria = "SELECT count(*) as total FROM tpint_grupo_3_lab4.alumnoxcurso AC inner join tpint_grupo_3_lab4.curso C on c.idCurso=AC.idCurso where ac.legajoAlumno=? and c.idmateria=? and c.idturno=? and c.cuatrimestre=? and c.anio=? and c.estado=1 and ac.estado=1";
     
 	public boolean agregarAlumno(Alumno alumno) {
 		PreparedStatement statement;
@@ -418,5 +419,35 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		return resultado;
 		
 		
+	}
+	
+	@Override
+	public boolean verifEstaCursandoMateria(String legajoAlumno, int idMateria, int idTurno, int cuatrimestre, int anio) {
+		PreparedStatement statement;
+		ResultSet resultSet; // Guarda el resultado de la query
+		Conexion conexion = Conexion.getConexion();
+		int cant=0;
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(verificarCursandoMateria);
+			statement.setInt(1,Integer.parseInt(legajoAlumno));
+			statement.setInt(2,idMateria);
+			statement.setInt(3,idTurno);
+			statement.setInt(4,cuatrimestre);
+			statement.setInt(5,anio);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				cant=resultSet.getInt("total");
+				if(cant>0)
+				{
+					return true;
+				}
+				else return false; 
+					
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		return false;
+
 	}
 }
