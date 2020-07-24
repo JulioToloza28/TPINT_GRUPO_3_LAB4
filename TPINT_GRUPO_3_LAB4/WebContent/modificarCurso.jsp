@@ -40,9 +40,9 @@
 			Curso</li>
 	</ol>
 	</nav>
-	
+
 	<%
-		Curso curso = null;
+		Curso curso = new Curso();
 		if (request.getAttribute("CursoModif") != null) {
 			curso = (Curso) request.getAttribute("CursoModif");
 		}
@@ -59,8 +59,6 @@
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Materia:</label> <select name="cmbMateria"
 							class="custom-select " id="validationServer04" required>
-							<option selected style="visibility: hidden"
-								value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
 							<%
 								ArrayList<Materia> listaMateria = null;
 								if (request.getAttribute("listaMaterias") != null) {
@@ -70,10 +68,16 @@
 							<%
 								if (listaMateria != null)
 									for (Materia mate : listaMateria) {
+										if (curso.getIdMateria() > 0 && curso.getIdMateria() == mate.getId()) {
+							%>
+							<option selected value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
+							<%
+								} else {
 							%>
 							<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
 							<%
 								}
+									}
 							%>
 						</select>
 					</div>
@@ -81,8 +85,6 @@
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Turno:</label> <select class="form-control"
 							id="sel1" name="cmbTurno" required>
-							<option selected style="visibility: hidden"
-								value=<%=curso.getIdTurno()%>><%=curso.getTurno()%></option>
 							<%
 								ArrayList<Turno> listaTurnos = null;
 								if (request.getAttribute("ListaTurnos") != null) {
@@ -92,10 +94,16 @@
 							<%
 								if (listaTurnos != null)
 									for (Turno turno : listaTurnos) {
+										if (curso.getIdTurno() > 0 && curso.getIdTurno() == turno.getIdTurno()) {
+							%>
+							<option selected value=<%=curso.getIdTurno()%>><%=curso.getTurno()%></option>
+							<%
+								} else {
 							%>
 							<option value=<%=turno.getIdTurno()%>><%=turno.getTurno()%></option>
 							<%
 								}
+									}
 							%>
 						</select>
 					</div>
@@ -103,23 +111,36 @@
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Cuatrimestre N°:</label> <select
 							class="form-control" id="sel1" name="cmbCuatrimestre" required>
-							<option selected style="visibility: hidden"
-								value=<%=curso.getCuatrimestre()%>><%=curso.getCuatrimestre()%></option>
-							<option>1</option>
+							<%
+								if (curso.getCuatrimestre() == 1) {
+							%>
+							<option selected>1</option>
 							<option>2</option>
+							<%
+								} else {
+							%>
+							<option>1</option>
+							<option selected>2</option>
+							<%
+								}
+							%>
 						</select>
 					</div>
 
 					<div class="col-md-3 mb-3">
 						<label for="sel1">Año:</label> <select class="form-control"
 							id="sel1" name="cmbAnio" required>
-							<option selected style="visibility: hidden"
-								value=<%=curso.getAnio()%>><%=curso.getAnio()%></option>
 							<%
 								for (int x = 2020; x >= 2000; x--) {
+									if (curso.getAnio() == x) {
+							%>
+							<option selected><%=x%></option>
+							<%
+								} else {
 							%>
 							<option><%=x%></option>
 							<%
+								}
 								}
 							%>
 						</select>
@@ -137,8 +158,6 @@
 
 					<select name="cmbProfesor" class="custom-select "
 						id="validationServer04" required>
-						<option selected style="visibility: hidden"
-							value=<%=curso.getLegajoProf()%>><%=curso.getProfesor()%></option>
 						<%
 							ArrayList<Profesor> listaProfesor = null;
 							if (request.getAttribute("listaProfes") != null) {
@@ -148,6 +167,14 @@
 						<%
 							if (listaProfesor != null)
 								for (Profesor prof : listaProfesor) {
+									if (curso.getLegajoProf() > 0 && curso.getLegajoProf() == prof.getLegajo()) {
+						%>
+						<option selected value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
+							|
+							<%=prof.getApellido()%>,
+							<%=prof.getNombre()%></option>
+						<%
+							} else {
 						%>
 						<option value=<%=prof.getLegajo()%>><%=prof.getLegajo()%>
 							|
@@ -155,21 +182,22 @@
 							<%=prof.getNombre()%></option>
 						<%
 							}
+								}
 						%>
 					</select>
 				</div>
 			</ol>
 			</nav>
-<%
-		if (request.getAttribute("Mensaje") != null) {
-			String Mensaje = request.getAttribute("Mensaje").toString();
-	%>
-	<div class="alert alert-danger" role="alert">
-		<%=Mensaje%>
-	</div>
-	<%
-		}
-	%>
+			<%
+				if (request.getAttribute("Mensaje") != null) {
+					String Mensaje = request.getAttribute("Mensaje").toString();
+			%>
+			<div class="alert alert-danger" role="alert">
+				<%=Mensaje%>
+			</div>
+			<%
+				}
+			%>
 			<H4>Alumnos:</H4>
 			<table id="AlumnosCursoAM" name="tableAlumnos" class="display"
 				style="width: 100%">
@@ -234,7 +262,7 @@
 				class="btn btn-primary" type="submit" Value="Guardar"> <a
 				Id="Retroceder" name="Retroceder" class="btn btn-secondary"
 				type="submit" href="ServletCurso?listCourses=1">Volver</a>
-		
+
 		</form>
 
 		<%

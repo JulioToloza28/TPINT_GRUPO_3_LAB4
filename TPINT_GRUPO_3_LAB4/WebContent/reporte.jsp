@@ -69,8 +69,8 @@
 									id="cboCuatrimestre" name="cboCuatrimestre"
 									class="form-control" id="sel1">
 									<option selected disabled value="">Seleccione...</option>
-									<option value="1">1Â° Cuatrimestre</option>
-									<option value="2">2Â° Cuatrimestre</option>
+									<option value="1">1° Cuatrimestre</option>
+									<option value="2">2° Cuatrimestre</option>
 
 								</select>
 							</div>
@@ -78,7 +78,7 @@
 						<div class="col-lg-3">
 							<div class="form-group">
 
-								<label for="sel1">AÃ±o:</label> <select id="cdoAnio"
+								<label for="sel1">Año:</label> <select id="cdoAnio"
 									name="cdoAnio" class="form-control" id="sel1">
 									<option selected disabled value="">Seleccione...</option>
 									<%
@@ -175,7 +175,7 @@
 				<div class="p-3 mb-2 mt-3 bg-primary text-white">
 					MATERIA:
 					<%=a.getMateria().getNombre()%>
-					- AÃ‘O:
+					- AÑ‘O:
 					<%=a.getCurso().getAnio()%>- CUATRI:
 					<%=a.getCurso().getCuatrimestre()%> - TURNO: <%=a.getTurno().getTurno()%>
 					- PROFESOR:

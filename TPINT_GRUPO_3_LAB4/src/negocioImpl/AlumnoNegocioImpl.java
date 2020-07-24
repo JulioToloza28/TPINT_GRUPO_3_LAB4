@@ -42,4 +42,10 @@ public class AlumnoNegocioImpl implements AlumnoNegocio {
 	public boolean verifEstaInscripto(String legajoAlumno, int idCurso) {
 		return alumDao.verifEstaInscripto(legajoAlumno, idCurso);
 	}
+
+	@Override
+	public boolean verifEstaCursandoMateria(String legajoAlumno, int idMateria, int idTurno, int cuatrimestre,
+			int anio) {
+		return alumDao.verifEstaCursandoMateria(legajoAlumno, idMateria, idTurno, cuatrimestre, anio);
+	}
 }
