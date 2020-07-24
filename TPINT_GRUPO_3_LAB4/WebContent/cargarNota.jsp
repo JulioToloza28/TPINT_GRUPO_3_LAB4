@@ -60,6 +60,7 @@
 			<div class="alert alert-danger" role="alert">
 				<%=Mensaje%>
 			</div>
+			
 			<%
 				}
 			%>
