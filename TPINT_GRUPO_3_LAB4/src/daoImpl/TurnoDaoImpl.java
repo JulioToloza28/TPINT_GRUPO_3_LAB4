@@ -23,7 +23,7 @@ public class TurnoDaoImpl implements TurnoDao{
 			statement = conexion.getSQLConexion().prepareStatement(buscarxID + Id);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				turno.setIdTurno(resultSet.getInt("idmateria"));
+				turno.setIdTurno(resultSet.getInt("idturno"));
 				turno.setTurno(resultSet.getString("Nom_Turno"));
 				}
 		} catch (Exception e) {

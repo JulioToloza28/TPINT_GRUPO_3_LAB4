@@ -349,31 +349,78 @@ public class CursoDaoImpl implements CursoDao {
 		}
 		return alumnoEstaInscripto;
 	}
-	
+
 	public boolean EliminarCursosdesdeProfesor(int legajoProf) {
-		
-		boolean isExtoso=false;
+
+		boolean isExtoso = false;
 		try {
-			
+
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		ArrayList<Curso> lCursos = new ArrayList<Curso>();
-		
-		lCursos=this.listarCursos(legajoProf);
-		
-		for(int i=0;i<lCursos.size();i++) 
-		{
+
+		lCursos = this.listarCursos(legajoProf);
+
+		for (int i = 0; i < lCursos.size(); i++) {
 			this.eliminarCurso(lCursos.get(i).getId());
-			isExtoso=true;
+			isExtoso = true;
 		}
-		
-		
+
 		return isExtoso;
-		
-		
+
+	}
+
+	@Override
+	public ArrayList<Curso> filtroListarCursos(int legajoProfesor, Curso cur) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Curso curso = null;
+		ArrayList<Curso> lCursos = new ArrayList<Curso>();
+		PreparedStatement statement;
+		ResultSet resultSet;
+		Conexion conexion = Conexion.getConexion();
+		String query = listarCursosProf + legajoProfesor;
+
+		if (cur.getIdMateria() > 0)
+			query += " and idmateria=" + cur.getIdMateria();
+		if (cur.getIdTurno() > 0)
+			query += " and idturno=" + cur.getIdTurno();
+		if (cur.getCuatrimestre() > 0)
+			query += " and cuatrimestre=" + cur.getCuatrimestre();
+		if (cur.getAnio() > 0)
+			query += " and anio=" + cur.getAnio();
+
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(query);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				curso = new Curso();
+
+				curso.setId(resultSet.getInt("idcurso"));
+				curso.setIdMateria(resultSet.getInt("IdMateria"));
+				curso.setIdTurno(resultSet.getInt("idturno"));
+				curso.setCuatrimestre(resultSet.getInt("cuatrimestre"));
+				curso.setAnio(resultSet.getInt("anio"));
+				curso.setLegajoProf(resultSet.getInt("legajo_Pro"));
+				curso.setEstado(resultSet.getInt("estado"));
+				curso.setMateria(resultSet.getString("materia"));
+				curso.setTurno(resultSet.getString("turno"));
+				curso.setProfesor(resultSet.getString("apeNomProf"));
+				curso.setCantAlum(resultSet.getInt("cantAlum"));
+
+				lCursos.add(curso);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lCursos;
 	}
 
 }
