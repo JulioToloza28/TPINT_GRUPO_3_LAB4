@@ -91,7 +91,7 @@
 				
 			</div>
 			<div class="col align-self-center">
-					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-outline-info "
+					<button id="btn-filtrar" name="btn-filtrar" class="btn btn-outline-info mt-3"
 						type="submit"><i class="fa fa-search"></i>Filtrar</button>
 					
 				</div>
