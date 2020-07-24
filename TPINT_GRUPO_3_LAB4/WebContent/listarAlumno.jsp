@@ -31,6 +31,7 @@ th {font-size: 14px;}
 </head>
 <body>
 
+
 	<jsp:include page="Menu.jsp"></jsp:include>
 
 	<nav aria-label="breadcrumb">
