@@ -139,8 +139,8 @@
 				<tbody>
 					<%
 						for (Reporte a : listaA) {
-									int Aprobados = a.getTotal_aprobados() * 100 / a.getTotal_alumnos();
-									int N_Aprobado = a.getTotal_no_aprobados() * 100 / a.getTotal_alumnos();
+									int Aprobados = ((a.getTotal_aprobados() + a.getTotal_alumnos_regularizados()) * 100) / a.getTotal_alumnos();
+									int N_Aprobado = ((a.getTotal_alumnos_en_curso() +a.getTotal_alumnos_libres()) * 100) / a.getTotal_alumnos();
 					%>
 
 					<tr>
