@@ -100,7 +100,7 @@
 							</button>
 							<!-- 			<button id="btn-reporte" name="btn-reporte"
 								class="btn btn-primary" type="submit">Generar reporte</button> -->
-							
+
 						</div>
 					</div>
 				</form>
@@ -142,13 +142,13 @@
 					%>
 
 					<tr>
-						<td ><%=a.getMateria().getNombre()%></td>
+						<td><%=a.getMateria().getNombre()%></td>
 						<td><%=a.getCurso().getCuatrimestre()%></td>
-						<td ><%=a.getCurso().getAnio()%></td>
+						<td><%=a.getCurso().getAnio()%></td>
 						<td><%=a.getTurno().getTurno()%></td>
-						<td ><%=a.getProfesor().getNombre()%> <%=a.getProfesor().getApellido()%></td>
+						<td><%=a.getProfesor().getNombre()%> <%=a.getProfesor().getApellido()%></td>
 						<td><%=Aprobados%> %</td>
-						<td ><%=N_Aprobado%> %</td>
+						<td><%=N_Aprobado%> %</td>
 						<td><%=a.getTotal_alumnos()%></td>
 					</tr>
 					<%
@@ -165,9 +165,15 @@
 				for (Reporte a : listaA) {
 			%>
 			<div class="col-lg-12">
-				<div class="p-3 mb-2 mt-3 bg-primary text-white">MATERIA: <%=a.getMateria().getNombre()%>
-					- AÑO: <%=a.getCurso().getAnio()%>- CUATRI: <%=a.getCurso().getCuatrimestre()%>
-					- PROFESOR: <%=a.getProfesor().getNombre()%> <%=a.getProfesor().getApellido()%></div>
+				<div class="p-3 mb-2 mt-3 bg-primary text-white">
+					MATERIA:
+					<%=a.getMateria().getNombre()%>
+					- AÑO:
+					<%=a.getCurso().getAnio()%>- CUATRI:
+					<%=a.getCurso().getCuatrimestre()%>
+					- PROFESOR:
+					<%=a.getProfesor().getNombre()%>
+					<%=a.getProfesor().getApellido()%></div>
 
 
 				<h5>Cursando</h5>
@@ -184,8 +190,7 @@
 				<div class="col-lg-12">
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped bg-success"
-							role="progressbar"
-							style="width: <%=a.getTotal_aprobados()%>%"
+							role="progressbar" style="width: <%=a.getTotal_aprobados()%>%"
 							aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%=a.getTotal_aprobados()%>
 							%
 						</div>
@@ -222,36 +227,6 @@
 				}
 				}
 			%>
-			
-<h5>  Cursando</h5>
-<div class="col-lg-12">
-<div class="progress">
-  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">25%</div>
-</div>
-</div>
-<h5>  Libre</h5>
-<div class="col-lg-12">
-<div class="progress">
-  <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">25%</div>
-</div>
-</div>
-
-<h5>  Promocionado</h5>
-<div class="col-lg-12">
-<div class="progress">
-  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-</div>
-</div>
-
-<h5>  Regularizado</h5>
-<div class="col-lg-12">
-<div class="progress">
-<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 25%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">25%</div>
-</div>
-  </div>
-</div>
-
-
 
 			<script type="text/javascript" src="js/script.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
