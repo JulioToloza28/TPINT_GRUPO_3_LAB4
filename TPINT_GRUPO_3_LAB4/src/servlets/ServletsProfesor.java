@@ -115,8 +115,8 @@ public class ServletsProfesor extends HttpServlet {
 				
 				
 				ProfesorDaoImpl profImp=new ProfesorDaoImpl();
-				
-				if(profImp.VerificarProfesor(prof.getDni(),100)==false) 
+				int dni=Integer.parseInt(prof.getDni());
+				if(profImp.VerificarProfesor(prof.getDni(),100)==false && dni !=1) 
 				{
 					if(profImp.agregarProfesor(prof)!=false) 
 					{

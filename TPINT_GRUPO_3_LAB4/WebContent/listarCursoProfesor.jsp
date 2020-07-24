@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%-- <%@page import="daoImpl.MateriaDaoImpl"%> --%>
 <%@page import="entidades.Curso"%>
+<%@page import="entidades.Turno"%>
+<%@page import="entidades.Materia"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -43,6 +45,8 @@
 		<li class="breadcrumb-item active" aria-current="page">Mis Cursos</li>
 	</ol>
 	</nav>
+	
+	
 	<%
 		if (request.getAttribute("Mensaje") != null) {
 			String Mensaje = request.getAttribute("Mensaje").toString();

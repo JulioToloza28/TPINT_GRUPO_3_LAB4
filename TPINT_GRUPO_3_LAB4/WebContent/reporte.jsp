@@ -196,21 +196,27 @@
 				}
 			%>
 			
-<h3>  Cursando</h3>
+<h5>  Cursando</h5>
 <div class="col-lg-12">
 <div class="progress">
   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">25%</div>
 </div>
 </div>
+<h5>  Libre</h5>
+<div class="col-lg-12">
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>
+</div>
 
-<h3>  Promocionado</h3>
+<h5>  Promocionado</h5>
 <div class="col-lg-12">
 <div class="progress">
   <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
 </div>
 </div>
 
-<h3>  Regularizado</h3>
+<h5>  Regularizado</h5>
 <div class="col-lg-12">
 <div class="progress">
 <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 25%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">25%</div>
@@ -218,12 +224,7 @@
   </div>
 </div>
 
-<h3>  Libre</h3>
-<div class="col-lg-12">
-<div class="progress">
-  <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">25%</div>
-</div>
-</div>
+
 
 			<script type="text/javascript" src="js/script.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
