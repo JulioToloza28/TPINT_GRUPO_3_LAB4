@@ -216,7 +216,7 @@ public class ServletCurso extends HttpServlet {
 		if (request.getParameter("btn-GrabarCurso") != null) {
 			Boolean CancelarGrabado = false;
 			int CantidadAlumSelec = 0;
-			String Msj = null;
+			String Msj = "";
 			Alumno A = null;
 			String[] lAlumnosInscriptos = null;
 			int IdCurso;
@@ -247,13 +247,19 @@ public class ServletCurso extends HttpServlet {
 						IdCurso = cursoNeg.UltimoId(); // Obtengo el Id del curso Grabado
 						for (int x = 0; x < CantidadAlumSelec; x++) {
 							if (!cursoNeg.VerificarAlumnoEstaInscripto(IdCurso, lAlumnosInscriptos[x])) {
-								if (!cursoNeg.InsertarAlumnoAlCurso(IdCurso, lAlumnosInscriptos[x])) {
+								if (!alumnoNeg.verifEstaCursandoMateria(lAlumnosInscriptos[x], curs.getIdMateria(),
+										curs.getIdTurno(), curs.getCuatrimestre(), curs.getAnio())) {
+									if (!cursoNeg.InsertarAlumnoAlCurso(curs.getId(), lAlumnosInscriptos[x])) {
+										CancelarGrabado = true;
+										Msj = "ERROR: Hubo un error al agregar uno o varios alumno/s.";
+									}
+								} else {
 									CancelarGrabado = true;
-									Msj = "ERROR: Hubo un error al insertar uno o varios alumnos.";
+									Msj += "ERROR: El alumno con legajo " + lAlumnosInscriptos[x]
+											+ " ya esta cursando la materia al mismo tiempo con otro profesor.";
 								}
 							}
 						}
-						Msj = "Curso creado correctamente.";
 					} else {
 						CancelarGrabado = true;
 						Msj = "ERROR: Hubo un error al crear curso.";
@@ -292,7 +298,7 @@ public class ServletCurso extends HttpServlet {
 				rd.forward(request, response);
 
 			} else {
-
+				Msj = "Curso creado correctamente.";
 				ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.listarCursos();
 
 				request.setAttribute("listaCursos", lCursos);
