@@ -25,7 +25,7 @@
 	<div class="container"></div>
 
 	<div class="container">
-
+	
 		<div class="row">
 			<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -50,6 +50,7 @@
 										MateriaDaoImpl materiaL = new MateriaDaoImpl();
 										ArrayList<Materia> listaMateria = null;
 										listaMateria = (ArrayList<Materia>) materiaL.listarMaterias();
+									
 									%>
 									<%
 										if (listaMateria != null)
@@ -68,8 +69,8 @@
 									id="cboCuatrimestre" name="cboCuatrimestre"
 									class="form-control" id="sel1">
 									<option selected disabled value="">Seleccione...</option>
-									<option value="1">1° Cuatrimestre</option>
-									<option value="2">2° Cuatrimestre</option>
+									<option value="1">1Â° Cuatrimestre</option>
+									<option value="2">2Â° Cuatrimestre</option>
 
 								</select>
 							</div>
@@ -77,7 +78,7 @@
 						<div class="col-lg-3">
 							<div class="form-group">
 
-								<label for="sel1">Año:</label> <select id="cdoAnio"
+								<label for="sel1">AÃ±o:</label> <select id="cdoAnio"
 									name="cdoAnio" class="form-control" id="sel1">
 									<option selected disabled value="">Seleccione...</option>
 									<%
@@ -107,10 +108,11 @@
 			</ol>
 			</nav>
 			<%
+			boolean verificacion=false;
 				ArrayList<Reporte> listaA = new ArrayList<Reporte>();
 				if (request.getAttribute("listaReporte") != null) {
 					listaA = (ArrayList<Reporte>) request.getAttribute("listaReporte");
-				}
+				}else{verificacion=true;}
 			%>
 			<%
 				if (request.getAttribute("tipoReporte") != null) {
@@ -126,7 +128,7 @@
 
 						<td><b>MATERIA</b></td>
 						<td><b>CUATRIMESTRE</b></td>
-						<td><b>AÑO</b></td>
+						<td><b>AÃ‘O</b></td>
 						<td><b>TURNO</b></td>
 						<td><b>PROFE</b></td>
 						<td><b>APROBADOS</b></td>
@@ -168,11 +170,12 @@
 					int alum_regulares = a.getTotal_alumnos_regularizados() * 100 / a.getTotal_alumnos();
 					int alum_libres = a.getTotal_alumnos_libres() * 100 / a.getTotal_alumnos();
 			%>
+
 			<div class="col-lg-12 mb-4">
 				<div class="p-3 mb-2 mt-3 bg-primary text-white">
 					MATERIA:
 					<%=a.getMateria().getNombre()%>
-					- AÑO:
+					- AÃ‘O:
 					<%=a.getCurso().getAnio()%>- CUATRI:
 					<%=a.getCurso().getCuatrimestre()%> - TURNO: <%=a.getTurno().getTurno()%>
 					- PROFESOR:
@@ -232,7 +235,7 @@
 				}
 			%>
 			
-			<%if (listaA.size()==0) { %>
+			<%if (listaA.size()==0 && verificacion!=true) { %>
 			<div class="col-lg-12">
 				<div class="alert alert-danger" role="alert">No se encontro ningun registro</div>
 				</div>
