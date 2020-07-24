@@ -86,4 +86,10 @@ public class CursoNegocioImpl implements CursoNegocio {
 		return eliminado;
 	}
 
+	@Override
+	public ArrayList<Curso> filtroListarCursos(int legajoProfesor, Curso curso) {
+		ArrayList<Curso> Lista = cursoDao.filtroListarCursos(legajoProfesor, curso);
+		return Lista;
+	}
+
 }

@@ -29,4 +29,5 @@ public interface CursoNegocio {
 	
 	public boolean EliminarCursosdesdeProfesor(int legajoProf);
 	
+	public ArrayList<Curso> filtroListarCursos(int legajoProfesor, Curso curso);
 }

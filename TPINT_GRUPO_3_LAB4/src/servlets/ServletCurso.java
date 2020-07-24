@@ -124,10 +124,11 @@ public class ServletCurso extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		
 		// Listar Cursos del usuario tipo profesor
 		if (request.getParameter("listCoursesProfessor") != null) {
 			String msj;
+			ArrayList<Materia> lMateria = materiaNeg.listarMaterias();
+			ArrayList<Turno> lTurno = turnoNeg.listarTurnos();
 			HttpSession session = request.getSession();
 
 			int LegajoProf = Integer.parseInt(session.getAttribute("Session_Legajo").toString());
@@ -138,6 +139,52 @@ public class ServletCurso extends HttpServlet {
 				request.setAttribute("Mensaje", msj);
 			}
 
+			request.setAttribute("listaMaterias", lMateria);
+			request.setAttribute("ListaTurnos", lTurno);
+			request.setAttribute("listaCursos", lCursos);
+			RequestDispatcher rd = request.getRequestDispatcher("/listarCursoProfesor.jsp");
+			rd.forward(request, response);
+		}
+
+		if (request.getParameter("btn-filtrarProf") != null) {
+			HttpSession session = request.getSession();
+			ArrayList<Materia> lMateria = materiaNeg.listarMaterias();
+			ArrayList<Turno> lTurno = turnoNeg.listarTurnos();
+			Curso curs = new Curso();
+			String aux = "";
+
+			if (request.getParameter("cmbMateria") != null) {
+				aux = request.getParameter("cmbMateria");
+				curs.setIdMateria(Integer.parseInt(aux));
+			}
+			if (request.getParameter("cmbTurno") != null) {
+				aux = request.getParameter("cmbTurno");
+				curs.setIdTurno(Integer.parseInt(aux));
+			}
+			if (request.getParameter("cmbCuatrimestre") != null) {
+				aux = request.getParameter("cmbCuatrimestre");
+				curs.setCuatrimestre(Integer.parseInt(aux));
+			}
+			if (request.getParameter("cmbAnio") != null) {
+				aux = request.getParameter("cmbAnio");
+				curs.setAnio(Integer.parseInt(aux));
+			}
+
+			int LegajoProf = Integer.parseInt(session.getAttribute("Session_Legajo").toString());
+			ArrayList<Curso> lCursos = (ArrayList<Curso>) cursoNeg.filtroListarCursos(LegajoProf, curs);
+			if (curs.getIdMateria() > 0) {
+				Materia mat = materiaNeg.buscarMateria(curs.getIdMateria());
+				curs.setMateria(mat.getNombre());
+			}
+			
+			if (curs.getIdTurno() > 0) {
+				Turno turn = turnoNeg.buscarTurno(curs.getIdTurno());
+				curs.setTurno(turn.getTurno());
+			}
+
+			request.setAttribute("CursoAux", curs);
+			request.setAttribute("listaMaterias", lMateria);
+			request.setAttribute("ListaTurnos", lTurno);
 			request.setAttribute("listaCursos", lCursos);
 			RequestDispatcher rd = request.getRequestDispatcher("/listarCursoProfesor.jsp");
 			rd.forward(request, response);

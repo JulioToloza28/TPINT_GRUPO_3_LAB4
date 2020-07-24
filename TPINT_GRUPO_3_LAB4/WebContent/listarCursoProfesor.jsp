@@ -45,8 +45,139 @@
 		<li class="breadcrumb-item active" aria-current="page">Mis Cursos</li>
 	</ol>
 	</nav>
-	
-	
+
+	<%
+		Curso curso = null;
+		if (request.getAttribute("CursoAux") != null) {
+			curso = (Curso) request.getAttribute("CursoAux");
+		}
+	%>
+<div class="container">
+	<form method="get" action="ServletCurso">
+		<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<div class="row">
+				<div class="col-md-4 mb-4">
+					<label for="sel1">Materia:</label> <select name="cmbMateria"
+						class="custom-select " id="validationServer04">
+						<%
+							if (curso != null && curso.getIdMateria() > 0) {
+						%>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getIdMateria()%>><%=curso.getMateria()%></option>
+						<%
+							} else {
+						%>
+						<option selected disabled value="">Seleccione...</option>
+						<%
+							}
+							ArrayList<Materia> listaMateria = null;
+							if (request.getAttribute("listaMaterias") != null) {
+								listaMateria = (ArrayList<Materia>) request.getAttribute("listaMaterias");
+							}
+						%>
+						<%
+							if (listaMateria != null)
+								for (Materia mate : listaMateria) {
+						%>
+						<option value=<%=mate.getId()%>><%=mate.getNombre()%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
+
+				<div class="col-md-2 mb-2">
+					<label for="sel1">Turno:</label> <select class="form-control"
+						id="sel1" name="cmbTurno">
+						<%
+							if (curso != null && curso.getIdTurno() > 0) {
+						%>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getIdTurno()%>><%=curso.getTurno()%></option>
+						<%
+							} else {
+						%>
+						<option selected disabled value="">Seleccione...</option>
+						<%
+							}
+							ArrayList<Turno> listaTurnos = null;
+							if (request.getAttribute("ListaTurnos") != null) {
+								listaTurnos = (ArrayList<Turno>) request.getAttribute("ListaTurnos");
+							}
+						%>
+						<%
+							if (listaTurnos != null)
+								for (Turno turno : listaTurnos) {
+						%>
+						<option value=<%=turno.getIdTurno()%>><%=turno.getTurno()%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
+
+				<div class="col-md-2 mb-2">
+					<label for="sel1">Cuatrimestre N°:</label> <select
+						class="form-control" id="sel1" name="cmbCuatrimestre">
+						<%
+							if (curso != null && curso.getCuatrimestre() > 0) {
+						%>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getCuatrimestre()%>><%=curso.getCuatrimestre()%></option>
+						<%
+							} else {
+						%>
+						<option selected disabled value="">Seleccione...</option>
+						<%
+							}
+						%>
+						<option>1</option>
+						<option>2</option>
+					</select>
+				</div>
+
+				<div class="col-md-2 mb-2">
+					<label for="sel1">Año:</label> <select class="form-control"
+						id="sel1" name="cmbAnio">
+						<%
+							if (curso != null && curso.getAnio() > 0) {
+						%>
+						<option selected style="visibility: hidden"
+							value=<%=curso.getAnio()%>><%=curso.getAnio()%></option>
+						<%
+							} else {
+						%>
+						<option selected disabled value="">Seleccione...</option>
+						<%
+							}
+						%>
+						<%
+							for (int x = 2020; x >= 1990; x--) {
+						%>
+						<option><%=x%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
+
+				<div class="col-md-2 mb-2">
+					<button id="btn-filtrarProf" name="btn-filtrarProf"
+						class="btn btn-outline-info " type="submit" data-toggle="tooltip" title="Filtrar">
+						<i class="fa fa-search"></i> Filtrar  
+					</button>
+					<button id="listCoursesProfessor" name="listCoursesProfessor"
+						class="btn btn-outline-secondary " type="submit" data-toggle="tooltip" title="Limpiar Filtros">
+						<i class="fa fa-undo"></i> Limpiar
+					</button>
+				</div>
+
+			</div>
+		</ol>
+		</nav>
+	</form>
+	</div>
 	<%
 		if (request.getAttribute("Mensaje") != null) {
 			String Mensaje = request.getAttribute("Mensaje").toString();
@@ -84,21 +215,21 @@
 						%>
 						<%
 							if (listaCurso != null)
-								for (Curso curso : listaCurso) {
+								for (Curso curso2 : listaCurso) {
 						%>
 						<tr>
-							<td><%=curso.getMateria()%></td>
-							<td><%=curso.getTurno()%></td>
-							<td><%=curso.getCuatrimestre()%></td>
-							<td><%=curso.getAnio()%></td>
-							<td><%=curso.getCantAlum()%></td>
+							<td><%=curso2.getMateria()%></td>
+							<td><%=curso2.getTurno()%></td>
+							<td><%=curso2.getCuatrimestre()%></td>
+							<td><%=curso2.getAnio()%></td>
+							<td><%=curso2.getCantAlum()%></td>
 							<td><a type="button"
 								class="btn btn-outline-secondary btn-sm"
-								href="ServletCurso?showCourse-professor=<%=curso.getId()%>"
+								href="ServletCurso?showCourse-professor=<%=curso2.getId()%>"
 								data-toggle="tooltip" title="Ver Curso"><i
 									class="fa fa-group"></i></a> <a type="button"
 								class="btn btn-outline-success btn-sm"
-								href="ServletAlumXcurso?uploadNotes=<%=curso.getId()%>"
+								href="ServletAlumXcurso?uploadNotes=<%=curso2.getId()%>"
 								data-toggle="tooltip" title="Cargar Notas"><i
 									class="fa fa-pencil-square"></i></a>
 						</tr>
@@ -112,28 +243,30 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Modal cargar nota -->
-	
-<div class="modal fade" id="VentanaCargaNota" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Cargar Nota</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guradar</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+	<div class="modal fade" id="VentanaCargaNota" data-backdrop="static"
+		data-keyboard="false" tabindex="-1" role="dialog"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Cargar Nota</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary">Guradar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<script
