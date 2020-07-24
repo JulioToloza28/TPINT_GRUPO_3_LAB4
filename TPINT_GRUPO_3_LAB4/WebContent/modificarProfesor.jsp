@@ -60,7 +60,7 @@
 			</div>
 			<div class="col-md-3 mb-3">
 				<label for="txtEmail">Email</label> 
-				<input value="<%=profe.getMail() %>" name="txtEmail" type="text" class="form-control" id="txtEmail" onFocusOut="return validateMail()" required>
+				<input value="<%=profe.getMail() %>" name="txtEmail" type="email" class="form-control" id="txtEmail" onFocusOut="return validateMail()" required>
 			</div>
        </div>
        <br>
