@@ -12,13 +12,17 @@
 <title>Lista de profesores</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <style>
-.bs-example {
-	margin: 20px;
-}
+.bs-example {margin: 20px;}
+td{padding: 1px 2px!important;font-size: 14px;}
+
 </style>
 </head>
 <body>
@@ -122,14 +126,13 @@
 							<th>Nombre</th>
 							<th>Apellido</th>
 							<th>DNI</th>
-							<th>Fecha Nac</th>
+							<th>Nacimiento</th>
 							<th>Direccion</th>
 							<th>Localidad</th>
 							<th>Provincia</th>
 							<th>Telefono</th>
 							<th>Mail</th>
-							<th>Editar</th>
-							<th>Eliminar</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -159,23 +162,16 @@
 							<td><%=profesor.getLocalidad().getProvincia().getNombreProv()%></td>
 							<td><%=profesor.getTelefono()%></td>
 							<td><%=profesor.getMail()%></td>
-							<td><a
-								href="ServletsProfesor?Param=ModificarProfesor&amp;Data=<%=profesor.getLegajo()%>"
-								name="btn-EditarProfesor"
-								class="btn btn-outline-secondary btn-sm">Editar</a></td>
-							<td> <button type="button" onClick="modalEliminar(this)" id="<%=profesor.getLegajo()%>"
-									name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm"> Eliminar</button>
-							
-						<%-- 	<a href="ServletsProfesor?Param=EliminarProfesor&amp;Data=<%=profesor.getLegajo()%>" 
-								name="btn-EliminarProfesor"
-								class="btn btn-outline-danger btn-sm">Eliminar</a> --%>
-								
-								</td>
+							<td>
+							  <a href="ServletsProfesor?Param=ModificarProfesor&amp;Data=<%=profesor.getLegajo()%>" type="button" name="btn-EditarProfesor" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="Editar">
+							    <i class="fa fa-edit"></i>
+							  </a>
+							  <button type="button" onClick="modalEliminar(this)" id="<%=profesor.getLegajo()%>" name="btn-EliminarAlumno" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" title="Eliminar"> 
+							 <i class="fa fa-trash-o"></i></button>
+							 </td>
 						</tr>
-						
-					 	<div class="modal fade" id="VentEliminar" tabindex="-1"
-							role="dialog" aria-labelledby="exampleModalLabel"
-							aria-hidden="true">
+<!-- 						MODAL -->
+					 	<div class="modal fade" id="VentEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
